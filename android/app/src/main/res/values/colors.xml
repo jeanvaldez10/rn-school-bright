@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Insert your background color for the splash screen -->
+    <color name="white">#fff</color>
+    <color name="colorAccent">#C60C30</color>
+</resources>

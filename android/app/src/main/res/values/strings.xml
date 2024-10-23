@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">School Bright</string>
+    <string name="facebook_app_id">3138993262811546</string>
+    <string name="fb_login_protocol_scheme">fb3138993262811546</string>
+</resources>

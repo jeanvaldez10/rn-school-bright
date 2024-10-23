@@ -1,0 +1,281 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/AntDesign.ttf",
+      "sha1": "4e77868439280fb434d4697c7b911271406c81f3"
+    },
+    {
+      "path": "src/assets/fonts/BPreplay.otf",
+      "sha1": "3e8a2fb24a5bd7018bfd4b2f0b722babf11e9f5f"
+    },
+    {
+      "path": "src/assets/fonts/Entypo.ttf",
+      "sha1": "47870a67dd50871765f799caa97da87219ee47c5"
+    },
+    {
+      "path": "src/assets/fonts/EvilIcons.ttf",
+      "sha1": "91d377ea3cf47490b256c2ed081704a7dabdae0c"
+    },
+    {
+      "path": "src/assets/fonts/Feather.ttf",
+      "sha1": "3eb22bcebf5e6ebd40883e4b92132328c5d6be42"
+    },
+    {
+      "path": "src/assets/fonts/FontAwesome.ttf",
+      "sha1": "13b1eab65a983c7a73bc7997c479d66943f7c6cb"
+    },
+    {
+      "path": "src/assets/fonts/FontAwesome5_Brands.ttf",
+      "sha1": "69b73df3c8992a93859246065a267a05bfd8cf56"
+    },
+    {
+      "path": "src/assets/fonts/FontAwesome5_Regular.ttf",
+      "sha1": "9706453c3ea9b73e7c08b3be1e7c716d655cf916"
+    },
+    {
+      "path": "src/assets/fonts/FontAwesome5_Solid.ttf",
+      "sha1": "3f760416638f6459ade7251b80fd7bc27d6ad1c6"
+    },
+    {
+      "path": "src/assets/fonts/Fontisto.ttf",
+      "sha1": "c090a3ec96a3f1bb9b615c2f3f204ce0dcdcdbc3"
+    },
+    {
+      "path": "src/assets/fonts/Foundation.ttf",
+      "sha1": "4b2bce6c792493a4a5716b6fec2dbefe89492c3f"
+    },
+    {
+      "path": "src/assets/fonts/Ionicons.ttf",
+      "sha1": "991bb7fac9709cd58da37901770efd4703c542ed"
+    },
+    {
+      "path": "src/assets/fonts/MaterialCommunityIcons.ttf",
+      "sha1": "5b10557841f6bfb1f7b635d8e4593b5a7509b0d2"
+    },
+    {
+      "path": "src/assets/fonts/MaterialIcons.ttf",
+      "sha1": "fc05de31234e0090f7ddc28ce1b23af4026cb1da"
+    },
+    {
+      "path": "src/assets/fonts/Octicons.ttf",
+      "sha1": "28875874413503bcc0810ea2a44dc1b8312c665a"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Black.ttf",
+      "sha1": "5edd8f0d86bb8a6941fc2fa9ebdc4a1e11d91a9e"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-BlackItalic.ttf",
+      "sha1": "d84d3b6c9ff1a19a42167f3005184fc01a891d26"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Bold.ttf",
+      "sha1": "6860363db5ea3dc384addbc4ff5d0aaee17b91eb"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-BoldItalic.ttf",
+      "sha1": "3d3325fd881eb52da9dda866fdfb62ce80113bf2"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-ExtraBold.ttf",
+      "sha1": "ea49a620d98dfd1004eaed8874eb2fbf575db8b4"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-ExtraBoldItalic.ttf",
+      "sha1": "207eb011625276a8126bd9335da0504d3f1d6bc0"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-ExtraLight.ttf",
+      "sha1": "1e4b7d71014de005fb93fbf8a12049a313235ed6"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-ExtraLightItalic.ttf",
+      "sha1": "b7d74749f515514d3bd88251d196a300e0445baa"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Italic.ttf",
+      "sha1": "4459c9dfd0f66afe4256752e256416bba00da40b"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Light.ttf",
+      "sha1": "557e12899c0c636753aa19259c2cea336e0c927d"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-LightItalic.ttf",
+      "sha1": "ad6a5deb0479184456b5bdb63d32b022d0fbee25"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Medium.ttf",
+      "sha1": "0c8681407d5de2de363187e7911e790d34d808c1"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-MediumItalic.ttf",
+      "sha1": "8a14d7e102c68ccaa136772d65ae0c53c4278a3d"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Regular.ttf",
+      "sha1": "1e8694a5ea1ff0e0f8800e5c23470c5132ec9123"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-SemiBold.ttf",
+      "sha1": "d9eeb3f776f8ad1ae98361df8f377b4809d4ae52"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-SemiBoldItalic.ttf",
+      "sha1": "0804298e3917a7bf21fa7cd7e664120e87aec69c"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-Thin.ttf",
+      "sha1": "71beeeaf454a6641d63b1361e1167dd3f1a5b201"
+    },
+    {
+      "path": "src/assets/fonts/Raleway-ThinItalic.ttf",
+      "sha1": "19f8872a77b37eb95e8cd3da99c9e54b3e579d83"
+    },
+    {
+      "path": "src/assets/fonts/Roboto-Black.ttf",
+      "sha1": "e28654c12713143bfdd72f8c559c48a19c1cbf18"
+    },
+    {
+      "path": "src/assets/fonts/Roboto-BlackItalic.ttf",
+      "sha1": "91158ed880ebf4bb904568ec246e85a07fefcdfb"
+    },
+    {
+      "path": "src/assets/fonts/Roboto-Bold.ttf",
+      "sha1": "013f1bbcbbd80991a5f00fca52a90d0d7ab8b81f"
+    },
+    {
+      "path": "src/assets/fonts/Roboto-BoldItalic.ttf",
+      "sha1": "41985122ae0d78676ac1eb30edde89606bdbe531"
+    },
+    {
+      "path": "src/assets/fonts/Roboto-Italic.ttf",
+      "sha1": "20420db4e13d654cbe22b5fba6296c78a6360537"
+    },
+    {
+      "path": "src/assets/fonts/Roboto-Light.ttf",
+      "sha1": "51dbae4543aaa10096e344e48fcffe468bd314a9"
+    },
+    {
+      "path": "src/assets/fonts/Roboto-LightItalic.ttf",
+      "sha1": "538f6b977a7109f14cf314b8bad18ed84519d995"
+    },
+    {
+      "path": "src/assets/fonts/Roboto-Medium.ttf",
+      "sha1": "fddc8b1c688ef3baed0d5a46abf5f01f0edaf02b"
+    },
+    {
+      "path": "src/assets/fonts/Roboto-MediumItalic.ttf",
+      "sha1": "b13559734aa602f9a1bddb8b5be72d7036858716"
+    },
+    {
+      "path": "src/assets/fonts/Roboto-Thin.ttf",
+      "sha1": "e07c400b55ef4ac7fb5ff9a79d301712922c681b"
+    },
+    {
+      "path": "src/assets/fonts/Roboto-ThinItalic.ttf",
+      "sha1": "4c80f7c044a7e9a83865f625559e114ea4d7d2b1"
+    },
+    {
+      "path": "src/assets/fonts/Roboto.ttf",
+      "sha1": "84d102488738b0ebbc7a5087973effbd54c95bd5"
+    },
+    {
+      "path": "src/assets/fonts/rubicon-icon-font.ttf",
+      "sha1": "c168c919afe118a595a948d2cfd8b35babf67a45"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-100-italic.ttf",
+      "sha1": "bf62a83fd7b0198d4c1d55ab04cbb617bc1c78bf"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-100-normal.ttf",
+      "sha1": "488bc87b18c37b349f49b824a05190e7ccedc64a"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-200-italic.ttf",
+      "sha1": "254ed37ac24fc23d9d6536281e7ed129dc4d4999"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-200-normal.ttf",
+      "sha1": "4ec3d5099f4d1bae4e44dbc1edf99604c421e210"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-300-italic.ttf",
+      "sha1": "71c72467538ba343a63a5d2b2846ecca44ab6674"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-300-normal.ttf",
+      "sha1": "ce6214c06f8935d33a6b1d91982198c6ac66c0c8"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-400-italic.ttf",
+      "sha1": "7566493a118ecc2ce776412b8b8c48d75dbb9847"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-400-normal.ttf",
+      "sha1": "38b23b7be0110fd1cd130aa2feb5f95e010a5ff6"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-500-italic.ttf",
+      "sha1": "1c9f3732b5d0f060947b774fccf6f6c7997b2820"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-500-normal.ttf",
+      "sha1": "5b19520d2855524aab46b65ac02d4f118c7accbf"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-600-italic.ttf",
+      "sha1": "9d17003178e8809e5d9a6bf4642b8cfc9fbb58f8"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-600-normal.ttf",
+      "sha1": "83d8fe1c18bced83e64fc5e098e378204b708818"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-700-italic.ttf",
+      "sha1": "e3045ddbdf4ab66a688d5879e5f2b59a0ed66350"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-700-normal.ttf",
+      "sha1": "ebbf3d3b6cdf5e4491b1696aa78490516b42424d"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-800-italic.ttf",
+      "sha1": "3183e7f2cf2970a06502f530fd857cca80e1334f"
+    },
+    {
+      "path": "src/assets/fonts/sarabun-thai-800-normal.ttf",
+      "sha1": "95cd2c5f440bbed72f1b01514abb251f852060ca"
+    },
+    {
+      "path": "src/assets/fonts/SimpleLineIcons.ttf",
+      "sha1": "9ffb81a5a11112e292f2cc323e98486bad597599"
+    },
+    {
+      "path": "src/assets/fonts/THSarabunNew-Bold.ttf",
+      "sha1": "79757d1fb8f77160927c2c0a352c1543a8a98a8a"
+    },
+    {
+      "path": "src/assets/fonts/THSarabunNew-BoldItalic.ttf",
+      "sha1": "dd4c1f6ba6b9f26c8f6f7575a8e4a8fb319b1bcd"
+    },
+    {
+      "path": "src/assets/fonts/THSarabunNew-Italic.ttf",
+      "sha1": "17377cd7005c18e7a72de7171bc7d89d45297cd7"
+    },
+    {
+      "path": "src/assets/fonts/THSarabunNew-Regular.ttf",
+      "sha1": "4559382f72ff9e1b6cd6689dd3a3583a41fc48aa"
+    },
+    {
+      "path": "src/assets/fonts/THSarabunNew.ttf",
+      "sha1": "4559382f72ff9e1b6cd6689dd3a3583a41fc48aa"
+    },
+    {
+      "path": "src/assets/fonts/Zocial.ttf",
+      "sha1": "0bda59c7bcd3d3927de047e091875a4428bfd1ab"
+    }
+  ]
+}

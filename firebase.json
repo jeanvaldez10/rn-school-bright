@@ -1,0 +1,10 @@
+{
+  "react-native": {
+    "ml_vision_ocr_model": true,
+    "ml_vision_label_model": true,
+    "ml_vision_image_label_model": true,
+    "admob_android_app_id": "ca-app-pub-8374032779878953~5394311618",
+    "admob_ios_app_id": "ca-app-pub-8374032779878953~5394311618",
+    "crashlytics_debug_enabled": true
+  }
+}

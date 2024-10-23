@@ -1,0 +1,43 @@
+{
+  "IsSuccess": true,
+  "authentication": {
+    "resCode": 401,
+    "resDesc": "User Not Found",
+    "resDescTH": "ไม่พบผู้ใช้",
+    "permission": null
+  },
+  "verify": {
+    "user": {
+      "statusCode": 500,
+      "message": "Object reference not set to an instance of an object."
+    },
+    "device": {
+      "Status": "Verifier Success",
+      "StatusCode": 200,
+      "Email": "",
+      "resObj": {
+        "MessageChanel": {
+          "email": {
+            "Label": "",
+            "Status": false
+          },
+          "line": {
+            "Label": "",
+            "Status": false
+          },
+          "phone": {
+            "Label": "",
+            "Status": false
+          }
+        },
+        "UserID": 42
+      },
+      "dSend": null,
+      "Error": ""
+    }
+  },
+  "policy": {
+    "Status": false,
+    "PolicyID": "b2074978-b4b7-4e3c-a0fa-a220e19303bc",
+    "Version": "1.0.0"
+  }

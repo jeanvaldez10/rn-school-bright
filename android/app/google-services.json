@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "219453601279",
+    "project_id": "school-bright-react",
+    "storage_bucket": "school-bright-react.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219453601279:android:2ce8f59ba185ed01c263ca",
+        "android_client_info": {
+          "package_name": "school.jabjai.jabjaiapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "219453601279-bdm050s9lrvbrh09p6she4dci47303l1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaweZq3lRU01FNLSFETrO2Z3cgfdoan40"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "219453601279-bdm050s9lrvbrh09p6she4dci47303l1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "219453601279-bro6bmon986ab73rgev2fu42lf4psmjl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.schoolbright"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
