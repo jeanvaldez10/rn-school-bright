@@ -33,6 +33,7 @@ export default class LeaveHistory extends React.Component {
     super(props);
     this.state = {
       showModal: false,
+      modalTitle: undefined,
       modalBody: '',
       modalType: 0,
       isLoading: false,
@@ -121,6 +122,11 @@ export default class LeaveHistory extends React.Component {
   };
 
   __next = async () => {
+    const title = translang.t('NUMBER_LEAVE_DAYS_NOT_ENOUGH');
+    const message = translang.t('CHECK_LEAVE_DAYS_AT_TOP_RIGHT_CORNER');
+    this.setState({ isLoading: false, showModal: true, modalTitle: title, modalBody: message,  modalType: 0 });
+    return;
+
     this.setState({ isLoading: true });
 
     const { sender, type, leaveReason, leaveDate, leaveToDate, leaveSeasonIndex, province, amphur, district, description, house, phonenumber, position, isStudent , attachedImages} = this.state
@@ -135,14 +141,14 @@ export default class LeaveHistory extends React.Component {
     const promise = ApiManager.sendLeaveData(senderId, leaveReason.typeId, dayStart, dayEnd, description, house, district, amphur, province, phonenumber, season, attachImg);
     promise.then(result => {
       if (result) {
-        this.setState({ isLoading: false, showModal: true, modalBody: translang.t('COMPLETED'), modalType: 1 });
+        this.setState({ isLoading: false, showModal: true, modalTitle: undefined, modalBody: translang.t('COMPLETED'), modalType: 1 });
       } else {
-        const message = translang.t('REACHED_LEAVE_REQ_LIMIT') + '\n' + translang.t('CONTACT_YOUER_SCHOOL_ADMIN');
+        const message = translang.t('REACHED_LEAVE_REQ_LIMIT'); // + '\n' + translang.t('CONTACT_YOUER_SCHOOL_ADMIN');
         this.setState({ isLoading: false, showModal: true, modalBody: message,  modalType: 0 });
       }
     }).catch(error => {
       console.log("RNFS READFILE", error);
-      this.setState({ isLoading: false, showModal: true, modalBody: translang.t('ERROR_OCCURED_TRY_AGAIN'), modalType: 0 });
+      this.setState({ isLoading: false, showModal: true, modalTitle: undefined, modalBody: translang.t('ERROR_OCCURED_TRY_AGAIN'), modalType: 0 });
     });
   };
 
@@ -227,7 +233,8 @@ export default class LeaveHistory extends React.Component {
       address = '';
     }
 
-    const alertButtonColor = this.state.modalBody === translang.t('COMPLETED') ? [Color.green_button_next_color1, Color.green_button_next_color2] : [Color.red_orange, Color.soft_red];
+    // const alertButtonColor = this.state.modalBody === translang.t('COMPLETED') ? [Color.green_button_next_color1, Color.green_button_next_color2] : [Color.red_orange, Color.soft_red];
+    const alertButtonColor = [Color.green_button_next_color1, Color.green_button_next_color2];
 
     return (
       <SafeAreaView style={styles.container} edges={['right', 'bottom', 'top', 'left']}>
@@ -388,17 +395,27 @@ export default class LeaveHistory extends React.Component {
         </View>
         <AlertWithImageModal
           isVisible={this.state.showModal}
-          image={Images.n_img_complete_green}
+          image={this.state.modalType === 1 ? Images.n_img_complete_green : Images.ic_alert}
+          title={this.state.modalTitle}
           message={this.state.modalBody}
           buttonColors={alertButtonColor}
+          buttonTitle={this.state.modalType === 1 ? translang.t('COMMON_close') : translang.t('COMMON_ok')}
           isVerticalGradient={false}
           onClose={() => {
-            if (this.state.modalType == 1) {
+            if (this.state.modalType === 1) {
               this.setState({ showModal: false });
               // this.props.navigation.navigate(this.state.type);
               this.props.navigation.navigate("App");
             } else {
-              this.setState({ showModal: false });
+              if (this.state.type === 'FulldayLeave') {
+                this.setState({ showModal: false }, () => {
+                  this.props.navigation.navigate("FulldayLeave");
+                });
+              } else {
+                this.setState({ showModal: false }, () => {
+                  this.props.navigation.navigate("HalfdayLeave");
+                });
+              }
             }
           }}
         />

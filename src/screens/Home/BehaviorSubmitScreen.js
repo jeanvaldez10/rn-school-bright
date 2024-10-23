@@ -172,11 +172,13 @@ export default class BehaviorSubmitScreen extends React.Component {
           borderBottomColor: Color.light_gray,
         }}>
           <Text style={{...styles.itemTextNo, width: 30}}>{index + 1}.</Text>
-          <Text style={{...styles.itemTextName, flex: 1}}>{score.BehaviorsName}</Text>
+          <Text style={{...styles.itemTextName, flex: 1}}>
+            {getCurrentLocale() === 'th' ? score.BehaviorsName : score.BehaviorsNameEN ?? score.BehaviorsName}
+          </Text>
           <Text
             style={[styles.itemTextScore, this.state.isReduce ? {color: Color.n_default_orange} : {color: Color.n_button_gradient_green_start}, {marginLeft: 5}]}>{this.state.isReduce ? `-${score.Score}` : `+${score.Score}`}</Text>
         </View>
-        {note != '' &&
+        {note !== '' &&
         <View style={styles.sectionContainer1}>
           <Text style={styles.noteText}>{translang.t('Note')}:{score.Note}</Text>
         </View>

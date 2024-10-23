@@ -372,9 +372,7 @@ export default class ReportExecutiveTopupScreen extends React.Component {
                             svg={{fontSize: 15, fill: 'black', fontWeight: 'bold', fontFamily: 'THSarabunNew',}}
                         />
                     </View>
-                    {detailList.map((item) => {
-                        this.renderItem(item);
-                    })}
+                    {detailList.map((item) => this.renderItem(item))}
                 </ScrollView>
                 <ProgressHud isVisible={this.state.isLoading}/>
             </SafeAreaView>

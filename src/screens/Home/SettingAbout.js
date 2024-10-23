@@ -86,7 +86,14 @@ export default class SettingAbout extends React.Component {
               <Text style={styles.highlightTxt}>{url}</Text>
             </Hyperlink>
             <Text style={styles.caption}>{translang.t('PROFILE_email')}</Text>
-            <Hyperlink onPress={url => {console.log(url); Linking.openURL("mailto:" + url)}} linkDefault={false} >
+            <Hyperlink onPress={url => {
+              console.log(url); 
+              if (url.startsWith("mailto:")) {
+                Linking.openURL(url);
+              } else {
+                Linking.openURL(`mailto:${url}`);
+              }
+            }} linkDefault={false} >
               <Text style={styles.highlightTxt}>{translang.t('JAB_EMAIL')}</Text>
             </Hyperlink>
 

@@ -426,7 +426,9 @@ const images = {
   i_car: require("../assets/images/new/i_car.png"),
   n_ic_setting_account1: require('../assets/images/new/n_ic_nav_behaivor1.png'),
   i_car_read: require("../assets/images/new/i_car_red.png"),
+  ic_close_cross: require("../assets/images/ic_close_cross.png"),
 
+  ic_alert: require("../assets/images/new/alert.png"),
 };
 
 export default images;

@@ -191,6 +191,23 @@ export const updatePassword = async (userId, password) => {
     return db.executeSql(query);
 }
 
+export const updateUserInfo = async (userId, userInfo) => {
+    const db = await getDBConnection();
+    const query = `UPDATE ${TABLE_USERNAME}  SET
+        ${COL_SCHOOLID} = '${userInfo.SchoolId}', 
+        ${COL_TYPE} = '${userInfo.Type}',
+        ${COL_VALUE} = '${userInfo.Value}',
+        ${COL_NAME_FIRST} = '${userInfo.name}',
+        ${COL_NAME_LAST} = '${userInfo.lastname}',
+        ${COL_SEX} = '${userInfo.sex}',
+        ${COL_TOKEN} = '${userInfo.token}',
+        ${COL_IMAGE_USER} = '${userInfo.image}',
+        ${COL_NAME_FIRST_EN} = '${userInfo.nameEN}',
+        ${COL_NAME_LAST_EN} = '${userInfo.lastnameEN}' WHERE ${COL_USERID} = '${userId}';`
+
+    return db.executeSql(query);
+}
+
 export const removeAllUser = async () => {
     const db = await getDBConnection();
 

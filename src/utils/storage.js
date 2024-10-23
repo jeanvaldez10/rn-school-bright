@@ -5,8 +5,20 @@ const storageNamespace = '@armroom';
 
 const getStorageKey = key => `${storageNamespace}:${key}`;
 
-const setValue = (key, value) => AsyncStorage.setItem(getStorageKey(key), value);
-const setObject = (key, object) => AsyncStorage.setItem(getStorageKey(key), JSON.stringify(object));
+const setValue = (key, value) => {
+    if (value) {
+        AsyncStorage.setItem(getStorageKey(key), value)
+    } else {
+        remove(key);
+    }
+};
+const setObject = (key, object) => {
+    if (object) {
+        AsyncStorage.setItem(getStorageKey(key), JSON.stringify(object))
+    } else {
+        remove(key);
+    }
+};
 
 const getValue = key => AsyncStorage.getItem(getStorageKey(key));
 const getObject = key => (

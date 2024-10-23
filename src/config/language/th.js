@@ -1235,5 +1235,15 @@ export default {
 
   FOR_YOUR_SAFETY: 'เพื่อความปลอดภัย',
   TRY_AGAIN: "Try again",
+
+  NOT_APPROVED_DUE_TO: "ไม่อนุมัติเนื่องจาก",
+  NOT_APPROVED: "ไม่อนุมัติ",
+
+  NUMBER_LEAVE_DAYS_NOT_ENOUGH: "ขออภัย จำนวนวันลาไม่เพียงพอ",
+  CHECK_LEAVE_DAYS_AT_TOP_RIGHT_CORNER: "ท่านสามารถตรวจสอบวันลาได้ที่ไอคอนมุมขวาบนหรือติดต่อผู้ดูแลระบบของโรงเรียน",
+
+  REMAINING_LEAVE_DAYS: "วันลาคงเหลือ",
+  LEAVE_TYPE: "ประเภทการลา",
+  LEAVE_DAYS_IN_CURRENT_PERIOD: "จำนวนวันลาในรอบปัจจุบัน",
 };
 

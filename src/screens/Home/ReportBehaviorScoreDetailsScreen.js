@@ -138,18 +138,19 @@ export default class ReportBehaviorScoreDetailsScreen extends React.Component {
     }
 
     renderPlusItem = (item, index) => {
+        const behaviorName = getCurrentLocale() === 'th' ? item.BehaviorsName : item.BehaviorsNameEN ?? item.BehaviorsName;
         const strDate = item.Day ? moment(item.Day).format('DD MMMM YYYY') : '';
-        const strDes = item.BehaviorsName ? item.BehaviorsName : '';
+        const strDes = behaviorName || '';
         const strScore = item.Score ? item.Score : '';
 
         let strSender;
         strSender =  item.TheacherName ? item.TheacherName : '';
-        if (getCurrentLocale() == 'en'){
+        if (getCurrentLocale() === 'en'){
             strSender =  item.TheacherNameEN ? item.TheacherNameEN : strSender;
         }
 
         const strRemark = item.Note ? item.Note : '';
-        let colorScore = Color.n_button_gradient_green_start;
+        const colorScore = Color.n_button_gradient_green_start;
         const item0 = item;
 
         return (
@@ -224,18 +225,19 @@ export default class ReportBehaviorScoreDetailsScreen extends React.Component {
     };
 
     renderMinusItem = (item, index) => {
+        const behaviorName = getCurrentLocale() === 'th' ? item.BehaviorsName : item.BehaviorsNameEN ?? item.BehaviorsName;
         const strDate = item.Day ? moment(item.Day).format('DD MMMM YYYY') : '';
-        const strDes = item.BehaviorsName ? item.BehaviorsName : '';
+        const strDes = behaviorName || '';
         const strScore = item.Score ? item.Score : '';
 
         let strSender;
         strSender =  item.TheacherName ? item.TheacherName : '';
-        if (getCurrentLocale() == 'en'){
+        if (getCurrentLocale() === 'en'){
             strSender =  item.TheacherNameEN ? item.TheacherNameEN : strSender;
         }
 
         const strRemark = item.Note ? item.Note : '';
-        let colorScore = Color.n_button_gradient_orange_start;
+        const colorScore = Color.n_button_gradient_orange_start;
         const item0 = item;
 
         return (

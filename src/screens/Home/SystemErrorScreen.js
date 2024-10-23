@@ -88,7 +88,7 @@ export default class SystemErrorScreen extends ValidationComponent {
                 <Image source={Images.School_Bright_H_Logo} style={styles.lineLogo} resizeMode='contain'/>
                 <Image source={Images.Alert_t} style={styles.AlertLogo} resizeMode='contain'/>
                 <View style={styles.textContainer}>
-                  <Text style={styles.AlertText}> {getCurrentLocale() == 'en' ? enText: thText} </Text>
+                  <Text style={styles.AlertText}> {getCurrentLocale() === 'en' ? enText: thText} </Text>
                 </View>
                 <View style={styles.DividerLine}/>
                 <GradientButton

@@ -191,31 +191,32 @@ export default class LeaveRequestScreen extends React.Component {
   renderItem = (index) => {
     const leaveRequest = this.state.leaveRequestList[index];
     const date = moment(leaveRequest.letterSubmitDate ?? '').format('DD MMM YYYY HH:mm:ss');
-    const sender = getCurrentLocale() == 'th' ? leaveRequest.senderName ?? '' : leaveRequest.senderNameEN ?? leaveRequest.senderName ?? '';
-    const letterType = getCurrentLocale() == 'th' ? leaveRequest.letterType ?? '' :  leaveRequest.letterTypeEN;
+    const sender = getCurrentLocale() === 'th' ? leaveRequest.senderName ?? '' : leaveRequest.senderNameEN ?? leaveRequest.senderName ?? '';
+    const letterType = getCurrentLocale() === 'th' ? leaveRequest.letterType ?? '' :  leaveRequest.letterTypeEN;
     let status = '-1';
     if(leaveRequest.ApprovedStatus){
       status = leaveRequest.ApprovedStatus.StatusCode
     }
-    if(leaveRequest.status == "98"){
+    if(leaveRequest.status === "98"){
       return (<Text style={styles.timeintervalStyle}>{translang.t('TODAY')}</Text>);
-    }else if(leaveRequest.status == "99"){
-      return (<Text style={styles.timeintervalStyle}>{translang.t('USERINFO_weekly')}</Text>);
-    }else{
-      return (
-        <TouchableOpacity
-          style={styles.itemContainer}
-          activeOpacity={0.7}
-          onPress={() => { this.onClickLeaveRequest(index) }} >
-          <LeaveRequestIconInfoItem
-            label={sender}
-            value_txt={letterType}
-            dateText={date}
-            status={status}
-          />
-        </TouchableOpacity>
-      );
     }
+    if(leaveRequest.status === "99"){
+      return (<Text style={styles.timeintervalStyle}>{translang.t('USERINFO_weekly')}</Text>);
+    }
+    
+    return (
+      <TouchableOpacity
+        style={styles.itemContainer}
+        activeOpacity={0.7}
+        onPress={() => { this.onClickLeaveRequest(index) }} >
+        <LeaveRequestIconInfoItem
+          label={sender}
+          value_txt={letterType}
+          dateText={date}
+          status={status}
+        />
+      </TouchableOpacity>
+    );
   };
 
   onRefresh = ()=>{

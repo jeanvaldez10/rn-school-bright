@@ -70,9 +70,9 @@ apiHttpClient.interceptors.response.use(response => {
   // console.log("response data:", response.data);
   return response;
 }, async (error) => {
-  console.log("api error,", error.config.baseURL, error.config.url,'----',error.response.data.Message, '---', error.response.status);
+  console.log("api error,", error.config?.baseURL, error.config?.url,'----',error.response?.data?.Message, '---', error.response?.status);
   const originalConfig = error.config;
-  console.log("config header:", originalConfig.headers);
+  console.log("config header:", originalConfig?.headers);
   if (error.response){
     if (error.response.status === 401 && !originalConfig._retry) {
       originalConfig._retry = true;
@@ -87,7 +87,7 @@ apiHttpClient.interceptors.response.use(response => {
       catch (_error) {
         console.log("Token Update error:", _error);
         NavigationService.setShowTokenError();
-        if(_error.response && _error.response.data){
+        if(_error.response && _error.response?.data){
           return Promise.reject(_error.response.data);
         }
         return Promise.reject(_error);
@@ -100,7 +100,7 @@ apiHttpClient.interceptors.response.use(response => {
       NavigationService.setShowTokenError();
     }
 
-    if (error.response.status === 403 && error.response.data) {
+    if (error.response.status === 403 && error.response?.data) {
       return Promise.reject(error.response.data);
     }
   }

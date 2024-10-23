@@ -20,6 +20,7 @@ import moment from 'moment';
 import { ScrollView } from 'react-native-gesture-handler';
 import NetInfo from "@react-native-community/netinfo";
 import ApiManager from "../../managers/ApiManager";
+import LeaveInfoModal from '../../components/LeaveInfoModal';
 
 export default class HalfdayLeaveScreen extends React.Component {
   constructor(props) {
@@ -39,6 +40,8 @@ export default class HalfdayLeaveScreen extends React.Component {
 
       isAddressRembemr: false,
       AddressInfo: {},
+
+      showInfoModal: false,
     };
   }
 
@@ -199,6 +202,10 @@ export default class HalfdayLeaveScreen extends React.Component {
         <BackNavigationBar
           title={translang.t('DRAWER_leave')}
           onMenuTap={() => this.back()}
+          is_info={true}
+          onInfoTap={() => {
+            this.setState({showInfoModal: true})
+          }}
         />
 
         <ScrollView style={styles.container} contentContainerStyle={{flexGrow: 1,}}>
@@ -265,6 +272,10 @@ export default class HalfdayLeaveScreen extends React.Component {
           listData={leaveSeasonList}
           dialogTtitle={translang.t('LEAVE_season')}
         />
+
+        <LeaveInfoModal isVisible={this.state.showInfoModal} onOkPress={() => {
+          this.setState({showInfoModal: false});
+        }} />
       </SafeAreaView>
     );
   }

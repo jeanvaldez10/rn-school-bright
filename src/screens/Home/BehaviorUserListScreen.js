@@ -187,10 +187,10 @@ export default class BehaviorUserListScreen extends React.Component {
     var res = []
     if(behaviorData.length > 0){
       for(let i = 0; i < behaviorData.length; i++){
-        let item = behaviorData[i];
+        const item = behaviorData[i];
         let score = item.Score ?? '';
         let themeColor = Color.n_button_gradient_green_start;
-        if(item.BehaviorsType == '1'){
+        if(item.BehaviorsType === '1'){
           themeColor = Color.n_default_orange;
           score = "-" + score;
         }
@@ -198,6 +198,8 @@ export default class BehaviorUserListScreen extends React.Component {
         if(moment().diff(item.Day, 'day') == 0){
           isToday = true;
         }
+        const behaviorsName = getCurrentLocale() === 'th' ? item.BehaviorsName : item.BehaviorsNameEN ?? item.BehaviorsName
+
         res.push(
           <>
             <View style={{backgroundColor: Color.n_background_white, padding: 20,}} key={i}>
@@ -205,7 +207,9 @@ export default class BehaviorUserListScreen extends React.Component {
                 <Text style={{...styles.behaviorDetailText, color: Color.white}}>{translang.t('TODAY_RECORD')}</Text>
               </View>}
               <Text style={{...styles.behaviorDetailText, textAlign: 'right', color: themeColor}}>{moment(item.Day).format('HH:mm')}</Text>
-              <Text style={{...styles.behaviorDetailText, color: themeColor}}>{`${item.BehaviorsName ?? ''}     ${score}`}</Text>
+              <Text style={{...styles.behaviorDetailText, color: themeColor}}>
+                {`${behaviorsName ?? ''}     ${score}`}
+              </Text>
               <Text style={{...styles.behaviorDetailText, color: themeColor}}>{`by ${item.TheacherName ?? ''}`}</Text>
             </View>
             <View style={{height: 1, backgroundColor: Color.n_default_gray_light}} />

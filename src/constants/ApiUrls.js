@@ -217,8 +217,8 @@ class ApiUrls {
     return `/LetterDetail?userid=${userId}&messageID=${messageId}`;
   }
 
-  updateLeaveRequestStatus(userId, messageId, status, schoolId) {
-    return `/confirmLeave?letterid=${messageId}&userid=${userId}&approve=${status}&schoolid=${schoolId}`;
+  updateLeaveRequestStatus(userId, messageId, status, schoolId, message) {
+    return `/confirmLeave?letterid=${messageId}&userid=${userId}&approve=${status}&schoolid=${schoolId}&message=${message}`;
   }
 
   getNewsMessageList(userId, page, schoolId) {
@@ -1004,6 +1004,10 @@ class ApiUrls {
 
   getVerification(){
     return `/verification`
+  }
+
+  getLeaveInfo(UserID) {
+    return `/studentLeave/GetLeaveInfo?UserId=${UserID}`;
   }
 }
 

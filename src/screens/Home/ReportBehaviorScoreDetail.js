@@ -133,7 +133,7 @@ export default class ReportBehaviorScoreDetailScreen extends React.Component {
         <View style={styles.content}>
           <View style={{...styles.topTitleContainer, backgroundColor: color}}>
             <Text style={{...styles.title, fontSize: 29}}>{score}</Text>
-            <Text style={styles.title} numberOfLines={1}>{getCurrentLocale() == 'th' ? behavior.BehaviorsName : behavior.BehaviorsNameEN ?? behavior.BehaviorsName}</Text>
+            <Text style={styles.title} numberOfLines={1}>{getCurrentLocale() === 'th' ? behavior.BehaviorsName : behavior.BehaviorsNameEN ?? behavior.BehaviorsName}</Text>
           </View>
           <ScrollView style={styles.list}>
             <CardInfoItem
@@ -156,7 +156,7 @@ export default class ReportBehaviorScoreDetailScreen extends React.Component {
             <View style={{marginVertical: 5}}>
               <Text style={{fontFamily: 'THSarabunNew', color: Color.n_default_orange, fontSize: 24, fontWeight: 'bold', marginBottom: 5}}>{translang.t('DETAIL')}</Text>
               <Text style={{fontFamily: 'THSarabunNew', color: Color.n_default_gray, fontSize: 24, width: '100%'}}>
-                {getCurrentLocale() == 'th' ? behavior.BehaviorsName : behavior.BehaviorsNameEN ?? behavior.BehaviorsName}
+                {getCurrentLocale() === 'th' ? behavior.BehaviorsName : behavior.BehaviorsNameEN ?? behavior.BehaviorsName}
               </Text>
             </View>
 

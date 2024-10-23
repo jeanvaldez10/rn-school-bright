@@ -27,6 +27,17 @@ Sentry.init({
     // Here, we'll capture profiles for 100% of transactions.
     profilesSampleRate: 1.0,
   },
+  ignoreErrors: ["Object captured as exception"],
+  beforeSend: (event, hint) => {
+    if (typeof hint.originalException === 'object' && hint.originalException !== null && 'key' in hint.originalException) {
+      event.extra = {
+        ...event.extra,
+        ...hint.originalException,
+      }
+    }
+
+    return event;
+  },
 });
 
 

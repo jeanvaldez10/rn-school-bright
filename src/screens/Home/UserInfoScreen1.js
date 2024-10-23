@@ -220,7 +220,7 @@ class UserInfoScreen1 extends React.Component {
 
     initializeDev = async () => {
         try{
-            const dev = this.props.devReducer.dev;
+            const dev = this.props.devReducer?.dev;
             let data = await Storage.getUrlsInfo();
             console.log("data:", data);
             if (data && data.schoolbright) {

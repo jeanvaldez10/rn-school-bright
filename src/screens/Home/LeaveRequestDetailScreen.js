@@ -22,6 +22,7 @@ import CardInfoItem from '../../components/CardInfoItem';
 import moment from 'moment';
 import ImageView from "react-native-image-viewing";
 import MyImageView from "../../components/MyImageView";
+import TextInputModal from '../../components/TextInputModal';
 
 export default class LeaveRequestDetailScreen extends React.Component {
   constructor(props) {
@@ -36,6 +37,8 @@ export default class LeaveRequestDetailScreen extends React.Component {
       type: '', //reportteacher, reportstudent, teacherleaverequest, notification, teacherstudent
       showImageView: false,
       selImageIndex: 0,
+      showRejectReasonModal: false,
+      rejectReason: '',
 
       season: -1,
     };
@@ -94,7 +97,11 @@ export default class LeaveRequestDetailScreen extends React.Component {
     this.props.navigation.navigate(from);
   };
 
-  doUpdateStatus = (status) => {
+  doReject = () => {
+    this.setState({showRejectReasonModal: true});
+  };
+
+  doUpdateStatus = (status, reason) => {
     if (status == '-1') {
       return;
     }
@@ -109,7 +116,7 @@ export default class LeaveRequestDetailScreen extends React.Component {
       old_status = detail.ApprovedStatus.StatusCode;
     }
 
-    ApiManager.updateLeaveRequestStatus(userInfo.ID, this.state.letterId, status, userInfo.SchoolID).then(result => {
+    ApiManager.updateLeaveRequestStatus(userInfo.ID, this.state.letterId, status, userInfo.SchoolID, reason).then(result => {
       if(result == "SUCCESS"){
         if (old_status == '5' && status == '3'){
           this.setState({ isLoading: false,  showModal: true, modalBody: translang.t('CANCELED_REQUEST_SUCCESS')}, () => {
@@ -444,7 +451,7 @@ export default class LeaveRequestDetailScreen extends React.Component {
                 buttonStyle={{ borderRadius: 30, height: 60 }}
                 colors={[Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]}
                 isVerticalGradient={false}
-                _onPress={() => this.doUpdateStatus("0")} />
+                _onPress={() => this.doReject()} />
 
               <GradientButton
                 label={translang.t('LEAVE_approve')}
@@ -453,7 +460,7 @@ export default class LeaveRequestDetailScreen extends React.Component {
                 buttonStyle={{ borderRadius: 30, height: 60 }}
                 colors={[Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]}
                 isVerticalGradient={false}
-                _onPress={() => this.doUpdateStatus("1")} />
+                _onPress={() => this.doUpdateStatus("1", "")} />
             </View>
           }
           { showAcceptCancelButton &&
@@ -465,7 +472,7 @@ export default class LeaveRequestDetailScreen extends React.Component {
                 buttonStyle={{ borderRadius: 30, height: 60 }}
                 colors={[Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]}
                 isVerticalGradient={false}
-                _onPress={() => this.doUpdateStatus("4")} />
+                _onPress={() => this.doReject()} />
 
               <GradientButton
                 label={translang.t('LEAVE_approve')}
@@ -474,7 +481,7 @@ export default class LeaveRequestDetailScreen extends React.Component {
                 buttonStyle={{ borderRadius: 30, height: 60 }}
                 colors={[Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]}
                 isVerticalGradient={false}
-                _onPress={() => this.doUpdateStatus("3")} />
+                _onPress={() => this.doUpdateStatus("3", "")} />
             </View>
           }
         {/* {showAllowRejectReason &&
@@ -502,6 +509,27 @@ export default class LeaveRequestDetailScreen extends React.Component {
           visible={this.state.showImageView}
           onRequestClose={() => this.setState({showImageView: false, selImageIndex: 0})}
         />
+
+        {this.state.showRejectReasonModal && (
+          <TextInputModal 
+            isVisible={this.state.showRejectReasonModal}
+            dialogTtitle={translang.t('NOT_APPROVED_DUE_TO')}
+            buttonTitle={translang.t('NOT_APPROVED')}
+            onClose={() => this.setState({showRejectReasonModal: false})}
+            onOk={(value) => {
+              this.setState({
+                showRejectReasonModal: false,
+                rejectReason: value,
+              }, () => {
+                if (showApproveRejectButton) {
+                  this.doUpdateStatus("0", value);
+                } else if (showAcceptCancelButton) {
+                  this.doUpdateStatus("4", value);
+                }
+              });
+            }}
+          />
+        )}
 
       </SafeAreaView>
     );
@@ -561,30 +589,4 @@ const styles = ScaledSheet.create({
     shadowRadius: 2,
     elevation: 2,
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });

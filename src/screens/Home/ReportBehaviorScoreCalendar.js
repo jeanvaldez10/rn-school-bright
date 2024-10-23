@@ -134,7 +134,9 @@ export default class ReportBehaviorScoreCalendarScreen extends React.Component {
       <TouchableOpacity style={styles.infoContainer} onPress={() => this.onSelectBehavior(item)}>
         <View style={{flex: 1,}}>
           <Text style={styles.infoDate}>{date}</Text>
-          <Text style={styles.infoBehaviorName} numberOfLines={1}>{item.behaviorsname}</Text>
+          <Text style={styles.infoBehaviorName} numberOfLines={1}>
+            {getCurrentLocale() === 'th' ? item.BehaviorsName : item.BehaviorsNameEN ?? item.BehaviorsName}
+          </Text>
         </View>
         <Text style={{...styles.infoBehaviorScore, color: color}}>{score}</Text>
       </TouchableOpacity>
@@ -156,7 +158,9 @@ export default class ReportBehaviorScoreCalendarScreen extends React.Component {
       <TouchableOpacity style={styles.infoContainer} onPress={() => this.onSelectBehavior(item)}>
         <View style={{flex: 1,}}>
           <Text style={styles.infoDate}>{date}</Text>
-          <Text style={styles.infoBehaviorName} numberOfLines={1}>{item.BehaviorsName}</Text>
+          <Text style={styles.infoBehaviorName} numberOfLines={1}>
+            {getCurrentLocale() === 'th' ? item.BehaviorsName : item.BehaviorsNameEN ?? item.BehaviorsName}
+          </Text>
         </View>
         <Text style={{...styles.infoBehaviorScore, color: color}}>{score}</Text>
       </TouchableOpacity>

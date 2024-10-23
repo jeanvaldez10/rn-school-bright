@@ -1,5 +1,6 @@
 import Storage from '../utils/storage';
 import { AsyncStorageKey } from '../constants/TextConstants';
+import { updateUserInfo } from '../utils/DBManager';
 
 const getUser = () => Storage.getObject(AsyncStorageKey.user);
 const setUser = user => Storage.setObject(AsyncStorageKey.user, user);
@@ -12,7 +13,10 @@ const setPrevUserInfo = user => Storage.setObject(AsyncStorageKey.prevUserInfo, 
 
 const removeUser = () => Storage.remove(AsyncStorageKey.user);
 const getUserInfo = () => Storage.getObject(AsyncStorageKey.userInfo);
-const setUserInfo = user => Storage.setObject(AsyncStorageKey.userInfo, user);
+const setUserInfo = user => {
+    Storage.setObject(AsyncStorageKey.userInfo, user)
+    updateUserInfo(user.ID, user);
+};
 const getRecoveryUserInfo = () => Storage.getObject(AsyncStorageKey.recoveryUserInfo);
 const setRecoveryUserInfo = user => Storage.setObject(AsyncStorageKey.recoveryUserInfo, user);
 const getRecoveryType = () => Storage.getObject(AsyncStorageKey.recoveryType);

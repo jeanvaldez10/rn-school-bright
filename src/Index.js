@@ -1658,8 +1658,9 @@ class Index extends Component {
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
           PermissionsAndroid.PERMISSIONS.CAMERA,
           PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-          PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
+          // PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
         ]);
+        const result = await request(PERMISSIONS.ANDROID.POST_NOTIFICATIONS);
       }
 
     } catch (err) {

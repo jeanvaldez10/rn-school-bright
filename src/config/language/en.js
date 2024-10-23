@@ -480,7 +480,7 @@ export default {
   SELECT_LEAVE_DATE: 'Please select leave date',
   ATTACHED_IMAGE: 'Attached Image',
   ATTACHED_FILE: 'Attached File',
-  REACHED_LEAVE_REQ_LIMIT: 'You have reached the leave request limit.',
+  REACHED_LEAVE_REQ_LIMIT: 'You have reached the leave request limit. Please contact your school administrator.',
   PEOPLE: 'people',
   ON_TIME: 'On Time',
   LATE: 'Late',
@@ -1153,7 +1153,7 @@ export default {
   ONLINE_CHECKIN: 'Check in',
   ONLINE_SUBJECT: 'Subject',
 
-  WARNING_NO_DEPARTMENT: 'This system is not set completely. Please contact Your system administrator to set up the system Complete - No user department has been set.',
+  WARNING_NO_DEPARTMENT: 'This system is not fully configured. Please contact your system administrator to complete the setup. No user department has been assigned.',
 
   EDITING_HISTORY: 'Editing History',
   NO_HISTORY: "There is not history",
@@ -1241,4 +1241,14 @@ export default {
   FOR_YOUR_SAFETY: 'For your safety',
 
   TRY_AGAIN: "Try again",
+
+  NOT_APPROVED_DUE_TO: "Not approved due to",
+  NOT_APPROVED: "Not approved",
+
+  NUMBER_LEAVE_DAYS_NOT_ENOUGH: "Sorry, the number of leave days is not enough",
+  CHECK_LEAVE_DAYS_AT_TOP_RIGHT_CORNER: "You can check the leave days at the icon on the top right corner Or contact the school administrator",
+
+  REMAINING_LEAVE_DAYS: "Remaining leave days",
+  LEAVE_TYPE: "Leave type",
+  LEAVE_DAYS_IN_CURRENT_PERIOD: "Leave days in the current period",
 };

@@ -100,9 +100,16 @@ const BackNavigationBar = ({title, ...props}) => {
         }
     }
 
+    const onInfoTap = () => {
+        if (props.onInfoTap) {
+            props.onInfoTap();
+        }
+    }
+
     const onMessageTap = () => {
         props.onMessageTap();
     }
+
     const is_notification = props.is_notification;
     const notificount = props.notifi_count ? props.notifi_count : 0;
 
@@ -131,6 +138,8 @@ const BackNavigationBar = ({title, ...props}) => {
 
     const isMessage = props.isMessage;
     const messageUnreadCnt = props.msgCount ? props.msgCount : 0;
+
+    const is_info = props.is_info;
 
     const backHidden = props.backHidden;
 
@@ -301,6 +310,17 @@ const BackNavigationBar = ({title, ...props}) => {
                         style={styles.iconContainer}>
                         <Text style={styles.skipText}>{translang.t('SKIP')}</Text>
                     </TouchableOpacity>}
+
+                    {is_info && (
+                        <TouchableOpacity
+                            onPress={() => onInfoTap()}
+                            style={styles.iconContainer}>
+                            <Image
+                                source={Images.ic_alert}
+                                style={styles.iconimg}
+                            />
+                        </TouchableOpacity>
+                    )}
 
                     {is_more &&
                     <PopupMenu actions={cactions} iconname={'more-vert'} iconsize={26} onPress={onMoreTap}/>}

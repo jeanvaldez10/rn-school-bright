@@ -134,7 +134,8 @@ export default class BehaviorEditScreen extends React.Component {
 
     onSelectItem = (index) => {
         const data = this.state.scoreData[index];
-        this.setState({showModal: true, modalBody: data.BehaviorsName})
+        const behaviorName = getCurrentLocale() === 'th' ? data.BehaviorsName : data.BehaviorsNameEN ?? data.BehaviorsName
+        this.setState({showModal: true, modalBody: behaviorName})
     };
 
     onTapItemRadio = (index) => {
@@ -234,7 +235,9 @@ export default class BehaviorEditScreen extends React.Component {
                             selectedColor={this.state.isReduce ? Color.n_default_orange : Color.n_button_gradient_green_start}
                             onPress={() => this.onTapItemRadio(index0)}
                             radioSize={30}/>
-                        <Text style={styles.scoreDescription}>{data.BehaviorsName}</Text>
+                        <Text style={styles.scoreDescription}>
+                            {getCurrentLocale() === 'th' ? data.BehaviorsName : data.BehaviorsNameEN ?? data.BehaviorsName}
+                        </Text>
                         <Text
                             style={[styles.scoreValue, this.state.isReduce ? {color: Color.n_default_orange} : {color: Color.n_button_gradient_green_start}]}>{this.state.isReduce ? `-${data.Score}` : `+${data.Score}`}</Text>
 

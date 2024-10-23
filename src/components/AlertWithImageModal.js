@@ -34,7 +34,7 @@ export default function AlertWithImageModal({
                   <Image source={image} style={styles.image} />
                 }
                 { title && title !== '' &&
-                  <Text style={[styles.text, titleStyle]}>
+                  <Text style={[styles.text, styles.title, titleStyle]}>
                     {title}
                   </Text>
                 }
@@ -94,6 +94,10 @@ const styles = StyleSheet.create({
     color: Color.n_default_gray,
     fontWeight: 'normal',
     fontFamily: 'THSarabunNew',
+  },
+  
+  title: {
+    fontWeight: '600',
   },
 
   buttonStyle:{

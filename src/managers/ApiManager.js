@@ -743,10 +743,10 @@ const getLeaveRequestDetail = (userId, messageId) => {
     return promise
 }
 
-const updateLeaveRequestStatus = (userId, messageId, status, schoolId) => {
+const updateLeaveRequestStatus = (userId, messageId, status, schoolId, message) => {
 
     const params = {};
-    const promise = apiHttpClient.get(apiUrls.updateLeaveRequestStatus(userId, messageId, status, schoolId), params)
+    const promise = apiHttpClient.get(apiUrls.updateLeaveRequestStatus(userId, messageId, status, schoolId, message), params)
         .then(response => response.data)
         .then((data) => {
             const result = String(data);
@@ -2718,7 +2718,7 @@ const getStudentLeaveType = (schoolID) => {
     const promise = apiHttpClient.get(apiUrls.getStudentLeaveType(schoolID), params)
         .then(response => response.data)
         .then(async (data) => {
-            return data;
+            return data.data || [];
         });
     return promise
 }
@@ -2742,6 +2742,16 @@ const getVerification = (Token, UserID, SchoolID, Imei) => {
         .then(async (data) => {
             return data;
         })
+}
+
+const getLeaveInfos = (userId) => {
+    const params = {};
+    const promise = apiHttpClient.get(apiUrls.getLeaveInfo(userId), params)
+        .then(response => response.data)
+        .then(async (data) => {
+            return data.data || [];
+        });
+    return promise
 }
 
 export default {
@@ -2962,4 +2972,5 @@ export default {
     isOpenEditUserProfile,
     getStudentLeaveType,
     getTeacherLeaveType,
+    getLeaveInfos,
 };

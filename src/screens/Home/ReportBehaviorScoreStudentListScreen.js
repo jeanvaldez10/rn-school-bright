@@ -126,6 +126,8 @@ export default class ReportBehaviorScoreStudentListScreen extends React.Componen
 
     let firstName = student.FirstNameTH;
     let lastName = student.LastNameTH;
+    let addScores = 0;
+    let reduceScores = 0;
 
     if(getCurrentLocale() == 'en'){
       if(student.FirstNameEN != "" && student.FirstNameEN != null){
@@ -150,17 +152,30 @@ export default class ReportBehaviorScoreStudentListScreen extends React.Componen
       // strScore = "-" + student.score;
     }
 
-    let enableState = student.Student_State == '0'?true:false;
+    const behaviorsHistory = student.BehaviorsHistory ?? [];
+    for (const behavior of behaviorsHistory) {
+      if (behavior.BehaviorsType !== "1") {
+        addScores += behavior.Score;
+      } else {
+        reduceScores -= behavior.Score;
+      }
+    }
+
+    const enableState = student.Student_State === '0';
     if(enableState){
       return (
         <View style={styles.listItem}>
           <TouchableOpacity style={{height: 130, flexDirection: 'row', flex: 1, alignItems: 'center', padding: 15, }}  onPress={() => this.onSelectItem(item, index)}>
             <Text style={styles.itemText}>{index + 1}.</Text>
-            <Image source={profileImage} style={styles.itemAvatar}></Image>
+            <Image source={profileImage} style={styles.itemAvatar} />
             <View style={{flexDirection: 'column', flex: 1, justifyContent: 'space-around'}}>
               <Text style={styles.itemText}>{student.StudentCode}</Text>
               <Text style={styles.itemText}>{firstName}</Text>
               <Text style={styles.itemText}>{lastName}</Text>
+            </View>
+            <View style={{flexDirection: 'row', marginHorizontal: 10}}>
+              <Text style={{fontFamily: 'THSarabunNew', color: 'black', fontSize: 24, width: 40}}>{`${addScores}`}</Text>
+              <Text style={{fontFamily: 'THSarabunNew', color: 'black', fontSize: 24, width: 40}}>{`${reduceScores}`}</Text>
             </View>
             <View style={{width: 50, height: 50, borderRadius: 25, backgroundColor: colorScore, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
               <Text style={{fontFamily: 'THSarabunNew', color: 'white', fontSize: 24,}}>{student.LastScore ?? ''}</Text>
@@ -168,24 +183,28 @@ export default class ReportBehaviorScoreStudentListScreen extends React.Componen
           </TouchableOpacity>
         </View>
       );
-    }else{
-      return (
-        <View style={{...styles.listItem, backgroundColor: Color.n_default_gray_light}}>
-          <View style={{height: 130, flexDirection: 'row', flex: 1, alignItems: 'center', padding: 15, }}  onPress={() => this.onSelectItem(item, index)}>
-            <Text style={styles.itemText}>{index + 1}.</Text>
-            <Image source={profileImage} style={styles.itemAvatar}></Image>
-            <View style={{flexDirection: 'column', flex: 1, justifyContent: 'space-around'}}>
-              <Text style={styles.itemText}>{student.StudentCode}</Text>
-              <Text style={styles.itemText}>{firstName}</Text>
-              <Text style={styles.itemText}>{lastName}</Text>
-            </View>
-            <View style={{width: 50, height: 50, borderRadius: 25, backgroundColor: colorScore, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-              <Text style={{fontFamily: 'THSarabunNew', color: 'white', fontSize: 24,}}>{student.LastScore ?? ''}</Text>
-            </View>
+    }
+
+    return (
+      <View style={{...styles.listItem, backgroundColor: Color.n_default_gray_light}}>
+        <View style={{height: 130, flexDirection: 'row', flex: 1, alignItems: 'center', padding: 15, }}  onPress={() => this.onSelectItem(item, index)}>
+          <Text style={styles.itemText}>{index + 1}.</Text>
+          <Image source={profileImage} style={styles.itemAvatar} />
+          <View style={{flexDirection: 'column', flex: 1, justifyContent: 'space-around'}}>
+            <Text style={styles.itemText}>{student.StudentCode}</Text>
+            <Text style={styles.itemText}>{firstName}</Text>
+            <Text style={styles.itemText}>{lastName}</Text>
+          </View>
+          <View style={{flexDirection: 'row', marginHorizontal: 10}}>
+            <Text style={{fontFamily: 'THSarabunNew', color: 'black', fontSize: 24, width: 40}}>{`${addScores}`}</Text>
+            <Text style={{fontFamily: 'THSarabunNew', color: 'black', fontSize: 24, width: 40}}>{`${reduceScores}`}</Text>
+          </View>
+          <View style={{width: 50, height: 50, borderRadius: 25, backgroundColor: colorScore, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+            <Text style={{fontFamily: 'THSarabunNew', color: 'white', fontSize: 24,}}>{student.LastScore ?? ''}</Text>
           </View>
         </View>
-      );
-    }
+      </View>
+    );
   };
 
   render() {
@@ -248,6 +267,16 @@ export default class ReportBehaviorScoreStudentListScreen extends React.Componen
               }}
             />
           </View>
+          <View style={{flexDirection: 'row', marginTop: 30, marginHorizontal: 10, paddingHorizontal: 15}}>
+            {this.state.filteredStudent.length > 0 && (
+              <>
+              <View style={{flex: 1}} />
+              <Text style={{width: 40, marginLeft: 10, fontFamily: 'THSarabunNew', fontWeight: '600', fontSize: 15}}>{translang.t('ADD')}</Text>
+              <Text style={{width: 40, marginRight: 10, fontFamily: 'THSarabunNew', fontWeight: '600', fontSize: 15}}>{translang.t('REDUCE')}</Text>
+              <Text style={{width: 50, fontFamily: 'THSarabunNew', fontWeight: '600', fontSize: 15}}>{translang.t('REPORT_remaining')}</Text>
+              </>
+            )}
+          </View>
           <FlatList style={styles.list}
             data={this.state.filteredStudent}
             keyExtractor={(item, index) => index.toString()}
@@ -276,7 +305,6 @@ const styles = ScaledSheet.create({
   },
   list: {
     flex: 1,
-    marginTop: 30,
   },
   listItem: {
     backgroundColor: Color.white,
