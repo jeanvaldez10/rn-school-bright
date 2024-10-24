@@ -1,50 +1,9 @@
 {
-  "_actionEventSubscribers": Set {[
-  Function
-  anonymous
-]}, "_getScreenProps": [Function anonymous], "_getTheme": [Function anonymous], "_handleOpenURL": [Function anonymous], "_initialAction": {
-"type": "Navigation/IN
-IT"}, "_isMounted": true, "_linkingSub": undefined, "_navState": null, "_navigation": {"_childrenNavigation": {"App": [Object], "Auth": [Object], "AuthLoading": [Object], "Drawer": [Object], "Helper": [Object]}, "actions": {}, "addListener": [Function addListener],
-"dangerouslyGetParent": [Function dangerouslyGetParent], "dispatch": [Function anonymous], "getChildNavigation": [Function getChildNavigation], "getScreenProps": [Function anonymous], "goBack": [Function anonymous], "isFirstRouteInParent": [
-Function isFirstRouteIn
-Parent
-], "isFocused": [Function isFocused], "navigate": [Function anonymous], "router": {"childRouters": [Object], "getActionCreators": [Function getActionCreators], "getActionForPathAndParams": [Function getActionForPathAndParams], "getComponentForRouteName": [
-Fun
-ction getComponentForRouteName
-], "getComponentForState": [Function getComponentForState], "getPathAndParamsForState": [Function getPathAndParamsForState], "getScreenOptions": [Function anonymous], "getStateForAction": [Function getStateForAction]}, "setParams": [
-Fu
-nction anonymous
-], "state": {"index": 4, "routes": [Array]}}, "_persistNavigationState": [Function _callee], "_reactInternalFiber": {"_debugHookTypes": null, "_debugID": 240, "_debugIsCurrentlyTiming": false, "_debugNeedsRemount": false, "_debugOwner": {"_debugHook
-Types": null, "_debugID": 105, "_debugIsCurrentlyTiming": false, "_debugNeedsRemount": false, "_debugOwner": [FiberNode], "_debugSource": [Object], "actualDuration": 6, "actualStartTime": 6262, "alternate": [FiberNode], "child": [FiberNode], "childExpirationTime":
-1073741823, "dependencies": null, "effectTag": 0, "elementType": [Function Index], "expirationTime": 0, "firstEffect": [FiberNode], "index": 0, "key": null, "lastEffect": [FiberNode], "memoizedProps": [Object], "memoizedState": [Object], "mode": 8, "nextEffect": nu
-ll, "pendingProps": [Object], "ref": null, "return": [FiberNode], "selfBaseDuration": 1, "sibling": [FiberNode], "stateNode": [Index], "tag": 1, "treeBaseDuration": 276, "type": [Function Index], "updateQueue": [Object]}, "_debugSource": {"columnNumber": 9, "fileNa
-me": "D: \\React_Native\\SB_v3\\src\\Index.js", "lineNumber": 1858}, "actualDuration": 66, "actualStartTime": 6278, "alternate": {"_debugHookTypes": null, "_debugID": 240, "_debugIsCurrentlyTiming": false, "_debugNeedsRemount": false, "_debugOwner": [FiberNode], "_d
-ebugSource": [Object], "actualDuration": 6, "actualStartTime": 6262, "alternate": [Circular], "child": [FiberNode], "childExpirationTime": 1073741823, "dependencies": null, "effectTag": 0, "elementType": [Function NavigationContainer], "expirationTime": 0, "firstEf
-fect": [FiberNode], "index": 0, "key": null, "lastEffect": [FiberNode], "memoizedProps": [Object], "memoizedState": [Object], "mode": 8, "nextEffect": null, "pendingProps": [Object], "ref": [Function ref], "return": [FiberNode], "selfBaseDuration": 0, "sibling": [F
-iberNode
-], "stateNode": [Circular], "tag": 1, "treeBaseDuration": 272, "type": [Function NavigationContainer], "updateQueue": [Object]}, "child": {"_debugHookTypes": null, "_debugID": 243, "_debugIsCurrentlyTiming": false, "_debugNeedsRemount": false, "_debugOwner": [Circular], "_debugSource": null, "actualDuration": 66, "actualStartTime": 6278, "alternate": [FiberNode], "child": [FiberNode], "childExpirationTime": 0, "dependencies": null, "effectTag": 0, "elementType": [Object], "expirationTime": 0, "firstEffect": [
-FiberNod
-e
-], "index": 0, "key": null, "lastEffect": [FiberNode], "memoizedProps": [Object], "memoizedState": null, "mode": 8, "nextEffect": null, "pendingProps": [Object], "ref": null, "return": [Circular], "selfBaseDuration": 0, "sibling": null, "stateNode": null, "tag": 1
-0, "treeBaseDuration": 254, "type": [Object], "updateQueue": null}, "childExpirationTime": 0, "dependencies": null, "effectTag": 0, "elementType": [Function NavigationContainer], "expirationTime": 0, "firstEffect": {"_debugHookTypes": null, "_debugID": 13999, "_deb
-ugIsCurrentlyTiming": false, "_debugNeedsRemount": false, "_debugOwner": [FiberNode], "_debugSource": [Object], "actualDuration": 0, "actualStartTime": 6284, "alternate": [FiberNode], "child": null, "childExpirationTime": 0, "dependencies": null, "effectTag": 4, "e
-lementType": "RCTImageView", "expirationTime": 0, "firstEffect": null, "index": 0, "key": null, "lastEffect": null, "memoizedProps": [Object], "memoizedState": null, "mode": 8, "nextEffect": null, "pendingProps": [Object], "ref": null, "return": [FiberNode], "selfB
-aseDuration": 0, "sibling": null, "stateNode": [ReactNativeFiberHostComponent], "tag": 5, "treeBaseDuration": 0, "type": "RCTImageView", "updateQueue": null}, "index": 0, "key": null, "lastEffect": {"_debugHookTypes": null, "_debugID": 13975, "_debugIsCurrentlyTimi
-ng": false, "_debugNeedsRemount": false, "_debugOwner": [FiberNode], "_debugSource": [Object], "actualDuration": 61, "actualStartTime": 6284, "alternate": [FiberNode], "child": [FiberNode], "childExpirationTime": 0, "dependencies": null, "effectTag": 4, "elementTyp
-e": "RCTView", "expirationTime": 0, "firstEffect": [FiberNode], "index": 0, "key": null, "lastEffect": [FiberNode], "memoizedProps": [Object], "memoizedState": null, "mode": 8, "nextEffect": null, "pendingProps": [Object], "ref": null, "return": [FiberNode], "selfB
-aseDuration": 0, "sibling": null, "stateNode": [ReactNativeFiberHostComponent], "tag": 5, "treeBaseDuration": 60, "type": "RCTView", "updateQueue": null}, "memoizedProps": {"theme": "light"}, "memoizedState": {"nav": [Object]}, "mode": 8, "nextEffect": null, "pendi
-ngProps": {"theme": "light"}, "ref": [Function ref], "return": {"_debugHookTypes": null, "_debugID": 238, "_debugIsCurrentlyTiming": false, "_debugNeedsRemount": false, "_debugOwner": [FiberNode], "_debugSource": [Object], "actualDuration": 66, "actualStartTime": 6
-278, "alternate": [FiberNode], "child": [Circular], "childExpirationTime": 0, "dependencies": null, "effectTag": 0, "elementType": [Object], "expirationTime": 0, "firstEffect": [FiberNode], "index": 0, "key": null, "lastEffect": [FiberNode], "memoizedProps": [
-Objec
-t
-], "memoizedState": null, "mode": 8, "nextEffect": null, "pendingProps": [Object], "ref": null, "return": [FiberNode], "selfBaseDuration": 0, "sibling": null, "stateNode": null, "tag": 10, "treeBaseDuration": 257, "type": [Object], "updateQueue": null
-}, "selfBaseD
-uration": 0, "sibling": {"_debugHookTypes": null, "_debugID": 241, "_debugIsCurrentlyTiming": false, "_debugNeedsRemount": false, "_debugOwner": [FiberNode], "_debugSource": [Object], "actualDuration": 0, "actualStartTime": 6347, "alternate": [FiberNode], "child":
-[FiberNode], "childExpirationTime": 0, "dependencies": null, "effectTag": 0, "elementType": [Function AlertWithImageOfflineModal], "expirationTime": 0, "firstEffect": null, "index": 2, "key": null, "lastEffect": null, "memoizedProps": [Object], "memoizedState": nul
-l, "mode": 8, "nextEffect": null, "pendingProps": [Object], "ref": null, "return": [FiberNode], "selfBaseDuration": 2, "sibling": null, "stateNode": null, "tag": 0, "treeBaseDuration": 3, "type": [Function AlertWithImageOfflineModal], "updateQueue": null
-}, "stateNo
-de": [Circular], "tag": 1, "treeBaseDuration": 254, "type": [Function NavigationContainer], "updateQueue": {"baseQueue": null, "baseState": [Object], "effects": null, "shared": [Object]}}, "_reactInternalInstance": {}, "context": {}, "dispatch": [Function anonymous
-], "props": {
-"theme": "light"
-}, "refs": {}, "state": {"nav": {"index": 4, "routes": [Array]}}, "subs": {"remove": [Function remove]}, "updater": {"enqueueForceUpdate": [Function enqueueForceUpdate], "enqueueReplaceState": [Function enqueueReplaceState], "enqueueSet
-State": [Function enqueueSetState], "isMounted": [Function isMounted]}}
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {},
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "**/*.d.ts"]
+}
