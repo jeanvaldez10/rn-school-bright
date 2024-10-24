@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
@@ -12,30 +12,36 @@ import {
   Dimensions,
   Text,
   Linking,
-  Alert
+  Alert,
 } from 'react-native';
-import {Platform, AppState} from 'react-native';
+import { Platform, AppState } from 'react-native';
 import _ from 'lodash';
 import I18n from 'react-native-i18n';
-import {getUniqueId, getBrand, getDeviceId, getModel, getApiLevel, getAndroidId} from 'react-native-device-info';
+import {
+  getUniqueId,
+  getBrand,
+  getDeviceId,
+  getModel,
+  getApiLevel,
+  getAndroidId,
+} from 'react-native-device-info';
 import Sound from 'react-native-sound';
 import SplashScreen from 'react-native-splash-screen';
 import LoginScreen from './screens/Auth/LoginScreen';
 import RegisterScreen from './screens/Auth/RegisterScreen';
-import {createAppContainer, createSwitchNavigator} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
-import {createDrawerNavigator} from 'react-navigation-drawer';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import Storage from './managers/StorageManager';
-import translang, {setLocale} from './utils/language.utils';
+import translang, { setLocale } from './utils/language.utils';
 import ApiManager from '../src/managers/ApiManager';
-import analytics, {firebase} from '@react-native-firebase/analytics';
+import analytics, { firebase } from '@react-native-firebase/analytics';
 import VersionCheck from 'react-native-version-check';
-import {getOneUserInfo, removeUser, updatePassword} from './utils/DBManager';
-import {getCurrentLocale} from './utils/language.utils';
-import TokenErrorModal from "./components/TokenErrorModal";
-import ReLoginModal from "./components/ReLoginModal";
+import { getOneUserInfo, removeUser, updatePassword } from './utils/DBManager';
+import { getCurrentLocale } from './utils/language.utils';
+import TokenErrorModal from './components/TokenErrorModal';
+import ReLoginModal from './components/ReLoginModal';
 import { request, PERMISSIONS, RESULTS } from 'react-native-permissions';
-
 
 import ForgotPassScreen from './screens/Auth/ForgotPassScreen';
 import ForgotPassLinkScreen from './screens/Auth/ForgotPassLinkScreen';
@@ -101,9 +107,9 @@ import Validate from './screens/Auth/Validate';
 import messaging from '@react-native-firebase/messaging';
 import Images from './themes/Images';
 import RenderHtml from 'react-native-render-html';
-import {httpUtils} from './utils/HttpUtils';
-import {menuservice} from './services/MenuService';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import { httpUtils } from './utils/HttpUtils';
+import { menuservice } from './services/MenuService';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AttendanceCheckInScreen from './screens/Home/AttendanceCheckInScreen';
 
 import AttendanceCheckInListScreen from './screens/Home/AttendanceCheckInListScreen';
@@ -199,8 +205,8 @@ import UpdatePassScreen from './screens/Home/UpdatePassScreen';
 import ShopSetPincodeScreen from './screens/Home/ShopSetPincodeScreen';
 import ShopSetPincodeConfirmScreen from './screens/Home/ShopSetPincodeConfirmScreen';
 import MessageHistoryForNotificationScreen from './screens/Home/MessageHistoryForNotificationScreen';
-import PushNotification from "react-native-push-notification";
-import PushNotificationIOS from "@react-native-community/push-notification-ios";
+import PushNotification from 'react-native-push-notification';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import Constant from './constants/constants';
 import VisitHomeScreen from './screens/Home/VisitHomeScreen';
 import VisitHomeDetailScreen from './screens/Home/VisitHomeDetailScreen';
@@ -211,59 +217,54 @@ import PrivacyPolicyNoActionScreen from './screens/Home/PrivacyPolicyNoActionScr
 import SettingUpdatePassScreen from './screens/Home/SettingUpdatePassScreen';
 import EmailSettingScreen from './screens/Home/EmailSettingScreen';
 import PhoneSettingScreen from './screens/Home/PhoneSettingScreen';
-import LineConnectScreen from "./screens/Home/LineConnectScreen";
-import LineDisConnectScreen from "./screens/Home/LineDisConnectScreen";
-import LineAgreeScreen from "./screens/Home/LineAgreeScreen";
-import LineConnectSuccessScreen from "./screens/Home/LineConnectSuccessScreen";
-import VerifyStartScreen from "./screens/Home/VerifyStartScreen";
+import LineConnectScreen from './screens/Home/LineConnectScreen';
+import LineDisConnectScreen from './screens/Home/LineDisConnectScreen';
+import LineAgreeScreen from './screens/Home/LineAgreeScreen';
+import LineConnectSuccessScreen from './screens/Home/LineConnectSuccessScreen';
+import VerifyStartScreen from './screens/Home/VerifyStartScreen';
 
-import NetInfo from "@react-native-community/netinfo";
-import {BASE_URL} from './constants/ApiUrls';
+import NetInfo from '@react-native-community/netinfo';
+import { BASE_URL } from './constants/ApiUrls';
 
 import AlertWithImageOfflineModal from './components/AlertWithImageOfflineModal';
 import RNExitApp from 'react-native-exit-app';
 import ReportAttendanceSubjectCalendarScreen from './screens/Home/ReportAttendanceSubjectCalendarScreen';
 import ReportAttendanceSubjectStatusListScreen from './screens/Home/ReportAttendanceSubjectStatusListScreen';
-import ReportAttendanceStudentSubjectStatusHistoryScreen
-  from './screens/Home/ReportAttendanceStudentSubjectStatusHistoryScreen';
+import ReportAttendanceStudentSubjectStatusHistoryScreen from './screens/Home/ReportAttendanceStudentSubjectStatusHistoryScreen';
 import BroadcastSelectClassScreen from './screens/Home/BroadcastSelectClassScreen';
 import BroadcastGroupSelectClassScreen from './screens/Home/BroadcastGroupSelectClassScreen';
 import VisitHomeDetailStudentScreen from './screens/Home/VisitHomeDetailStudentScreen';
-import OnlineStudentHomeworkDetailForNotificationScreen
-  from './screens/Home/OnlineStudentHomeworkDetailForNotificationScreen';
-import VerifyEmailInputScreen from "./screens/Home/VerifyEmailInputScreen";
-import VerifyEmailCodeScreen from "./screens/Home/VerifyEmailCodeScreen";
-import VerifyEmailSuccessScreen from "./screens/Home/VerifyEmailSuccessScreen";
-import VerifyPhoneInputScreen from "./screens/Home/VerifyPhoneInputScreen";
-import VerifyPhoneCodeScreen from "./screens/Home/VerifyPhoneCodeScreen";
-import VerifyPhoneSuccessScreen from "./screens/Home/VerifyPhoneSuccessScreen";
-import VerifyLineConnectScreen from "./screens/Home/VerifyLineConnectScreen";
-import VerifyLineSuccessScreen from "./screens/Home/VerifyLineSuccessScreen";
-import VerifyWarningScreen from "./screens/Home/VerifyWarningScreen";
-import NavigationService from "./NavigationService";
-import YourDevicesScreen from "./screens/Home/YourDevicesScreen";
-import VerifyIdentifyIDScreen from "./screens/Auth/VerifyIdentifyIDScreen";
+import OnlineStudentHomeworkDetailForNotificationScreen from './screens/Home/OnlineStudentHomeworkDetailForNotificationScreen';
+import VerifyEmailInputScreen from './screens/Home/VerifyEmailInputScreen';
+import VerifyEmailCodeScreen from './screens/Home/VerifyEmailCodeScreen';
+import VerifyEmailSuccessScreen from './screens/Home/VerifyEmailSuccessScreen';
+import VerifyPhoneInputScreen from './screens/Home/VerifyPhoneInputScreen';
+import VerifyPhoneCodeScreen from './screens/Home/VerifyPhoneCodeScreen';
+import VerifyPhoneSuccessScreen from './screens/Home/VerifyPhoneSuccessScreen';
+import VerifyLineConnectScreen from './screens/Home/VerifyLineConnectScreen';
+import VerifyLineSuccessScreen from './screens/Home/VerifyLineSuccessScreen';
+import VerifyWarningScreen from './screens/Home/VerifyWarningScreen';
+import NavigationService from './NavigationService';
+import YourDevicesScreen from './screens/Home/YourDevicesScreen';
+import VerifyIdentifyIDScreen from './screens/Auth/VerifyIdentifyIDScreen';
 
-
-import {connect} from 'react-redux';
-import {bindActionCreators} from "redux";
-import {setDEV, setTabIndex, setShowTokenError, setGoVerifyLineSuccess} from "./redux/actions";
-import VerifyDeviceScreen from "./screens/Home/VerifyDeviceScreen";
-import VerifyDeviceSuccessScreen from "./screens/Home/VerifyDeviceSuccessScreen";
-import VerifyIdentifyID1Screen from "./screens/Auth/VerifyIdentifyID1Screen";
-import VerifyIdentifyID2Screen from "./screens/Auth/VerifyIdentifyID2Screen";
-import VerifyIdentifyID3Screen from "./screens/Auth/VerifyIdentifyID3Screen";
-import CheckVerification from "./components/CheckVerification";
-import VerifyIdentifyIDSuccessScreen from "./screens/Auth/VerifyIdentifyIDSuccessScreen";
-import AuthLoadingScreen from "./AuthLoadingScreen";
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { setDEV, setTabIndex, setShowTokenError, setGoVerifyLineSuccess } from './redux/actions';
+import VerifyDeviceScreen from './screens/Home/VerifyDeviceScreen';
+import VerifyDeviceSuccessScreen from './screens/Home/VerifyDeviceSuccessScreen';
+import VerifyIdentifyID1Screen from './screens/Auth/VerifyIdentifyID1Screen';
+import VerifyIdentifyID2Screen from './screens/Auth/VerifyIdentifyID2Screen';
+import VerifyIdentifyID3Screen from './screens/Auth/VerifyIdentifyID3Screen';
+import CheckVerification from './components/CheckVerification';
+import VerifyIdentifyIDSuccessScreen from './screens/Auth/VerifyIdentifyIDSuccessScreen';
+import AuthLoadingScreen from './AuthLoadingScreen';
 
 const screenWidth = Dimensions.get('window').width;
 const drawerWidth = 0;
 
 //console.disableYellowBox = true;
 LogBox.ignoreAllLogs(true); //Ignore all log notifications
-
 
 const AuthRouteConfigs = {
   Login: {
@@ -314,15 +315,11 @@ const AuthRouteConfigs = {
       headerShown: false,
     },
   },
-
 };
 const AuthStackNavigatorConfig = {
   initialRouteName: 'Login',
 };
-const AuthNavigator = createStackNavigator(
-  AuthRouteConfigs,
-  AuthStackNavigatorConfig,
-);
+const AuthNavigator = createStackNavigator(AuthRouteConfigs, AuthStackNavigatorConfig);
 const AuthContainer = createAppContainer(AuthNavigator);
 
 const MainAppRouteConfigs = {
@@ -330,7 +327,7 @@ const MainAppRouteConfigs = {
     screen: UserInfoScreen1,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   Timetable: {
     screen: TimeTableScreen,
@@ -349,7 +346,7 @@ const MainAppRouteConfigs = {
     screen: SettingManageLanguage,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   HomeworkHistory: {
@@ -368,31 +365,31 @@ const MainAppRouteConfigs = {
     screen: ReportLeaveApproved,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportLeaveWaiting: {
     screen: ReportLeaveWaiting,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   CheckTemperature: {
     screen: CheckTemperature,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   SystemError: {
     screen: SystemErrorScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   BehaviorAddOutput: {
     screen: BehaviorAddOutput,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   SendIndividualUserList: {
@@ -405,7 +402,7 @@ const MainAppRouteConfigs = {
     screen: HomeworkFillInfoScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   HomeworkSummarize: {
     screen: HomeworkSummarizeScreen,
@@ -417,19 +414,19 @@ const MainAppRouteConfigs = {
     screen: BroadcastOutput,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   LeaveRequestWaiting: {
     screen: LeaveRequestWaiting,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   LeaveRequestApproved: {
     screen: LeaveRequestApproved,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   Pickup: {
     screen: PickupScreen,
@@ -441,16 +438,13 @@ const MainAppRouteConfigs = {
     screen: UpdatePassScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 };
 const MainAppNavigatorConfigs = {
   initialRouteName: 'UserInfo',
 };
-const MainAppNavigator = createStackNavigator(
-  MainAppRouteConfigs,
-  MainAppNavigatorConfigs,
-);
+const MainAppNavigator = createStackNavigator(MainAppRouteConfigs, MainAppNavigatorConfigs);
 const MainAppContainer = createAppContainer(MainAppNavigator);
 
 const DrawerRouteConfigs = {
@@ -458,7 +452,7 @@ const DrawerRouteConfigs = {
     screen: UserInfoScreen1,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ProfileStudent: {
     screen: ProfileStudentMainNoTabScreen,
@@ -519,7 +513,6 @@ const DrawerRouteConfigs = {
       headerShown: false,
     },
   },
-
 
   OnlineTeacherSubjectList: {
     screen: OnlineTeacherSubjectListScreen,
@@ -761,92 +754,91 @@ const DrawerRouteConfigs = {
     screen: SettingManageAccount,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   SettingAddAccount: {
     screen: SettingAddAccount,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   SettingChangePincode: {
     screen: SettingChangePincode,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   SettingUpdatePass: {
     screen: SettingUpdatePassScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   EmailSetting: {
     screen: EmailSettingScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   PhoneSetting: {
     screen: PhoneSettingScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   LineConnect: {
     screen: LineConnectScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   LineAgree: {
     screen: LineAgreeScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   LineConnectSuccess: {
     screen: LineConnectSuccessScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
-
 
   SettingChangePincodeEdit: {
     screen: SettingChangePincodeEdit,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   SettingChangePincodeConfirm: {
     screen: SettingChangePincodeConfirm,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   SettingNotification: {
     screen: SettingNotification,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   SettingAbout: {
     screen: SettingAbout,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   SettingPrivacy: {
     screen: PrivacyPolicyNoActionScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportForTeacher: {
@@ -860,263 +852,262 @@ const DrawerRouteConfigs = {
     screen: ReportAttendanceNoTabScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportAttendanceCalendar: {
     screen: ReportAttendanceCalendarScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportAttendanceSubjectCalendar: {
     screen: ReportAttendanceSubjectCalendarScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportBehavior: {
     screen: ReportBehaviorScoreMain,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportBehaviorStudentList: {
     screen: ReportBehaviorScoreStudentListScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportBehaviorScoreDetail: {
     screen: ReportBehaviorScoreDetailsScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportStudentBehaviorScoreDetail: {
     screen: ReportBehaviorScoreDetailScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportStudentBehaviorScoreList: {
     screen: ReportStudentBehaviorScoreListScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportExecutiveAttendance: {
     screen: ReportExecutiveAttendanceNoTabScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportUncheckName: {
     screen: ReportUncheckNameScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportExcuteBroadcast: {
     screen: ReportExcuteBroadcastScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportBroadcast: {
     screen: ReportBroadcastScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportPersonalAttendance: {
     screen: ReportPersonalAttendanceNoTabScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportTeacherStudentLeave: {
     screen: ReportTeacherStudentLeaveScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportTeacherStudentLeaveStudentList: {
     screen: ReportTeacherStudentLeaveStudentListScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
-
 
   ReportLeaveForStudent: {
     screen: ReportStudentLeaveScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportTeacherStudentLeaveList: {
     screen: ReportTeacherStudentLeaveListScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportLeave: {
     screen: ReportTeacherPersonalLeaveScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   LeaveRequestDetail: {
     screen: LeaveRequestDetailScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportTopup: {
     screen: ReportTopup,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportOrderList: {
     screen: ReportOrderList,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportOrderDetail: {
     screen: ReportOrderDetailScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportAttendanceStatusList: {
     screen: ReportAttendanceStatusListScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportAttendanceSubjectStatusList: {
     screen: ReportAttendanceSubjectStatusListScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportAttendanceStudentStatusHistory: {
     screen: ReportAttendanceStudentStatusHistoryScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportAttendanceStudentSubjectStatusHistory: {
     screen: ReportAttendanceStudentSubjectStatusHistoryScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportExecutiveClassList: {
     screen: ReportExecutiveClassListScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportExecAttendanceClassDetail: {
     screen: ReportExecAttendanceClassDetailScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportExecutiveDepartmentList: {
     screen: ReportExecutiveDepartmentListScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportExecAttendanceDepartmentDetail: {
     screen: ReportExecAttendanceDepartmentDetailScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportHomework: {
     screen: ReportHomeworkScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportHomeworkDetail: {
     screen: ReportHomeworkDetailScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportBroadcastDetail: {
     screen: ReportBroadcastDetailNoTabScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportExecutiveTopup: {
     screen: ReportExecutiveTopupScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportPurchase: {
     screen: ReportPurchaseScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportExecutivePurchaseList: {
     screen: ReportExecutivePurchaseDetailListScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportTeacherExcutableTuition: {
     screen: ReportTeacherExcutableTuitionScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ReportTeacherExcutableTuitionDetail: {
     screen: ReportTeacherExcutableTuitionDetailScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportTeacherPersonalLeave: {
     screen: ReportTeacherPersonalLeaveScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   ReportTeacherPersonalOnline: {
     screen: ReportTeacherPersonalOnlineScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   Academic: {
@@ -1163,79 +1154,79 @@ const DrawerRouteConfigs = {
     screen: VisitHomeScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   VisitHomeDetail: {
     screen: VisitHomeDetailScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   VisitHomeDetailStudent: {
     screen: VisitHomeDetailStudentScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   AttendanceCheckIn: {
     screen: AttendanceCheckInScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   AttendanceCheckInList: {
     screen: AttendanceCheckInListScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   AttendanceCheckInSummary: {
     screen: AttendanceCheckInSummaryScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   AttendanceEditCheckin: {
     screen: AttendanceEditCheckinScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   BehaviorEdit: {
     screen: BehaviorEditScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   BehaviorQRCode: {
     screen: BehaviorQRCodeScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   BehaviorStudentID: {
     screen: BehaviorStudentIDScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   AttendanceCheckQRCode: {
     screen: AttendanceCheckQRCodeScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   AttendanceCheckStudentID: {
     screen: AttendanceCheckStudentIDScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   BehaviorAdd: {
     screen: BehaviorAddScreen,
@@ -1266,7 +1257,7 @@ const DrawerRouteConfigs = {
     screen: AttendanceCheckOutNoTabScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   Report: {
@@ -1287,31 +1278,31 @@ const DrawerRouteConfigs = {
     screen: ClassAttendTakeScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ClassAttendEdit: {
     screen: ClassAttendEditScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ClassAttendStudentList: {
     screen: ClassAttendStudentListScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ClassAttendAddSummary: {
     screen: ClassAttendTakeAddSummaryScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   ClassAttendSummary: {
     screen: ClassAttendSummaryScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   SendIndividual: {
     screen: SendIndividualScreen,
@@ -1335,39 +1326,39 @@ const DrawerRouteConfigs = {
     screen: BroadcastSelectClassScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   BroadcastGroupSelectClass: {
     screen: BroadcastGroupSelectClassScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   BroadcastIndiviDual: {
     screen: BroadcastIndiviDualScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   BroadcastFillInfo: {
     screen: BroadcastFillInfoScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   BroadcastSubmit: {
     screen: BroadcastSubmitScreen,
     navigationOptions: {
-      headerShown: false
+      headerShown: false,
     },
   },
   YourDevice: {
     screen: YourDevicesScreen,
     navigationOptions: {
-      headerShown: true
+      headerShown: true,
     },
-  }
+  },
 };
 
 const DrawerNavigatorConfigs = {
@@ -1376,10 +1367,7 @@ const DrawerNavigatorConfigs = {
   contentComponent: Drawer,
 };
 
-const DrawerNavigator = createDrawerNavigator(
-  DrawerRouteConfigs,
-  DrawerNavigatorConfigs
-);
+const DrawerNavigator = createDrawerNavigator(DrawerRouteConfigs, DrawerNavigatorConfigs);
 const DrawerContainer = createAppContainer(DrawerNavigator);
 
 const VerifyRouteConfigs = {
@@ -1387,77 +1375,77 @@ const VerifyRouteConfigs = {
     screen: VerifyStartScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   VerifyEmailCode: {
     screen: VerifyEmailCodeScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   VerifyEmailSuccess: {
     screen: VerifyEmailSuccessScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   VerifyPhoneCode: {
     screen: VerifyPhoneCodeScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   VerifyPhoneSuccess: {
     screen: VerifyPhoneSuccessScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   VerifyLineConnect: {
     screen: VerifyLineConnectScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   LineDisConnect: {
     screen: LineDisConnectScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   VerifyLineSuccess: {
     screen: VerifyLineSuccessScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   VerifyWarning: {
     screen: VerifyWarningScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   VerifyEmailInput: {
     screen: VerifyEmailInputScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   VerifyPhoneInput: {
     screen: VerifyPhoneInputScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   VerifyDevice: {
@@ -1465,45 +1453,45 @@ const VerifyRouteConfigs = {
     navigationOptions: {
       headerShown: false,
       gestureEnabled: false,
-    }
+    },
   },
 
   VerifyDeviceSuccess: {
     screen: VerifyDeviceSuccessScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   VerifyIdentify: {
     screen: VerifyIdentifyIDScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   VerifyIdentify1: {
     screen: VerifyIdentifyID1Screen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   VerifyIdentify2: {
     screen: VerifyIdentifyID2Screen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   VerifyIdentify3: {
     screen: VerifyIdentifyID3Screen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
   VerifyIdentifySuccess: {
     screen: VerifyIdentifyIDSuccessScreen,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 };
 
@@ -1514,33 +1502,29 @@ const VerifyNavigatorConfigs = {
   },
 };
 
-const VerifyNavigator = createStackNavigator(
-  VerifyRouteConfigs,
-  VerifyNavigatorConfigs,
-);
+const VerifyNavigator = createStackNavigator(VerifyRouteConfigs, VerifyNavigatorConfigs);
 const VerifyContainer = createAppContainer(VerifyNavigator);
-
 
 const HelperRouteConfigs = {
   FirstRunFirst: {
     screen: FirstRunScreenOne,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   FirstRunSecond: {
     screen: FirstRunScreenTwo,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 
   FirstRunThird: {
     screen: FirstRunScreenThree,
     navigationOptions: {
       headerShown: false,
-    }
+    },
   },
 };
 
@@ -1548,10 +1532,7 @@ const HelperNavigatorConfigs = {
   initialRouteName: 'FirstRunFirst',
 };
 
-const HelperNavigator = createStackNavigator(
-  HelperRouteConfigs,
-  HelperNavigatorConfigs,
-);
+const HelperNavigator = createStackNavigator(HelperRouteConfigs, HelperNavigatorConfigs);
 const HelperContainer = createAppContainer(HelperNavigator);
 
 const AppSwitchRouteConfigs = {
@@ -1569,12 +1550,8 @@ const AppSwitchNavigatorConfigs = {
   initialRouteName: 'AuthLoading',
 };
 
-const AppSwitchNavigator = createSwitchNavigator(
-  AppSwitchRouteConfigs,
-  AppSwitchNavigatorConfigs,
-);
+const AppSwitchNavigator = createSwitchNavigator(AppSwitchRouteConfigs, AppSwitchNavigatorConfigs);
 const AppSwitchContainer = createAppContainer(AppSwitchNavigator);
-
 
 const soundAlarm = new Sound(require('./assets/sounds/alarm.mp3'), (err) => {
   if (err) {
@@ -1590,7 +1567,7 @@ class Index extends Component {
     this.state = {
       notification: null,
       serverStatus: true,
-      serverStatusMsg: "",
+      serverStatusMsg: '',
       showModalOffline: false,
       showReLoginModal: false,
       dev: false,
@@ -1600,14 +1577,12 @@ class Index extends Component {
       selectedItem: null,
       passwordError: '',
     };
-
   }
 
   unsubscribe = null;
 
   async componentDidMount() {
-
-    console.log("------------------Mount-----------------");
+    console.log('------------------Mount-----------------');
 
     await Storage.setVerifyFlag(false);
 
@@ -1626,18 +1601,18 @@ class Index extends Component {
       reachabilityRequestTimeout: 15 * 1000,
     });
 
-    this.unsubscribe = NetInfo.addEventListener(state => {
+    this.unsubscribe = NetInfo.addEventListener((state) => {
       if (!state.isConnected) {
-        this.setState({showModalOffline: true});
+        this.setState({ showModalOffline: true });
       } else {
-        this.setState({showModalOffline: false});
+        this.setState({ showModalOffline: false });
       }
     });
 
     SplashScreen.hide();
 
     try {
-      if (Platform.OS === "android" && Platform.Version >= 33) {
+      if (Platform.OS === 'android' && Platform.Version >= 33) {
         const granted = await PermissionsAndroid.requestMultiple([
           PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
@@ -1652,7 +1627,7 @@ class Index extends Component {
         } else {
           console.log('Permissions not granted');
         }
-      }else{
+      } else {
         const granted1 = await PermissionsAndroid.requestMultiple([
           PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
@@ -1662,7 +1637,6 @@ class Index extends Component {
         ]);
         const result = await request(PERMISSIONS.ANDROID.POST_NOTIFICATIONS);
       }
-
     } catch (err) {
       console.warn(err);
     }
@@ -1670,35 +1644,28 @@ class Index extends Component {
 
     const _this = this;
 
-    Linking.addEventListener('url', e => {
-      _this._handleDeeplink(e.url)
+    Linking.addEventListener('url', (e) => {
+      _this._handleDeeplink(e.url);
     });
 
-    Linking.getInitialURL().then(
-      (url) => {
-        if (url) {
-          if (url.includes('sbapp://drawers/linesuccess/')) {
-            this.props.setGoVerifyLineSuccess(true);
-          }
+    Linking.getInitialURL().then((url) => {
+      if (url) {
+        if (url.includes('sbapp://drawers/linesuccess/')) {
+          this.props.setGoVerifyLineSuccess(true);
         }
       }
-    )
+    });
   }
 
-  componentWillUnmount() {
-  }
-
-
+  componentWillUnmount() {}
 
   _handleDeeplink(url) {
     if (url.includes('sbapp://drawers/linesuccess/')) {
       NavigationService.navigate('VerifyLineSuccess');
-    }
-    else if (url.includes('sbapp://main/app/')) {
+    } else if (url.includes('sbapp://main/app/')) {
       NavigationService.navigate('Timetable');
     }
   }
-
 
   displayNotification = async (msg) => {
     this.setState(
@@ -1707,7 +1674,7 @@ class Index extends Component {
       },
       () => {
         this.readNotification(msg.data.id);
-        setTimeout(() => this.setState({notification: null}), 5000);
+        setTimeout(() => this.setState({ notification: null }), 5000);
       },
     );
   };
@@ -1728,14 +1695,14 @@ class Index extends Component {
   };
 
   reLogin() {
-    const {userInfo, password} = this.state;
+    const { userInfo, password } = this.state;
     const imei = getUniqueId();
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
     ApiManager.signin(userInfo.UserName, password, userInfo.SchoolID, imei, '')
-      .then(async success => {
-        this.setState({isLoading: false});
+      .then(async (success) => {
+        this.setState({ isLoading: false });
         if (!success) {
-          this.setState({passwordError: translang.t('WRONG_PASSWORD')});
+          this.setState({ passwordError: translang.t('WRONG_PASSWORD') });
           return Promise.reject('error');
         } else {
           const user = await Storage.getUser();
@@ -1747,12 +1714,20 @@ class Index extends Component {
       })
       .then(() => {
         this.props.setShowTokenError(false);
-        this.setState({showReLoginModal: false, password: '', passwordError: null, reLoginUser: ''});
+        this.setState({
+          showReLoginModal: false,
+          password: '',
+          passwordError: null,
+          reLoginUser: '',
+        });
         NavigationService.navigate('AuthLoading');
       })
-      .catch(err => {
-        console.log("Drawer", err);
-        this.setState({passwordError: translang.t('WRONG_PASSWORD'), isLoading: false});
+      .catch((err) => {
+        console.log('Drawer', err);
+        this.setState({
+          passwordError: translang.t('WRONG_PASSWORD'),
+          isLoading: false,
+        });
       });
   }
 
@@ -1766,34 +1741,49 @@ class Index extends Component {
 
     return (
       <SafeAreaProvider style={styles.container}>
-        {dev &&
-        <SafeAreaView>
-          <Text style={{fontSize: 24, textAlign: 'center'}}>Development Mode</Text>
-        </SafeAreaView>
-        }
-        <AppSwitchContainer ref={(ref) => {
-          this._navigator = ref;
-          NavigationService.setTopLevelNavigator(ref)
-        }} uriPrefix={prefix} enableURLHandling={true}/>
+        {dev && (
+          <SafeAreaView>
+            <Text style={{ fontSize: 24, textAlign: 'center' }}>Development Mode</Text>
+          </SafeAreaView>
+        )}
+        <AppSwitchContainer
+          ref={(ref) => {
+            this._navigator = ref;
+            NavigationService.setTopLevelNavigator(ref);
+          }}
+          uriPrefix={prefix}
+          enableURLHandling={true}
+        />
         {this.state.notification && (
           <Modal animationType="slide" transparent={true} key="modal">
             <View style={styles.centeredView}>
-              <LinearGradient style={styles.dialogStyle}
-                              colors={[Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]}>
-                <View style={{flexDirection: 'column', justifyContent: 'center', marginTop: 30, alignItems: 'center'}}>
-                  <Image source={Images.n_applogo_logo_only} style={styles.modalLogo}/>
+              <LinearGradient
+                style={styles.dialogStyle}
+                colors={[Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]}
+              >
+                <View
+                  style={{
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    marginTop: 30,
+                    alignItems: 'center',
+                  }}
+                >
+                  <Image source={Images.n_applogo_logo_only} style={styles.modalLogo} />
                 </View>
-                <ScrollView style={{flex: 1, marginHorizontal: 20, marginVertical: 15}}
-                            contentContainerStyle={{flexGrow: 1}}>
+                <ScrollView
+                  style={{ flex: 1, marginHorizontal: 20, marginVertical: 15 }}
+                  contentContainerStyle={{ flexGrow: 1 }}
+                >
                   <RenderHtml
-                    baseFontStyle={{fontSize: 18, color: 'white',}}
+                    baseFontStyle={{ fontSize: 18, color: 'white' }}
                     html={`<div>${this.state.notification}</div>`}
                   />
                 </ScrollView>
                 <GradientSmallButton
                   label={translang.t('HOME_close')}
                   opacity={1}
-                  containerStyle={{marginBottom: 20}}
+                  containerStyle={{ marginBottom: 20 }}
                   _onPress={this.confirmNotification}
                 />
               </LinearGradient>
@@ -1808,17 +1798,17 @@ class Index extends Component {
           buttonColors={[Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]}
           isVerticalGradient={false}
           onClose={() => {
-            this.setState({showModalOffline: false}, () => {
+            this.setState({ showModalOffline: false }, () => {
               setTimeout(() => {
-                NetInfo.refresh().then(state => {
+                NetInfo.refresh().then((state) => {
                   if (!state.isConnected) {
-                    this.setState({showModalOffline: true});
+                    this.setState({ showModalOffline: true });
                   } else {
-                    this.setState({showModalOffline: false});
+                    this.setState({ showModalOffline: false });
                   }
-                })
-              }, 100)
-            })
+                });
+              }, 100);
+            });
           }}
         />
 
@@ -1826,12 +1816,16 @@ class Index extends Component {
           isVisible={this.props.devReducer.showTokenError && !this.state.showReLoginModal}
           onConfirm={async () => {
             const userInfo = await Storage.getUserInfo();
-            let name = userInfo.sName + " " + userInfo.sLastname;
+            let name = userInfo.sName + ' ' + userInfo.sLastname;
             if (getCurrentLocale() == 'en' && userInfo.NameEn) {
-              name = userInfo.NameEn + " " + userInfo.LastNameEN;
+              name = userInfo.NameEn + ' ' + userInfo.LastNameEN;
             }
             this.props.setShowTokenError(false);
-            this.setState({showReLoginModal: true, reLoginUser: name, userInfo});
+            this.setState({
+              showReLoginModal: true,
+              reLoginUser: name,
+              userInfo,
+            });
           }}
         />
         <ReLoginModal
@@ -1845,16 +1839,15 @@ class Index extends Component {
             this.reLogin();
           }}
           onForgot={() => {
-            this.setState({showReLoginModal: false});
-            NavigationService.navigate('Forgotpass', {type: 2});
+            this.setState({ showReLoginModal: false });
+            NavigationService.navigate('Forgotpass', { type: 2 });
           }}
           password={this.state.password}
           onChangePassword={(password) => {
-            this.setState({password: password, passwordError: ''});
+            this.setState({ password: password, passwordError: '' });
           }}
           passwordError={this.state.passwordError}
         />
-
       </SafeAreaProvider>
     );
   }
@@ -1896,21 +1889,20 @@ const styles = StyleSheet.create({
   },
 });
 
-
 const mapStateToProps = (state) => {
-  const {devReducer} = state;
-  return {devReducer}
+  const { devReducer } = state;
+  return { devReducer };
 };
 
-const mapDispatchToProps = dispatch => (
-  bindActionCreators({
-    setDEV,
-    setTabIndex,
-    setShowTokenError,
-    setGoVerifyLineSuccess
-  }, dispatch)
-);
-
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      setDEV,
+      setTabIndex,
+      setShowTokenError,
+      setGoVerifyLineSuccess,
+    },
+    dispatch,
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);
-
