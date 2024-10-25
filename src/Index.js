@@ -1363,7 +1363,7 @@ const DrawerRouteConfigs = {
   VehicleList: {
     screen: VehicleList,
     navigationOptions: {
-      headerShown: true,
+      headerShown: false,
     },
   },
 };

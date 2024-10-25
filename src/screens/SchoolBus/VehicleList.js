@@ -7,14 +7,28 @@ import busIcon from '../../assets/images/services/m_school_bus.png';
 import BackNavigationBar from '../../components/BackNavigationBar';
 import GradientButton from '../../components/GradientButton';
 import ProgressHud from '../../components/ProgressHud';
+import ClassLevelModal from '../../components/SelectListModal';
 import Color from '../../constants/color';
 import ApiManager from '../../managers/ApiManager';
 import Storage from '../../managers/StorageManager';
 import translang from '../../utils/language.utils';
 
+const routes = [
+  {
+    title: 'route 1',
+  },
+  {
+    title: 'route 2',
+  },
+  {
+    title: 'route 3',
+  },
+];
+
 const ShopScreen = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
-  const [modalBody, setModalBody] = useState('');
+  const [items, setItems] = useState(routes);
+
   const [shopList, setShopList] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -99,13 +113,18 @@ const ShopScreen = ({ navigation }) => {
   }, [navigation]);
 
   const onClickItem = (item) => {
-    const { shop_id: shopId } = item;
-    navigation.navigate('ShopInput', {
-      shopId,
-      shop: item,
-      userInfo,
-      refresh: true,
-    });
+    setShowModal(true);
+
+    // navigation.navigate('ShopInput', {
+    //   shopId,
+    //   shop: item,
+    //   userInfo,
+    //   refresh: true,
+    // });
+  };
+
+  const onListSelect = (item, index) => {
+    setShowModal(false);
   };
 
   const renderItem = ({ item }) => {
@@ -115,7 +134,6 @@ const ShopScreen = ({ navigation }) => {
       <TouchableOpacity
         style={styles.menuEachStyle}
         activeOpacity={0.5}
-        onPress={() => onClickItem(item)}
       >
         <View style={styles.group1}>
           <Image source={busIcon} style={styles.image}></Image>
@@ -131,7 +149,7 @@ const ShopScreen = ({ navigation }) => {
           buttonStyle={styles.buttonStyle}
           textStyle={styles.buttonTextStyle}
           label={translang.t('SELECT_ROUTE')}
-          _onPress={() => this.removeDevice(item)}
+          _onPress={() => onClickItem(item)}
         />
       </TouchableOpacity>
     );
@@ -153,7 +171,12 @@ const ShopScreen = ({ navigation }) => {
           <Text style={styles.noSupportText}>{translang.t('NOT_SUPPORT_STRING')}</Text>
         </View>
       )}
-
+      <ClassLevelModal
+        isVisible={showModal}
+        onListSelect={onListSelect}
+        listData={items}
+        dialogTtitle={translang.t('SELECT_ROUTE')}
+      />
       <ProgressHud isVisible={isLoading} />
     </SafeAreaView>
   );
