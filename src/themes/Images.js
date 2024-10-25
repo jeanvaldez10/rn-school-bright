@@ -383,6 +383,7 @@ const images = {
   m_add_score: require("../assets/images/services/m_add_score.png"),
   m_alpha: require("../assets/images/services/m_alpha.png"),
   m_broadcast: require("../assets/images/services/m_broadcast.png"),
+  m_school_bus: require("../assets/images/services/m_school_bus.png"),
   m_calendar: require("../assets/images/services/m_calendar.png"),
   m_checkin: require("../assets/images/services/m_checkin.png"),
   m_checkout: require("../assets/images/services/m_checkout.png"),
