@@ -20,7 +20,7 @@
     "build:android-staging": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/stagingrelease/assets/index.android.bundle --assets-dest android/app/src/stagingrelease/res/",
     "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/SchoolBright/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
     "build:ios-staging": "react-native bundle --entry-file='index.js' --bundle-output='./ios/SchoolBright/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
-    "postinstall": "node ./android-release-gradle-fix.js && patch-package"
+    "postinstall": "node ./android-release-gradle-fix.js patch-package"
   },
   "dependencies": {
     "@georstat/react-native-image-cache": "^2.3.0",
@@ -40,7 +40,7 @@
     "@react-native-firebase/app": "^14.11.1",
     "@react-native-firebase/crashlytics": "^14.11.1",
     "@react-native-firebase/messaging": "^14.9.4",
-    "@sentry/react-native": "^5.24.1",
+    "@sentry/react-native": "5.33.1",
     "axios": "^0.21.1",
     "deprecated-react-native-prop-types": "^5.0.0",
     "geolib": "^3.3.3",
@@ -57,7 +57,6 @@
     "react-native-calendars": "^1.1249.0",
     "react-native-camera": "^4.2.1",
     "react-native-card-flip": "^1.0.7",
-    "react-native-charts-wrapper": "^0.5.7",
     "react-native-check-version": "^1.0.12",
     "react-native-checkbox-heaven": "^0.1.6",
     "react-native-confirmation-code-field": "6",
