@@ -1251,4 +1251,9 @@ export default {
   REMAINING_LEAVE_DAYS: "Remaining leave days",
   LEAVE_TYPE: "Leave type",
   LEAVE_DAYS_IN_CURRENT_PERIOD: "Leave days in the current period",
+
+  // start of schoolBus
+  LIST_OF_VEHICLES: 'Vehicles',
+  SELECT_ROUTE: 'Select Route',
+  // End of schoolBus
 };

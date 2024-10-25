@@ -385,7 +385,7 @@ export const defaultAllMenuStudent = {
       key: 'schoolBus',
       image: Images.m_school_bus,
       quick_menu: false,
-      link: 'SchoolBus',
+      link: 'VehicleList',
       func: 'link',
     },
     {
@@ -593,7 +593,7 @@ export const defaultAllMenuTeacher = {
       key: 'schoolBus',
       image: Images.m_school_bus,
       quick_menu: false,
-      link: 'SchoolBus',
+      link: 'VehicleList',
       func: 'link',
     },
     {

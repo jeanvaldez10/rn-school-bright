@@ -68,7 +68,7 @@ export default {
   DRAWER_reportattendance: 'รายงานเช็กชื่อ',
   DRAWER_reportleave: 'รายงานการลา',
   DRAWER_reporttopup: 'รายงานเติมเงิน',
-  DRAWER_reportorderlist:'รายงานการซื้อขาย',
+  DRAWER_reportorderlist: 'รายงานการซื้อขาย',
 
   DRAWER_changepincode: 'เปลี่ยนรหัส PIN',
   DRAWER_aboutus: 'เกี่ยวกับเรา',
@@ -105,15 +105,15 @@ export default {
   USERINFO_uncheck: 'ไม่เช็กชื่อ ',
   USERINFO_total: 'รวม ',
   // USERINFO_attendreport: "เช็คชื่อ\n\รายงาน",
-  USERINFO_attendreport: "สถิติการทำงาน",
-  USERINFO_helthyreport: "รายงานสุขภาพ",
-  USERINFO_healthLevelOne: "น้ำหนักน้อย\น้ำหนักน้อยเกินไป",
-  USERINFO_healthLevelTwo: 'ปกติ\สุขภาพดี',
-  USERINFO_healthLevelThree: 'น้ำหนักเกิน\โรคอ้วนระดับ  1',
-  USERINFO_healthLevelFour: 'น้ำหนักเกิน\โรคอ้วนระดับ 2',
-  USERINFO_healthLevelFive: 'น้ำหนักเกินอย่างรุนแรง\โรคอ้วนระดับ 3',
-  USERINFO_congendisease: "โรคประจำตัว",
-  USERINFO_notfound: "ไม่พบข้อมูล",
+  USERINFO_attendreport: 'สถิติการทำงาน',
+  USERINFO_helthyreport: 'รายงานสุขภาพ',
+  USERINFO_healthLevelOne: 'น้ำหนักน้อยน้ำหนักน้อยเกินไป',
+  USERINFO_healthLevelTwo: 'ปกติสุขภาพดี',
+  USERINFO_healthLevelThree: 'น้ำหนักเกินโรคอ้วนระดับ  1',
+  USERINFO_healthLevelFour: 'น้ำหนักเกินโรคอ้วนระดับ 2',
+  USERINFO_healthLevelFive: 'น้ำหนักเกินอย่างรุนแรงโรคอ้วนระดับ 3',
+  USERINFO_congendisease: 'โรคประจำตัว',
+  USERINFO_notfound: 'ไม่พบข้อมูล',
   USERINFO_sex: 'เพศ',
   USERINFO_age: 'อายุ',
   USERINFO_height: 'ส่วนสูง',
@@ -121,7 +121,7 @@ export default {
   USERINFO_bloodtype: 'กรุ๊ปเลือด',
   USERINFO_foodAllergy: 'แพ้อาหาร',
   USERINFO_drugAllergy: 'แพ้ยา',
-  USERINFO_checktemp: "ตรวจวัดค่าอุณหภูมิ",
+  USERINFO_checktemp: 'ตรวจวัดค่าอุณหภูมิ',
   USERINFO_position: 'ตำแหน่ง',
   USERINFO_department: 'แผนก',
 
@@ -160,8 +160,6 @@ export default {
   HOMEWORK_send_class: 'รายชั้นเรียน',
   HOMEWORK_group: 'รายกลุ่ม',
   HOMEWORK_recipient: 'ผู้รับ',
-
-
 
   ACADEMIC_msg_selectyear: 'กรุณาเลือกปีการศึกษา',
   ACADEMIC_msg_selectyear2: 'กรุณาเลือกปีการศึกษา',
@@ -251,7 +249,7 @@ export default {
   TOPUP_tu500: 'เติม 500',
   TOPUP_other: 'ระบุจำนวนเงิน',
   TOPUP_msg_inputamount: 'กรุณาระบุจำนวนเงิน',
-  TOPUP_AMOUNT_ERROR: "ไม่สามารถเติมเงินมากกว่า 50,000 บาท",
+  TOPUP_AMOUNT_ERROR: 'ไม่สามารถเติมเงินมากกว่า 50,000 บาท',
   TOPUP_msg_noactivate: 'ระบบยังไม่เปิดการใช้งาน',
   TOPUP_backmain: 'กลับไปหน้าหลัก',
 
@@ -337,7 +335,7 @@ export default {
   NOTIFICATION_read: 'อ่านแล้ว',
   NOTIFICATION_unread: 'ยังไม่ได้อ่าน',
   NOTIFICATION_readall: 'เลือกเป็นอ่านทั้งหมด',
-  PDF_VIEWER_ERROR: "ไม่มีโปรแกรมรองรับสำหรับไฟล์นี้",
+  PDF_VIEWER_ERROR: 'ไม่มีโปรแกรมรองรับสำหรับไฟล์นี้',
 
   Male: 'เพศชาย',
   Female: 'เพศหญิง',
@@ -387,8 +385,6 @@ export default {
   ATTENDANCE_STATUS_undefined: 'ไม่เช็กชื่อ',
   ATTENDANCE_STATUS_holiday: 'วันหยุด',
 
-
-
   QR_CODE: 'คิวอาร์โค้ด',
   STUDENT_ID: 'รหัสนักเรียน',
   QR_Code: 'คิวอาร์โค้ด',
@@ -409,9 +405,9 @@ export default {
   CLASSROOM: 'ชั้นเรียน',
   UPDATE_SUCCESS: 'ทำรายการสำเร็จ',
   SELECT_SUBJECT: 'กรุณาเลือกวิชา',
-  HAVE_NOT_ARRANGED_TIME_TABLE: "ขออภัย ขณะนี้ยังไม่ได้จัดตารางสอนในระบบ",
-  SUBJECT_NOT_CHECKED: "วิชานี้ยังไม่มีการเข็คชื่อ",
-  SCHOOL_HOLIDAY_CANNOT_TRANSACTION: 'ทำรายการไม่สำเร็จ เนื่องจากอยู่ในระหว่างปิดภาคเรียน',  //BehaviorSubmitScreen
+  HAVE_NOT_ARRANGED_TIME_TABLE: 'ขออภัย ขณะนี้ยังไม่ได้จัดตารางสอนในระบบ',
+  SUBJECT_NOT_CHECKED: 'วิชานี้ยังไม่มีการเข็คชื่อ',
+  SCHOOL_HOLIDAY_CANNOT_TRANSACTION: 'ทำรายการไม่สำเร็จ เนื่องจากอยู่ในระหว่างปิดภาคเรียน', //BehaviorSubmitScreen
   GROUP: 'รายกลุ่ม',
   INDIVIDUAL: 'รายบุคคล',
   ALL_EMPLOYEES_AND_TEACHERS: 'พนักงาน/อาจารย์ ทั้งหมด',
@@ -473,7 +469,8 @@ export default {
   SELECT_LEAVE_DATE: 'กรุณาเลือกวันลา',
   ATTACHED_IMAGE: 'แนบรูปภาพ',
   ATTACHED_FILE: 'แนบไฟล์',
-  REACHED_LEAVE_REQ_LIMIT: 'ไม่สามารถทำการแจ้งลาได้ เนื่องจากท่านได้ลาเกินกำหนด กรุณาติดต่อแจ้งลาที่โรงเรียนโดยตรง.',
+  REACHED_LEAVE_REQ_LIMIT:
+    'ไม่สามารถทำการแจ้งลาได้ เนื่องจากท่านได้ลาเกินกำหนด กรุณาติดต่อแจ้งลาที่โรงเรียนโดยตรง.',
   PEOPLE: 'คน',
   ON_TIME: 'ตรงเวลา',
   LATE: 'สาย',
@@ -485,7 +482,7 @@ export default {
   ALL: 'ทั้งหมด',
   NOT_FOUND_STUDENT: 'ไม่พบนักเรียน',
   DAY: 'วัน',
-  RECORD_TIME_AT: 'บันทึกเมื่อเวลา',                            //ReportAttendanceStudentStatusHistoryScreen
+  RECORD_TIME_AT: 'บันทึกเมื่อเวลา', //ReportAttendanceStudentStatusHistoryScreen
   STATUS: 'สถานะ',
   ADD: 'เพิ่ม',
   REDUCE: 'ลด',
@@ -557,17 +554,12 @@ export default {
 
   List: 'รายการ',
 
-
-
   Image: 'รูปภาพ',
 
   Points: 'คะแนน',
 
   SEARCH_Placeholder_namestudent: 'ชื่อ/รหัสนักเรียน',
   MONEY_THB: ' บาท',
-
-
-
 
   Monday_One: 'จ.',
   Tuesday_One: 'อ.',
@@ -596,7 +588,7 @@ export default {
   Password_confrim_again: 'กรอกรหัส Pin ใหม่อีกครั้ง',
   staff_id: 'รหัสพนักงาน',
   COMMON_msg_confirm_remove: 'คุณต้องการลบรายการนี้หรือไม่ ? ',
-  PAYMENT_DUEDATE: "วันครบกำหนดชำระ: ",
+  PAYMENT_DUEDATE: 'วันครบกำหนดชำระ: ',
   TURN_ON: 'เปิด',
   TURN_OFF: 'ปิด',
   ALL_NOTIFICATION: 'การแจ้งเตือนทั้งหมด',
@@ -612,7 +604,8 @@ export default {
   ERROR_UPPER: 'เกิดข้อผิดพลาด',
   WRONG_VERIFY_CODE: 'กรอกรหัสยืนยันผิด.',
   PASSWORD_DISMATCH: 'ตรวจพบรหัสผ่านไม่ตรงกัน.',
-  PASSWORD_INVALID: 'รหัสผ่านต้องประกอบด้วยอักขระอย่างน้อยแปดตัว ตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก และตัวเลข.',
+  PASSWORD_INVALID:
+    'รหัสผ่านต้องประกอบด้วยอักขระอย่างน้อยแปดตัว ตัวพิมพ์ใหญ่ ตัวพิมพ์เล็ก และตัวเลข.',
   PASSWORD_SUCCESS: 'เปลี่ยนรหัสผ่านสำเร็จ.',
   SELECT_GENDER: 'เลือกเพศ',
   SELECT_STATUS: 'เลือกสถานะ',
@@ -637,8 +630,8 @@ export default {
   EDIT_ATTENDANCE: 'แก้ไขเช็คชื่อ',
   EDIT: 'แก้ไข',
   CHECKING: 'กำลังตรวจสอบ', // OnlineTeacherScoreSubmitScreen
-  ASSIGNMENT:'งานที่มอบหมาย',
-  ATTACH_LINK:'แนบลิงก์',
+  ASSIGNMENT: 'งานที่มอบหมาย',
+  ATTACH_LINK: 'แนบลิงก์',
   LESSON_LIB: 'บทเรียน',
   FULL_SCORE: 'คะแนนเต็ม',
   SCORE: 'คะแนน',
@@ -654,7 +647,7 @@ export default {
   SEND: 'ส่ง',
   UNSEND: 'ยกเลิกการส่ง',
   STUDENT: 'นักเรียน',
-  INPUT_ASSIGNMENT: "กรุณากรอกงานที่มอบหมาย",
+  INPUT_ASSIGNMENT: 'กรุณากรอกงานที่มอบหมาย',
   INPUT_MATERIAL: 'กรุณากรอกเลือกคลังบทเรียน',
   INPUT_DESCRIPTION: 'กรุณากรอกรายละเอียด',
   INPUT_HEADTOPIC: 'กรุณากรอกหัวเรื่อง',
@@ -664,7 +657,7 @@ export default {
   INPUT_DEADLINE_DATE: 'กรุณากรอกวันที่กำหนดส่ง',
   INPUT_SCHE_DATE: 'กรุณากรอกวันที่กำหนด',
   CHECKIN_SUBJECT_REPORT: 'รายงานเช็กชื่อรายวิชา',
-  TIMES: "ครั้ง",
+  TIMES: 'ครั้ง',
   LAST_UPDATE: 'อัพเดทล่าสุด',
   ONLINE: 'ออนไลน์',
 
@@ -682,13 +675,11 @@ export default {
   TEACHING_INFORMATION: 'ข้อมูลการสอน',
   OCCUPATIONAL_LICENSE: 'ใบอนุญาตประกอบอาชีพ',
 
-
   PROFILE_studentinfo: 'ข้อมูลนักเรียน',
   PROFILE_parentinfo: 'ข้อมูลผู้ปกครอง',
   PROFILE_educationinfo: 'ข้อมูลทางการศึกษา',
   PROFILE_healthinfo: 'ข้อมูลสุขภาพ',
   PROFILE_edit: 'แก้ไข',
-
 
   PROFILE_firstname: 'ชื่อ',
   PROFILE_lastname: 'นามสกุล',
@@ -735,7 +726,6 @@ export default {
   PROFILE_PROVINCE: 'จังหวัด',
   PROFILE_EXPENSES: 'ค่าใช้จ่าย',
 
-
   PROFILE_WORKING_STATUS: 'สถานภาพการทำงาน',
   PROFILE_LEVEL_GOVERNMENT: 'ระดับ(สำหรับราชการ*)',
   PROFILE_DATE_OF_WORK_IN: 'วันที่ปฏิบัติงานในสถานศึกษา',
@@ -761,8 +751,8 @@ export default {
   PROFILE_ROYAL_GOVERNMENT_NO: 'ราชกิจเลขที่',
   PROFILE_DATED: 'ลงวันที่',
 
-  DONT_SHOW_AGAIN: "ไม่แสดงประกาศอีก",
-  YEAR_RANGE: "ช่วงปี",
+  DONT_SHOW_AGAIN: 'ไม่แสดงประกาศอีก',
+  YEAR_RANGE: 'ช่วงปี',
 
   PROFILE_ID_CARD_CODE: 'รหัสบัตรประชาชน',
   PROFILE_RELATIONSHIP: 'ความสัมพันธ์',
@@ -785,23 +775,21 @@ export default {
   YEARLY: 'รายปี',
   SELECT_TYPE: 'เลือกประเภท',
 
-  REMAINING_SCORE: 'คะแนนที่เหลือ',   //ReportBehaviorScoreCalendar
-  NEW: 'ใหม่',                           //OnlineStudentLessonListScreen
+  REMAINING_SCORE: 'คะแนนที่เหลือ', //ReportBehaviorScoreCalendar
+  NEW: 'ใหม่', //OnlineStudentLessonListScreen
 
   NOT_FINISHED: 'ยังไม่เสร็จ',
   NO_SCORE: 'ไม่มีคะแนน',
   DEADLINE: 'กำหนดส่ง',
   HOMEWORK_DETAILS: 'รายละเอียดการบ้าน',
 
-
-
   NAME_TITLES: 'คำนำหน้า',
   PASSPORT_NUMBER: 'หมายเลขหนังสือเดินทาง',
   PASSPORT_COUNTRY: 'ประเทศหนังสือเดินทาง',
   RACE: 'เชื้อชาติ',
   MARITAL_TYPE: 'สถานภาพสมรส',
-  SPOUSE_NAME: "ชื่อคู่สมรส",
-  SPOUSE_SURNAME: "นามสกุลคู่สมรส",
+  SPOUSE_NAME: 'ชื่อคู่สมรส',
+  SPOUSE_SURNAME: 'นามสกุลคู่สมรส',
   SELECT_NAMETITLES: 'เลือกคำนำหน้า',
   DDMMYYYY: 'วัน/เดือน/ปี',
   PERMANENT_ADDRESS: 'ที่อยู่ตามทะเบียนบ้าน',
@@ -865,54 +853,55 @@ export default {
   FAMILY_STATUS: 'สถานะครอบครัว',
   FORMER_SCHOOL: 'สถานศึกษาเดิม',
   CREDIT_STUDY_UNIT: 'หน่วยกิต/หน่วยการเรียน',
-  COPY_OF_FATHER_ADDRESS: "คัดลอกที่อยู่จากบิดา",
+  COPY_OF_FATHER_ADDRESS: 'คัดลอกที่อยู่จากบิดา',
   FATHER: 'บิดา',
   MOTHER: 'มารดา',
   SAVE: 'บันทึก',
-  TODAY_RECORD: "ประวัติวันนี้",
+  TODAY_RECORD: 'ประวัติวันนี้',
   FOURTEEN_DAYS_BACK: '14วันย้อนหลัง',
   SEVEN_DAYS_BACK: '7 วันย้อนหลัง',
   FINISHED: 'เสร็จแล้ว',
 
   HISTORY: 'ประวัติ',
-  JAN: 'ม.ค.',		//Full Name มกราคม
-  FEB: 'ก.พ.',		//Full Name กุมภาพันธ์
-  MAR: 'มี.ค.',		//Full Name มีนาคม
-  APR: 'เม.ย.',		//Full Name เมษายน
-  MAY: 'พ.ค.',		//Full Name พฤษภาคม
-  JUN: 'มิ.ย.',		//Full Name มิถุนายน
-  JUL: 'ก.ค.',		//Full Name กรกฎาคม
-  AUG: 'ส.ค.',		//Full Name สิงหาคม
-  SEP: 'ก.ย.',		//Full Name กันยายน
-  OCT: 'ต.ค.',		//Full Name ตุลาคม
-  DEC: 'ธ.ค.',		//Full Name ธันวาคม
-  NOV: 'พ.ย.',		//Full Name พฤษภาคม
+  JAN: 'ม.ค.', //Full Name มกราคม
+  FEB: 'ก.พ.', //Full Name กุมภาพันธ์
+  MAR: 'มี.ค.', //Full Name มีนาคม
+  APR: 'เม.ย.', //Full Name เมษายน
+  MAY: 'พ.ค.', //Full Name พฤษภาคม
+  JUN: 'มิ.ย.', //Full Name มิถุนายน
+  JUL: 'ก.ค.', //Full Name กรกฎาคม
+  AUG: 'ส.ค.', //Full Name สิงหาคม
+  SEP: 'ก.ย.', //Full Name กันยายน
+  OCT: 'ต.ค.', //Full Name ตุลาคม
+  DEC: 'ธ.ค.', //Full Name ธันวาคม
+  NOV: 'พ.ย.', //Full Name พฤษภาคม
 
-  SUN: "อา.",		//Full Name 'อาทิตย์ '
-  MON: "จ.",		//Full Name 'จันทร์',
-  TUE: "อ.",		//Full Name 'อังคาร',
-  WED: "พ.",		//Full Name 'พุธ',
-  THU: "พฤ.",		//Full Name 'พฤหัส',
-  FRI: "ศ.",		//Full Name 'ศุกร์',
-  SAT: "ส.",		//Full Name 'เสาร์',
+  SUN: 'อา.', //Full Name 'อาทิตย์ '
+  MON: 'จ.', //Full Name 'จันทร์',
+  TUE: 'อ.', //Full Name 'อังคาร',
+  WED: 'พ.', //Full Name 'พุธ',
+  THU: 'พฤ.', //Full Name 'พฤหัส',
+  FRI: 'ศ.', //Full Name 'ศุกร์',
+  SAT: 'ส.', //Full Name 'เสาร์',
   TOTAL_SALE: 'สรุปยอดการใช้จ่าย',
   SELECT_MONTH: 'เลือกเดือน',
   BY: 'โดย',
-  NOT_SUPPORT_STRING: "ขออภัย โรงเรียนของคุณไม่รองรับระบบนี้ หรือไม่มีร้านค้าสำหรับชำระเงินผ่านมือถือ",
-  MANTERNITY_LEAVE: "ลาคลอด",
-  VACATION_LEAVE: "ลาพักร้อน",
-  PICKUP_OUT_SCHOOL: "คุณอยู่นอกรัศมีโรงเรียน.",
-  PICKUP_IN_SCHOOL: "คุณอยู่ในเขตโรงเรียนแล้ว",
-  PICKUP_OUT_SCHOOL_COME_CLOSER: "ขออภัย ท่านอยู่นอกรัศมีโรงเรียน กรุณาเข้าใกล้โรงเรียนมากขึ้นแล้วลองใหม่อีกครั้ง",
-  PICKUP_NOT_AVAILABLE: "โรงเรียนของท่านไม่รองรับการใช้งานระบบรับนักเรียนผ่านแอปพลิเคชั่น",
+  NOT_SUPPORT_STRING:
+    'ขออภัย โรงเรียนของคุณไม่รองรับระบบนี้ หรือไม่มีร้านค้าสำหรับชำระเงินผ่านมือถือ',
+  MANTERNITY_LEAVE: 'ลาคลอด',
+  VACATION_LEAVE: 'ลาพักร้อน',
+  PICKUP_OUT_SCHOOL: 'คุณอยู่นอกรัศมีโรงเรียน.',
+  PICKUP_IN_SCHOOL: 'คุณอยู่ในเขตโรงเรียนแล้ว',
+  PICKUP_OUT_SCHOOL_COME_CLOSER:
+    'ขออภัย ท่านอยู่นอกรัศมีโรงเรียน กรุณาเข้าใกล้โรงเรียนมากขึ้นแล้วลองใหม่อีกครั้ง',
+  PICKUP_NOT_AVAILABLE: 'โรงเรียนของท่านไม่รองรับการใช้งานระบบรับนักเรียนผ่านแอปพลิเคชั่น',
   WANT_PACK_UP: 'ยืนยันการรับนักเรียนหรือไม่?',
   CONFIRM_PACK_UP: 'ยืนยันการรับ',
 
-  PICKUP_LEAVE: "ไม่สามารถรับนักเรียนได้ เนื่องจากอยู่ในสถานะลา",
+  PICKUP_LEAVE: 'ไม่สามารถรับนักเรียนได้ เนื่องจากอยู่ในสถานะลา',
 
-
-  ALL_EXPENSES: "ค่าใช้จ่ายทั้งหมด",
-  ALL_TOPUP: "เติมเงินทั้งหมด",
+  ALL_EXPENSES: 'ค่าใช้จ่ายทั้งหมด',
+  ALL_TOPUP: 'เติมเงินทั้งหมด',
   TUITION_AMOUNT: 'ค่าเล่าเรียน',
   NUMBER_OF_STUDENT: 'จำนวนนักเรียน',
   CHECK_IN_LATE: 'เช็กชื่อสาย',
@@ -924,8 +913,10 @@ export default {
   ACCEPT: 'ยอมรับ',
   DONT_SHOW_AGAIN_WEEK: 'ไม่ต้องแสดงอีกภายใน 7 วัน',
   SUGGESTION: 'คำแนะนำ',
-  TOPUP_ALERT: 'โปรดอ่าน! ระบบเติมเงินเชื่อมกับทางธนาคาร ซึ่งเป็นผู้ตัดเงินจากบัญชีธนาคารของท่าน ในกรณีที่ระบบธนาคารหรือระบบพร้อมเพย์มีปัญหา จะทำให้ไม่สามารถส่งรายการธุรกรรมที่สำเร็จมายัง School Bright ได้ ซึ่งจะทำให้รายการในระบบไม่ปรับสถานะทันที ให้ท่านรอภายใน 24-72 ชม. เพื่อให้ทางธนาคารส่งข้อมูลการทำรายการที่สำเร็จมาให้ School Bright ปรับสถานะในระบบ',
-  TUITION_ALERT: 'โปรดอ่าน! ระบบชำระค่าเทอมเชื่อมกับทางธนาคาร ซึ่งเป็นผู้ตัดเงินจากบัญชีธนาคารของท่าน ในกรณีที่ระบบธนาคารหรือระบบพร้อมเพย์มีปัญหา จะทำให้ไม่สามารถส่งรายการธุรกรรมที่สำเร็จมายัง School Bright ได้ ซึ่งจะทำให้รายการในระบบไม่ปรับสถานะทันที ให้ท่านรอภายใน 24-72 ชม. เพื่อให้ทางธนาคารส่งข้อมูลการทำรายการที่สำเร็จมาให้ School Bright ปรับสถานะในระบบ',
+  TOPUP_ALERT:
+    'โปรดอ่าน! ระบบเติมเงินเชื่อมกับทางธนาคาร ซึ่งเป็นผู้ตัดเงินจากบัญชีธนาคารของท่าน ในกรณีที่ระบบธนาคารหรือระบบพร้อมเพย์มีปัญหา จะทำให้ไม่สามารถส่งรายการธุรกรรมที่สำเร็จมายัง School Bright ได้ ซึ่งจะทำให้รายการในระบบไม่ปรับสถานะทันที ให้ท่านรอภายใน 24-72 ชม. เพื่อให้ทางธนาคารส่งข้อมูลการทำรายการที่สำเร็จมาให้ School Bright ปรับสถานะในระบบ',
+  TUITION_ALERT:
+    'โปรดอ่าน! ระบบชำระค่าเทอมเชื่อมกับทางธนาคาร ซึ่งเป็นผู้ตัดเงินจากบัญชีธนาคารของท่าน ในกรณีที่ระบบธนาคารหรือระบบพร้อมเพย์มีปัญหา จะทำให้ไม่สามารถส่งรายการธุรกรรมที่สำเร็จมายัง School Bright ได้ ซึ่งจะทำให้รายการในระบบไม่ปรับสถานะทันที ให้ท่านรอภายใน 24-72 ชม. เพื่อให้ทางธนาคารส่งข้อมูลการทำรายการที่สำเร็จมาให้ School Bright ปรับสถานะในระบบ',
   DOWNLOAD_RECEIPT: 'ดาวน์โหลดใบเสร็จ',
   DOWNLOAD_PICTURE: 'ดาวน์โหลดรูปภาพ',
   TAX_ID: 'หมายเลขประจำตัวผู้เสียภาษี',
@@ -933,7 +924,7 @@ export default {
   RECEIPT: 'ใบเสร็จ',
   SCHOOL_BRIGHT_SYSTEM: 'ระบบ School Bright ',
   PASSWORD: 'รหัสผ่าน',
-  CANTSELECT_LIMIT: "แนบรูปได้ไม่เกิน 10 ภาพ. โปรดลองอีกครั้ง.",
+  CANTSELECT_LIMIT: 'แนบรูปได้ไม่เกิน 10 ภาพ. โปรดลองอีกครั้ง.',
   AMOUNT_PAYMENT: 'ยอดชำระ',
   CORRECT_DATERANGE: 'กรุณาเลือกวันที่เริ่มต้นและสิ้นสุด.',
 
@@ -956,22 +947,22 @@ export default {
   RETIRED: 'พ้นสภาพ',
   EXCHANGE_STUDENT: 'นักเรียนไปโครงการ',
   REQUEST_CANCELED: 'รอดำเนินการยกเลิก',
-  WAITING_APPROVE: "กำลังรออนุมัติ %{count} คน",
-  CANCEL_REQUEST_SENT: "ส่งคำร้องยกเลิกสำเร็จ",
-  CANCELED_REQUEST_SUCCESS: "ยกเลิกคำร้องสำเร็จ",
+  WAITING_APPROVE: 'กำลังรออนุมัติ %{count} คน',
+  CANCEL_REQUEST_SENT: 'ส่งคำร้องยกเลิกสำเร็จ',
+  CANCELED_REQUEST_SUCCESS: 'ยกเลิกคำร้องสำเร็จ',
 
   UPDATE_PASSWORD: 'อัปเดตรหัสผ่าน',
   DELETED_BY_USER: 'ยกเลิกแล้วโดยผู้ใช้',
   DELETED: 'ลบแล้ว',
-  NOTIFICATION_ALERT: 'ข้อความการแจ้งเตือนแสดงย้อนหลัง 7 วัน กรุณาเข้าผ่านเมนูภายในแอปพลิเคชั่น เช่น ข้อมูลข่าวสาร จดหมายลาหยุด และรายงานต่างๆ เพื่อตรวจสอบข้อมูลย้อนหลัง',
+  NOTIFICATION_ALERT:
+    'ข้อความการแจ้งเตือนแสดงย้อนหลัง 7 วัน กรุณาเข้าผ่านเมนูภายในแอปพลิเคชั่น เช่น ข้อมูลข่าวสาร จดหมายลาหยุด และรายงานต่างๆ เพื่อตรวจสอบข้อมูลย้อนหลัง',
   CHANGE_PASSWORD: 'เปลี่ยนรหัสผ่าน',
   CANCELED: 'ยกเลิกแล้ว',
-  NOT_PERMISSION_EDIT: "คุณไม่ได้รับอนุญาตให้แก้ไข\n โปรดติดต่อ\n",
-  PASSWORD_CHANGED_LOGIN_AGAIN: "เปลี่ยนรหัสผ่านสำเร็จ กรุณาล็อกอินใหม่อีกครั้ง",
-  NOT_CANCEL_REQUEST_PAST_TODAY: "ไม่อนุญาตให้ยกเลิกรายการที่พ้นวันปัจจุบันแล้ว",
-  CANT_LOGIN_USER: "คุณได้ทำการเปลี่ยนรหัสผ่าน",
-  ENTER_NEW_PASSWORD: "กรุณากรอกรหัสผ่านใหม่",
-
+  NOT_PERMISSION_EDIT: 'คุณไม่ได้รับอนุญาตให้แก้ไข\n โปรดติดต่อ\n',
+  PASSWORD_CHANGED_LOGIN_AGAIN: 'เปลี่ยนรหัสผ่านสำเร็จ กรุณาล็อกอินใหม่อีกครั้ง',
+  NOT_CANCEL_REQUEST_PAST_TODAY: 'ไม่อนุญาตให้ยกเลิกรายการที่พ้นวันปัจจุบันแล้ว',
+  CANT_LOGIN_USER: 'คุณได้ทำการเปลี่ยนรหัสผ่าน',
+  ENTER_NEW_PASSWORD: 'กรุณากรอกรหัสผ่านใหม่',
 
   BODY_MASS: 'Body Mass',
   GOOD: 'Good',
@@ -984,173 +975,177 @@ export default {
   JAB_EMAIL: 'cs@schoolbright.co',
   JAB_PHONENUMBER: '02-096-2550',
   VERSION: 'เวอร์ชัน',
-  ALERT_OFFLINE: "แอปพลิเคชันออฟไลน์ กรุณาตรวจสอบอินเทอร์เน็ต และเปิดแอปพลิเคชันใหม่อีกครั้ง",
+  ALERT_OFFLINE: 'แอปพลิเคชันออฟไลน์ กรุณาตรวจสอบอินเทอร์เน็ต และเปิดแอปพลิเคชันใหม่อีกครั้ง',
   ALERT_SEL_PAYMENT: 'กรุณาเลือกช่องทางการชำระเงิน',
   DISCIPLINE: 'พฤติกรรม',
-  CLASS_HAVE_PEOPLE: "ชั้น %{classroom} จำนวน %{count} คน",
-  SDQ_HOMEVISIT: "แบบประเมิน / เยี่ยมบ้าน",
-  VISIT_HOME: "Visit Home",
-  TEACHER_STAFF: "บุคลากร",
-  LEAVE: "ลากิจ",
-  PICUP_ALERT: "ท่านได้ทำการกดรับวันนี้ไปแล้ว กรุณาลองใหม่อีกครั้งพรุ่งนี้",
-  OVERSIZE_ALERT: "ขนาดไฟล์นี้เกิน 25 Mb.",
-  OVERSCORE_ALERT: "กรุณากรอกคะแนนให้ถูกต้อง",
-  SEARCH_STARTDATE: "เริ่มวันที่",
-  SEARCH_ENDDATE: "สิ้นสุดวันที่",
+  CLASS_HAVE_PEOPLE: 'ชั้น %{classroom} จำนวน %{count} คน',
+  SDQ_HOMEVISIT: 'แบบประเมิน / เยี่ยมบ้าน',
+  VISIT_HOME: 'Visit Home',
+  TEACHER_STAFF: 'บุคลากร',
+  LEAVE: 'ลากิจ',
+  PICUP_ALERT: 'ท่านได้ทำการกดรับวันนี้ไปแล้ว กรุณาลองใหม่อีกครั้งพรุ่งนี้',
+  OVERSIZE_ALERT: 'ขนาดไฟล์นี้เกิน 25 Mb.',
+  OVERSCORE_ALERT: 'กรุณากรอกคะแนนให้ถูกต้อง',
+  SEARCH_STARTDATE: 'เริ่มวันที่',
+  SEARCH_ENDDATE: 'สิ้นสุดวันที่',
 
-  DRAWER_STUDENT_TIMETABLE: "ตารางเรียน",
-  DRAWER_TEACHER_TIMETABLE: "ตารางสอน",
-  SUBMITTED: "ส่งแล้ว",
-  SUBMITTED_LATE: "ส่งช้า",
-  USER_GUIDE: "คู่มือ",
-  LOGIN_STUDENTID: "รหัสนักเรียน/รหัสบุคลากร/เบอร์โทรศัพท์",
-  CURRENT_PASSWORD: "รหัสผ่านปัจจุบัน",
-  VISITHOME_LOST_ALERT: "หากออกจากหน้านี้ ข้อมูลที่ยังไม่ได้บันทึกจะหายไป โปรดตรวจสอบว่าท่านบันทึกข้อมูลแล้ว",
-  SUB_DISTRICT: "แขวง/ตำบล",
-  DISTRICT: "เขต/อำเภอ",
-  HOMEWORK_DISPLAY_DATE: "วันที่แสดงผล",
-  DEADLINE_DATE: "วันที่กำหนดส่ง",
-  TOPUP_AMOUNT_NOTICE: "สูงสุด 50,000 บาทต่อครั้ง",
+  DRAWER_STUDENT_TIMETABLE: 'ตารางเรียน',
+  DRAWER_TEACHER_TIMETABLE: 'ตารางสอน',
+  SUBMITTED: 'ส่งแล้ว',
+  SUBMITTED_LATE: 'ส่งช้า',
+  USER_GUIDE: 'คู่มือ',
+  LOGIN_STUDENTID: 'รหัสนักเรียน/รหัสบุคลากร/เบอร์โทรศัพท์',
+  CURRENT_PASSWORD: 'รหัสผ่านปัจจุบัน',
+  VISITHOME_LOST_ALERT:
+    'หากออกจากหน้านี้ ข้อมูลที่ยังไม่ได้บันทึกจะหายไป โปรดตรวจสอบว่าท่านบันทึกข้อมูลแล้ว',
+  SUB_DISTRICT: 'แขวง/ตำบล',
+  DISTRICT: 'เขต/อำเภอ',
+  HOMEWORK_DISPLAY_DATE: 'วันที่แสดงผล',
+  DEADLINE_DATE: 'วันที่กำหนดส่ง',
+  TOPUP_AMOUNT_NOTICE: 'สูงสุด 50,000 บาทต่อครั้ง',
 
-  Verify_email: "ยืนยันอีเมล",
-  Current_Email: "เพิ่มอีเมลปัจจุบัน",
-  Email: "อีเมล",
-  Information_Alert: "If confirmation of information is successful, it will no longer be possible to edit this information.",
-  Information_Updated: "อัปเดตข้อมูลสำเร็จ",
+  Verify_email: 'ยืนยันอีเมล',
+  Current_Email: 'เพิ่มอีเมลปัจจุบัน',
+  Email: 'อีเมล',
+  Information_Alert:
+    'If confirmation of information is successful, it will no longer be possible to edit this information.',
+  Information_Updated: 'อัปเดตข้อมูลสำเร็จ',
 
-  Phone_Setting: "Phone Setting",
-  Current_Phone: "แก้ไขเบอร์โทรศัพท์ปัจจุบัน",
-  Line_Connect: "เชื่อมต่อบัญชี Line",
+  Phone_Setting: 'Phone Setting',
+  Current_Phone: 'แก้ไขเบอร์โทรศัพท์ปัจจุบัน',
+  Line_Connect: 'เชื่อมต่อบัญชี Line',
 
   Agree_Connect: 'Agree and Connect',
   Line_Connection_Succeeded: 'เชื่อมต่อ Line สำเร็จ',
-  Verify_Start: 'กรุณาอัปเดตข้อมูลอีเมล เบอร์โทรศัพท์ หรือ เชื่อมต่อบัญชี Line เพื่อเปิดใช้งานระบบรักษาความปลอดภัยสองขั้นตอน',
+  Verify_Start:
+    'กรุณาอัปเดตข้อมูลอีเมล เบอร์โทรศัพท์ หรือ เชื่อมต่อบัญชี Line เพื่อเปิดใช้งานระบบรักษาความปลอดภัยสองขั้นตอน',
   Common_Start: 'เริ่มต้น',
 
-  Step: "ขั้นตอนที่",
-  Enter_Email: "กรุณาทำการกรอกข้อมูลอีเมลของท่านเพื่อรับรหัสยืนยัน",
-  Get_Verification_Code: "รับรหัสยืนยัน",
+  Step: 'ขั้นตอนที่',
+  Enter_Email: 'กรุณาทำการกรอกข้อมูลอีเมลของท่านเพื่อรับรหัสยืนยัน',
+  Get_Verification_Code: 'รับรหัสยืนยัน',
 
-  Enter_email_code: "กรุณากรอกรหัสที่ได้รับในอีเมล หากไม่ได้รับให้ตรวจสอบ Junk Mail (อีเมลขยะ)",
-  Resend_Code: "ส่งรหัสใหม่อีกครั้ง",
+  Enter_email_code: 'กรุณากรอกรหัสที่ได้รับในอีเมล หากไม่ได้รับให้ตรวจสอบ Junk Mail (อีเมลขยะ)',
+  Resend_Code: 'ส่งรหัสใหม่อีกครั้ง',
 
-  Email_verification_successful: "คุณได้ทำการยืนยันอีเมลสำเร็จ",
-  Email_verification_fail: "คุณยังไม่ได้ทำการยืนยันอีเมล",
-  Enter_phone: "กรุณากรอกเบอร์โทรศัพท์ในประเทศไทย",
+  Email_verification_successful: 'คุณได้ทำการยืนยันอีเมลสำเร็จ',
+  Email_verification_fail: 'คุณยังไม่ได้ทำการยืนยันอีเมล',
+  Enter_phone: 'กรุณากรอกเบอร์โทรศัพท์ในประเทศไทย',
 
-  Enter_phone_code: "กรุณากรอกรหัสยืนยันที่ได้รับทาง SMS",
-  Phone_verified_successfully: "ยืนยันเบอร์โทรศัพท์สำเร็จ",
+  Enter_phone_code: 'กรุณากรอกรหัสยืนยันที่ได้รับทาง SMS',
+  Phone_verified_successfully: 'ยืนยันเบอร์โทรศัพท์สำเร็จ',
 
-  Ready: "เริ่มใช้งานทันที",
-  Warning: "คำเตือน",
+  Ready: 'เริ่มใช้งานทันที',
+  Warning: 'คำเตือน',
 
-  Not_verified_phone: "คุณยังไม่ได้ทำการยืนยันเบอร์โทรศัพท์",
-  Not_connected_line: "คุณยังไม่ได้ทำการเชื่อมต่อ Line",
+  Not_verified_phone: 'คุณยังไม่ได้ทำการยืนยันเบอร์โทรศัพท์',
+  Not_connected_line: 'คุณยังไม่ได้ทำการเชื่อมต่อ Line',
 
-  Back: "กลับ",
+  Back: 'กลับ',
   Complete_verification: "Complete verification to ensure your account's security",
 
-  Unverified: "ยังไม่ยืนยัน",
-  Verified: "ยืนยันแล้ว",
-  Not_yet_connected: "ยังไม่เชื่อมต่อ",
+  Unverified: 'ยังไม่ยืนยัน',
+  Verified: 'ยืนยันแล้ว',
+  Not_yet_connected: 'ยังไม่เชื่อมต่อ',
 
-  Email_input_placeholder: "กรุณาเพิ่มอีเมล",
+  Email_input_placeholder: 'กรุณาเพิ่มอีเมล',
 
-  Closed : "ปิด",
-  Verify_phone_number: "ยืนยันเบอร์โทรศัพท์",
-  Phone_input_placeholder: "โปรดเพิ่มเบอร์โทรศัพท์มือถือ",
+  Closed: 'ปิด',
+  Verify_phone_number: 'ยืนยันเบอร์โทรศัพท์',
+  Phone_input_placeholder: 'โปรดเพิ่มเบอร์โทรศัพท์มือถือ',
 
   Token_exist: 'รหัส OTP ยังไม่หมดอายุ โปรดใช้อีเมลอื่น หรือ รอ 3 นาที',
   Token_exist_phone: 'รหัส OTP ยังไม่หมดอายุ โปรดใช้หมายเลขโทรศัพท์อื่น หรือ รอ 3 นาที',
 
-  Phone_verified_already: "หมายเลขโทรศัพท์นี้ได้รับการยืนยันแล้ว",
-  Email_verified_already: "อีเมลนี้ได้รับการยืนยันแล้ว",
+  Phone_verified_already: 'หมายเลขโทรศัพท์นี้ได้รับการยืนยันแล้ว',
+  Email_verified_already: 'อีเมลนี้ได้รับการยืนยันแล้ว',
 
-  Input_Valid_Phone: "กรุณากรอกหมายเลขโทรศัพท์ที่ถูกต้อง",
-  Linked: "เชื่อมต่อแล้ว",
+  Input_Valid_Phone: 'กรุณากรอกหมายเลขโทรศัพท์ที่ถูกต้อง',
+  Linked: 'เชื่อมต่อแล้ว',
 
-  Connected_line: "You have connected to Line.",
+  Connected_line: 'You have connected to Line.',
 
-  Invalid_OTP_Code: "รหัส OTP ไม่ถูกต้อง",
+  Invalid_OTP_Code: 'รหัส OTP ไม่ถูกต้อง',
 
-  Your_devices: "อุปกรณ์ของคุณ",
-  Verify_Device_Comment: 'เพื่อความปลอดภัยของบัญชีท่าน กรุณาเลือกช่องทางยืนยันอุปกรณ์เพื่อบันทึกอุปกรณ์นี้เป็นอุปกรณ์ที่คุณไว้ใจ',
+  Your_devices: 'อุปกรณ์ของคุณ',
+  Verify_Device_Comment:
+    'เพื่อความปลอดภัยของบัญชีท่าน กรุณาเลือกช่องทางยืนยันอุปกรณ์เพื่อบันทึกอุปกรณ์นี้เป็นอุปกรณ์ที่คุณไว้ใจ',
   Verify_Device_Waiting: 'กรุณาตรวจสอบ "อีเมล/SMS/Line" เพื่อยืนยันอุปกรณ์ของคุณ',
-
 
   Location: 'สถานที่',
   First_Login: 'ล็อกอินครั้งแรก',
   Recent_Activity: 'กิจกรรมล่าสุด',
   Device: 'อุปกรณ์',
 
+  Forgot_Password_Link_Comment: 'ลิงก์สำหรับรีเซ็ตรหัสผ่านจะส่งไปยังช่องทางที่คุณเลือก',
+  Account_Recovery: 'กู้ข้อมูลบัญชี',
 
-  Forgot_Password_Link_Comment: "ลิงก์สำหรับรีเซ็ตรหัสผ่านจะส่งไปยังช่องทางที่คุณเลือก",
-  Account_Recovery: "กู้ข้อมูลบัญชี",
+  Reset_Success: 'สำเร็จ',
 
-  Reset_Success: "สำเร็จ",
+  Confirm_Success: 'ยืนยันสำเร็จ',
 
-  Confirm_Success: "ยืนยันสำเร็จ",
+  Remove_Device_Comment: 'เมื่อคุณลบอุปกรณ์นี้ ระบบจะออกจากระบบบัญชีของคุณจากอุปกรณ์นี้เช่นกัน',
+  Remove_Device_Success: 'ลบอุปกรณ์นี้จากระบบสำเร็จ',
 
-  Remove_Device_Comment: "เมื่อคุณลบอุปกรณ์นี้ ระบบจะออกจากระบบบัญชีของคุณจากอุปกรณ์นี้เช่นกัน",
-  Remove_Device_Success: "ลบอุปกรณ์นี้จากระบบสำเร็จ",
-
-  Recovery_Notification: "โปรดใช้อุปกรณ์ที่เคยเข้าสู่ระบบก่อนหน้านี้ในการกู้คืนบัญชี หากใช้อุปกรณ์ใหม่ เราอาจใช้เวลาในการตรวจสอบความเป็นเจ้าของนานกว่าปกติ",
+  Recovery_Notification:
+    'โปรดใช้อุปกรณ์ที่เคยเข้าสู่ระบบก่อนหน้านี้ในการกู้คืนบัญชี หากใช้อุปกรณ์ใหม่ เราอาจใช้เวลาในการตรวจสอบความเป็นเจ้าของนานกว่าปกติ',
 
   Add_Phrase_Student_ID: `บัตรประชาชนเจ้าของบัญชี`,
-  ID_Card_Photo_Front: "บัตรประชาชน ภาพถ่ายบัตรประชาชน (ด้านหน้า)",
-  Attach_Photo: " *ตามรูปแบบตัวอย่าง*",
+  ID_Card_Photo_Front: 'บัตรประชาชน ภาพถ่ายบัตรประชาชน (ด้านหน้า)',
+  Attach_Photo: ' *ตามรูปแบบตัวอย่าง*',
 
-  ID_Card_Instruction1: "1. รูปภาพต้องแสดงให้เห็นทั้งบัตรประชาชน",
-  ID_Card_Instruction2: "2. รูปภาพต้องตรวจสอบและสามารถอ่านข้อมูลใบบัตรได้",
-  ID_Card_Instruction3: "3. ต้องเป็นภาพจริงเท่านั้นโดยไม่ได้ผ่านการตัดต่อ",
+  ID_Card_Instruction1: '1. รูปภาพต้องแสดงให้เห็นทั้งบัตรประชาชน',
+  ID_Card_Instruction2: '2. รูปภาพต้องตรวจสอบและสามารถอ่านข้อมูลใบบัตรได้',
+  ID_Card_Instruction3: '3. ต้องเป็นภาพจริงเท่านั้นโดยไม่ได้ผ่านการตัดต่อ',
 
-  Attach_Picture: "แนบรูป",
+  Attach_Picture: 'แนบรูป',
 
-  Example: "ตัวอย่าง",
+  Example: 'ตัวอย่าง',
 
   Upload_Gallery: 'อัปโหลดจากแกลเลอรี่',
-  Open_Camera: "เปิดกล้องเพื่อถ่ายรูป",
+  Open_Camera: 'เปิดกล้องเพื่อถ่ายรูป',
 
-  Add_Picture_ID_Selfie: "ยืนยันตัวตน", //Authentication
-  Add_Picture_ID_Selfie1: "แนบรูปบัตรประชาชนคู่ใบหน้าตนเอง",
+  Add_Picture_ID_Selfie: 'ยืนยันตัวตน', //Authentication
+  Add_Picture_ID_Selfie1: 'แนบรูปบัตรประชาชนคู่ใบหน้าตนเอง',
 
-  Attach_Parent_ID: "กรุณาอัพโหลดภาพบัตรประชาชนผู้ปกครองที่ใช้นามสกุลเดียวกันกับนักเรียน",
-  Add_Picture_ID_Parent: "กรุณาอัพโหลดภาพถ่ายผู้ปกครองเซลฟี่คู่กับบัตรประชาชน",
+  Attach_Parent_ID: 'กรุณาอัพโหลดภาพบัตรประชาชนผู้ปกครองที่ใช้นามสกุลเดียวกันกับนักเรียน',
+  Add_Picture_ID_Parent: 'กรุณาอัพโหลดภาพถ่ายผู้ปกครองเซลฟี่คู่กับบัตรประชาชน',
 
-  Remove_Device: "ลบอุปกรณ์",
+  Remove_Device: 'ลบอุปกรณ์',
 
-  Verify_ID_Success_Message: "ขอบคุณสำหรับข้อมูล กรุณารอการยืนยันบัญชีภายใน 7 วัน",
+  Verify_ID_Success_Message: 'ขอบคุณสำหรับข้อมูล กรุณารอการยืนยันบัญชีภายใน 7 วัน',
 
-  Select_Between: "เลือกระหว่าง",
+  Select_Between: 'เลือกระหว่าง',
 
-  Check_Status: "ตรวจสอบสถานะ",
-  Device_Not_Verified: "ขออภัย อุปกรณ์ของคุณยังไม่ได้รับการยืนยัน โปรดติดต่อเจ้าของบัญชี",
+  Check_Status: 'ตรวจสอบสถานะ',
+  Device_Not_Verified: 'ขออภัย อุปกรณ์ของคุณยังไม่ได้รับการยืนยัน โปรดติดต่อเจ้าของบัญชี',
 
-  Link_Not_Expired: "ลิงก์ยังไม่หมดอายุ กรุณาตรวจสอบช่องทางที่ท่านเลือก หรือรอ 3 นาที",
+  Link_Not_Expired: 'ลิงก์ยังไม่หมดอายุ กรุณาตรวจสอบช่องทางที่ท่านเลือก หรือรอ 3 นาที',
 
-  Check_Name: "เช็กชื่อหน้าเสาธง",
+  Check_Name: 'เช็กชื่อหน้าเสาธง',
   CHECKIN_SUBJECT: 'เช็กชื่อรายวิชา',
 
-  Line_Disconnect: "ยกเลิกเชื่อมต่อบัญชี Line",
-  Line_Disconnect_Modal: "ท่านต้องการยกเลิกเชื่อมต่อบัญชีไลน์ใช่หรือไม่",
-  Line_disconnect_success: "ยกเลิกเชื่อมต่อบัญชี Line สำเร็จ",
+  Line_Disconnect: 'ยกเลิกเชื่อมต่อบัญชี Line',
+  Line_Disconnect_Modal: 'ท่านต้องการยกเลิกเชื่อมต่อบัญชีไลน์ใช่หรือไม่',
+  Line_disconnect_success: 'ยกเลิกเชื่อมต่อบัญชี Line สำเร็จ',
 
-  No_list: "ไม่มีรายการ",
-  Select_Date: "เลือกวันที่",
+  No_list: 'ไม่มีรายการ',
+  Select_Date: 'เลือกวันที่',
 
-  Note_placeholder: "กรุณากรอกหมายเหตุ",
-  Attached_Pictures: "แนบรูป",
-  Note: "หมายเหตุ",
+  Note_placeholder: 'กรุณากรอกหมายเหตุ',
+  Attached_Pictures: 'แนบรูป',
+  Note: 'หมายเหตุ',
 
-  Not_Remove_Device: "ขออภัย คุณไม่สามารถลบอุปกรณ์ของคุณเองได้",
+  Not_Remove_Device: 'ขออภัย คุณไม่สามารถลบอุปกรณ์ของคุณเองได้',
 
   ONLINE_CHECKIN: 'มาโรงเรียน',
   ONLINE_SUBJECT: 'รายวิชา',
 
-  WARNING_NO_DEPARTMENT: 'ระบบนี้ยังตั้งค่าไม่สมบูรณ์ กรุณาติดต่อครูผู้ดูแลระบบของท่านเพื่อทำการตั้งค่าระบบให้สมบูรณ์ -*ยังไม่ได้ตั้งค่าแผนกของผู้ใช้งาน',
+  WARNING_NO_DEPARTMENT:
+    'ระบบนี้ยังตั้งค่าไม่สมบูรณ์ กรุณาติดต่อครูผู้ดูแลระบบของท่านเพื่อทำการตั้งค่าระบบให้สมบูรณ์ -*ยังไม่ได้ตั้งค่าแผนกของผู้ใช้งาน',
 
   EDITING_HISTORY: 'ประวัติการแก้ไข',
-  NO_HISTORY: "ไม่มีประวัติการแก้ไข",
+  NO_HISTORY: 'ไม่มีประวัติการแก้ไข',
 
   HISTORY_TOPIC: 'หัวข้อ',
   HISTORY_STATUS: 'สถานะ',
@@ -1198,7 +1193,7 @@ export default {
   discipline: 'พฤติกรรม',
   savings: 'เงินออม',
   recycle_bank: 'ธนาคารขยะ',
-  schoolBus: "รถโรงเรียน",
+  schoolBus: 'รถโรงเรียน',
 
   arrange: 'จัดเรียง',
   all_your_accounts: 'บัญชีทั้งหมดของคุณ',
@@ -1208,8 +1203,8 @@ export default {
   check_in_out: 'เช็กชื่อ',
   services: 'บริการ',
 
-  show_information: "แสดงข้อมูล",
-  show_balance: "แสดงยอดเงิน",
+  show_information: 'แสดงข้อมูล',
+  show_balance: 'แสดงยอดเงิน',
 
   hello: 'สวัสดีครับคุณ',
   hello_student: 'สวัสดีครับน้อง',
@@ -1225,25 +1220,29 @@ export default {
   view_score: 'ดูคะแนน',
   view_balance: 'ดูยอดเงิน',
 
-
   coming_soon: 'พบกันเร็ว ๆ นี้',
-  add_menu: "เพิ่มเมนู",
+  add_menu: 'เพิ่มเมนู',
   edit_checkin: 'แก้ไขเช็กชื่อ',
 
   TOKEN_ERROR_TEXT: 'ไม่สามารถตรวจสอบสิทธิ์\nการเข้าถึงข้อมูลของคุณได้',
   CONFIRM_PASS_AGAIN: 'กรุณายืนยันรหัสผ่านอีกครั้ง',
 
   FOR_YOUR_SAFETY: 'เพื่อความปลอดภัย',
-  TRY_AGAIN: "Try again",
+  TRY_AGAIN: 'Try again',
 
-  NOT_APPROVED_DUE_TO: "ไม่อนุมัติเนื่องจาก",
-  NOT_APPROVED: "ไม่อนุมัติ",
+  NOT_APPROVED_DUE_TO: 'ไม่อนุมัติเนื่องจาก',
+  NOT_APPROVED: 'ไม่อนุมัติ',
 
-  NUMBER_LEAVE_DAYS_NOT_ENOUGH: "ขออภัย จำนวนวันลาไม่เพียงพอ",
-  CHECK_LEAVE_DAYS_AT_TOP_RIGHT_CORNER: "ท่านสามารถตรวจสอบวันลาได้ที่ไอคอนมุมขวาบนหรือติดต่อผู้ดูแลระบบของโรงเรียน",
+  NUMBER_LEAVE_DAYS_NOT_ENOUGH: 'ขออภัย จำนวนวันลาไม่เพียงพอ',
+  CHECK_LEAVE_DAYS_AT_TOP_RIGHT_CORNER:
+    'ท่านสามารถตรวจสอบวันลาได้ที่ไอคอนมุมขวาบนหรือติดต่อผู้ดูแลระบบของโรงเรียน',
 
-  REMAINING_LEAVE_DAYS: "วันลาคงเหลือ",
-  LEAVE_TYPE: "ประเภทการลา",
-  LEAVE_DAYS_IN_CURRENT_PERIOD: "จำนวนวันลาในรอบปัจจุบัน",
+  REMAINING_LEAVE_DAYS: 'วันลาคงเหลือ',
+  LEAVE_TYPE: 'ประเภทการลา',
+  LEAVE_DAYS_IN_CURRENT_PERIOD: 'จำนวนวันลาในรอบปัจจุบัน',
+
+  // start of schoolBus
+  LIST_OF_VEHICLES: 'รายการรถ',
+  SELECT_ROUTE: 'เลือกรอบ',
+  // End of schoolBus
 };
-
