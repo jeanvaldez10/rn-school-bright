@@ -25,7 +25,7 @@ const routes = [
   },
 ];
 
-const ShopScreen = ({ navigation }) => {
+const BusListScreen = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [items, setItems] = useState(routes);
 
@@ -158,13 +158,13 @@ const ShopScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
       <BackNavigationBar title={translang.t('schoolBus')} onMenuTap={back} />
-      <Text style={styles.pageTitle}>{translang.t('LIST_OF_VEHICLES')}</Text>
       {shopList.length > 0 || isLoading ? (
         <FlatList
           contentContainerStyle={styles.contentContainerStyle}
           data={shopList}
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderItem}
+          ListHeaderComponent={<Text style={styles.pageTitle}>{translang.t('LIST_OF_VEHICLES')}</Text>}
         />
       ) : (
         <View style={styles.noSupportWrapper}>
@@ -196,7 +196,7 @@ const styles = ScaledSheet.create({
     paddingBottom: 60,
   },
   pageTitle: {
-    marginTop: 16,
+    marginBottom: 16,
     fontSize: 24,
     fontWeight: 'normal',
     color: Color.n_default_orange,
@@ -237,9 +237,11 @@ const styles = ScaledSheet.create({
     marginRight: 10,
   },
   selectButton: {
+    width: '50%',
+    alignSelf: 'center',
     marginTop: 20,
   },
-  buttonStyle: { height: 40 },
+  buttonStyle: { height: 40, flexGrow: 0 },
   buttonTextStyle: { fontSize: 22 },
   noSupportWrapper: {
     flex: 1,
@@ -262,4 +264,4 @@ const styles = ScaledSheet.create({
   },
 });
 
-export default ShopScreen;
+export default BusListScreen;

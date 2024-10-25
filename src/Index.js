@@ -259,7 +259,7 @@ import VerifyIdentifyID3Screen from './screens/Auth/VerifyIdentifyID3Screen';
 import CheckVerification from './components/CheckVerification';
 import VerifyIdentifyIDSuccessScreen from './screens/Auth/VerifyIdentifyIDSuccessScreen';
 import AuthLoadingScreen from './AuthLoadingScreen';
-import VehicleList from './screens/SchoolBus/VehicleList';
+import BusListScreen from './screens/SchoolBus/BusListScreen';
 
 const screenWidth = Dimensions.get('window').width;
 const drawerWidth = 0;
@@ -1360,8 +1360,8 @@ const DrawerRouteConfigs = {
       headerShown: true,
     },
   },
-  VehicleList: {
-    screen: VehicleList,
+  BusListScreen: {
+    screen: BusListScreen,
     navigationOptions: {
       headerShown: false,
     },
