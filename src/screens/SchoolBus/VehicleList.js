@@ -3,20 +3,14 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { AppState, BackHandler, FlatList, Image, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScaledSheet } from 'react-native-size-matters';
-import { DrawerActions } from 'react-navigation-drawer';
-import NumberFormat from 'react-number-format';
-import AlertWithImageModal from '../../components/AlertWithImageModal';
+import busIcon from '../../assets/images/services/m_school_bus.png';
 import BackNavigationBar from '../../components/BackNavigationBar';
-import CustomTextSearch from '../../components/CustomTextSearch';
-import ShopIconInfoItem from '../../components/IconInfoItem_OneLine';
+import GradientButton from '../../components/GradientButton';
 import ProgressHud from '../../components/ProgressHud';
 import Color from '../../constants/color';
 import ApiManager from '../../managers/ApiManager';
 import Storage from '../../managers/StorageManager';
-import Images from '../../themes/Images';
 import translang from '../../utils/language.utils';
-import busIcon from '../../assets/images/services/m_school_bus.png';
-import GradientButton from '../../components/GradientButton';
 
 const ShopScreen = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
@@ -126,16 +120,16 @@ const ShopScreen = ({ navigation }) => {
         <View style={styles.group1}>
           <Image source={busIcon} style={styles.image}></Image>
           <View style={styles.group2}>
-            <Text style={styles.topText}>อบ 1212 กรุงเทพมหานคร</Text>
-            <Text style={styles.topText}>Toyota Commuter</Text>
+            <Text style={styles.topText}>{name || 'อบ 1212 กรุงเทพมหานคร'}</Text>
+            <Text style={styles.topText}>{driver || 'Toyota Commuter'}</Text>
           </View>
         </View>
 
         <View style={styles.DividerLine} />
         <GradientButton
           containerStyle={styles.selectButton}
-          buttonStyle={{ height: 40 }}
-          textStyle={{ fontSize: 22 }}
+          buttonStyle={styles.buttonStyle}
+          textStyle={styles.buttonTextStyle}
           label={translang.t('SELECT_ROUTE')}
           _onPress={() => this.removeDevice(item)}
         />
@@ -160,14 +154,6 @@ const ShopScreen = ({ navigation }) => {
         </View>
       )}
 
-      <AlertWithImageModal
-        isVisible={showModal}
-        image={Images.n_ic_warning}
-        message={modalBody}
-        buttonColors={[Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]}
-        isVerticalGradient={false}
-        onClose={() => setShowModal(false)}
-      />
       <ProgressHud isVisible={isLoading} />
     </SafeAreaView>
   );
@@ -230,6 +216,8 @@ const styles = ScaledSheet.create({
   selectButton: {
     marginTop: 20,
   },
+  buttonStyle: { height: 40 },
+  buttonTextStyle: { fontSize: 22 },
   noSupportWrapper: {
     flex: 1,
     flexDirection: 'row',
@@ -250,7 +238,5 @@ const styles = ScaledSheet.create({
     marginTop: 20,
   },
 });
-
-/* Rectangle 3385 */
 
 export default ShopScreen;
