@@ -30,7 +30,7 @@ export default class GradientSmallButton extends Component {
             style={[
               styles.gradientBtnBackground,
               {opacity: this.props.opacity ? this.props.opacity : 0.55},
-              {width: this.props.width ? this.props.width : 120},
+              {width: this.props.width || 120, height: this.props.height || 40, borderRadius: this.props.borderRadius || 20 },
             ]}
             colors={colorGradient}>
             <Text

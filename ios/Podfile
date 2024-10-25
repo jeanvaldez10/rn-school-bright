@@ -1,7 +1,8 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+require_relative '../node_modules/react-native-permissions/scripts/setup'
 
-platform :ios, '11.0'
+platform :ios, '14.0'
 project 'SchoolBright.xcodeproj'
 
 target 'SchoolBright' do
@@ -9,13 +10,14 @@ target 'SchoolBright' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  permissions_path = '../node_modules/react-native-permissions/ios'
-  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
-
-  # pod 'RNCharts', :path => '../node_modules/react-native-charts-wrapper'/
-  pod 'react-native-charts-wrapper', :path => '../node_modules/react-native-charts-wrapper'
+  # permissions_path = '../node_modules/react-native-permissions/ios'
+  # pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
   # pod 'react-native-notifications', :path => '../node_modules/react-native-notifications'
   # pod 'React-RCTPushNotification', :path => '../node_modules/react-native/Libraries/PushNotificationIOS'
+
+  setup_permissions([
+    "Camera"
+  ])
 
   target 'SchoolBrightTests' do
     inherit! :complete
@@ -33,7 +35,19 @@ target 'SchoolBright' do
   post_install do |installer|
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
-        config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
+        case target.name
+        when 'RCT-Folly'
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '9.0'
+        else
+          config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+        end
+
+        config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)', '_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION']
+#        config.build_settings["ONLY_ACTIVE_ARCH"] = "NO"
+
+        if target.name != "Sentry"
+          config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'NO'
+        end
       end
     end
   end
