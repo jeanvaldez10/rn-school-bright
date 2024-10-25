@@ -1,6 +1,6 @@
 import { Text } from 'native-base';
 import React, { useCallback, useEffect, useState } from 'react';
-import { AppState, BackHandler, FlatList, Image, TouchableOpacity, View } from 'react-native';
+import { BackHandler, FlatList, Image, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScaledSheet } from 'react-native-size-matters';
 import busIcon from '../../assets/images/services/m_school_bus.png';
@@ -32,16 +32,19 @@ const BusListScreen = ({ navigation }) => {
   const [shopList, setShopList] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [appState, setAppState] = useState(AppState.currentState);
+
+  useEffect(() => {
+    loadData(userInfo);
+  }, [loadData, userInfo]);
+
+  useEffect(() => {
+    loadUserInfo();
+  }, [loadUserInfo]);
 
   const handleBackButton = useCallback(() => {
     back();
     return true;
   }, [back]);
-
-  useEffect(() => {
-    loadData(userInfo);
-  }, [loadData, userInfo]);
 
   useEffect(() => {
     const loadUserInfoAndData = async () => {
@@ -54,31 +57,13 @@ const BusListScreen = ({ navigation }) => {
 
   useEffect(() => {
     const backhandler = BackHandler.addEventListener('hardwareBackPress', handleBackButton);
-    AppState.addEventListener('change', handleAppStateChange);
-    const willFocusSubscription = navigation.addListener('willFocus', async () => {
-      const userInfo = await Storage.getUserInfo();
-      setUserInfo(userInfo);
-    });
 
     return () => {
       backhandler.remove();
-      AppState.removeEventListener('change', handleAppStateChange);
-      willFocusSubscription.remove();
     };
-  }, [handleAppStateChange, handleBackButton, navigation]);
+  }, [handleBackButton, navigation]);
 
-  const handleAppStateChange = useCallback(
-    (nextAppState) => {
-      if (appState.match(/inactive|background/) && nextAppState === 'active') {
-        console.log('App has come to the foreground!');
-        loadUserInfo();
-      }
-      setAppState(nextAppState);
-    },
-    [appState],
-  );
-
-  const loadUserInfo = async () => {
+  const loadUserInfo = useCallback(async () => {
     setIsLoading(true);
     try {
       const user = await Storage.getUser();
@@ -91,11 +76,15 @@ const BusListScreen = ({ navigation }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   const loadData = useCallback((userInfo) => {
-    setIsLoading(true);
     const { SchoolID } = userInfo;
+
+    if (!SchoolID) {
+      return;
+    }
+    setIsLoading(true);
     ApiManager.getShopList(SchoolID)
       .then((list) => {
         setShopList(list);
@@ -131,10 +120,7 @@ const BusListScreen = ({ navigation }) => {
     const { name, driver } = item;
 
     return (
-      <TouchableOpacity
-        style={styles.menuEachStyle}
-        activeOpacity={0.5}
-      >
+      <TouchableOpacity style={styles.menuEachStyle} activeOpacity={0.5}>
         <View style={styles.group1}>
           <Image source={busIcon} style={styles.image}></Image>
           <View style={styles.group2}>
@@ -164,7 +150,9 @@ const BusListScreen = ({ navigation }) => {
           data={shopList}
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderItem}
-          ListHeaderComponent={<Text style={styles.pageTitle}>{translang.t('LIST_OF_VEHICLES')}</Text>}
+          ListHeaderComponent={
+            <Text style={styles.pageTitle}>{translang.t('LIST_OF_VEHICLES')}</Text>
+          }
         />
       ) : (
         <View style={styles.noSupportWrapper}>

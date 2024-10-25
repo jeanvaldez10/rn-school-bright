@@ -260,6 +260,7 @@ import CheckVerification from './components/CheckVerification';
 import VerifyIdentifyIDSuccessScreen from './screens/Auth/VerifyIdentifyIDSuccessScreen';
 import AuthLoadingScreen from './AuthLoadingScreen';
 import BusListScreen from './screens/SchoolBus/BusListScreen';
+import BusDetailScreen from './screens/SchoolBus/BusDetailScreen';
 
 const screenWidth = Dimensions.get('window').width;
 const drawerWidth = 0;
@@ -437,6 +438,18 @@ const MainAppRouteConfigs = {
   },
   UpdatePassword: {
     screen: UpdatePassScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  BusListScreen: {
+    screen: BusListScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  BusDetailScreen: {
+    screen: BusDetailScreen,
     navigationOptions: {
       headerShown: false,
     },
@@ -1358,12 +1371,6 @@ const DrawerRouteConfigs = {
     screen: YourDevicesScreen,
     navigationOptions: {
       headerShown: true,
-    },
-  },
-  BusListScreen: {
-    screen: BusListScreen,
-    navigationOptions: {
-      headerShown: false,
     },
   },
 };
