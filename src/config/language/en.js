@@ -1204,7 +1204,7 @@ export default {
   discipline: 'Discipline',
   savings: 'Savings',
   recycle_bank: 'Recycle Bank',
-
+  schoolBus: "School Bus",
   arrange: 'Arrange',
   all_your_accounts: 'All Your Accounts',
   add_account: 'Add Account',

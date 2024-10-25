@@ -1198,7 +1198,7 @@ export default {
   discipline: 'พฤติกรรม',
   savings: 'เงินออม',
   recycle_bank: 'ธนาคารขยะ',
-
+  schoolBus: "รถโรงเรียน",
 
   arrange: 'จัดเรียง',
   all_your_accounts: 'บัญชีทั้งหมดของคุณ',

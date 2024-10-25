@@ -76,6 +76,8 @@ class ServicesTab extends React.Component {
     const {allMenu, quickMenu} = await getMenu(userInfo, this);
     this.props.setQuickMenu(quickMenu);
     this.setState({quickMenu, allMenu, userInfo, deviceInfo, loginInfo, isLoading: false});
+
+    console.log(allMenu)
   }
 
   componentWillUnmount = () => {
