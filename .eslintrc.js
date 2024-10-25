@@ -23,5 +23,7 @@ module.exports = {
   rules: {
     'react-hooks/exhaustive-deps': 'warn',
     'react/prop-types': 'off',
+    'react-native/no-color-literals': 'off',
+    'react-native/sort-styles': 'off'
   },
 };

@@ -9,7 +9,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import BackNavigationBar from '../../components/BackNavigationBar';
 import AlertWithImageModal from '../../components/AlertWithImageModal';
 import Images from '../../themes/Images';
-import translang from '../../utils/language.utils';
+import translang, { getCurrentLocale } from '../../utils/language.utils';
 import CustomRadioButtonItem from '../../components/CustomRadioButtonItem';
 import ProgressHud from '../../components/ProgressHud';
 import ApiManager from '../../managers/ApiManager';

@@ -83,7 +83,6 @@ const styles = ScaledSheet.create({
   gradientBtnWrapper: {
     alignItems: 'center',
     // marginTop: 45,
-    width: '100%',
     // paddingHorizontal: 35,
 
     shadowColor: '#1C191966',

@@ -1244,5 +1244,11 @@ export default {
   // start of schoolBus
   LIST_OF_VEHICLES: 'รายการรถ',
   SELECT_ROUTE: 'เลือกรอบ',
+  NOT_DEPARTRED: 'ยังไม่เดินทาง',
+  DEPARTED: 'ออกเดินทาง',
+  ARRIVED: 'ถึงที่หมาย',
+  START_JOURNEY: 'เริ่มเดินทาง',
+  TURN_ON_GPS: 'กรุณาเปิด gps',
+
   // End of schoolBus
 };

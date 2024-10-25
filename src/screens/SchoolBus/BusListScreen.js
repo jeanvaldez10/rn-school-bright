@@ -32,6 +32,7 @@ const BusListScreen = ({ navigation }) => {
   const [shopList, setShopList] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedBus, setSelectedBus] = useState();
 
   useEffect(() => {
     loadData(userInfo);
@@ -40,6 +41,10 @@ const BusListScreen = ({ navigation }) => {
   useEffect(() => {
     loadUserInfo();
   }, [loadUserInfo]);
+
+  const back = useCallback(() => {
+    navigation.navigate('UserInfo');
+  }, [navigation]);
 
   const handleBackButton = useCallback(() => {
     back();
@@ -79,7 +84,7 @@ const BusListScreen = ({ navigation }) => {
   }, []);
 
   const loadData = useCallback((userInfo) => {
-    const { SchoolID } = userInfo;
+    const { SchoolID } = userInfo || {};
 
     if (!SchoolID) {
       return;
@@ -97,23 +102,18 @@ const BusListScreen = ({ navigation }) => {
       });
   }, []);
 
-  const back = useCallback(() => {
-    navigation.navigate('UserInfo');
-  }, [navigation]);
-
   const onClickItem = (item) => {
+    setSelectedBus(item);
     setShowModal(true);
-
-    // navigation.navigate('ShopInput', {
-    //   shopId,
-    //   shop: item,
-    //   userInfo,
-    //   refresh: true,
-    // });
   };
 
-  const onListSelect = (item, index) => {
+  const onListSelect = (item) => {
     setShowModal(false);
+    navigation.navigate('BusDetailScreen', {
+      route: item.id,
+      bus: selectedBus.id,
+      userInfo,
+    });
   };
 
   const renderItem = ({ item }) => {

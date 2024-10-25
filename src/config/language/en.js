@@ -1255,5 +1255,10 @@ export default {
   // start of schoolBus
   LIST_OF_VEHICLES: 'Vehicles',
   SELECT_ROUTE: 'Select Route',
+  NOT_DEPARTRED: 'Not Departed',
+  DEPARTED: 'Departed',
+  ARRIVED: 'Arrived',
+  START_JOURNEY: 'Start Journey',
+  TURN_ON_GPS: 'Please turn on gps',
   // End of schoolBus
 };
