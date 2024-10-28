@@ -1265,6 +1265,15 @@ export default {
   CALL_PARENT: 'Call the parents',
   REPORT_INCIDENT: 'Report incident',
   INCIDENT_REPORT: 'Incident report',
+  CHECK_STUDENT_QUEUE:
+    'Please check the students in queue order. If you need to check this student, you can reorder the queue.',
+
+  BUS_CHECK_IN_STATUS_CHECKED_IN: 'Checked In',
+  BUS_CHECK_IN_STATUS_CHECKED_IN_LATE: 'Checked In Late',
+  BUS_CHECK_IN_STATUS_NOT_BOARD: 'Did Not Board',
+  BUS_CHECK_IN_STATUS_PERSONNAL_LEAVE: 'Personal Leave',
+  BUS_CHECK_IN_STATUS_SICK_LEAVE: 'Sick Leave',
+  BUS_CHECK_IN_STATUS_UNSPECIFIED: 'Not Specified',
 
   // End of schoolBus
 };

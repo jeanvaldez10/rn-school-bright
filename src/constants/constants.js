@@ -110,6 +110,38 @@ export const AttendanceStatusMap = {
   },
 };
 
+export const BusStatusColorMap = {
+  0: {
+    value: 0,
+    title: translang.t('BUS_CHECK_IN_STATUS_CHECKED_IN'),
+    color: Color.n_button_gradient_green_end,
+  },
+  1: {
+    value: 1,
+    title: translang.t('BUS_CHECK_IN_STATUS_CHECKED_IN_LATE'),
+    color: Color.n_default_brown,
+  },
+  2: {
+    value: 2,
+    title: translang.t('BUS_CHECK_IN_STATUS_NOT_BOARD'),
+    color: Color.n_default_orange,
+  },
+  3: {
+    value: 3,
+    title: translang.t('BUS_CHECK_IN_STATUS_PERSONNAL_LEAVE'),
+    color: Color.n_seance,
+  },
+  4: {
+    value: 4,
+    title: translang.t('BUS_CHECK_IN_STATUS_SICK_LEAVE'),
+    color: Color.n_electric_violet,
+  },
+  '-1': {
+    value: -1,
+    title: translang.t('BUS_CHECK_IN_STATUS_UNSPECIFIED'),
+    color: Color.n_scorpion,
+  },
+};
 export const AttendanceStatusMapOneColor = {
   0: {
     value: 0,

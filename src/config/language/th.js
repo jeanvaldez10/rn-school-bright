@@ -1253,6 +1253,15 @@ export default {
   CALL_PARENT: 'โทรหาผู้ปกครอง',
   REPORT_INCIDENT: 'แจ้งเหตุ',
   INCIDENT_REPORT: 'แจ้งเหตุ',
+  CHECK_STUDENT_QUEUE:
+    'กรุณาเช็กนักเรียนตามลำดับคิว หากต้องการเช็กนักเรียนคนนี้, ท่านสามารถจัดลำดับคิวใหม่ได้',
+
+  BUS_CHECK_IN_STATUS_CHECKED_IN: 'เช็กอิน',
+  BUS_CHECK_IN_STATUS_CHECKED_IN_LATE: 'เช็กอินสาย',
+  BUS_CHECK_IN_STATUS_NOT_BOARD: 'ไม่ขึ้นรถ',
+  BUS_CHECK_IN_STATUS_PERSONNAL_LEAVE: 'ลากิจ',
+  BUS_CHECK_IN_STATUS_SICK_LEAVE: 'ลาป่วย',
+  BUS_CHECK_IN_STATUS_UNSPECIFIED: 'ไม่ระบุ',
 
   // End of schoolBus
 };
