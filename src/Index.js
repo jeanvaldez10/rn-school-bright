@@ -259,8 +259,8 @@ import VerifyIdentifyID3Screen from './screens/Auth/VerifyIdentifyID3Screen';
 import CheckVerification from './components/CheckVerification';
 import VerifyIdentifyIDSuccessScreen from './screens/Auth/VerifyIdentifyIDSuccessScreen';
 import AuthLoadingScreen from './AuthLoadingScreen';
-import BusListScreen from './screens/SchoolBus/BusListScreen';
-import BusDetailScreen from './screens/SchoolBus/BusDetailScreen';
+import BusListScreen from './screens/SchoolBus/Teacher/BusListScreen';
+import BusDetailScreen from './screens/SchoolBus/Teacher/BusDetailScreen';
 
 const screenWidth = Dimensions.get('window').width;
 const drawerWidth = 0;

@@ -7,18 +7,20 @@ import {
   SafeAreaView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
-import busIcon from '../../assets/images/services/m_school_bus.png';
-import AlertWithImageModal from '../../components/AlertWithImageModal';
-import BackNavigationBar from '../../components/BackNavigationBar';
-import CustomRadioButtonItem from '../../components/CustomRadioButtonItem';
-import NextButton from '../../components/NextButton';
-import ProgressHud from '../../components/ProgressHud';
-import Color from '../../constants/color';
-import ApiManager from '../../managers/ApiManager';
-import Images from '../../themes/Images';
-import translang from '../../utils/language.utils';
+import busIcon from '../../../assets/images/services/m_school_bus.png';
+import AlertWithImageModal from '../../../components/AlertWithImageModal';
+import BackNavigationBar from '../../../components/BackNavigationBar';
+import CustomRadioButtonItem from '../../../components/CustomRadioButtonItem';
+import NextButton from '../../../components/NextButton';
+import ProgressHud from '../../../components/ProgressHud';
+import Color from '../../../constants/color';
+import ApiManager from '../../../managers/ApiManager';
+import Images from '../../../themes/Images';
+import translang from '../../../utils/language.utils';
+import StudentPopup from './StudentPopup';
 
 const BusDetailScreen = ({ navigation }) => {
   const [userInfo] = useState(navigation.getParam('userInfo'));
@@ -26,7 +28,8 @@ const BusDetailScreen = ({ navigation }) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [modalBody, setModalBody] = useState();
+  const [showStudentModal, setShowStudentModal] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState();
 
   useEffect(() => {
     loadData(userInfo);
@@ -68,11 +71,16 @@ const BusDetailScreen = ({ navigation }) => {
     };
   }, [handleBackButton, navigation]);
 
+  const onPressStudent = (student) => () => {
+    setSelectedStudent(student);
+    setShowStudentModal(true);
+  };
+
   const renderItem = ({ item, index }) => {
     const { firstName = 'ตรีมนต์', lastName = 'รันการ' } = item;
 
     return (
-      <View style={styles.listItem}>
+      <TouchableOpacity style={styles.listItem} onPress={onPressStudent(item)}>
         <Text style={styles.itemText}>{index + 1}.</Text>
         <Image source={busIcon} style={styles.itemAvatar} />
         <View style={styles.studentTextWrapper}>
@@ -91,7 +99,7 @@ const BusDetailScreen = ({ navigation }) => {
             <Text style={styles.buttonText}>{translang.t('UNDEFINED')}</Text>
           </Pressable>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -156,6 +164,7 @@ const BusDetailScreen = ({ navigation }) => {
         image={Images.n_ic_warning}
         message={translang.t('TURN_ON_GPS')}
       />
+      <StudentPopup isVisible={showStudentModal} onClose={() => setShowStudentModal(false)} />
     </SafeAreaView>
   );
 };

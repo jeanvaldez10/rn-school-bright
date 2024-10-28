@@ -3,15 +3,15 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { BackHandler, FlatList, Image, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScaledSheet } from 'react-native-size-matters';
-import busIcon from '../../assets/images/services/m_school_bus.png';
-import BackNavigationBar from '../../components/BackNavigationBar';
-import GradientButton from '../../components/GradientButton';
-import ProgressHud from '../../components/ProgressHud';
-import ClassLevelModal from '../../components/SelectListModal';
-import Color from '../../constants/color';
-import ApiManager from '../../managers/ApiManager';
-import Storage from '../../managers/StorageManager';
-import translang from '../../utils/language.utils';
+import busIcon from '../../../assets/images/services/m_school_bus.png';
+import BackNavigationBar from '../../../components/BackNavigationBar';
+import GradientButton from '../../../components/GradientButton';
+import ProgressHud from '../../../components/ProgressHud';
+import ClassLevelModal from '../../../components/SelectListModal';
+import Color from '../../../constants/color';
+import ApiManager from '../../../managers/ApiManager';
+import Storage from '../../../managers/StorageManager';
+import translang from '../../../utils/language.utils';
 
 const routes = [
   {

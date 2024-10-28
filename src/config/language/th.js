@@ -1249,6 +1249,10 @@ export default {
   ARRIVED: 'ถึงที่หมาย',
   START_JOURNEY: 'เริ่มเดินทาง',
   TURN_ON_GPS: 'กรุณาเปิด gps',
+  SELECT_ITEM: 'เลือกรายการ',
+  CALL_PARENT: 'โทรหาผู้ปกครอง',
+  REPORT_INCIDENT: 'แจ้งเหตุ',
+  INCIDENT_REPORT: 'แจ้งเหตุ',
 
   // End of schoolBus
 };
