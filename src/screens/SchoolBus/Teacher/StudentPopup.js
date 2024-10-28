@@ -1,11 +1,26 @@
 import React from 'react';
-import { Image, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, Image, Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
 import translang from '../../../utils/language.utils';
 import Color from '../../../constants/color';
 import GradientButton from '../../../components/GradientButton';
 import images from '../../../themes/Images';
 
 export default function StudentPopup({ isVisible, onClose }) {
+  const openDialPad = (phoneNumber) => {
+    const url = `tel:${phoneNumber}`;
+    Linking.openURL(url).catch((err) => Alert.alert('Failed to open dial pad', err.message));
+  };
+
+  const onPressCallFather = () => {
+    openDialPad('081-234-5678');
+    onClose();
+  };
+
+  const onPressCallMother = () => {
+    openDialPad('081-234-5678');
+    onClose();
+  };
+
   return (
     <Modal animationType="none" transparent={true} key="modal" visible={isVisible}>
       <View style={styles.centeredView}>
@@ -15,16 +30,20 @@ export default function StudentPopup({ isVisible, onClose }) {
 
           <View style={styles.divider} />
           <View style={styles.wrapper1}>
-            <Pressable style={styles.item1}>
+            <Pressable style={styles.item1} onPress={onPressCallFather}>
               <Image source={images.ic_call_yellow} style={styles.image}></Image>
               <View style={styles.group1}>
-                <Text style={styles.number}>{translang.t('FATHER')}: {'081-234-5678'}</Text>
+                <Text style={styles.number}>
+                  {translang.t('FATHER')}: {'081-234-5678'}
+                </Text>
               </View>
             </Pressable>
-            <Pressable style={styles.item1}>
+            <Pressable style={styles.item1} onPress={onPressCallMother}>
               <Image source={images.ic_call_yellow} style={styles.image}></Image>
               <View style={styles.group1}>
-                <Text style={styles.number}>{translang.t('MOTHER')}: {'081-234-5678'}</Text>
+                <Text style={styles.number}>
+                  {translang.t('MOTHER')}: {'081-234-5678'}
+                </Text>
               </View>
             </Pressable>
           </View>
@@ -102,7 +121,7 @@ const styles = StyleSheet.create({
   item1: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8
+    marginBottom: 8,
   },
   group1: {
     flexDirection: 'row',
