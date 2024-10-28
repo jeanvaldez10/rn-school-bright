@@ -1262,6 +1262,10 @@ export default {
   BUS_CHECK_IN_STATUS_PERSONNAL_LEAVE: 'ลากิจ',
   BUS_CHECK_IN_STATUS_SICK_LEAVE: 'ลาป่วย',
   BUS_CHECK_IN_STATUS_UNSPECIFIED: 'ไม่ระบุ',
+  REPORT_INCIDENT_TO_PARENT: 'แจ้งเหตุรายกลุ่ม',
+
+  REPORT_TYPE_SCHOOL: 'ส่งหาโรงเรียน',
+  REPORT_TYPE_PARENT: 'ส่งหาผู้ปกครอง',
 
   // End of schoolBus
 };

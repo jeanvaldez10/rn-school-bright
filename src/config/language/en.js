@@ -1274,6 +1274,10 @@ export default {
   BUS_CHECK_IN_STATUS_PERSONNAL_LEAVE: 'Personal Leave',
   BUS_CHECK_IN_STATUS_SICK_LEAVE: 'Sick Leave',
   BUS_CHECK_IN_STATUS_UNSPECIFIED: 'Not Specified',
+  REPORT_INCIDENT_TO_PARENT: 'แจ้งเหตุรายกลุ่ม',
+
+  REPORT_TYPE_SCHOOL: 'School',
+  REPORT_TYPE_PARENT: 'Parent',
 
   // End of schoolBus
 };

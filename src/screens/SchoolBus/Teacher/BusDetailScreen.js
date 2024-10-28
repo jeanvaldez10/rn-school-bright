@@ -171,7 +171,11 @@ const BusDetailScreen = ({ navigation }) => {
         image={Images.n_ic_warning}
         message={alertContent}
       />
-      <StudentPopup isVisible={showStudentModal} onClose={() => setShowStudentModal(false)} />
+      <StudentPopup
+        isVisible={showStudentModal}
+        onClose={() => setShowStudentModal(false)}
+        navigation={navigation}
+      />
       <StudentStatusModal
         isVisible={showStudentStatusModal}
         onSelect={onChangeStudentStatus}

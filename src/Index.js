@@ -261,6 +261,7 @@ import VerifyIdentifyIDSuccessScreen from './screens/Auth/VerifyIdentifyIDSucces
 import AuthLoadingScreen from './AuthLoadingScreen';
 import BusListScreen from './screens/SchoolBus/Teacher/BusListScreen';
 import BusDetailScreen from './screens/SchoolBus/Teacher/BusDetailScreen';
+import IncidentReport from './screens/SchoolBus/Teacher/IncidentReport';
 
 const screenWidth = Dimensions.get('window').width;
 const drawerWidth = 0;
@@ -450,6 +451,12 @@ const MainAppRouteConfigs = {
   },
   BusDetailScreen: {
     screen: BusDetailScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  IncidentReport: {
+    screen: IncidentReport,
     navigationOptions: {
       headerShown: false,
     },

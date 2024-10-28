@@ -1,11 +1,11 @@
 import React from 'react';
 import { Alert, Image, Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
-import translang from '../../../utils/language.utils';
-import Color from '../../../constants/color';
 import GradientButton from '../../../components/GradientButton';
+import Color from '../../../constants/color';
 import images from '../../../themes/Images';
+import translang from '../../../utils/language.utils';
 
-export default function StudentPopup({ isVisible, onClose }) {
+export default function StudentPopup({ isVisible, onClose, navigation }) {
   const openDialPad = (phoneNumber) => {
     const url = `tel:${phoneNumber}`;
     Linking.openURL(url).catch((err) => Alert.alert('Failed to open dial pad', err.message));
@@ -18,6 +18,19 @@ export default function StudentPopup({ isVisible, onClose }) {
 
   const onPressCallMother = () => {
     openDialPad('081-234-5678');
+    onClose();
+  };
+
+  const onPressReportIncident = () => {
+    let params = {
+      deliveryFormat: {},
+      recipient: {},
+      selectedIds: [],
+      parent: 'BroadcastGroupSelectClass',
+      userInfo: {},
+    };
+
+    navigation.navigate('IncidentReport', params);
     onClose();
   };
 
@@ -52,7 +65,7 @@ export default function StudentPopup({ isVisible, onClose }) {
 
           <View style={styles.divider} />
           <View style={styles.wrapper1}>
-            <Pressable style={styles.item1}>
+            <Pressable style={styles.item1} onPress={onPressReportIncident}>
               <Image source={images.ic_warning_yellow} style={styles.image}></Image>
               <View style={styles.group1}>
                 <Text style={styles.number}>{translang.t('Incident Report')}</Text>
@@ -121,6 +134,9 @@ const styles = StyleSheet.create({
   item1: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 8,
+  },
+  wrapper1: {
     marginBottom: 8,
   },
   group1: {
