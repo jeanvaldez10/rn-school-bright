@@ -110,7 +110,7 @@ const BusListScreen = ({ navigation }) => {
   const onListSelect = (item) => {
     setShowModal(false);
     navigation.navigate('BusDetailScreen', {
-      route: item.id,
+      route: item?.id,
       bus: selectedBus.id,
       userInfo,
     });
