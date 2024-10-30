@@ -1265,13 +1265,13 @@ export default {
   REPORT_INCIDENT_TO_PARENT: 'ส่งข้อความให้ผู้ปกครอง',
   REPORT_INCIDENT_TO_GROUP: 'แจ้งเหตุรายกลุ่ม',
 
-
   REPORT_TYPE_SCHOOL: 'ส่งหาโรงเรียน',
   REPORT_TYPE_PARENT: 'ส่งหาผู้ปกครอง',
 
   DOT_MENU_QUEUE_MANAGE: 'จัดล่าดับคิว',
   DOT_MENU_BUS_DETAILS: 'รายละเอียดรถ',
   DOT_MENU_GROUP_ICIDENT_REPORT: 'Group Incident Report',
+  DOT_MENU_INCIDENT_REPORTING_REPORT: 'รายงานการแจ้งเหตุ',
 
   VEHICLE_REGISTRATION: 'ทะเบียนรถ',
   BUS_MODEL: 'ยี่ห้อรถ / รุ่นรถ',

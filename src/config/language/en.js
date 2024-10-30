@@ -1274,15 +1274,17 @@ export default {
   BUS_CHECK_IN_STATUS_PERSONNAL_LEAVE: 'Personal Leave',
   BUS_CHECK_IN_STATUS_SICK_LEAVE: 'Sick Leave',
   BUS_CHECK_IN_STATUS_UNSPECIFIED: 'Not Specified',
+
   REPORT_INCIDENT_TO_PARENT: 'Report to parents',
   REPORT_INCIDENT_TO_GROUP: 'Report to group',
 
   REPORT_TYPE_SCHOOL: 'School',
   REPORT_TYPE_PARENT: 'Parent',
+
   DOT_MENU_QUEUE_MANAGE: 'Manage Queue',
   DOT_MENU_BUS_DETAILS: 'Vehicle details',
   DOT_MENU_GROUP_ICIDENT_REPORT: 'Group Incident Report',
-
+  DOT_MENU_INCIDENT_REPORTING_REPORT: "Report of incident",
 
   VEHICLE_REGISTRATION: 'Vehicle Registration',
   BUS_MODEL: 'Car brand/Model',

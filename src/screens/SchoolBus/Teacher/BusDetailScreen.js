@@ -140,10 +140,15 @@ const BusDetailScreen = ({ navigation }) => {
     navigation.navigate('GroupIncidentReport', { params });
   };
 
+  const onReportingReport = () => {
+    navigation.navigate('IncidentReportingReport');
+  };
+
   const moreActions = [
     translang.t('DOT_MENU_QUEUE_MANAGE'),
     translang.t('DOT_MENU_BUS_DETAILS'),
     translang.t('DOT_MENU_GROUP_ICIDENT_REPORT'),
+    translang.t('DOT_MENU_INCIDENT_REPORTING_REPORT'),
   ];
 
   return (
@@ -159,6 +164,7 @@ const BusDetailScreen = ({ navigation }) => {
           if (index === 0) onHandleQueue();
           else if (index === 1) onVehicleDetail();
           else if (index === 2) onGroupIncidentReport();
+          else if (index === 3) onReportingReport();
         }}
       />
       <View style={styles.subContainer}>
