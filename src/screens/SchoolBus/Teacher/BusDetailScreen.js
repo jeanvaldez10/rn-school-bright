@@ -12,6 +12,7 @@ import translang from '../../../utils/language.utils';
 import StudentItem from './StudentItem';
 import StudentPopup from './StudentPopup';
 import StudentStatusModal from './StudentStatusModal';
+import BusPopup from './BusPopups';
 
 const BusDetailScreen = ({ navigation }) => {
   const [userInfo] = useState(navigation.getParam('userInfo'));
@@ -20,12 +21,14 @@ const BusDetailScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [alertContent, setAlertContent] = useState('');
-  const [alertStatus, setAlertStatus] = useState('');
+  const [alertStatus, setAlertStatus] = useState(''); // success or warning
 
   const [showStudentStatusModal, setShowStudentStatusModal] = useState(false);
 
   const [showStudentModal, setShowStudentModal] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState();
+  const [reordering, setReordering] = useState(false);
+  const [showBusModal, setShowBusModal] = useState(false);
 
   useEffect(() => {
     loadData(userInfo);
@@ -101,6 +104,7 @@ const BusDetailScreen = ({ navigation }) => {
         onPressStudent={onPressStudent}
         onPressCheckIn={onPressCheckIn}
         onPressCheckout={onPressCheckout}
+        reordering={reordering}
         item={item}
         index={index}
       />
@@ -114,6 +118,20 @@ const BusDetailScreen = ({ navigation }) => {
 
   const onChangeStudentStatus = () => {};
 
+  const onPressNext = () => {
+    setReordering(false);
+  };
+
+  const onHandleQueue = () => {
+    setReordering(true);
+  };
+
+  const onVehicleDetail = () => {
+    setShowBusModal(true);
+  };
+
+  const moreActions = [translang.t('DOT_MENU_QUEUE_MANAGE'), translang.t('DOT_MENU_BUS_DETAILS')];
+
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
       <BackNavigationBar
@@ -121,6 +139,12 @@ const BusDetailScreen = ({ navigation }) => {
         onMenuTap={back}
         is_journey={true}
         onPressJourney={onPressJourney}
+        is_more="1"
+        actions={moreActions}
+        onMoreTap={(value, index) => {
+          if (index === 0) onHandleQueue();
+          else if (index === 1) onVehicleDetail();
+        }}
       />
       <View style={styles.subContainer}>
         <View style={styles.statusContainer}>
@@ -161,7 +185,7 @@ const BusDetailScreen = ({ navigation }) => {
           buttonStyle={styles.nextButton}
           colors={[Color.green_button_next_color1, Color.green_button_next_color2]}
           isVerticalGradient={true}
-          // _onPress={() => this.__next()}
+          _onPress={onPressNext}
         />
       </View>
       <ProgressHud isVisible={isLoading} />
@@ -176,6 +200,13 @@ const BusDetailScreen = ({ navigation }) => {
         onClose={() => setShowStudentModal(false)}
         navigation={navigation}
       />
+
+      <BusPopup
+        isVisible={showBusModal}
+        onClose={() => setShowBusModal(false)}
+        navigation={navigation}
+      />
+
       <StudentStatusModal
         isVisible={showStudentStatusModal}
         onSelect={onChangeStudentStatus}

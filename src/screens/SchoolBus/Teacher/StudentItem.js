@@ -1,16 +1,27 @@
 import React from 'react';
 import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import busIcon from '../../../assets/images/services/m_school_bus.png';
 import Color from '../../../constants/color';
 import translang from '../../../utils/language.utils';
+import images from '../../../themes/Images';
 
-const StudentItem = ({ item, index, onPressStudent, onPressCheckIn, onPressCheckout }) => {
+const StudentItem = ({
+  item,
+  index,
+  onPressStudent,
+  onPressCheckIn,
+  onPressCheckout,
+  reordering = false,
+}) => {
   const { firstName = 'ตรีมนต์', lastName = 'รันการ', checkInStatus, checkoutStatus } = item;
 
   return (
     <TouchableOpacity style={styles.listItem} onPress={onPressStudent(item)}>
+      {reordering ? (
+        <Image source={images.ic_three_line} style={styles.orderIcon} resizeMode="cover" />
+      ) : null}
+
       <Text style={styles.itemText}>{index + 1}.</Text>
-      <Image source={busIcon} style={styles.itemAvatar} />
+      <Image source={images.women_user} style={styles.itemAvatar} />
       <View style={styles.studentTextWrapper}>
         <Text style={styles.itemText} numberOfLines={1}>
           {firstName}
@@ -43,6 +54,12 @@ const styles = StyleSheet.create({
     height: 46,
     marginHorizontal: 8,
     width: 46,
+  },
+  orderIcon: {
+    width: 16,
+    height: 12,
+    resizeMode: 'cover',
+    marginRight: 4,
   },
   itemText: {
     color: Color.n_default_gray,

@@ -430,7 +430,7 @@ const styles = StyleSheet.create({
   gradientButtonContainer: {
     alignSelf: 'center',
   },
-  gradientButton: { height: 40, paddingHorizontal: 12 },
+  gradientButton: { height: 40, paddingHorizontal: 16 },
   gradientButtonText: { fontSize: 22 },
 });
 

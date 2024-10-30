@@ -1259,7 +1259,7 @@ export default {
   NOT_DEPARTRED: 'Not Departed',
   DEPARTED: 'Departed',
   ARRIVED: 'Arrived',
-  START_JOURNEY: 'Start Journey',
+  START_JOURNEY: 'Start',
   TURN_ON_GPS: 'Please turn on gps',
   SELECT_ITEM: 'Select an item',
   CALL_PARENT: 'Call the parents',
@@ -1278,6 +1278,13 @@ export default {
 
   REPORT_TYPE_SCHOOL: 'School',
   REPORT_TYPE_PARENT: 'Parent',
+  DOT_MENU_QUEUE_MANAGE: 'Manage Queue',
+  DOT_MENU_BUS_DETAILS: 'Vehicle details',
+
+  VEHICLE_REGISTRATION: 'Vehicle Registration',
+  BUS_MODEL: 'Car brand/Model',
+  DRIVER_NAME: "Driver name",
+  DRIVER_PHONE_NUMBER: 'Phone number',
 
   // End of schoolBus
 };

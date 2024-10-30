@@ -1267,5 +1267,13 @@ export default {
   REPORT_TYPE_SCHOOL: 'ส่งหาโรงเรียน',
   REPORT_TYPE_PARENT: 'ส่งหาผู้ปกครอง',
 
+  DOT_MENU_QUEUE_MANAGE: 'จัดล่าดับคิว',
+  DOT_MENU_BUS_DETAILS: 'รายละเอียดรถ',
+
+  VEHICLE_REGISTRATION: 'ทะเบียนรถ',
+  BUS_MODEL: 'ยี่ห้อรถ / รุ่นรถ',
+  DRIVER_NAME: 'เลือกชื่อคนขับ',
+  DRIVER_PHONE_NUMBER: 'เบอร์โทร',
+
   // End of schoolBus
 };

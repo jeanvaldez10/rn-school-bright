@@ -433,6 +433,8 @@ const images = {
   ic_close_cross: require("../assets/images/ic_close_cross.png"),
 
   ic_alert: require("../assets/images/new/alert.png"),
+
+  ic_three_line: require("../assets/images/new/ic_three_line.png")
 };
 
 export default images;

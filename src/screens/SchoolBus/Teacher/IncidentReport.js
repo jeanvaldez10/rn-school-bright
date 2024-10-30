@@ -118,30 +118,6 @@ const IncidentReport = ({ navigation }) => {
     navigation.navigate('BroadcastSubmit', params);
   };
 
-  const onDatePicked = (date) => {
-    if (date === null || date === '') {
-      setShowDatePicker(false);
-      return;
-    }
-
-    const formattedDate = moment(date).format('YYYY-MM-DD');
-    setDeliveryDate(formattedDate);
-    setShowDatePicker(false);
-  };
-
-  const onTimePicked = (date) => {
-    if (date === null) {
-      setShowTimePicker(false);
-
-      return;
-    }
-
-    const formattedTime = moment(date).format('YYYY-MM-DDTHH:mm');
-
-    setDeliveryTime(formattedTime);
-    setShowTimePicker(false);
-  };
-
   const onChooseFile = async () => {
     try {
       const results = await DocumentPicker.pickMultiple({
@@ -292,20 +268,10 @@ const IncidentReport = ({ navigation }) => {
     );
   };
 
-  const onReplySelect = (item, index) => {
-    if (item != null) {
-      setShowReplySelect(false);
-      setReply(item);
-    } else {
-      setShowReplySelect(false);
-    }
-  };
-
   var radio_props = [
     { text: translang.t('REPORT_TYPE_SCHOOL'), key: 1 },
     { text: translang.t('REPORT_TYPE_PARENT'), key: 2 },
   ];
-
 
   // UI Components
   return (
