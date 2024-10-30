@@ -4,15 +4,10 @@ import GradientButton from '../../../components/GradientButton';
 import Color from '../../../constants/color';
 import translang from '../../../utils/language.utils';
 
-export default function BusPopup({ isVisible, onClose, navigation }) {
+export default function BusPopup({ isVisible, onClose }) {
   const openDialPad = (phoneNumber) => {
     const url = `tel:${phoneNumber}`;
     Linking.openURL(url).catch((err) => Alert.alert('Failed to open dial pad', err.message));
-  };
-
-  const onPressCallFather = () => {
-    openDialPad('081-234-5678');
-    onClose();
   };
 
   const onPressCallMother = () => {
@@ -20,18 +15,7 @@ export default function BusPopup({ isVisible, onClose, navigation }) {
     onClose();
   };
 
-  const onPressReportIncident = () => {
-    let params = {
-      deliveryFormat: {},
-      recipient: {},
-      selectedIds: [],
-      parent: 'BroadcastGroupSelectClass',
-      userInfo: {},
-    };
-
-    navigation.navigate('IncidentReport', params);
-    onClose();
-  };
+ 
 
   console;
   return (

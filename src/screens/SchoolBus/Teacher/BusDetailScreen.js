@@ -130,7 +130,21 @@ const BusDetailScreen = ({ navigation }) => {
     setShowBusModal(true);
   };
 
-  const moreActions = [translang.t('DOT_MENU_QUEUE_MANAGE'), translang.t('DOT_MENU_BUS_DETAILS')];
+  const onGroupIncidentReport = () => {
+    let params = {
+      deliveryFormat: {},
+      recipient: {},
+      selectedIds: [],
+      userInfo: {},
+    };
+    navigation.navigate('GroupIncidentReport', { params });
+  };
+
+  const moreActions = [
+    translang.t('DOT_MENU_QUEUE_MANAGE'),
+    translang.t('DOT_MENU_BUS_DETAILS'),
+    translang.t('DOT_MENU_GROUP_ICIDENT_REPORT'),
+  ];
 
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
@@ -144,6 +158,7 @@ const BusDetailScreen = ({ navigation }) => {
         onMoreTap={(value, index) => {
           if (index === 0) onHandleQueue();
           else if (index === 1) onVehicleDetail();
+          else if (index === 2) onGroupIncidentReport();
         }}
       />
       <View style={styles.subContainer}>

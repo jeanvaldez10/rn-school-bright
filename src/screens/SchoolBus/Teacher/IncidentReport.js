@@ -1,47 +1,34 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import {
-  SafeAreaView,
-  Image,
-  View,
-  BackHandler,
-  TouchableOpacity,
-  FlatList,
-  ScrollView,
-  TextInput,
-} from 'react-native';
 import { Text } from 'native-base';
-import { ScaledSheet } from 'react-native-size-matters';
-import NextButton from '../../../components/NextButton';
-import Color from '../../../constants/color';
-import BackNavigationBar from '../../../components/BackNavigationBar';
-import AlertWithImageModal from '../../../components/AlertWithImageModal';
-import Images from '../../../themes/Images';
-import translang, { getCurrentLocale } from '../../../utils/language.utils';
-import CustomTextInput from '../../../components/CustomTextInput';
-import CalendarModal from '../../../components/CalendarModal';
-import TimerPickerModal from '../../../components/TimerPickerModal';
-import CustomRadioButton from '../../../components/CustomRadioButton';
-import moment from 'moment';
+import React, { useCallback, useEffect, useState } from 'react';
+import {
+  BackHandler,
+  FlatList,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  TouchableOpacity,
+  View
+} from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import * as ImagePicker from 'react-native-image-picker';
-import SelectListModal from '../../../components/SelectListModal';
-import ApiManager from '../../../managers/ApiManager';
-import ProgressHud from '../../../components/ProgressHud';
 import ImageView from 'react-native-image-viewing';
+import { ScaledSheet } from 'react-native-size-matters';
+import AlertWithImageModal from '../../../components/AlertWithImageModal';
+import BackNavigationBar from '../../../components/BackNavigationBar';
+import CustomTextInput from '../../../components/CustomTextInput';
+import NextButton from '../../../components/NextButton';
+import ProgressHud from '../../../components/ProgressHud';
+import Color from '../../../constants/color';
+import ApiManager from '../../../managers/ApiManager';
+import { default as Images, default as images } from '../../../themes/Images';
+import translang from '../../../utils/language.utils';
 
 const IncidentReport = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalBody, setModalBody] = useState('');
-  const [showReplySelect, setShowReplySelect] = useState(false);
-  const [deliveryFormat, setDeliveryFormat] = useState({});
   const [recipient, setRecipient] = useState({});
   const [selectedIds, setSelectedIds] = useState([]);
-  const [deliveryTimeType, setDeliveryTimeType] = useState(-1);
-  const [showDatePicker, setShowDatePicker] = useState(false);
-  const [showTimePicker, setShowTimePicker] = useState(false);
-  const [deliveryDate, setDeliveryDate] = useState('');
-  const [deliveryTime, setDeliveryTime] = useState('');
 
   const [topic, setTopic] = useState('');
   const [reply, setReply] = useState('');
@@ -78,33 +65,13 @@ const IncidentReport = ({ navigation }) => {
       return;
     }
 
-    if (deliveryTimeType == -1) {
-      return;
-    }
-
-    if (deliveryTimeType === 2) {
-      if (deliveryDate === '') {
-        setShowModal(true);
-        setModalBody(translang.t('SPECIFY_DATE'));
-        return;
-      }
-      if (deliveryTime === '') {
-        setShowModal(true);
-        setModalBody(translang.t('SPECIFY_TIME'));
-        return;
-      }
-    }
     if (description === '') {
       setShowModal(true);
       setModalBody(translang.t('INPUT_DESCRIPTION'));
       return;
     }
     const params = {
-      deliveryFormat: deliveryFormat,
       recipient: recipient,
-      deliveryTimeType: deliveryTimeType - 1,
-      deliveryDate: deliveryDate,
-      deliveryTime: deliveryTime,
       topic: topic,
       reply: reply,
       description: description,
@@ -268,11 +235,6 @@ const IncidentReport = ({ navigation }) => {
     );
   };
 
-  var radio_props = [
-    { text: translang.t('REPORT_TYPE_SCHOOL'), key: 1 },
-    { text: translang.t('REPORT_TYPE_PARENT'), key: 2 },
-  ];
-
   // UI Components
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
@@ -280,6 +242,14 @@ const IncidentReport = ({ navigation }) => {
       <ScrollView style={styles.list}>
         <View style={{ ...styles.listItem, marginTop: 20, marginBottom: 10 }}>
           <View style={{ ...styles.listItem, flexDirection: 'column', alignItems: 'flex-start' }}>
+            <TouchableOpacity style={styles.studentWrapper}>
+              <Image source={images.women_user} style={styles.itemAvatar} />
+              <View style={styles.studentTextWrapper}>
+                <Text style={styles.studentText} numberOfLines={1}>
+                  ตรีมนต์ รันการ
+                </Text>
+              </View>
+            </TouchableOpacity>
             <Text style={styles.itemTitle}>{translang.t('REPORT_INCIDENT_TO_PARENT')}</Text>
 
             <CustomTextInput
@@ -295,19 +265,6 @@ const IncidentReport = ({ navigation }) => {
               onChangeText={(text) => setTopic(text)}
             />
           </View>
-
-          <Text style={styles.itemTitle}>{translang.t('SEND_TYPE')}</Text>
-          <CustomRadioButton
-            PROP={radio_props}
-            isVertically={true}
-            radioColor={Color.n_button_gradient_green_start}
-            radioSize={30}
-            itemTextStyle={{ fontSize: 24 }}
-            selVal={deliveryTimeType}
-            onPress={(value) => {
-              setDeliveryTimeType(value);
-            }}
-          />
         </View>
 
         <View style={{ ...styles.listItem, flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -498,6 +455,25 @@ const styles = ScaledSheet.create({
     minHeight: 200,
     paddingVertical: 8,
     paddingHorizontal: 8,
+  },
+  studentWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  studentTextWrapper: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  studentText: {
+    color: Color.n_default_gray,
+    fontSize: 20,
+  },
+  itemAvatar: {
+    borderRadius: 30,
+    height: 46,
+    marginHorizontal: 8,
+    width: 46,
   },
 });
 
