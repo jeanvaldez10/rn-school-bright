@@ -13,6 +13,7 @@ import ApiManager from '../../../managers/ApiManager';
 import Storage from '../../../managers/StorageManager';
 import translang from '../../../utils/language.utils';
 import ReportPopup from './ReportPopup';
+import images from '../../../themes/Images';
 
 const routes = [
   {
@@ -109,12 +110,16 @@ const IncidentReportingReport = ({ navigation }) => {
 
     return (
       <TouchableOpacity style={styles.menuEachStyle} activeOpacity={0.5} onPress={onClickItem}>
-        <View style={styles.group1}>
-          <Image source={busIcon} style={styles.image}></Image>
-          <View style={styles.group2}>
-            <Text style={styles.topText}>{name || 'อบ 1212 กรุงเทพมหานคร'}</Text>
-            <Text style={styles.topText}>{driver || 'Toyota Commuter'}</Text>
+        <Image source={images.ic_school_bus_1} style={styles.image}></Image>
+        <View style={styles.group2}>
+          <View style={styles.group3}>
+            <Text style={styles.text1}>6.00</Text>
+            <Text style={styles.text1}>1/9/2567</Text>
           </View>
+          <Text style={[styles.topText, { color: Color.n_default_orange }]}>
+            {name || 'อบ 1212 กรุงเทพมหานคร'}
+          </Text>
+          <Text style={styles.topText}>{driver || 'Toyota Commuter'}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -172,7 +177,7 @@ const styles = ScaledSheet.create({
   },
   menuEachStyle: {
     borderRadius: 15,
-    backgroundColor: 'white',
+    backgroundColor: Color.n_default_orange_light,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -183,17 +188,29 @@ const styles = ScaledSheet.create({
     elevation: 2,
     marginBottom: 20,
     padding: 15,
-  },
-  group1: {
+
     flexDirection: 'row',
+    alignItems: 'center'
   },
   group2: {
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
   },
+  group3: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  text1: {
+    fontSize: 14,
+    color: Color.light_gray,
+    textAlign: 'left',
+    marginRight: 10,
+    marginTop: 4,
+  },
   image: {
-    width: 46,
-    height: 46,
+    width: 54,
+    height: 54,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
@@ -202,9 +219,7 @@ const styles = ScaledSheet.create({
     fontSize: 14,
     color: Color.n_default_gray,
     textAlign: 'left',
-    marginRight: 10,
   },
-
   noSupportWrapper: {
     flex: 1,
     flexDirection: 'row',

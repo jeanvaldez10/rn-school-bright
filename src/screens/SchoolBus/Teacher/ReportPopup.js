@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react';
-import { Alert, Image, Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Alert, Linking, Modal, StyleSheet, Text, View } from 'react-native';
 import GradientButton from '../../../components/GradientButton';
 import Color from '../../../constants/color';
 import translang from '../../../utils/language.utils';
@@ -20,27 +20,25 @@ export default function ReportPopup({ isVisible, onClose }) {
     <Modal animationType="none" transparent={true} key="modal" visible={isVisible}>
       <View style={styles.centeredView}>
         <View style={styles.dialogStyle}>
-          <Text style={styles.header}>{translang.t('DOT_MENU_BUS_DETAILS')}</Text>
-
-          <View style={styles.divider} />
           <View style={styles.wrapper1}>
             <View style={styles.item1}>
-              <Text style={styles.subTitle}>{translang.t('VEHICLE_REGISTRATION')} : </Text>
-              <Text style={styles.details}>อบ 1212 กรุงเทพมหานคร ddddddddddd</Text>
+              <Text style={styles.subTitle}>ผู้ส่ง /103146 : </Text>
+              <Text style={styles.details}>อบ 1212 กรุงเทพมหานคร</Text>
             </View>
             <View style={styles.item1} onPress={onPressCallMother}>
-              <Text style={styles.subTitle}>{translang.t('BUS_MODEL')} : </Text>
+              <Text style={styles.subTitle}>ส่งถึง /1201031 : </Text>
               <Text style={styles.details}>Toyota Commuter</Text>
             </View>
 
             <View style={styles.item1} onPress={onPressCallMother}>
-              <Text style={styles.subTitle}>{translang.t('DRIVER_NAME')} : </Text>
-              <Text style={styles.details}>ชื่อคนขับ</Text>
+              <Text style={styles.subTitle}>1/9/2567 : </Text>
             </View>
-            <View style={styles.item1} onPress={onPressCallMother}>
-              <Text style={styles.subTitle}>{translang.t('DRIVER_PHONE_NUMBER')} : </Text>
-              <Text style={styles.details}>081-111-1111</Text>
-            </View>
+          </View>
+
+          <View style={styles.divider} />
+          <View style={styles.wrapper1}>
+            <Text style={styles.header}>{translang.t('INCIDENT_REPORT')}</Text>
+            <Text style={styles.text1}>รถยนต์มีปัญหา ทางโรงเรียนกำลังดำเนิน การแก้ไขอยู่นะคะ</Text>
           </View>
 
           <GradientButton
@@ -82,20 +80,25 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   header: {
-    color: Color.n_default_orange,
+    color: Color.text_black,
     fontSize: 24,
-    marginBottom: 8,
     fontWeight: 'bold',
-    alignSelf: 'center',
   },
   subTitle: {
     fontSize: 22,
-    color: '#707070',
+    color: Color.text_black,
+    fontWeight: 'bold',
   },
   details: {
     flex: 1,
     fontSize: 22,
-    color: '#45494D',
+    color: Color.text_black,
+    fontWeight: 'bold',
+  },
+  text1: {
+    marginTop: 2,
+    fontSize: 24,
+    color: '#707070',
   },
   divider: {
     width: '100%',
@@ -105,11 +108,10 @@ const styles = StyleSheet.create({
   },
   item1: {
     flexDirection: 'row',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   wrapper1: {
     width: '100%',
-    alignItems: 'center',
     marginBottom: 8,
   },
   buttonContainer: {

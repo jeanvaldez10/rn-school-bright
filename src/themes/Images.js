@@ -434,7 +434,9 @@ const images = {
 
   ic_alert: require("../assets/images/new/alert.png"),
 
-  ic_three_line: require("../assets/images/new/ic_three_line.png")
+  ic_three_line: require("../assets/images/new/ic_three_line.png"),
+
+  ic_school_bus_1: require("../assets/images/new/ic_school_bus_1.png"),
 };
 
 export default images;
