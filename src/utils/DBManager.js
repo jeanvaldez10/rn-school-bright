@@ -134,6 +134,7 @@ export const insertUser = async (userID, loginid, password, schoolID, type, valu
       '${mainUserID}',
       "${first_name_en}",
       "${last_name_en}");`;
+
     return db.executeSql(query);
 }
 
@@ -193,19 +194,42 @@ export const updatePassword = async (userId, password) => {
 
 export const updateUserInfo = async (userId, userInfo) => {
     const db = await getDBConnection();
-    const query = `UPDATE ${TABLE_USERNAME}  SET
-        ${COL_SCHOOLID} = '${userInfo.SchoolId}', 
-        ${COL_TYPE} = '${userInfo.Type}',
-        ${COL_VALUE} = '${userInfo.Value}',
-        ${COL_NAME_FIRST} = '${userInfo.name}',
-        ${COL_NAME_LAST} = '${userInfo.lastname}',
-        ${COL_SEX} = '${userInfo.sex}',
-        ${COL_TOKEN} = '${userInfo.token}',
-        ${COL_IMAGE_USER} = '${userInfo.image}',
-        ${COL_NAME_FIRST_EN} = '${userInfo.nameEN}',
-        ${COL_NAME_LAST_EN} = '${userInfo.lastnameEN}' WHERE ${COL_USERID} = '${userId}';`
+    const keyValues = [];
 
-    return db.executeSql(query);
+    if (userInfo.SchoolID) {
+        keyValues.push(`${COL_SCHOOLID} = '${userInfo.SchoolID}'`);
+    }
+    if (userInfo.cType) {
+        keyValues.push(`${COL_TYPE} = '${userInfo.cType}'`);
+    }
+    if (userInfo.sName) {
+        keyValues.push(`${COL_NAME_FIRST} = '${userInfo.sName}'`);
+    }
+    if (userInfo.sLastname) {
+        keyValues.push(`${COL_NAME_LAST} = '${userInfo.sLastname}'`);
+    }
+    if (userInfo.cSex) {
+        keyValues.push(`${COL_SEX} = '${userInfo.cSex}'`);
+    }
+    if (userInfo.token) {
+        keyValues.push(`${COL_TOKEN} = '${userInfo.token}'`);
+    }
+    if (userInfo.image) {
+        keyValues.push(`${COL_IMAGE_USER} = '${userInfo.image}'`);
+    }
+    if (userInfo.NameEn) {
+        keyValues.push(`${COL_NAME_FIRST_EN} = '${userInfo.NameEn}'`);
+    }
+    if (userInfo.LastNameEN) {
+        keyValues.push(`${COL_NAME_LAST_EN} = '${userInfo.LastNameEN}'`);
+    }
+
+    if (keyValues.length > 0) {
+        const query = `UPDATE ${TABLE_USERNAME}  SET ${keyValues.join(', ')} WHERE ${COL_USERID} = '${userId}';`
+        return db.executeSql(query);
+    }
+
+    return undefined;
 }
 
 export const removeAllUser = async () => {

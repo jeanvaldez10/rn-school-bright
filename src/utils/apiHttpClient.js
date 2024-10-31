@@ -35,6 +35,8 @@ const addAuthToken = async (config) => {
       config.headers[`JabjaiKey-${tokenInfo.SchoolId}-${tokenInfo.ID}`] = tokenInfo.token;
     }
 
+    console.log("Http Header: ", config.headers);
+
     const apiTypeRegex = /(Payment|Schoolbright)\s+API/;
     const urlMatch = config.url.match(/\/device\/system\/apiurls\?applicationtype=(.*)/);
     if (urlMatch && apiTypeRegex.test(urlMatch[1])) {

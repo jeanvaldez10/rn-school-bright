@@ -31,6 +31,7 @@ import {
   getDBConnection,
   checkExist,
   insertUser,
+  getAllUserInfo,
 } from '../../utils/DBManager';
 import Constant from '../../constants/constants';
 import RNExitApp from 'react-native-exit-app';
@@ -131,50 +132,35 @@ class SettingAddAccount extends ValidationComponent {
           const msg = translang.t('INCORRECT_USERNAME_PWD') + '\n' + translang.t('CONTACT_YOUER_SCHOOL_ADMIN');
           this.setState({showModal: true, modalBody: msg});
           return Promise.reject(msg);
-        } else {
-          const user = await StorageManager.getTempUser();
-          const userMain = await StorageManager.getUser();
-          const userMainInfo = await StorageManager.getUserInfo();
-          await StorageManager.setPrevUser(userMain);
-          await StorageManager.setPrevUserInfo(userMainInfo);
-          this.props.setTabIndex(0);
+        }
 
-          const isExist = await checkExist(user.ID);
-          if (!isExist) {
-            const resInsert = await insertUser(user.ID, userName, password, user.SchoolId, user.Type, user.Value,
-                user.name, user.lastname, user.sex, user.token, user.image, "", "", userMain.ID, user.nameEN, user.lastnameEN);
-            if (resInsert) {
-              const db = await getDBConnection();
-              try {
-                Constant.AddProfiles = [];
-                const query = `SELECT * FROM ${TABLE_USERNAME} GROUP BY ${COL_USERID}`;
-                db.transaction(txn => {
-                  txn.executeSql(query, [],
-                    (txn, results) => {
-                      if (results.rows.length > 0) {
-                        for (let i = 0; i < results.rows.length; ++i) {
-                          Constant.AddProfiles.push(results.rows.item(i));
-                        }
-                        // this.back();
-                        this.gotoAddedProfile(userName, password, selectedSchool.SchoolID, imei, publicIP);
-                      }
-                    },
-                    error => {
-                      console.log("error Table", error.message);
-                    })
-                }, []);
+        const user = await StorageManager.getTempUser();
+        const userMain = await StorageManager.getUser();
+        const userMainInfo = await StorageManager.getUserInfo();
+        await StorageManager.setPrevUser(userMain);
+        await StorageManager.setPrevUserInfo(userMainInfo);
+        this.props.setTabIndex(0);
 
-              } catch (error) {
-                console.log(error);
-                throw Error('Failed to get getAllUserInfo');
-              }
-            } else {
-              console.log("Add Failed");
+        const isExist = await checkExist(user.ID);
+        if (!isExist) {
+          const resInsert = await insertUser(user.ID, userName, password, user.SchoolId, user.Type, user.Value,
+              user.name, user.lastname, user.sex, user.token, user.image, "", "", userMain.ID, user.nameEN, user.lastnameEN);
+          if (resInsert) {
+            const db = await getDBConnection();
+            try {
+              Constant.AddProfiles = [];
+              await getAllUserInfo();
+              this.gotoAddedProfile(userName, password, selectedSchool.SchoolID, imei, publicIP);
+            } catch (error) {
+              console.log(error);
+              throw Error('Failed to get getAllUserInfo');
             }
           } else {
-            const msg = translang.t('DUBPLICATE_USR');
-            this.setState({showModal: true, modalBody: msg});
+            console.log("Add Failed");
           }
+        } else {
+          const msg = translang.t('DUBPLICATE_USR');
+          this.setState({showModal: true, modalBody: msg});
         }
       })
       .then(() => {
