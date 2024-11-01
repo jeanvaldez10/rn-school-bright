@@ -1272,11 +1272,15 @@ export default {
   DOT_MENU_BUS_DETAILS: 'รายละเอียดรถ',
   DOT_MENU_GROUP_ICIDENT_REPORT: 'Group Incident Report',
   DOT_MENU_INCIDENT_REPORTING_REPORT: 'รายงานการแจ้งเหตุ',
+  DOT_MENU_PASSENGER_REPORT: 'หน้ารายงานขึ้น-ลงรถรับส่ง',
 
   VEHICLE_REGISTRATION: 'ทะเบียนรถ',
   BUS_MODEL: 'ยี่ห้อรถ / รุ่นรถ',
   DRIVER_NAME: 'เลือกชื่อคนขับ',
   DRIVER_PHONE_NUMBER: 'เบอร์โทร',
+
+
+  PASSENGER_REPORT: 'หน้ารายงานขึ้น-ลงรถรับส่ง',
 
   // End of schoolBus
 };

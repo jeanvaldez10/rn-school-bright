@@ -1284,12 +1284,15 @@ export default {
   DOT_MENU_QUEUE_MANAGE: 'Manage Queue',
   DOT_MENU_BUS_DETAILS: 'Vehicle details',
   DOT_MENU_GROUP_ICIDENT_REPORT: 'Group Incident Report',
-  DOT_MENU_INCIDENT_REPORTING_REPORT: "Report of incident",
+  DOT_MENU_INCIDENT_REPORTING_REPORT: 'Report of incident',
+  DOT_MENU_PASSENGER_REPORT: 'Passenger Boarding and Alighting Report',
 
   VEHICLE_REGISTRATION: 'Vehicle Registration',
   BUS_MODEL: 'Car brand/Model',
-  DRIVER_NAME: "Driver name",
+  DRIVER_NAME: 'Driver name',
   DRIVER_PHONE_NUMBER: 'Phone number',
+
+  PASSENGER_REPORT: 'หน้ารายงานขึ้น-ลงรถรับส่ง',
 
   // End of schoolBus
 };

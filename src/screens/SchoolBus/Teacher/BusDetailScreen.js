@@ -144,11 +144,16 @@ const BusDetailScreen = ({ navigation }) => {
     navigation.navigate('IncidentReportingReport');
   };
 
+  const onPassengerReport = () => {
+    navigation.navigate('TeacherBusReport');
+  };
+
   const moreActions = [
     translang.t('DOT_MENU_QUEUE_MANAGE'),
     translang.t('DOT_MENU_BUS_DETAILS'),
     translang.t('DOT_MENU_GROUP_ICIDENT_REPORT'),
     translang.t('DOT_MENU_INCIDENT_REPORTING_REPORT'),
+    translang.t('DOT_MENU_PASSENGER_REPORT'),
   ];
 
   return (
@@ -165,6 +170,7 @@ const BusDetailScreen = ({ navigation }) => {
           else if (index === 1) onVehicleDetail();
           else if (index === 2) onGroupIncidentReport();
           else if (index === 3) onReportingReport();
+          else if (index === 4) onPassengerReport();
         }}
       />
       <View style={styles.subContainer}>
