@@ -40,7 +40,9 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Need camera permission for scanning Student ID qrcode</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs to get your location...</string>
+	<string>Location access is needed to show nearby buses while you use the app.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Location access is needed to track buses at all times.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Need Photo Library additions permission to save images.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
