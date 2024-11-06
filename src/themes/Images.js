@@ -438,6 +438,7 @@ const images = {
 
   ic_school_bus_1: require("../assets/images/new/ic_school_bus_1.png"),
   ic_school_bus_blue: require("../assets/images/new/ic_school_bus_blue.png"),
+  ic_school_bus_green: require("../assets/images/new/ic_school_bus_green.png"),
 };
 
 export default images;

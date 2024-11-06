@@ -13,7 +13,6 @@ import ApiManager from '../../../../managers/ApiManager';
 import Storage from '../../../../managers/StorageManager';
 import translang from '../../../../utils/language.utils';
 import MorningAlightingReportTab from './MorningAlightingReportTab';
-import EveningAlightingReportTab from './EveningAlightingReportTab';
 
 export default class TeacherAlightingReport extends React.Component {
   constructor(props) {
@@ -47,11 +46,11 @@ export default class TeacherAlightingReport extends React.Component {
     const routes = [
       {
         key: 'morning',
-        title: translang.t('BUS_MORNING_SESSION').toUpperCase(),
+        title: translang.t('BUS_MORNING_SESSION'),
       },
       {
         key: 'evening',
-        title: translang.t('BUS_EVENING_SESSION').toUpperCase(),
+        title: translang.t('BUS_EVENING_SESSION'),
       },
     ];
 
@@ -148,7 +147,7 @@ export default class TeacherAlightingReport extends React.Component {
   );
 
   renderEveningTab = () => (
-    <EveningAlightingReportTab
+    <MorningAlightingReportTab
       navigation={this.props.navigation}
       reportList={this.state.personalReportList}
       date={this.state.selectedDate}
