@@ -145,7 +145,7 @@ const BusDetailScreen = ({ navigation }) => {
   };
 
   const onPassengerReport = () => {
-    navigation.navigate('TeacherBusReport');
+    navigation.navigate('TeacherBusAlightingReport');
   };
 
   const moreActions = [

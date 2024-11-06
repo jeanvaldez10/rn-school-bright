@@ -74,6 +74,8 @@ export default class ReportForTeacherNoTabScreen extends React.Component {
       this.props.navigation.navigate('ReportAttendance', {parent: 'ReportForTeacher'});
     else if (key == 'student_leave')
       this.props.navigation.navigate('ReportTeacherStudentLeave', {parent: 'ReportForTeacher'});
+    else if(key === 'alighting_report')
+      this.props.navigation.navigate('TeacherStudentAlightingReport', {parent: 'ReportForTeacher'});
     else if (key == 'student_behavior')
       this.props.navigation.navigate('ReportBehavior', {parent: 'ReportForTeacher'});
     else if (key == 'excute_attendance')
@@ -222,6 +224,14 @@ export default class ReportForTeacherNoTabScreen extends React.Component {
                   topTextStyle={styles.menuTitle}
                   icon_mark={Images.n_ic_report_behavior}
                   label={translang.t('REPORT_behaviorscore')}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.menuEachStyle} activeOpacity={0.5} onPress={() => { this.onClickItem('alighting_report') }} >
+                <ReportIconInfoItem
+                  imageSize={50}
+                  topTextStyle={styles.menuTitle}
+                  icon_mark={Images.ic_school_bus_blue}
+                  label={translang.t('BUS_ALIGHTING_REPORT')}
                 />
               </TouchableOpacity>
             </View>}

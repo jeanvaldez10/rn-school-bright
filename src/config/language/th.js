@@ -1279,8 +1279,11 @@ export default {
   DRIVER_NAME: 'เลือกชื่อคนขับ',
   DRIVER_PHONE_NUMBER: 'เบอร์โทร',
 
-
   PASSENGER_REPORT: 'หน้ารายงานขึ้น-ลงรถรับส่ง',
+  BUS_ALIGHTING_REPORT: 'รายงานขึ้น-ลงรถรับส่ง',
+
+  BUS_MORNING_SESSION: 'รอบเช้า',
+  BUS_EVENING_SESSION: 'รอบบ่าย',
 
   // End of schoolBus
 };

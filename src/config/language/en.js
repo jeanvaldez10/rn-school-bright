@@ -1293,6 +1293,9 @@ export default {
   DRIVER_PHONE_NUMBER: 'Phone number',
 
   PASSENGER_REPORT: 'หน้ารายงานขึ้น-ลงรถรับส่ง',
+  BUS_ALIGHTING_REPORT: 'รายงานขึ้น-ลงรถรับส่ง',
 
+  BUS_MORNING_SESSION: 'Morning Session',
+  BUS_EVENING_SESSION: 'Evening Session',
   // End of schoolBus
 };
