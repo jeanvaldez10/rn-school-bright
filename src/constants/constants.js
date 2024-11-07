@@ -418,8 +418,23 @@ export const defaultAllMenuStudent = {
       image: Images.m_school_bus,
       quick_menu: false,
       link: 'BusListScreen',
-      func: 'link',
+      func: 'modal',
+      subMenu: [
+        {
+          key: 'BUS_MORNING_SESSION',
+          image: Images.m_leave_half_day,
+          link: 'MorningBusList',
+          func: 'gotoPageAfterLeavePermission',
+        },
+        {
+          key: 'BUS_MORNING_SESSION',
+          image: Images.m_leave_half_day,
+          link: 'EveningBusList',
+          func: 'gotoPageAfterLeavePermission',
+        },
+      ],
     },
+
     {
       key: 'message',
       image: Images.m_message,

@@ -38,6 +38,8 @@ const BusListScreen = ({ navigation }) => {
     loadData(userInfo);
   }, [loadData, userInfo]);
 
+  
+
   useEffect(() => {
     loadUserInfo();
   }, [loadUserInfo]);

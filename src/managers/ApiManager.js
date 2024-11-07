@@ -2754,6 +2754,17 @@ const getLeaveInfos = (userId) => {
     return promise
 }
 
+const getBusList = (schoolId) => {
+    const params = {};
+    const promise = shopHttpClient.get(apiUrls.getShopList(schoolId), params)
+        .then(response => response.data)
+        .then((data) => {
+            const array = Object.values(data);
+            return Promise.resolve(array);
+        });
+    return promise
+}
+
 export default {
     getVerification,
     getLogStatus,
@@ -2959,7 +2970,6 @@ export default {
     removeNotification,
     getAllClass,
     checkStudentIsPrimary,
-
     checkVerify,
     requestOTP,
     recoveryRequestOTP,
@@ -2973,4 +2983,8 @@ export default {
     getStudentLeaveType,
     getTeacherLeaveType,
     getLeaveInfos,
+
+    // start school bus
+    getBusList
+    // end schcool bus
 };

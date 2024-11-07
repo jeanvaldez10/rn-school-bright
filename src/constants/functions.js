@@ -108,7 +108,7 @@ export const navigateMenu = async (item, _this) => {
 }
 
 export const createDefaultQuickMenu = (allMenu, isStudent, _this) => {
-  const quickMenuStudentKeys = ['leave', 'TimetableStudent', 'topUp', 'tuition', 'academicResult', 'pickUp'];
+  const quickMenuStudentKeys = ['leave', 'schoolBus', 'TimetableStudent', 'topUp', 'tuition', 'academicResult', 'pickUp'];
   const quickMenuTeacherKeys = ['checkInAttendance', 'schoolBus', 'leave',
     'discipline', 'TimetableTeacher', 'broadcast', 'topUp', 'shop'];
 

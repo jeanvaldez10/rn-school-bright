@@ -454,6 +454,12 @@ const MainAppRouteConfigs = {
       headerShown: false,
     },
   },
+  MorningBusList: {
+    screen: BusListScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
   BusDetailScreen: {
     screen: BusDetailScreen,
     navigationOptions: {
