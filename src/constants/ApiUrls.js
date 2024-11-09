@@ -1012,6 +1012,38 @@ class ApiUrls {
   getLeaveInfo(UserID) {
     return `/studentLeave/GetLeaveInfo?UserId=${UserID}`;
   }
+
+  getBusList() {
+    return '/GetBuses';
+  }
+
+  getTodayBusSchedule() {
+    return `/GetBusTodaySchedules`;
+  }
+
+  getBusScheduleDetail() {
+    return  '/GetScheduleDetail';
+  }
+
+  statBusTravel() {
+    return '/StartTravel';
+  }
+
+  cacelBusTravel() {
+    return '/CancelTravel';
+  }
+
+  completeBusTravel() {
+    return '/CompleteTravel';
+  }
+
+  checkInBus() {
+    return '/CheckInStudent';
+  }
+
+  checkOutBus() {
+    return '/CheckOutStudent';
+  }
 }
 
 
