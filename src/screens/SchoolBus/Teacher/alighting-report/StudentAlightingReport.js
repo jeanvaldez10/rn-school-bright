@@ -25,7 +25,7 @@ const routes = [
   },
 ];
 
-const BusListScreen = ({ navigation }) => {
+const StudentAlightingReport = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [items, setItems] = useState(routes);
 
@@ -286,4 +286,4 @@ const styles = ScaledSheet.create({
   },
 });
 
-export default BusListScreen;
+export default StudentAlightingReport;

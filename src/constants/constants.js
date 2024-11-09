@@ -423,13 +423,13 @@ export const defaultAllMenuStudent = {
         {
           key: 'BUS_MORNING_SESSION',
           image: Images.m_leave_half_day,
-          link: 'MorningBusList',
+          link: 'MorningBusDetails',
           func: 'gotoPageAfterLeavePermission',
         },
         {
           key: 'BUS_MORNING_SESSION',
           image: Images.m_leave_half_day,
-          link: 'EveningBusList',
+          link: 'MorningBusDetails',
           func: 'gotoPageAfterLeavePermission',
         },
       ],

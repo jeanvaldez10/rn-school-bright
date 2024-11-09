@@ -267,6 +267,7 @@ import IncidentReportingReport from './screens/SchoolBus/Teacher/IncidentReporti
 import TeacherBusAlightingReport from './screens/SchoolBus/Teacher/TeacherBusAlightingReport';
 import TeacherStudentAlightingReport from './screens/SchoolBus/Teacher/alighting-report/TeacherStudentAlightingReport';
 import StudentAlightingReport from './screens/SchoolBus/Teacher/alighting-report/StudentAlightingReport';
+import MorningBusDetails from './screens/SchoolBus/Student/MorningBusDetails';
 
 const screenWidth = Dimensions.get('window').width;
 const drawerWidth = 0;
@@ -454,12 +455,6 @@ const MainAppRouteConfigs = {
       headerShown: false,
     },
   },
-  MorningBusList: {
-    screen: BusListScreen,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
   BusDetailScreen: {
     screen: BusDetailScreen,
     navigationOptions: {
@@ -498,6 +493,12 @@ const MainAppRouteConfigs = {
   },
   StudentAlightingReport: {
     screen: StudentAlightingReport,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  MorningBusDetails: {
+    screen: MorningBusDetails,
     navigationOptions: {
       headerShown: false,
     },
