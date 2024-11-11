@@ -1296,6 +1296,11 @@ export default {
 
   BUS_MORNING_SESSION: 'รอบเช้า',
   BUS_EVENING_SESSION: 'รอบบ่าย',
+  DRIVER_NUMBER: 'เบอร์โทรคนขับ',
+  VEHICLE_ROUTE: 'รอบรถ',
+  DEPATURE_TIME: 'เวลาออกเดินทาง',
+  QUEUE_ORDER: 'ลำดับคิว',
+  BUS_TEACHER_STAFF: 'ครู/บุคลากร',
 
   // End of schoolBus
 };

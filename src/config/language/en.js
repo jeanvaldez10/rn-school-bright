@@ -1310,5 +1310,12 @@ export default {
 
   BUS_MORNING_SESSION: 'Morning Session',
   BUS_EVENING_SESSION: 'Evening Session',
+
+  DRIVER_NUMBER: 'Driver Number',
+  VEHICLE_ROUTE: 'Vehicle Route',
+  DEPATURE_TIME: 'Departured time',
+  QUEUE_ORDER: 'Queue Order',
+  BUS_TEACHER_STAFF: 'Teacher/Staff',
+
   // End of schoolBus
 };
