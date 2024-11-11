@@ -135,14 +135,14 @@ const BackNavigationBar = ({ title, ...props }) => {
 
   const is_skip = props.is_skip;
   const onPressSkip = props.onPressSkip;
-  const onPressJourney = props.onPressJourney;
 
   const isMessage = props.isMessage;
   const messageUnreadCnt = props.msgCount ? props.msgCount : 0;
 
   const is_info = props.is_info;
 
-  const is_journey = props.is_journey;
+  const is_travel = props.is_travel;
+  const TravelButton = props.TravelButton;
 
   const backHidden = props.backHidden;
 
@@ -296,16 +296,8 @@ const BackNavigationBar = ({ title, ...props }) => {
             </TouchableOpacity>
           )}
 
-          {is_journey && (
-            <GradientButton
-              containerStyle={styles.gradientButtonContainer}
-              buttonStyle={styles.gradientButton}
-              textStyle={styles.gradientButtonText}
-              colors={[Color.green_button_color]}
-              isVerticalGradient={true}
-              label={translang.t('START_JOURNEY')}
-              _onPress={onPressJourney}
-            />
+          {is_travel && (
+            <TravelButton />
           )}
 
           {is_more && (
@@ -427,11 +419,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'grey',
   },
-  gradientButtonContainer: {
-    alignSelf: 'center',
-  },
-  gradientButton: { height: 40, paddingHorizontal: 16 },
-  gradientButtonText: { fontSize: 22 },
+  
 });
 
 export default BackNavigationBar;

@@ -1260,7 +1260,17 @@ export default {
   DEPARTED: 'Departed',
   ARRIVED: 'Arrived',
   START_JOURNEY: 'Start',
+  COMPLETE_TRAVEL: 'Complete',
+  ARRIVED_TRAVEL: 'Arrived',
+  CANCEL_TRAVEL: 'Cancel',
+  CANCELLED_TRAVEL: 'Cancelled',
+
   TURN_ON_GPS: 'Please turn on gps',
+  BUS_SUCCESSFUL_DEPART:  'Successfully departed!',
+  BUS_SUCCESSFUL_CANCEL: 'successfully cancelled!',
+  BUS_SUCCESSFUL_ARRIVE: 'The bus is arrived!',
+  BUS_CHECK_STUDENT_STATUS: 'Please check all the students first.',
+
   SELECT_ITEM: 'Select an item',
   CALL_PARENT: 'Call the parents',
   REPORT_INCIDENT: 'Report incident',
@@ -1269,6 +1279,7 @@ export default {
     'Please check the students in queue order. If you need to check this student, you can reorder the queue.',
 
   BUS_CHECK_IN_STATUS_CHECKED_IN: 'Checked In',
+  BUS_CHECK_IN_STATUS_CHECKED_OUT: 'Checked Out',
   BUS_CHECK_IN_STATUS_CHECKED_IN_LATE: 'Checked In Late',
   BUS_CHECK_IN_STATUS_NOT_BOARD: 'Did Not Board',
   BUS_CHECK_IN_STATUS_PERSONNAL_LEAVE: 'Personal Leave',

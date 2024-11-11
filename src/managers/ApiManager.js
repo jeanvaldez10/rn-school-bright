@@ -2775,6 +2775,76 @@ const getBusSchedule = (nBusID) => {
       });
 };
 
+const getBusScheduleDetail = (nScheduleID) => {
+    return schoolBusHttpClient.post(apiUrls.getBusScheduleDetail(), {
+        nScheduleID,
+    })
+        .then(response => response.data)
+        .catch(error => {
+            console.error("Error fetching bus schedule details:", error);
+            throw error; 
+        });
+};
+
+const busCheckInStudent = (nTravelID, sStudentID, nStatus) => {
+    return schoolBusHttpClient.post(apiUrls.buscheckInStudent(), {
+        nTravelID,
+        sStudentID,
+        nStatus
+    })
+        .then(response => response.data)
+        .catch(error => {
+            console.error("Error updating checkin status:", error);
+            throw error; 
+        });
+};
+
+const busCheckoutStudent = (nTravelID, sStudentID, nStatus) => {
+    return schoolBusHttpClient.post(apiUrls.busCheckoutStudent(), {
+        nTravelID,
+        sStudentID,
+        nStatus
+    })
+        .then(response => response.data)
+        .catch(error => {
+            console.error("Error updating checkout status:", error);
+            throw error; 
+        });
+};
+
+const busStartTravel = (nTravelID) => {
+    return schoolBusHttpClient.post(apiUrls.busStartTravel(), {
+        nTravelID,
+    })
+        .then(response => response.data)
+        .catch(error => {
+            console.error("Error starting travel:", error);
+            throw error; 
+        });
+};
+
+const busCancelTravel = (nTravelID) => {
+    return schoolBusHttpClient.post(apiUrls.cacelBusTravel(), {
+        nTravelID,
+    })
+        .then(response => response.data)
+        .catch(error => {
+            console.error("Error cancelling travel:", error);
+            throw error; 
+        });
+};
+
+const busCompleteTravel = (nTravelID) => {
+    return schoolBusHttpClient.post(apiUrls.completeBusTravel(), {
+        nTravelID,
+    })
+        .then(response => response.data)
+        .catch(error => {
+            console.error("Error completing travel:", error);
+            throw error; 
+        });
+};
+
 export default {
     getVerification,
     getLogStatus,
@@ -2997,5 +3067,11 @@ export default {
     // start school bus
     getBusList,
     getBusSchedule,
+    getBusScheduleDetail,
+    busCheckInStudent,
+    busCheckoutStudent,
+    busStartTravel,
+    busCancelTravel,
+    busCompleteTravel,
     // end schcool bus
 };

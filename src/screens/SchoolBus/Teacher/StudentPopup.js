@@ -5,19 +5,21 @@ import Color from '../../../constants/color';
 import images from '../../../themes/Images';
 import translang from '../../../utils/language.utils';
 
-export default function StudentPopup({ isVisible, onClose, navigation }) {
+export default function StudentPopup({ isVisible, onClose, navigation, student }) {
+  const { sFatherPhone = '081-234-5678', sMotherPhone = '081-234-5678' } = student || {};
+  
   const openDialPad = (phoneNumber) => {
     const url = `tel:${phoneNumber}`;
     Linking.openURL(url).catch((err) => Alert.alert('Failed to open dial pad', err.message));
   };
 
   const onPressCallFather = () => {
-    openDialPad('081-234-5678');
+    openDialPad(sFatherPhone);
     onClose();
   };
 
   const onPressCallMother = () => {
-    openDialPad('081-234-5678');
+    openDialPad(sMotherPhone);
     onClose();
   };
 
@@ -39,27 +41,31 @@ export default function StudentPopup({ isVisible, onClose, navigation }) {
       <View style={styles.centeredView}>
         <View style={styles.dialogStyle}>
           <Text style={styles.header}>{translang.t('SELECT_ITEM')}</Text>
-          <Text style={styles.text1}>{translang.t('CALL_PARENT')}</Text>
+          {!!sFatherPhone || !!sMotherPhone ? (
+            <>
+              <Text style={styles.text1}>{translang.t('CALL_PARENT')}</Text>
 
-          <View style={styles.divider} />
-          <View style={styles.wrapper1}>
-            <Pressable style={styles.item1} onPress={onPressCallFather}>
-              <Image source={images.ic_call_yellow} style={styles.image}></Image>
-              <View style={styles.group1}>
-                <Text style={styles.number}>
-                  {translang.t('FATHER')}: {'081-234-5678'}
-                </Text>
+              <View style={styles.divider} />
+              <View style={styles.wrapper1}>
+                <Pressable style={styles.item1} onPress={onPressCallFather}>
+                  <Image source={images.ic_call_yellow} style={styles.image}></Image>
+                  <View style={styles.group1}>
+                    <Text style={styles.number}>
+                      {translang.t('FATHER')}: {'081-234-5678'}
+                    </Text>
+                  </View>
+                </Pressable>
+                <Pressable style={styles.item1} onPress={onPressCallMother}>
+                  <Image source={images.ic_call_yellow} style={styles.image}></Image>
+                  <View style={styles.group1}>
+                    <Text style={styles.number}>
+                      {translang.t('MOTHER')}: {'081-234-5678'}
+                    </Text>
+                  </View>
+                </Pressable>
               </View>
-            </Pressable>
-            <Pressable style={styles.item1} onPress={onPressCallMother}>
-              <Image source={images.ic_call_yellow} style={styles.image}></Image>
-              <View style={styles.group1}>
-                <Text style={styles.number}>
-                  {translang.t('MOTHER')}: {'081-234-5678'}
-                </Text>
-              </View>
-            </Pressable>
-          </View>
+            </>
+          ) : null}
 
           <Text style={styles.text1}>{translang.t('REPORT_INCIDENT')}</Text>
 

@@ -126,7 +126,7 @@ const BusListScreen = ({ navigation }) => {
       return;
     }
     navigation.navigate('BusDetailScreen', {
-      route: item,
+      schedule: item,
       bus: selectedBus,
       userInfo,
     });

@@ -1248,7 +1248,17 @@ export default {
   DEPARTED: 'ออกเดินทาง',
   ARRIVED: 'ถึงที่หมาย',
   START_JOURNEY: 'เริ่มเดินทาง',
+  COMPLETE_TRAVEL: 'เสร็จสิ้นงาน',
+  ARRIVED_TRAVEL: 'Arrived',
+  CANCEL_TRAVEL: 'Cancel',
+  CANCELLED_TRAVEL: 'Cancelled',
+
   TURN_ON_GPS: 'กรุณาเปิด gps',
+  BUS_SUCCESSFUL_DEPART:  'เริ่มงานสำเร็จ',
+  BUS_SUCCESSFUL_CANCEL: 'ยกเลิกเรียบร้อย',
+  BUS_SUCCESSFUL_ARRIVE: 'The bus is arrived!',
+  BUS_CHECK_STUDENT_STATUS: 'กรุณาเช็กนักเรียนให้ครบก่อนค่ะ',
+
   SELECT_ITEM: 'เลือกรายการ',
   CALL_PARENT: 'โทรหาผู้ปกครอง',
   REPORT_INCIDENT: 'แจ้งเหตุ',
@@ -1257,6 +1267,8 @@ export default {
     'กรุณาเช็กนักเรียนตามลำดับคิว หากต้องการเช็กนักเรียนคนนี้, ท่านสามารถจัดลำดับคิวใหม่ได้',
 
   BUS_CHECK_IN_STATUS_CHECKED_IN: 'เช็กอิน',
+  BUS_CHECK_IN_STATUS_CHECKED_OUT: 'เช็กเอาท์',
+
   BUS_CHECK_IN_STATUS_CHECKED_IN_LATE: 'เช็กอินสาย',
   BUS_CHECK_IN_STATUS_NOT_BOARD: 'ไม่ขึ้นรถ',
   BUS_CHECK_IN_STATUS_PERSONNAL_LEAVE: 'ลากิจ',

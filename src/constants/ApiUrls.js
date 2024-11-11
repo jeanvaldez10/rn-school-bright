@@ -1025,7 +1025,7 @@ class ApiUrls {
     return  '/GetScheduleDetail';
   }
 
-  statBusTravel() {
+  busStartTravel() {
     return '/StartTravel';
   }
 
@@ -1037,11 +1037,11 @@ class ApiUrls {
     return '/CompleteTravel';
   }
 
-  checkInBus() {
+  buscheckInStudent() {
     return '/CheckInStudent';
   }
 
-  checkOutBus() {
+  busCheckoutStudent() {
     return '/CheckOutStudent';
   }
 }

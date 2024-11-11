@@ -1,8 +1,9 @@
 import React from 'react';
 import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Color from '../../../constants/color';
-import translang from '../../../utils/language.utils';
+// import { BusStatusColorMap } from '../../../constants/constants';
 import images from '../../../themes/Images';
+import translang from '../../../utils/language.utils';
 
 const StudentItem = ({
   item,
@@ -12,7 +13,59 @@ const StudentItem = ({
   onPressCheckout,
   reordering = false,
 }) => {
-  const { firstName = 'ตรีมนต์', lastName = 'รันการ', checkInStatus, checkoutStatus } = item;
+  const {
+    sFirstName = 'ตรีมนต์',
+    sLastName = 'รันการ',
+    sPhoto,
+    nCheckInStatus,
+    nCheckOutStatus,
+  } = item;
+  // can't be in constants as language switch is affected.
+  let BusStatusColorMap = {
+    1: {
+      value: 1,
+      title: translang.t('BUS_CHECK_IN_STATUS_CHECKED_IN'),
+      color: Color.n_button_gradient_green_end,
+    },
+    2: {
+      value: 2,
+      title: translang.t('BUS_CHECK_IN_STATUS_CHECKED_IN_LATE'),
+      color: Color.n_default_brown,
+    },
+    3: {
+      value: 1,
+      title: translang.t('BUS_CHECK_IN_STATUS_CHECKED_OUT'),
+      color: Color.n_button_gradient_green_end,
+    },
+    '-1': {
+      value: 2,
+      title: translang.t('BUS_CHECK_IN_STATUS_NOT_BOARD'),
+      color: Color.n_default_orange,
+    },
+    '-2': {
+      value: 3,
+      title: translang.t('BUS_CHECK_IN_STATUS_PERSONNAL_LEAVE'),
+      color: Color.n_seance,
+    },
+    '-3': {
+      value: 4,
+      title: translang.t('BUS_CHECK_IN_STATUS_SICK_LEAVE'),
+      color: Color.n_electric_violet,
+    },
+    0: {
+      value: 0,
+      title: translang.t('BUS_CHECK_IN_STATUS_UNSPECIFIED'),
+      color: Color.n_scorpion,
+    },
+  };
+
+  const checkInColor = BusStatusColorMap[nCheckInStatus]?.color || Color.n_password_grey;
+  const checkInLabel =
+    BusStatusColorMap[nCheckInStatus]?.title || translang.t('BUS_CHECK_IN_STATUS_UNSPECIFIED');
+  const checkoutColor = BusStatusColorMap[nCheckOutStatus]?.color || Color.n_password_grey;
+  const checkoutLabel =
+    BusStatusColorMap[nCheckOutStatus === 1 ? 3 : nCheckOutStatus]?.title ||
+    translang.t('BUS_CHECK_IN_STATUS_UNSPECIFIED');
 
   return (
     <TouchableOpacity style={styles.listItem} onPress={onPressStudent(item)}>
@@ -21,27 +74,27 @@ const StudentItem = ({
       ) : null}
 
       <Text style={styles.itemText}>{index + 1}.</Text>
-      <Image source={images.women_user} style={styles.itemAvatar} />
+      <Image source={sPhoto ? { uri: sPhoto } : images.women_user} style={styles.itemAvatar} />
       <View style={styles.studentTextWrapper}>
         <Text style={styles.itemText} numberOfLines={1}>
-          {firstName}
+          {sFirstName}
         </Text>
         <Text style={styles.itemText} numberOfLines={1}>
-          {lastName}
+          {sLastName}
         </Text>
       </View>
       <View style={styles.buttonContainer}>
         <Pressable
-          style={[styles.buttons, { backgroundColor: Color.n_password_grey }]}
+          style={[styles.buttons, { backgroundColor: checkInColor }]}
           onPress={onPressCheckIn(item)}
         >
-          <Text style={styles.buttonText}>{translang.t('UNDEFINED')}</Text>
+          <Text style={styles.buttonText}>{checkInLabel}</Text>
         </Pressable>
         <Pressable
-          style={[styles.buttons, { backgroundColor: Color.n_password_grey }]}
+          style={[styles.buttons, { backgroundColor: checkoutColor }]}
           onPress={onPressCheckout(item)}
         >
-          <Text style={styles.buttonText}>{translang.t('UNDEFINED')}</Text>
+          <Text style={styles.buttonText}>{checkoutLabel}</Text>
         </Pressable>
       </View>
     </TouchableOpacity>
@@ -54,6 +107,7 @@ const styles = StyleSheet.create({
     height: 46,
     marginHorizontal: 8,
     width: 46,
+    backgroundColor: Color.n_default_gray,
   },
   orderIcon: {
     width: 16,
@@ -90,7 +144,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   buttonContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
@@ -110,6 +164,8 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     shadowOpacity: 1,
     elevation: 12,
+    marginTop: 4,
+    marginBottom: 4,
   },
   buttonText: {
     fontSize: 16,
