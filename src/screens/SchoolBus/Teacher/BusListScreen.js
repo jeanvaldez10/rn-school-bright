@@ -1,6 +1,13 @@
 import { Text } from 'native-base';
 import React, { useCallback, useEffect, useState } from 'react';
-import { BackHandler, FlatList, Image, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator,
+  BackHandler,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScaledSheet } from 'react-native-size-matters';
 import busIcon from '../../../assets/images/services/m_school_bus.png';
@@ -27,40 +34,26 @@ const routes = [
 
 const BusListScreen = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
-  const [items, setItems] = useState(routes);
+  const [schedules, setSchedules] = useState(routes);
+  const [loadingSchedule, setLoadingSchedule] = useState(false);
 
-  const [shopList, setShopList] = useState([]);
+  const [bustList, setBusList] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [selectedBus, setSelectedBus] = useState();
 
   useEffect(() => {
-    loadData(userInfo);
-  }, [loadData, userInfo]);
-
-  
-
-  useEffect(() => {
-    loadUserInfo();
-  }, [loadUserInfo]);
+    initialize();
+  }, [initialize]);
 
   const back = useCallback(() => {
-    navigation.navigate('UserInfo');
+    navigation.pop();
   }, [navigation]);
 
   const handleBackButton = useCallback(() => {
     back();
     return true;
   }, [back]);
-
-  useEffect(() => {
-    const loadUserInfoAndData = async () => {
-      const userInfo = await Storage.getUserInfo();
-      setUserInfo(userInfo);
-    };
-
-    loadUserInfoAndData();
-  }, [loadData]);
 
   useEffect(() => {
     const backhandler = BackHandler.addEventListener('hardwareBackPress', handleBackButton);
@@ -70,64 +63,85 @@ const BusListScreen = ({ navigation }) => {
     };
   }, [handleBackButton, navigation]);
 
-  const loadUserInfo = useCallback(async () => {
+  const initialize = useCallback(async () => {
     setIsLoading(true);
     try {
       const user = await Storage.getUser();
       const { ID: userId, SchoolId: schoolId } = user;
       const userInfo = await ApiManager.getUserInfo(userId, schoolId);
       setUserInfo(userInfo);
-      console.log('UserInfo updated');
+      loadBusList();
     } catch (error) {
       console.log('UserInfo error', error);
-    } finally {
-      setIsLoading(false);
     }
-  }, []);
+  }, [loadBusList]);
 
-  const loadData = useCallback((userInfo) => {
-    const { SchoolID } = userInfo || {};
-
-    if (!SchoolID) {
-      return;
-    }
+  const loadBusList = useCallback(() => {
     setIsLoading(true);
-    ApiManager.getShopList(SchoolID)
-      .then((list) => {
-        setShopList(list);
+    ApiManager.getBusList()
+      .then((data) => {
+        if (data.status === 1) {
+          setBusList(data.lstData || []);
+        } else {
+          alert(data.message);
+        }
       })
       .catch((error) => {
         console.log(error);
+        alert('Failed to fetch bus list.');
       })
       .finally(() => {
         setIsLoading(false);
       });
   }, []);
 
-  const onClickItem = (item) => {
+  const onClickItem = async (item) => {
+    if (loadingSchedule) {
+      return;
+    }
     setSelectedBus(item);
-    setShowModal(true);
+
+    setLoadingSchedule(true);
+    ApiManager.getBusSchedule(item.nBusID)
+      .then((data) => {
+        if (data.status === 1) {
+          setSchedules(data.lstData || []);
+          setShowModal(true);
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Failed to fetch schedules.');
+      })
+      .finally(() => {
+        setLoadingSchedule(false);
+      });
   };
 
   const onListSelect = (item) => {
     setShowModal(false);
+    if (item === null) {
+      return;
+    }
     navigation.navigate('BusDetailScreen', {
-      route: item?.id,
-      bus: selectedBus.id,
+      route: item,
+      bus: selectedBus,
       userInfo,
     });
   };
 
   const renderItem = ({ item }) => {
-    const { name, driver } = item;
+    const { sLicensePlate, sBrandModel } = item;
 
     return (
       <TouchableOpacity style={styles.menuEachStyle} activeOpacity={0.5}>
         <View style={styles.group1}>
           <Image source={busIcon} style={styles.image}></Image>
           <View style={styles.group2}>
-            <Text style={styles.topText}>{name || 'อบ 1212 กรุงเทพมหานคร'}</Text>
-            <Text style={styles.topText}>{driver || 'Toyota Commuter'}</Text>
+            <Text style={styles.topText}>{sLicensePlate}</Text>
+            <Text style={styles.topText}>{sBrandModel}</Text>
           </View>
         </View>
 
@@ -137,19 +151,29 @@ const BusListScreen = ({ navigation }) => {
           buttonStyle={styles.buttonStyle}
           textStyle={styles.buttonTextStyle}
           label={translang.t('SELECT_ROUTE')}
+          ContentComponent={
+            loadingSchedule && selectedBus.nBusID === item.nBusID
+              ? () => <ActivityIndicator color={Color.white} />
+              : null
+          }
           _onPress={() => onClickItem(item)}
         />
       </TouchableOpacity>
     );
   };
 
+  const scheduleDataformatted = schedules.map((schedule) => ({
+    ...schedule,
+    title: `${schedule.isMorning ? 'Morning' : 'Evening'} : ${schedule.sTime}`,
+  }));
+
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
       <BackNavigationBar title={translang.t('schoolBus')} onMenuTap={back} />
-      {shopList.length > 0 || isLoading ? (
+      {bustList.length > 0 || isLoading ? (
         <FlatList
           contentContainerStyle={styles.contentContainerStyle}
-          data={shopList}
+          data={bustList}
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderItem}
           ListHeaderComponent={
@@ -158,13 +182,13 @@ const BusListScreen = ({ navigation }) => {
         />
       ) : (
         <View style={styles.noSupportWrapper}>
-          <Text style={styles.noSupportText}>{translang.t('NOT_SUPPORT_STRING')}</Text>
+          <Text style={styles.noSupportText}>{translang.t('NOT_FOUND_DATA')}</Text>
         </View>
       )}
       <ClassLevelModal
         isVisible={showModal}
         onListSelect={onListSelect}
-        listData={items}
+        listData={scheduleDataformatted}
         dialogTtitle={translang.t('SELECT_ROUTE')}
       />
       <ProgressHud isVisible={isLoading} />

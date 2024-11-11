@@ -5,6 +5,7 @@ import academicHttpClient from "../utils/academicHttpClient";
 import {apiUrls} from "../constants/ApiUrls";
 import StorageManager from "./StorageManager";
 import moment from 'moment'
+import schoolBusHttpClient from "../utils/schoolBusHttpClient";
 
 let params;
 
@@ -2754,16 +2755,25 @@ const getLeaveInfos = (userId) => {
     return promise
 }
 
-const getBusList = (schoolId) => {
-    const params = {};
-    const promise = shopHttpClient.get(apiUrls.getShopList(schoolId), params)
-        .then(response => response.data)
-        .then((data) => {
-            const array = Object.values(data);
-            return Promise.resolve(array);
-        });
-    return promise
-}
+const getBusList = () => {
+  return schoolBusHttpClient.post(apiUrls.getBusList(), {})
+      .then(response => response.data)
+      .catch(error => {
+          console.error("Error fetching bus list:", error);
+          throw error; 
+      });
+};
+
+const getBusSchedule = (nBusID) => {
+  return schoolBusHttpClient.post(apiUrls.getTodayBusSchedule(), {
+    nBusID,
+  })
+      .then(response => response.data)
+      .catch(error => {
+          console.error("Error fetching bus schedule list:", error);
+          throw error; 
+      });
+};
 
 export default {
     getVerification,
@@ -2985,6 +2995,7 @@ export default {
     getLeaveInfos,
 
     // start school bus
-    getBusList
+    getBusList,
+    getBusSchedule,
     // end schcool bus
 };

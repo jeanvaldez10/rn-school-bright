@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
-import { View, Text, TouchableOpacity} from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Color from '../constants/color';
 import { ScaledSheet } from 'react-native-size-matters';
-
 
 export default class GradientButton extends Component {
   render() {
@@ -17,12 +16,13 @@ export default class GradientButton extends Component {
       disableColors,
       isVerticalGradient,
       borderColor,
+      ContentComponent,
     } = this.props;
-    let {enabled} = this.props;
+    let { enabled } = this.props;
     if (enabled === undefined) {
       enabled = true;
     }
-    let {activeOpacity} = this.props;
+    let { activeOpacity } = this.props;
     if (activeOpacity === undefined) {
       activeOpacity = 0.7;
     }
@@ -49,8 +49,8 @@ export default class GradientButton extends Component {
     }
 
     const _isVerticalGradient = isVerticalGradient ?? true;
-    let gradientStart = {x: 0, y: 1}
-    let gradientEnd = {x: 1, y: 0}
+    let gradientStart = { x: 0, y: 1 };
+    let gradientEnd = { x: 1, y: 0 };
     // if (_isVerticalGradient) {
     //   gradientStart = {x: 0, y: 0}
     //   gradientEnd = {x: 0, y: 1}
@@ -65,13 +65,23 @@ export default class GradientButton extends Component {
           onPress={_onPress}
           disabled={!enabled}
           style={styles.gradientBtn}
-          activeOpacity={activeOpacity}>
+          activeOpacity={activeOpacity}
+        >
           <LinearGradient
-            style={[styles.gradientBtnBackground, buttonStyle, borderColor? {borderColor: borderColor, borderWidth: 2} : {borderWidth: 0} ]}
+            style={[
+              styles.gradientBtnBackground,
+              buttonStyle,
+              borderColor ? { borderColor: borderColor, borderWidth: 2 } : { borderWidth: 0 },
+            ]}
             start={gradientStart}
             end={gradientEnd}
-            colors={colorGradient}>
-            <Text style={[styles.gradientBtnLabel, textStyle]}>{label}</Text>
+            colors={colorGradient}
+          >
+            {ContentComponent ? (
+              <ContentComponent />
+            ) : (
+              <Text style={[styles.gradientBtnLabel, textStyle]}>{label}</Text>
+            )}
           </LinearGradient>
         </TouchableOpacity>
       </View>
@@ -93,21 +103,19 @@ const styles = ScaledSheet.create({
     shadowRadius: 6,
     shadowOpacity: 1,
     elevation: 12,
-
   },
   gradientBtn: {
     width: '100%',
   },
   gradientBtnBackground: {
-    width: "100%",
+    width: '100%',
     height: 70,
     borderRadius: 35,
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   gradientBtnLabel: {
-    fontSize: "24@ms",
+    fontSize: '24@ms',
     fontWeight: 'bold',
     letterSpacing: 0,
     color: Color.white,
