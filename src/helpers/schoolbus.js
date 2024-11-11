@@ -4,19 +4,20 @@ import ApiManager from '../managers/ApiManager';
 import translang from '../utils/language.utils';
 
 export const checkGPSPermission = async () => {
-  return new Promise((resolve) => {
-    Geolocation.requestAuthorization(
-      () => resolve(true),
-      (error) => {
-        if (error.code === error.PERMISSION_DENIED) {
-          resolve(false);
-        } else {
-          console.error('GPS permission error:', error.message);
-          resolve(false);
-        }
-      },
-    );
-  });
+  try {
+    const position = await new Promise((resolve, reject) => {
+      Geolocation.getCurrentPosition(
+        (position) => resolve(position), 
+        (error) => reject(new Error(error.message)), 
+      );
+    });
+
+    console.log('GPS is enabled', position);
+    return true;
+  } catch (error) {
+    console.error('GPS is not enabled:', error.message);
+    return false;
+  }
 };
 
 export const getTravelStatusUpdateFunction = (status) => {

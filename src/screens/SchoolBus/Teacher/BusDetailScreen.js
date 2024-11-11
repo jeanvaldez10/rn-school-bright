@@ -155,7 +155,7 @@ const BusDetailScreen = ({ navigation }) => {
       const newStatus = getNextTravelStatus(travelStatus);
 
       try {
-        if (newStatus === TravelStatuses.DEPARTED && !(await checkGPSPermission())) {
+        if (!(await checkGPSPermission())) {
           showAlert(translang.t('TURN_ON_GPS'), 'warning');
           return;
         }
