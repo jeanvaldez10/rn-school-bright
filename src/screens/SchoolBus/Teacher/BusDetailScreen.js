@@ -1,3 +1,4 @@
+import Geolocation from '@react-native-community/geolocation';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
   ActivityIndicator,
@@ -11,18 +12,27 @@ import {
 import AlertWithImageModal from '../../../components/AlertWithImageModal';
 import BackNavigationBar from '../../../components/BackNavigationBar';
 import CustomRadioButtonItem from '../../../components/CustomRadioButtonItem';
+import GradientButton from '../../../components/GradientButton';
 import NextButton from '../../../components/NextButton';
 import ProgressHud from '../../../components/ProgressHud';
 import Color from '../../../constants/color';
+import { TravelStatuses } from '../../../constants/constants';
+import {
+  checkGPSPermission,
+  getNextTravelStatus,
+  getTravelButtonLabel,
+  getTravelStatusUpdateFunction,
+  getTravelSwitchSuccessMessage,
+} from '../../../helpers/schoolbus';
 import ApiManager from '../../../managers/ApiManager';
 import Images from '../../../themes/Images';
 import translang from '../../../utils/language.utils';
+import BusPopup from './BusPopups';
 import StudentItem from './StudentItem';
 import StudentPopup from './StudentPopup';
 import StudentStatusModal from './StudentStatusModal';
-import BusPopup from './BusPopups';
-import GradientButton from '../../../components/GradientButton';
-import { TravelStatuses } from '../../../constants/constants';
+
+// Geolocation.setRNConfiguration({});
 
 const BusDetailScreen = ({ navigation }) => {
   //const [selectedBus] = useState(navigation.getParam('bus'));
@@ -49,8 +59,8 @@ const BusDetailScreen = ({ navigation }) => {
   const [reordering, setReordering] = useState(false);
   const [showBusModal, setShowBusModal] = useState(false);
 
-  const { nStatus: travelStatus, nTravelID } = infoTravel || {};
   const { nScheduleID } = selectedSchedule;
+  const { nStatus: travelStatus, nTravelID } = infoTravel || {};
 
   useEffect(() => {
     loadScheduleDetails();
@@ -66,18 +76,14 @@ const BusDetailScreen = ({ navigation }) => {
         setStudents(data.lstStudents || []);
         setInfoTravel(data.infoTravel);
       } else {
-        setShowAlertModal(true);
-        setAlertStatus('warning');
-        setAlertContent(data.message || 'Failed to fetch data.');
+        showAlert(data.message || 'Failed to fetch data.', 'warning');
       }
     } catch (e) {
       console.log(e, 'Schedule Details Error');
-      setShowAlertModal(true);
-      setAlertStatus('warning');
-      setAlertContent(e.message || 'Failed to fetch data.');
+      showAlert(e.message || 'Failed to fetch data.', 'warning');
     }
     setIsLoading(false);
-  }, [nScheduleID]);
+  }, [nScheduleID, showAlert]);
 
   const back = useCallback(() => {
     navigation.pop();
@@ -96,6 +102,12 @@ const BusDetailScreen = ({ navigation }) => {
     };
   }, [handleBackButton, navigation]);
 
+  const showAlert = useCallback((message, status) => {
+    setAlertContent(message);
+    setAlertStatus(status);
+    setShowAlertModal(true);
+  }, []);
+
   const onPressStudent = (student) => () => {
     setSelectedStudent(student);
     setShowStudentModal(true);
@@ -113,7 +125,7 @@ const BusDetailScreen = ({ navigation }) => {
     setShowStudentStatusModal(true);
   };
 
-  const renderItem = ({ item, index }) => {
+  const renderStudentItem = ({ item, index }) => {
     return (
       <StudentItem
         onPressStudent={onPressStudent}
@@ -126,83 +138,50 @@ const BusDetailScreen = ({ navigation }) => {
     );
   };
 
-  const handleErrorSwitchingTravel = (message) => {
-    setAlertContent(message);
-    setShowAlertModal(true);
-    setAlertStatus('warning');
-  };
-
-  const handleSuccessSwitchingtravel = async (newStatus) => {
+  const onSwitchSuccess = async (newStatus) => {
     const data = await ApiManager.getBusScheduleDetail(nScheduleID);
 
     if (data.status === 1) {
       setStudents(data.lstStudents || []);
       setInfoTravel(data.infoTravel);
     }
-    setAlertContent(
-      newStatus === TravelStatuses.DEPARTED
-        ? translang.t('BUS_SUCCESSFUL_DEPART')
-        : newStatus === TravelStatuses.CANCELLED
-          ? translang.t('BUS_SUCCESSFUL_CANCEL')
-          : newStatus === TravelStatuses.ARRIVED
-            ? translang.t('BUS_SUCCESSFUL_ARRIVE')
-            : '',
-    );
-    setAlertStatus('success');
+    const successMessage = getTravelSwitchSuccessMessage(newStatus);
 
-    setShowAlertModal(true);
+    showAlert(successMessage, 'success');
   };
 
-  console.log(nTravelID)
+  const onPressJourney = async () => {
+    if (!switchingTravelStatus) {
+      const newStatus = getNextTravelStatus(travelStatus);
 
-  const handleSwitchTravel = async (newStatus) => {
-    try {
-      setSwitchingTravelStatus(true);
-      const updateFunc =
-        newStatus === TravelStatuses.DEPARTED
-          ? ApiManager.busStartTravel
-          : newStatus === TravelStatuses.ARRIVED
-            ? ApiManager.busCompleteTravel
-            : newStatus === TravelStatuses.CANCELLED
-              ? ApiManager.busCancelTravel
-              : undefined;
-
-      if (updateFunc) {
-        const result = await updateFunc(nTravelID);
-        if (result.success !== 1) {
-          handleErrorSwitchingTravel(result.message);
-        } else {
-          await handleSuccessSwitchingtravel(newStatus);
+      try {
+        if (newStatus === TravelStatuses.DEPARTED && !(await checkGPSPermission())) {
+          showAlert(translang.t('TURN_ON_GPS'), 'warning');
+          return;
         }
-      }
-    } catch (e) {
-      console.log(e, 'Switch travel status error');
-      handleErrorSwitchingTravel(e.message || 'Failed to update travel status.');
-    }
-    setSwitchingTravelStatus(false);
-  };
 
-  const onPressJourney = () => {
-    if (switchingTravelStatus) {
-      return;
+        setSwitchingTravelStatus(true);
+        const updateFunc = getTravelStatusUpdateFunction(newStatus);
+
+        if (updateFunc) {
+          const result = await updateFunc(nTravelID);
+          result.success === 1
+            ? await onSwitchSuccess(newStatus)
+            : showAlert(result.message, 'warning');
+        }
+      } catch (e) {
+        console.error('Switch travel status error', e);
+        showAlert(e.message || 'Failed to update travel status.', 'warning');
+      } finally {
+        setSwitchingTravelStatus(false);
+      }
     }
-    handleSwitchTravel(
-      travelStatus === TravelStatuses.NOT_DEPARTED
-        ? TravelStatuses.DEPARTED
-        : travelStatus === TravelStatuses.DEPARTED
-          ? TravelStatuses.CANCELLED
-          : travelStatus === TravelStatuses.CANCELLED ? TravelStatuses.DEPARTED : '',
-    );
-    // setAlertContent(translang.t('TURN_ON_GPS'));
-    // setShowAlertModal(true);
   };
 
   const handleErrorCheckInOut = (message) => {
     let newStudentList = [...students];
+    showAlert(message, 'warning');
 
-    setAlertContent(message);
-    setShowAlertModal(true);
-    setAlertStatus('warning');
     setStudents(newStudentList);
   };
 
@@ -264,6 +243,7 @@ const BusDetailScreen = ({ navigation }) => {
     ) {
       return null;
     }
+    const buttonLabel = getTravelButtonLabel(travelStatus);
     return (
       <GradientButton
         containerStyle={styles.gradientButtonContainer}
@@ -271,17 +251,7 @@ const BusDetailScreen = ({ navigation }) => {
         textStyle={styles.gradientButtonText}
         colors={[Color.green_button_color]}
         isVerticalGradient={true}
-        label={
-          travelStatus === TravelStatuses.NOT_DEPARTED
-            ? translang.t('START_TRAVEL')
-            : travelStatus === TravelStatuses.DEPARTED
-              ? translang.t('CANCEL_TRAVEL')
-              : travelStatus === TravelStatuses.CANCELLED
-                ? translang.t('RESTART_TRAVEL')
-                : travelStatus === TravelStatuses.ARRIVED
-                  ? translang.t('ARRIVED_TRAVEL')
-                  : ''
-        }
+        label={buttonLabel}
         ContentComponent={
           switchingTravelStatus ? () => <ActivityIndicator color={Color.white} /> : null
         }
@@ -353,7 +323,7 @@ const BusDetailScreen = ({ navigation }) => {
         <FlatList
           data={students}
           keyExtractor={(item, index) => index.toString()}
-          renderItem={renderItem}
+          renderItem={renderStudentItem}
           contentContainerStyle={styles.flatlist}
         />
         {(travelStatus === TravelStatuses.ARRIVED || travelStatus === TravelStatuses.DEPARTED) && (

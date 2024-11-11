@@ -1259,7 +1259,9 @@ export default {
   NOT_DEPARTRED: 'Not Departed',
   DEPARTED: 'Departed',
   ARRIVED: 'Arrived',
-  START_JOURNEY: 'Start',
+  START_TRAVEL: 'Start',
+  RESTART_TRAVEL: 'Restart',
+
   COMPLETE_TRAVEL: 'Complete',
   ARRIVED_TRAVEL: 'Arrived',
   CANCEL_TRAVEL: 'Cancel',
