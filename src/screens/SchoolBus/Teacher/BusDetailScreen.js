@@ -24,6 +24,7 @@ import {
   getTravelButtonLabel,
   getTravelStatusUpdateFunction,
   getTravelSwitchSuccessMessage,
+  hasUnspecifiedCheckInBefore,
 } from '../../../helpers/schoolbus';
 import ApiManager from '../../../managers/ApiManager';
 import Images from '../../../themes/Images';
@@ -64,6 +65,8 @@ const BusDetailScreen = ({ navigation }) => {
 
   const { nScheduleID } = selectedSchedule;
   const { nStatus: travelStatus, nTravelID } = infoTravel || {};
+
+  const sortedStudents = [...students].sort((a, b) => a.nOrder - b.nOrder);
 
   useEffect(() => {
     loadScheduleDetails();
@@ -118,6 +121,10 @@ const BusDetailScreen = ({ navigation }) => {
   };
 
   const onPressCheckIn = (student) => () => {
+    if (hasUnspecifiedCheckInBefore(students, student)) {
+      showAlert(translang.t('CHECK_STUDENT_QUEUE'), 'warning');
+      return;
+    }
     setSelectedStudent(student);
     setCheckMode('in');
     setShowStudentStatusModal(true);
@@ -346,8 +353,8 @@ const BusDetailScreen = ({ navigation }) => {
           ))}
         </View>
         <FlatList
-          data={students}
-          keyExtractor={(item, index) => index.toString()}
+          data={sortedStudents}
+          keyExtractor={(item) => item.sStudentID}
           renderItem={renderStudentItem}
           contentContainerStyle={styles.flatlist}
         />

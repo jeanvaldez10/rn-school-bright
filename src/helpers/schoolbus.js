@@ -77,3 +77,11 @@ export const canCompleteTask = (students) => {
 
   return !hasUnspecifiedStatus;
 };
+
+export const hasUnspecifiedCheckInBefore = (students, targetStudent) => {
+  const lowerOrderStudents = students.filter(
+      student => student.nOrder < targetStudent.nOrder
+  );
+
+  return lowerOrderStudents.some(student => student.nCheckInStatus === 0);
+}
