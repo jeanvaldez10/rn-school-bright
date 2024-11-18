@@ -1044,6 +1044,10 @@ class ApiUrls {
   busCheckoutStudent() {
     return '/CheckOutStudent';
   }
+
+  reOrderStudentQueue() {
+    return '/Schedule/ReOrderStudents';
+  }
 }
 
 

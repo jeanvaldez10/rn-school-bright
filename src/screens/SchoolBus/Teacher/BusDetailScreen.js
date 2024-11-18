@@ -33,6 +33,7 @@ import BusPopup from './BusPopups';
 import StudentItem from './StudentItem';
 import StudentPopup from './StudentPopup';
 import StudentStatusModal from './StudentStatusModal';
+import SortableList from 'react-native-sortable-list';
 
 // Geolocation.setRNConfiguration({});
 
@@ -136,7 +137,15 @@ const BusDetailScreen = ({ navigation }) => {
     setShowStudentStatusModal(true);
   };
 
-  const renderStudentItem = ({ item, index }) => {
+  const handleRelease = (_, currentOrder) => {
+    const newStudents = currentOrder.map((key, index) => ({
+      ...students[key],
+      nOrder: index + 1,
+    }));
+    setStudents(newStudents);
+  };
+
+  const renderStudentItem = ({ item, index, toggleRowActive }) => {
     return (
       <StudentItem
         onPressStudent={onPressStudent}
@@ -145,6 +154,7 @@ const BusDetailScreen = ({ navigation }) => {
         reordering={reordering}
         item={item}
         index={index}
+        toggleRowActive={toggleRowActive}
       />
     );
   };
@@ -220,7 +230,7 @@ const BusDetailScreen = ({ navigation }) => {
   };
 
   const onPressComplete = async () => {
-    if (!switchingTravelStatus) {
+    if (!completingTravel) {
       try {
         if (TravelStatuses.ARRIVED && !canCompleteTask(students)) {
           showAlert(translang.t('CHECK_STUDENT_STATUS'), 'warning');
@@ -240,6 +250,15 @@ const BusDetailScreen = ({ navigation }) => {
         setCompletingTravel(false);
       }
     }
+  };
+
+  const onPressConfirmReorder = async () => {
+    // TODO - show loading...
+    ApiManager.reOrderStudentQueue(
+      nScheduleID,
+      sortedStudents.map((student) => student.sStudentID),
+    );
+    setReordering(false);
   };
 
   const onHandleQueue = () => {
@@ -352,30 +371,56 @@ const BusDetailScreen = ({ navigation }) => {
             </View>
           ))}
         </View>
-        <FlatList
+        <SortableList
+          style={styles.sortableList}
+          data={sortedStudents}
+          sortingEnabled={reordering}
+          manuallyActivateRows={true}
+          renderRow={({ data, index, toggleRowActive }) =>
+            renderStudentItem({ item: data, index, toggleRowActive })
+          }
+          onReleaseRow={handleRelease}
+          contentContainerStyle={styles.flatlist}
+        />
+        {/* <FlatList
           data={sortedStudents}
           keyExtractor={(item) => item.sStudentID}
           renderItem={renderStudentItem}
           contentContainerStyle={styles.flatlist}
-        />
-        {(travelStatus === TravelStatuses.ARRIVED || travelStatus === TravelStatuses.DEPARTED) && (
+        /> */}
+
+        {reordering ? (
           <GradientButton
-            label={
-              travelStatus === TravelStatuses.ARRIVED
-                ? translang.t('ARRIVED_TRAVEL')
-                : translang.t('COMPLETE_TRAVEL')
-            }
+            label={translang.t('COMMON_confirm')}
             containerStyle={styles.nextButtonContainer}
             buttonStyle={styles.nextButton}
-            enabled={travelStatus === TravelStatuses.DEPARTED}
             colors={[Color.green_button_next_color1, Color.green_button_next_color2]}
-            disableColors={[Color.n_disable_button, Color.n_disable_button]}
             ContentComponent={
               completingTravel ? () => <ActivityIndicator color={Color.white} /> : null
             }
             isVerticalGradient={true}
-            _onPress={onPressComplete}
+            _onPress={onPressConfirmReorder}
           />
+        ) : (
+          (travelStatus === TravelStatuses.ARRIVED || travelStatus === TravelStatuses.DEPARTED) && (
+            <GradientButton
+              label={
+                travelStatus === TravelStatuses.ARRIVED
+                  ? translang.t('ARRIVED_TRAVEL')
+                  : translang.t('COMPLETE_TRAVEL')
+              }
+              containerStyle={styles.nextButtonContainer}
+              buttonStyle={styles.nextButton}
+              enabled={travelStatus === TravelStatuses.DEPARTED}
+              colors={[Color.green_button_next_color1, Color.green_button_next_color2]}
+              disableColors={[Color.n_disable_button, Color.n_disable_button]}
+              ContentComponent={
+                completingTravel ? () => <ActivityIndicator color={Color.white} /> : null
+              }
+              isVerticalGradient={true}
+              _onPress={onPressComplete}
+            />
+          )
         )}
       </View>
       <ProgressHud isVisible={isLoading} />
@@ -418,6 +463,9 @@ const styles = StyleSheet.create({
   subContainer: {
     flex: 1,
     paddingTop: 16,
+  },
+  sortableList: {
+    flex: 1,
   },
   statusContainer: {
     alignItems: 'center',

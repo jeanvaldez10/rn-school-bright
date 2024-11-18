@@ -12,6 +12,7 @@ const StudentItem = ({
   onPressCheckIn,
   onPressCheckout,
   reordering = false,
+  toggleRowActive,
 }) => {
   const {
     sFirstName = 'ตรีมนต์',
@@ -68,9 +69,11 @@ const StudentItem = ({
     translang.t('BUS_CHECK_IN_STATUS_UNSPECIFIED');
 
   return (
-    <TouchableOpacity style={styles.listItem} onPress={onPressStudent(item)}>
+    <View style={styles.listItem} onPress={onPressStudent(item)}>
       {reordering ? (
-        <Image source={images.ic_three_line} style={styles.orderIcon} resizeMode="cover" />
+        <TouchableOpacity style={styles.dragIconContainer} onLongPress={toggleRowActive}>
+          <Image source={images.ic_three_line} style={styles.orderIcon} resizeMode="cover" />
+        </TouchableOpacity>
       ) : null}
 
       <Text style={styles.itemText}>{index + 1}.</Text>
@@ -97,7 +100,7 @@ const StudentItem = ({
           <Text style={styles.buttonText}>{checkoutLabel}</Text>
         </Pressable>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -108,6 +111,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     width: 46,
     backgroundColor: Color.n_default_gray,
+  },
+  dragIconContainer: {
+    paddingVertical: 8,
   },
   orderIcon: {
     width: 16,

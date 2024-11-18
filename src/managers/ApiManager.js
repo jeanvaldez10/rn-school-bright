@@ -2827,22 +2827,35 @@ const busCancelTravel = (nTravelID) => {
     return schoolBusHttpClient.post(apiUrls.cacelBusTravel(), {
         nTravelID,
     })
-        .then(response => response.data)
-        .catch(error => {
-            console.error("Error cancelling travel:", error);
-            throw error; 
-        });
+    .then(response => response.data)
+    .catch(error => {
+        console.error("Error cancelling travel:", error);
+        throw error; 
+    });
 };
 
 const busCompleteTravel = (nTravelID) => {
     return schoolBusHttpClient.post(apiUrls.completeBusTravel(), {
         nTravelID,
     })
-        .then(response => response.data)
-        .catch(error => {
-            console.error("Error completing travel:", error);
-            throw error; 
-        });
+    .then(response => response.data)
+    .catch(error => {
+        console.error("Error completing travel:", error);
+        throw error; 
+    });
+};
+
+
+const reOrderStudentQueue = (nScheduleID, lstStudentIDsByOrder) => {
+    return schoolBusHttpClient.post(apiUrls.reOrderStudentQueue(), {
+        nScheduleID,
+        lstStudentIDsByOrder
+    })
+    .then(response => response.data)
+    .catch(error => {
+        console.error("Error re-ordering queue:", error);
+        throw error; 
+    });
 };
 
 export default {
@@ -3073,5 +3086,6 @@ export default {
     busStartTravel,
     busCancelTravel,
     busCompleteTravel,
+    reOrderStudentQueue,
     // end schcool bus
 };
