@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native';
 import Color from '../../../constants/color';
 // import { BusStatusColorMap } from '../../../constants/constants';
 import images from '../../../themes/Images';
@@ -69,7 +69,7 @@ const StudentItem = ({
     translang.t('BUS_CHECK_IN_STATUS_UNSPECIFIED');
 
   return (
-    <View style={styles.listItem} onPress={onPressStudent(item)}>
+    <TouchableOpacity style={styles.listItem} onPress={onPressStudent(item)}>
       {reordering ? (
         <TouchableOpacity style={styles.dragIconContainer} onLongPress={toggleRowActive}>
           <Image source={images.ic_three_line} style={styles.orderIcon} resizeMode="cover" />
@@ -100,7 +100,7 @@ const StudentItem = ({
           <Text style={styles.buttonText}>{checkoutLabel}</Text>
         </Pressable>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
