@@ -1,21 +1,23 @@
-import React, { useCallback, useState } from 'react';
-import { Alert, Image, Linking, Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Alert, Linking, Modal, StyleSheet, Text, View } from 'react-native';
 import GradientButton from '../../../components/GradientButton';
 import Color from '../../../constants/color';
 import translang from '../../../utils/language.utils';
 
-export default function BusPopup({ isVisible, onClose }) {
+export default function BusPopup({ isVisible, onClose, infoVehicle }) {
+  const { sBrandModel, sLicensePlate, sDriverName, sDriverPhone } = infoVehicle;
+
   const openDialPad = (phoneNumber) => {
     const url = `tel:${phoneNumber}`;
     Linking.openURL(url).catch((err) => Alert.alert('Failed to open dial pad', err.message));
   };
 
   const onPressCallMother = () => {
-    openDialPad('081-234-5678');
+    if (sDriverPhone) {
+      openDialPad(sDriverPhone);
+    }
     onClose();
   };
-
- 
 
   console;
   return (
@@ -28,20 +30,20 @@ export default function BusPopup({ isVisible, onClose }) {
           <View style={styles.wrapper1}>
             <View style={styles.item1}>
               <Text style={styles.subTitle}>{translang.t('VEHICLE_REGISTRATION')} : </Text>
-              <Text style={styles.details}>อบ 1212 กรุงเทพมหานคร ddddddddddd</Text>
+              <Text style={styles.details}>{sLicensePlate}</Text>
             </View>
             <View style={styles.item1} onPress={onPressCallMother}>
               <Text style={styles.subTitle}>{translang.t('BUS_MODEL')} : </Text>
-              <Text style={styles.details}>Toyota Commuter</Text>
+              <Text style={styles.details}>{sBrandModel}</Text>
             </View>
 
             <View style={styles.item1} onPress={onPressCallMother}>
               <Text style={styles.subTitle}>{translang.t('DRIVER_NAME')} : </Text>
-              <Text style={styles.details}>ชื่อคนขับ</Text>
+              <Text style={styles.details}>{sDriverName}</Text>
             </View>
             <View style={styles.item1} onPress={onPressCallMother}>
               <Text style={styles.subTitle}>{translang.t('DRIVER_PHONE_NUMBER')} : </Text>
-              <Text style={styles.details}>081-111-1111</Text>
+              <Text style={styles.details}>{sDriverPhone}</Text>
             </View>
           </View>
 

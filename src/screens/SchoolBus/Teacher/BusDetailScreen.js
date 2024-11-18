@@ -42,6 +42,7 @@ const BusDetailScreen = ({ navigation }) => {
 
   const [students, setStudents] = useState([]); // nCheckInStatus: 0:None, 1:Checked In, 2:Checked In Late, -1:Not Board, -2:Personal Leave, "nCheckOutStatus": 0 0:None, 1:Checked Out, -1:Not Board, -2:Personal Leave, -3:Sick Leave
   const [infoTravel, setInfoTravel] = useState({}); // 0:Not Departed, 1:Departed, 100:Arrived, -1:Cancelled, -100:Inciden
+  const [infoVehicle, setInfoVehicle] = useState({});
 
   const [isLoading, setIsLoading] = useState(false);
   const [switchingTravelStatus, setSwitchingTravelStatus] = useState(false);
@@ -75,6 +76,7 @@ const BusDetailScreen = ({ navigation }) => {
       if (data.status === 1) {
         setStudents(data.lstStudents || []);
         setInfoTravel(data.infoTravel);
+        setInfoVehicle(data.infoVehicle);
       } else {
         showAlert(data.message || 'Failed to fetch data.', 'warning');
       }
@@ -165,7 +167,7 @@ const BusDetailScreen = ({ navigation }) => {
 
         if (updateFunc) {
           const result = await updateFunc(nTravelID);
-          result.success === 1
+          result.status === 1
             ? await onSwitchSuccess(newStatus)
             : showAlert(result.message, 'warning');
         }
@@ -357,6 +359,7 @@ const BusDetailScreen = ({ navigation }) => {
       />
 
       <BusPopup
+        infoVehicle={infoVehicle}
         isVisible={showBusModal}
         onClose={() => setShowBusModal(false)}
         navigation={navigation}
