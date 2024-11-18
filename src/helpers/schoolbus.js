@@ -7,8 +7,8 @@ export const checkGPSPermission = async () => {
   try {
     const position = await new Promise((resolve, reject) => {
       Geolocation.getCurrentPosition(
-        (position) => resolve(position), 
-        (error) => reject(new Error(error.message)), 
+        (position) => resolve(position),
+        (error) => reject(new Error(error.message)),
       );
     });
 
@@ -68,4 +68,12 @@ export const getTravelButtonLabel = (travelStatus) => {
     default:
       return '';
   }
+};
+
+export const canCompleteTask = (students) => {
+  const hasUnspecifiedStatus = students.some(
+    (student) => student.nCheckInStatus === 0 || student.nCheckOutStatus === 0,
+  );
+
+  return !hasUnspecifiedStatus;
 };

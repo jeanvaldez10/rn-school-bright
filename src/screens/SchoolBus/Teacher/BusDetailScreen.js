@@ -18,6 +18,7 @@ import ProgressHud from '../../../components/ProgressHud';
 import Color from '../../../constants/color';
 import { TravelStatuses } from '../../../constants/constants';
 import {
+  canCompleteTask,
   checkGPSPermission,
   getNextTravelStatus,
   getTravelButtonLabel,
@@ -46,6 +47,7 @@ const BusDetailScreen = ({ navigation }) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [switchingTravelStatus, setSwitchingTravelStatus] = useState(false);
+  const [completingTravel, setCompletingTravel] = useState(false);
 
   const [showAlertModal, setShowAlertModal] = useState(false);
   const [alertContent, setAlertContent] = useState('');
@@ -210,7 +212,28 @@ const BusDetailScreen = ({ navigation }) => {
     }
   };
 
-  const onPressNext = () => {};
+  const onPressComplete = async () => {
+    if (!switchingTravelStatus) {
+      try {
+        if (TravelStatuses.ARRIVED && !canCompleteTask(students)) {
+          showAlert(translang.t('CHECK_STUDENT_STATUS'), 'warning');
+          return;
+        }
+
+        setCompletingTravel(true);
+
+        const result = await ApiManager.busCompleteTravel(nTravelID);
+        result.status === 1
+          ? await onSwitchSuccess(TravelStatuses.ARRIVED)
+          : showAlert(result.message, 'warning');
+      } catch (e) {
+        console.error('Switch travel status error', e);
+        showAlert(e.message || 'Failed to complete travel.', 'warning');
+      } finally {
+        setCompletingTravel(false);
+      }
+    }
+  };
 
   const onHandleQueue = () => {
     setReordering(true);
@@ -329,17 +352,22 @@ const BusDetailScreen = ({ navigation }) => {
           contentContainerStyle={styles.flatlist}
         />
         {(travelStatus === TravelStatuses.ARRIVED || travelStatus === TravelStatuses.DEPARTED) && (
-          <NextButton
+          <GradientButton
             label={
               travelStatus === TravelStatuses.ARRIVED
-                ? translang.t('COMMON_confirm')
-                : translang.t('COMMON_confirm')
+                ? translang.t('ARRIVED_TRAVEL')
+                : translang.t('COMPLETE_TRAVEL')
             }
             containerStyle={styles.nextButtonContainer}
             buttonStyle={styles.nextButton}
+            enabled={travelStatus === TravelStatuses.DEPARTED}
             colors={[Color.green_button_next_color1, Color.green_button_next_color2]}
+            disableColors={[Color.n_disable_button, Color.n_disable_button]}
+            ContentComponent={
+              completingTravel ? () => <ActivityIndicator color={Color.white} /> : null
+            }
             isVerticalGradient={true}
-            _onPress={onPressNext}
+            _onPress={onPressComplete}
           />
         )}
       </View>

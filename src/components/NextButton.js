@@ -58,7 +58,7 @@ export default class NextButton extends Component {
       <View style={[styles.gradientBtnWrapper, containerStyle]}>
         <TouchableOpacity
           onPress={_onPress}
-          disabled={!enabled}r
+          disabled={!enabled}
           activeOpacity={0.8}
           style={touchStyle}>
           <LinearGradient

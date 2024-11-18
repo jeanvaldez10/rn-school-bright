@@ -1277,6 +1277,7 @@ export default {
   CALL_PARENT: 'Call the parents',
   REPORT_INCIDENT: 'Report incident',
   INCIDENT_REPORT: 'Incident report',
+  CHECK_STUDENT_STATUS: 'กรุณาเช็กนักเรียนให้ครบก่อนค่ะ',
   CHECK_STUDENT_QUEUE:
     'Please check the students in queue order. If you need to check this student, you can reorder the queue.',
 

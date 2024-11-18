@@ -1263,6 +1263,7 @@ export default {
   CALL_PARENT: 'โทรหาผู้ปกครอง',
   REPORT_INCIDENT: 'แจ้งเหตุ',
   INCIDENT_REPORT: 'แจ้งเหตุ',
+  CHECK_STUDENT_STATUS: 'Please Check Student Status',
   CHECK_STUDENT_QUEUE:
     'กรุณาเช็กนักเรียนตามลำดับคิว หากต้องการเช็กนักเรียนคนนี้, ท่านสามารถจัดลำดับคิวใหม่ได้',
 
