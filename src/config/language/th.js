@@ -1286,6 +1286,7 @@ export default {
   DOT_MENU_GROUP_ICIDENT_REPORT: 'Group Incident Report',
   DOT_MENU_INCIDENT_REPORTING_REPORT: 'รายงานการแจ้งเหตุ',
   DOT_MENU_PASSENGER_REPORT: 'หน้ารายงานขึ้น-ลงรถรับส่ง',
+  SUCCESS_INCIDENT_SUBMIT: 'แจ้งเหตุเรียบร้อย',
 
   VEHICLE_REGISTRATION: 'ทะเบียนรถ',
   BUS_MODEL: 'ยี่ห้อรถ / รุ่นรถ',
@@ -1302,6 +1303,7 @@ export default {
   DEPATURE_TIME: 'เวลาออกเดินทาง',
   QUEUE_ORDER: 'ลำดับคิว',
   BUS_TEACHER_STAFF: 'ครู/บุคลากร',
+
 
   // End of schoolBus
 };

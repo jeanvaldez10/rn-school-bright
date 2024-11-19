@@ -1300,7 +1300,7 @@ export default {
   DOT_MENU_GROUP_ICIDENT_REPORT: 'Group Incident Report',
   DOT_MENU_INCIDENT_REPORTING_REPORT: 'Report of incident',
   DOT_MENU_PASSENGER_REPORT: 'Passenger Boarding and Alighting Report',
-
+  SUCCESS_INCIDENT_SUBMIT: 'SUCCESS',
   VEHICLE_REGISTRATION: 'Vehicle Registration',
   BUS_MODEL: 'Car brand/Model',
   DRIVER_NAME: 'Driver name',

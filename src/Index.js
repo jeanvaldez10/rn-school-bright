@@ -261,7 +261,7 @@ import VerifyIdentifyIDSuccessScreen from './screens/Auth/VerifyIdentifyIDSucces
 import AuthLoadingScreen from './AuthLoadingScreen';
 import BusListScreen from './screens/SchoolBus/Teacher/BusListScreen';
 import BusDetailScreen from './screens/SchoolBus/Teacher/BusDetailScreen';
-import IncidentReport from './screens/SchoolBus/Teacher/IncidentReport';
+import StudentBusIncidentReport from './screens/SchoolBus/Teacher/StudentBusIncidentReport';
 import GroupIncidentReport from './screens/SchoolBus/Teacher/GroupIncidentReport';
 import IncidentReportingReport from './screens/SchoolBus/Teacher/IncidentReportingReport';
 import TeacherBusAlightingReport from './screens/SchoolBus/Teacher/TeacherBusAlightingReport';
@@ -461,8 +461,8 @@ const MainAppRouteConfigs = {
       headerShown: false,
     },
   },
-  IncidentReport: {
-    screen: IncidentReport,
+  StudentBusIncidentReport: {
+    screen: StudentBusIncidentReport,
     navigationOptions: {
       headerShown: false,
     },

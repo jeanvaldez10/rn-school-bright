@@ -1048,6 +1048,10 @@ class ApiUrls {
   reOrderStudentQueue() {
     return '/Schedule/ReOrderStudents';
   }
+
+  submitIndividualIncident() {
+    return '/SubmitIncident/Individual';
+  }
 }
 
 

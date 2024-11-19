@@ -1,13 +1,14 @@
 import { Text } from 'native-base';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   BackHandler,
   FlatList,
   Image,
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
-  View
+  View,
 } from 'react-native';
 import DocumentPicker from 'react-native-document-picker';
 import * as ImagePicker from 'react-native-image-picker';
@@ -22,26 +23,29 @@ import Color from '../../../constants/color';
 import ApiManager from '../../../managers/ApiManager';
 import { default as Images, default as images } from '../../../themes/Images';
 import translang from '../../../utils/language.utils';
+import GradientButton from '../../../components/GradientButton';
 
 const IncidentReport = ({ navigation }) => {
+  const [userInfo] = useState(navigation.getParam('userInfo'));
+  const [student] = useState(navigation.getParam('student'));
+  const [nTravelID] = useState(navigation.getParam('nTravelID'));
+
   const [isLoading, setIsLoading] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
   const [showModal, setShowModal] = useState(false);
   const [modalBody, setModalBody] = useState('');
-  const [recipient, setRecipient] = useState({});
-  const [selectedIds, setSelectedIds] = useState([]);
 
-  const [topic, setTopic] = useState('');
-  const [reply, setReply] = useState('');
   const [description, setDescription] = useState('');
+
   const [attachedFiles, setAttachedFiles] = useState([]);
   const [attachedImages, setAttachedImages] = useState([]);
   const [showAttachImages, setShowAttachImages] = useState([]);
   const [showImageView, setShowImageView] = useState(false);
   const [selImageIndex, setSelImageIndex] = useState(0);
-  const [level2id, setLevel2id] = useState([]);
-  const [userInfo, setUserInfo] = useState({});
 
-  // Back button handler
+  const { sPhoto, sFirstName, sLastName, sStudentID } = student || {};
+
   const handleBackButton = useCallback(() => {
     navigation.goBack();
     return true;
@@ -53,15 +57,7 @@ const IncidentReport = ({ navigation }) => {
   }, [handleBackButton]);
 
   const __next = async () => {
-    if (topic === '') {
-      setShowModal(true);
-      setModalBody(translang.t('INPUT_HEADTOPIC'));
-      return;
-    }
-
-    if (reply === '') {
-      setShowModal(true);
-      setModalBody(translang.t('INPUT_REPLY'));
+    if (submitting) {
       return;
     }
 
@@ -70,31 +66,43 @@ const IncidentReport = ({ navigation }) => {
       setModalBody(translang.t('INPUT_DESCRIPTION'));
       return;
     }
-    const params = {
-      recipient: recipient,
-      topic: topic,
-      reply: reply,
-      description: description,
-      attachedFiles: attachedFiles,
-      attachedImages: attachedImages,
-      showAttachImages: showAttachImages,
-      individualIds: selectedIds,
-      userInfo: userInfo,
-      level2id: level2id,
-    };
-    navigation.navigate('BroadcastSubmit', params);
+
+    console.log({
+      nTravelID,
+      sStudentID,
+      sMessage: description,
+      sFileURLs: attachedFiles.map((file) => file.FileURL).join(','),
+      sImageURLs: attachedImages.map((file) => file.FileURL).join(','),
+    });
+
+    setSubmitting(true);
+    try {
+      const result = await ApiManager.submitIndividualIncident({
+        nTravelID,
+        sStudentID,
+        sMessage: description,
+        sFileURLs: attachedFiles.map((file) => file.FileURL).join(','),
+        sImageURLs: attachedImages.map((file) => file.FileURL).join(','),
+      });
+      if (result.status === 1) {
+        setShowModal(true);
+        setModalBody(translang.t('SUCCESS_INCIDENT_SUBMIT'));
+      } else {
+        throw Error(result.message);
+      }
+    } catch (e) {
+      setShowModal(true);
+      setModalBody(translang.t('ERROR_OCCURED_TRY_AGAIN'));
+    }
+    setSubmitting(false);
   };
+
+  console.log(modalBody);
 
   const onChooseFile = async () => {
     try {
-      const results = await DocumentPicker.pickMultiple({
-        type: [
-          DocumentPicker.types.doc,
-          DocumentPicker.types.docx,
-          DocumentPicker.types.xls,
-          DocumentPicker.types.xlsx,
-          DocumentPicker.types.pdf,
-        ],
+      const results = await DocumentPicker.pick({
+        allowMultiSelection: true,
       });
 
       let requestCnt = 0;
@@ -128,9 +136,10 @@ const IncidentReport = ({ navigation }) => {
           });
       });
     } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-      } else {
-      }
+      console.log(err);
+      // if (DocumentPicker.isCancel(err)) {
+      // } else {
+      // }
     }
   };
 
@@ -235,7 +244,6 @@ const IncidentReport = ({ navigation }) => {
     );
   };
 
-  // UI Components
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
       <BackNavigationBar title={translang.t('SchoolBus')} onMenuTap={handleBackButton} />
@@ -243,10 +251,13 @@ const IncidentReport = ({ navigation }) => {
         <View style={{ ...styles.listItem, marginTop: 20, marginBottom: 10 }}>
           <View style={{ ...styles.listItem, flexDirection: 'column', alignItems: 'flex-start' }}>
             <TouchableOpacity style={styles.studentWrapper}>
-              <Image source={images.women_user} style={styles.itemAvatar} />
+              <Image
+                source={sPhoto ? { uri: sPhoto } : images.women_user}
+                style={styles.itemAvatar}
+              />
               <View style={styles.studentTextWrapper}>
                 <Text style={styles.studentText} numberOfLines={1}>
-                  ตรีมนต์ รันการ
+                  {sFirstName} {sLastName}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -259,10 +270,11 @@ const IncidentReport = ({ navigation }) => {
                 marginTop: 10,
                 width: '100%',
               }}
-              value={topic}
+              value={description}
               textAlignVertical={'top'}
+              placeholder={translang.t('FILL_IN_THE_DETAIL')}
               placeholderTextColor={Color.n_text_placeholder_gray}
-              onChangeText={(text) => setTopic(text)}
+              onChangeText={(text) => setDescription(text)}
             />
           </View>
         </View>
@@ -317,12 +329,13 @@ const IncidentReport = ({ navigation }) => {
           </Text>
         </View>
 
-        <NextButton
+        <GradientButton
           label={translang.t('COMMON_next')}
-          containerStyle={{ width: 290, marginLeft: 'auto', marginRight: 'auto', marginBottom: 20 }}
+          containerStyle={styles.nextButtonContainer}
           buttonStyle={{ borderRadius: 38, height: 75 }}
           colors={[Color.green_button_next_color1, Color.green_button_next_color2]}
           isVerticalGradient={false}
+          ContentComponent={submitting ? () => <ActivityIndicator color={Color.white} /> : null}
           _onPress={() => __next()}
         />
       </ScrollView>
@@ -474,6 +487,13 @@ const styles = ScaledSheet.create({
     height: 46,
     marginHorizontal: 8,
     width: 46,
+  },
+  nextButtonContainer: {
+    width: 290,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 24,
+    marginBottom: 20,
   },
 });
 

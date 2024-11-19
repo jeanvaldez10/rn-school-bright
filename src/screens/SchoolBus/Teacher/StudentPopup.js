@@ -5,9 +5,16 @@ import Color from '../../../constants/color';
 import images from '../../../themes/Images';
 import translang from '../../../utils/language.utils';
 
-export default function StudentPopup({ isVisible, onClose, navigation, student }) {
+export default function StudentPopup({
+  isVisible,
+  onClose,
+  navigation,
+  student,
+  nTravelID,
+  userInfo,
+}) {
   const { sFatherPhone = '081-234-5678', sMotherPhone = '081-234-5678' } = student || {};
-  
+
   const openDialPad = (phoneNumber) => {
     const url = `tel:${phoneNumber}`;
     Linking.openURL(url).catch((err) => Alert.alert('Failed to open dial pad', err.message));
@@ -25,14 +32,12 @@ export default function StudentPopup({ isVisible, onClose, navigation, student }
 
   const onPressReportIncident = () => {
     let params = {
-      deliveryFormat: {},
-      recipient: {},
-      selectedIds: [],
-      parent: 'BroadcastGroupSelectClass',
-      userInfo: {},
+      student,
+      nTravelID,
+      userInfo,
     };
 
-    navigation.navigate('IncidentReport', params);
+    navigation.navigate('StudentBusIncidentReport', params);
     onClose();
   };
 

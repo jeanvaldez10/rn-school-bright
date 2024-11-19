@@ -2756,105 +2756,129 @@ const getLeaveInfos = (userId) => {
 }
 
 const getBusList = () => {
-  return schoolBusHttpClient.post(apiUrls.getBusList(), {})
-      .then(response => response.data)
-      .catch(error => {
-          console.error("Error fetching bus list:", error);
-          throw error; 
-      });
+  return schoolBusHttpClient
+    .post(apiUrls.getBusList(), {})
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error fetching bus list:', error);
+      throw error;
+    });
 };
 
 const getBusSchedule = (nBusID) => {
-  return schoolBusHttpClient.post(apiUrls.getTodayBusSchedule(), {
-    nBusID,
-  })
-      .then(response => response.data)
-      .catch(error => {
-          console.error("Error fetching bus schedule list:", error);
-          throw error; 
-      });
+  return schoolBusHttpClient
+    .post(apiUrls.getTodayBusSchedule(), {
+      nBusID,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error fetching bus schedule list:', error);
+      throw error;
+    });
 };
 
 const getBusScheduleDetail = (nScheduleID) => {
-    return schoolBusHttpClient.post(apiUrls.getBusScheduleDetail(), {
-        nScheduleID,
+  return schoolBusHttpClient
+    .post(apiUrls.getBusScheduleDetail(), {
+      nScheduleID,
     })
-        .then(response => response.data)
-        .catch(error => {
-            console.error("Error fetching bus schedule details:", error);
-            throw error; 
-        });
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error fetching bus schedule details:', error);
+      throw error;
+    });
 };
 
 const busCheckInStudent = (nTravelID, sStudentID, nStatus) => {
-    return schoolBusHttpClient.post(apiUrls.buscheckInStudent(), {
-        nTravelID,
-        sStudentID,
-        nStatus
+  return schoolBusHttpClient
+    .post(apiUrls.buscheckInStudent(), {
+      nTravelID,
+      sStudentID,
+      nStatus,
     })
-        .then(response => response.data)
-        .catch(error => {
-            console.error("Error updating checkin status:", error);
-            throw error; 
-        });
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error updating checkin status:', error);
+      throw error;
+    });
 };
 
 const busCheckoutStudent = (nTravelID, sStudentID, nStatus) => {
-    return schoolBusHttpClient.post(apiUrls.busCheckoutStudent(), {
-        nTravelID,
-        sStudentID,
-        nStatus
+  return schoolBusHttpClient
+    .post(apiUrls.busCheckoutStudent(), {
+      nTravelID,
+      sStudentID,
+      nStatus,
     })
-        .then(response => response.data)
-        .catch(error => {
-            console.error("Error updating checkout status:", error);
-            throw error; 
-        });
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error updating checkout status:', error);
+      throw error;
+    });
 };
 
 const busStartTravel = (nTravelID) => {
-    return schoolBusHttpClient.post(apiUrls.busStartTravel(), {
-        nTravelID,
+  return schoolBusHttpClient
+    .post(apiUrls.busStartTravel(), {
+      nTravelID,
     })
-        .then(response => response.data)
-        .catch(error => {
-            console.error("Error starting travel:", error);
-            throw error; 
-        });
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error starting travel:', error);
+      throw error;
+    });
 };
 
 const busCancelTravel = (nTravelID) => {
-    return schoolBusHttpClient.post(apiUrls.cacelBusTravel(), {
-        nTravelID,
+  return schoolBusHttpClient
+    .post(apiUrls.cacelBusTravel(), {
+      nTravelID,
     })
-    .then(response => response.data)
-    .catch(error => {
-        console.error("Error cancelling travel:", error);
-        throw error; 
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error cancelling travel:', error);
+      throw error;
     });
 };
 
 const busCompleteTravel = (nTravelID) => {
-    return schoolBusHttpClient.post(apiUrls.completeBusTravel(), {
-        nTravelID,
+  return schoolBusHttpClient
+    .post(apiUrls.completeBusTravel(), {
+      nTravelID,
     })
-    .then(response => response.data)
-    .catch(error => {
-        console.error("Error completing travel:", error);
-        throw error; 
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error completing travel:', error);
+      throw error;
     });
 };
 
-
 const reOrderStudentQueue = (nScheduleID, lstStudentIDsByOrder) => {
-    return schoolBusHttpClient.post(apiUrls.reOrderStudentQueue(), {
-        nScheduleID,
-        lstStudentIDsByOrder
+  return schoolBusHttpClient
+    .post(apiUrls.reOrderStudentQueue(), {
+      nScheduleID,
+      lstStudentIDsByOrder,
     })
-    .then(response => response.data)
-    .catch(error => {
-        console.error("Error re-ordering queue:", error);
-        throw error; 
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error re-ordering queue:', error);
+      throw error;
+    });
+};
+
+const submitIndividualIncident = ({ nTravelID, sStudentID, sMessage, sFileURLs, sImageURLs }) => {
+  return schoolBusHttpClient
+    .post(apiUrls.submitIndividualIncident(), {
+      nTravelID,
+      sStudentID,
+      sMessage,
+      sFileURLs,
+      sImageURLs,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error submitting incident:', error);
+      throw error;
     });
 };
 
@@ -3087,5 +3111,6 @@ export default {
     busCancelTravel,
     busCompleteTravel,
     reOrderStudentQueue,
+    submitIndividualIncident,
     // end schcool bus
 };
