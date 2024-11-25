@@ -1280,6 +1280,11 @@ export default {
 
   REPORT_TYPE_SCHOOL: 'ส่งหาโรงเรียน',
   REPORT_TYPE_PARENT: 'ส่งหาผู้ปกครอง',
+  REPORT_SEND_TO_SCHOOL: 'ส่งหาโรงเรียน',
+  REPORT_SEND_TO_PARENTS: 'ส่งหาผู้ปกครอง',
+  REPORT_SEND_TO_PARENTS_NOT_CHECKEDIN: 'ส่งหาผู้ปกครองของนักเรียนที่ยัง ไม่เช็กอิน',
+  REPORT_SEND_TO_PARENTS_NOT_CHECKEDOUT: 'ส่งหาผู้ปกครองของนักเรียนที่ยัง ไม่เช็กเอาท์',
+  REPORT_SEND_TO_PARENTS_ALL: 'ส่งหาผู้ปกครองของนักเรียนทุกคน บนรถ',
 
   DOT_MENU_QUEUE_MANAGE: 'จัดล่าดับคิว',
   DOT_MENU_BUS_DETAILS: 'รายละเอียดรถ',

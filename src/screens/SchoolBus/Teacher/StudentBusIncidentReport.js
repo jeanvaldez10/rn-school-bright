@@ -67,17 +67,9 @@ const IncidentReport = ({ navigation }) => {
       return;
     }
 
-    console.log({
-      nTravelID,
-      sStudentID,
-      sMessage: description,
-      sFileURLs: attachedFiles.map((file) => file.FileURL).join(','),
-      sImageURLs: attachedImages.map((file) => file.FileURL).join(','),
-    });
-
     setSubmitting(true);
     try {
-      const result = await ApiManager.submitIndividualIncident({
+      const result = await ApiManager.submitBusIndividualIncident({
         nTravelID,
         sStudentID,
         sMessage: description,
@@ -92,12 +84,10 @@ const IncidentReport = ({ navigation }) => {
       }
     } catch (e) {
       setShowModal(true);
-      setModalBody(translang.t('ERROR_OCCURED_TRY_AGAIN'));
+      setModalBody(e.message || translang.t('ERROR_OCCURED_TRY_AGAIN'));
     }
     setSubmitting(false);
   };
-
-  console.log(modalBody);
 
   const onChooseFile = async () => {
     try {
@@ -132,7 +122,6 @@ const IncidentReport = ({ navigation }) => {
           })
           .catch((error) => {
             console.log('uploadFile', error);
-            setIsLoading(false);
           });
       });
     } catch (err) {
@@ -181,7 +170,6 @@ const IncidentReport = ({ navigation }) => {
             })
             .catch((error) => {
               console.log('uploadImage', error);
-              setIsLoading(false);
             });
         });
       }
@@ -343,7 +331,7 @@ const IncidentReport = ({ navigation }) => {
       <AlertWithImageModal
         isVisible={showModal}
         image={Images.alert_inbox}
-        message={modalBody}
+        message={JSON.stringify(modalBody)}
         buttonColors={[Color.red_orange, Color.soft_red]}
         isVerticalGradient={false}
         onClose={() => {

@@ -1295,6 +1295,12 @@ export default {
   REPORT_TYPE_SCHOOL: 'School',
   REPORT_TYPE_PARENT: 'Parent',
 
+  REPORT_SEND_TO_SCHOOL: 'Send to school',
+  REPORT_SEND_TO_PARENTS: 'Send to parents',
+  REPORT_SEND_TO_PARENTS_NOT_CHECKEDIN: 'Send to parents of students who haven\'t checked in yet.',
+  REPORT_SEND_TO_PARENTS_NOT_CHECKEDOUT: 'Send to parents of students who haven\'t checked out yet.',
+  REPORT_SEND_TO_PARENTS_ALL: 'Send to the parents of all students in the bus.',
+
   DOT_MENU_QUEUE_MANAGE: 'Manage Queue',
   DOT_MENU_BUS_DETAILS: 'Vehicle details',
   DOT_MENU_GROUP_ICIDENT_REPORT: 'Group Incident Report',

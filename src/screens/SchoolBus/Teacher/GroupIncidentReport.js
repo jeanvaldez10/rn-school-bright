@@ -1,6 +1,7 @@
 import { Text } from 'native-base';
 import React, { useCallback, useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   BackHandler,
   FlatList,
   Image,
@@ -17,35 +18,33 @@ import AlertWithImageModal from '../../../components/AlertWithImageModal';
 import BackNavigationBar from '../../../components/BackNavigationBar';
 import CustomRadioButton from '../../../components/CustomRadioButton';
 import CustomTextInput from '../../../components/CustomTextInput';
-import NextButton from '../../../components/NextButton';
+import GradientButton from '../../../components/GradientButton';
 import ProgressHud from '../../../components/ProgressHud';
 import Color from '../../../constants/color';
 import ApiManager from '../../../managers/ApiManager';
 import Images from '../../../themes/Images';
 import translang from '../../../utils/language.utils';
+import CustomCheckbox from '../CustomCheckBox';
 
 const GroupIncidentReport = ({ navigation }) => {
+  const [userInfo] = useState(navigation.getParam('userInfo'));
+  const [nTravelID] = useState(navigation.getParam('nTravelID'));
+
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalBody, setModalBody] = useState('');
-  const [deliveryFormat, setDeliveryFormat] = useState({});
-  const [recipient, setRecipient] = useState({});
-  const [selectedIds, setSelectedIds] = useState([]);
-  const [deliveryTimeType, setDeliveryTimeType] = useState(-1);
-  const [deliveryDate, setDeliveryDate] = useState('');
-  const [deliveryTime, setDeliveryTime] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  const [topic, setTopic] = useState('');
-  const [reply, setReply] = useState('');
   const [description, setDescription] = useState('');
   const [attachedFiles, setAttachedFiles] = useState([]);
   const [attachedImages, setAttachedImages] = useState([]);
   const [showAttachImages, setShowAttachImages] = useState([]);
   const [showImageView, setShowImageView] = useState(false);
   const [selImageIndex, setSelImageIndex] = useState(0);
-  const [level2id, setLevel2id] = useState([]);
-  const [userInfo, setUserInfo] = useState({});
+  const [isSendToParent, setIsSentToParent] = useState(false);
+  const [groupType, setGroupType] = useState(0);
 
+  console.log(nTravelID, userInfo);
   // Back button handler
   const handleBackButton = useCallback(() => {
     navigation.goBack();
@@ -57,69 +56,52 @@ const GroupIncidentReport = ({ navigation }) => {
     return () => BackHandler.removeEventListener('hardwareBackPress', handleBackButton);
   }, [handleBackButton]);
 
+  const handleToggleParent = useCallback(() => {
+    if (isSendToParent) {
+      setGroupType(0);
+    }
+    setIsSentToParent(!isSendToParent);
+  }, [isSendToParent]);
+
   const __next = async () => {
-    if (topic === '') {
-      setShowModal(true);
-      setModalBody(translang.t('INPUT_HEADTOPIC'));
+    if (submitting) {
       return;
-    }
-
-    if (reply === '') {
-      setShowModal(true);
-      setModalBody(translang.t('INPUT_REPLY'));
-      return;
-    }
-
-    if (deliveryTimeType == -1) {
-      return;
-    }
-
-    if (deliveryTimeType === 2) {
-      if (deliveryDate === '') {
-        setShowModal(true);
-        setModalBody(translang.t('SPECIFY_DATE'));
-        return;
-      }
-      if (deliveryTime === '') {
-        setShowModal(true);
-        setModalBody(translang.t('SPECIFY_TIME'));
-        return;
-      }
     }
     if (description === '') {
       setShowModal(true);
       setModalBody(translang.t('INPUT_DESCRIPTION'));
       return;
     }
-    const params = {
-      deliveryFormat: deliveryFormat,
-      recipient: recipient,
-      deliveryTimeType: deliveryTimeType - 1,
-      deliveryDate: deliveryDate,
-      deliveryTime: deliveryTime,
-      topic: topic,
-      reply: reply,
-      description: description,
-      attachedFiles: attachedFiles,
-      attachedImages: attachedImages,
-      showAttachImages: showAttachImages,
-      individualIds: selectedIds,
-      userInfo: userInfo,
-      level2id: level2id,
-    };
-    navigation.navigate('BroadcastSubmit', params);
+
+    setSubmitting(true);
+    try {
+      const result = await ApiManager.submitBusGroupIncident({
+        nTravelID,
+        isSendToSchool: true,
+        isSendToParent,
+        nStudentGroupKind: groupType,
+        sMessage: description,
+        sFileURLs: attachedFiles.map((file) => file.FileURL).join(','),
+        sImageURLs: attachedImages.map((file) => file.FileURL).join(','),
+      });
+      if (result.status === 1) {
+        setShowModal(true);
+        setModalBody(translang.t('SUCCESS_INCIDENT_SUBMIT'));
+      } else {
+        throw Error(result.message);
+      }
+    } catch (e) {
+      console.log(e);
+      setShowModal(true);
+      setModalBody(e.message || translang.t('ERROR_OCCURED_TRY_AGAIN'));
+    }
+    setSubmitting(false);
   };
 
   const onChooseFile = async () => {
     try {
-      const results = await DocumentPicker.pickMultiple({
-        type: [
-          DocumentPicker.types.doc,
-          DocumentPicker.types.docx,
-          DocumentPicker.types.xls,
-          DocumentPicker.types.xlsx,
-          DocumentPicker.types.pdf,
-        ],
+      const results = await DocumentPicker.pick({
+        allowMultiSelection: true,
       });
 
       let requestCnt = 0;
@@ -149,13 +131,12 @@ const GroupIncidentReport = ({ navigation }) => {
           })
           .catch((error) => {
             console.log('uploadFile', error);
-            setIsLoading(false);
           });
       });
     } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-      } else {
-      }
+      // if (DocumentPicker.isCancel(err)) {
+      // } else {
+      // }
     }
   };
 
@@ -186,6 +167,7 @@ const GroupIncidentReport = ({ navigation }) => {
 
           ApiManager.uploadImage('broadcast', userInfo.SchoolID, item)
             .then((data) => {
+              console.log(data);
               uris.push({ FileType: data[0].FileType, FileURL: data[0].FileURL });
               showUris.push({ uri: data[0].FileURL });
               requestCnt = requestCnt + 1;
@@ -197,7 +179,6 @@ const GroupIncidentReport = ({ navigation }) => {
             })
             .catch((error) => {
               console.log('uploadImage', error);
-              setIsLoading(false);
             });
         });
       }
@@ -261,9 +242,12 @@ const GroupIncidentReport = ({ navigation }) => {
   };
 
   var radio_props = [
-    { text: translang.t('REPORT_TYPE_SCHOOL'), key: 1 },
-    { text: translang.t('REPORT_TYPE_PARENT'), key: 2 },
+    { text: translang.t('REPORT_SEND_TO_PARENTS_NOT_CHECKEDIN'), key: 1 },
+    { text: translang.t('REPORT_SEND_TO_PARENTS_NOT_CHECKEDOUT'), key: 2 },
+    { text: translang.t('REPORT_SEND_TO_PARENTS_ALL'), key: 3 },
   ];
+
+  console.log(modalBody);
 
   // UI Components
   return (
@@ -282,37 +266,38 @@ const GroupIncidentReport = ({ navigation }) => {
                 marginTop: 10,
                 width: '100%',
               }}
-              value={topic}
+              value={description}
               textAlignVertical={'top'}
+              placeholder={translang.t('FILL_IN_THE_DETAIL')}
               placeholderTextColor={Color.n_text_placeholder_gray}
-              onChangeText={(text) => setTopic(text)}
+              onChangeText={(text) => setDescription(text)}
             />
           </View>
 
           <Text style={styles.itemTitle}>{translang.t('SEND_TYPE')}</Text>
-          <CustomRadioButton
-            PROP={radio_props}
-            isVertically={true}
-            radioColor={Color.n_button_gradient_green_start}
-            radioSize={30}
-            itemTextStyle={{ fontSize: 24 }}
-            selVal={deliveryTimeType}
-            onPress={(value) => {
-              setDeliveryTimeType(value);
-            }}
+          <CustomCheckbox
+            checked={true}
+            label={translang.t('REPORT_SEND_TO_SCHOOL')}
+            disabled={true}
           />
-          <CustomRadioButton
-            PROP={radio_props}
-            isVertically={true}
-            radioColor={Color.n_button_gradient_green_start}
-            radioSize={30}
-            itemTextStyle={{ fontSize: 24 }}
-            selVal={deliveryTimeType}
-            containerStyle={{ marginLeft: 24 }}
-            onPress={(value) => {
-              setDeliveryTimeType(value);
-            }}
+          <CustomCheckbox
+            checked={isSendToParent}
+            label={translang.t('REPORT_SEND_TO_PARENTS')}
+            onToggle={handleToggleParent}
+            containerStyle={styles.checkBoxContainer}
           />
+          {isSendToParent && (
+            <CustomRadioButton
+              PROP={radio_props}
+              isVertically={true}
+              radioColor={Color.n_button_gradient_green_start}
+              radioSize={30}
+              itemTextStyle={{ fontSize: 24 }}
+              selVal={groupType}
+              containerStyle={{ marginLeft: 24 }}
+              onPress={setGroupType}
+            />
+          )}
         </View>
 
         <View style={{ ...styles.listItem, flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -365,12 +350,13 @@ const GroupIncidentReport = ({ navigation }) => {
           </Text>
         </View>
 
-        <NextButton
+        <GradientButton
           label={translang.t('COMMON_next')}
-          containerStyle={{ width: 290, marginLeft: 'auto', marginRight: 'auto', marginBottom: 20 }}
+          containerStyle={styles.nextButtonContainer}
           buttonStyle={{ borderRadius: 38, height: 75 }}
           colors={[Color.green_button_next_color1, Color.green_button_next_color2]}
           isVerticalGradient={false}
+          ContentComponent={submitting ? () => <ActivityIndicator color={Color.white} /> : null}
           _onPress={() => __next()}
         />
       </ScrollView>
@@ -378,7 +364,7 @@ const GroupIncidentReport = ({ navigation }) => {
       <AlertWithImageModal
         isVisible={showModal}
         image={Images.alert_inbox}
-        message={modalBody}
+        message={JSON.stringify(modalBody)}
         buttonColors={[Color.red_orange, Color.soft_red]}
         isVerticalGradient={false}
         onClose={() => {
@@ -503,6 +489,16 @@ const styles = ScaledSheet.create({
     minHeight: 200,
     paddingVertical: 8,
     paddingHorizontal: 8,
+  },
+  checkBoxContainer: {
+    marginTop: 8,
+  },
+  nextButtonContainer: {
+    width: 290,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 24,
+    marginBottom: 20,
   },
 });
 

@@ -1049,8 +1049,12 @@ class ApiUrls {
     return '/Schedule/ReOrderStudents';
   }
 
-  submitIndividualIncident() {
+  submitBusIndividualIncident() {
     return '/SubmitIncident/Individual';
+  }
+
+  submitBusGroupIncident() {
+    return '/SubmitIncident/Group';
   }
 }
 

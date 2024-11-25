@@ -271,12 +271,10 @@ const BusDetailScreen = ({ navigation }) => {
 
   const onGroupIncidentReport = () => {
     let params = {
-      deliveryFormat: {},
-      recipient: {},
-      selectedIds: [],
-      userInfo: {},
+      nTravelID,
+      userInfo,
     };
-    navigation.navigate('GroupIncidentReport', { params });
+    navigation.navigate('GroupIncidentReport', params);
   };
 
   const onReportingReport = () => {

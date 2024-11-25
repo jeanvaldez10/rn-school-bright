@@ -2866,9 +2866,15 @@ const reOrderStudentQueue = (nScheduleID, lstStudentIDsByOrder) => {
     });
 };
 
-const submitIndividualIncident = ({ nTravelID, sStudentID, sMessage, sFileURLs, sImageURLs }) => {
+const submitBusIndividualIncident = ({
+  nTravelID,
+  sStudentID,
+  sMessage,
+  sFileURLs,
+  sImageURLs,
+}) => {
   return schoolBusHttpClient
-    .post(apiUrls.submitIndividualIncident(), {
+    .post(apiUrls.submitBusIndividualIncident(), {
       nTravelID,
       sStudentID,
       sMessage,
@@ -2877,7 +2883,33 @@ const submitIndividualIncident = ({ nTravelID, sStudentID, sMessage, sFileURLs, 
     })
     .then((response) => response.data)
     .catch((error) => {
-      console.error('Error submitting incident:', error);
+      console.error('Error submitting student incident:', error);
+      throw error;
+    });
+};
+
+const submitBusGroupIncident = ({
+  nTravelID,
+  isSendToSchool,
+  isSendToParent,
+  nStudentGroupKind,
+  sMessage,
+  sFileURLs,
+  sImageURLs,
+}) => {
+  return schoolBusHttpClient
+    .post(apiUrls.submitBusGroupIncident(), {
+      nTravelID,
+      isSendToSchool,
+      isSendToParent,
+      nStudentGroupKind,
+      sMessage,
+      sFileURLs,
+      sImageURLs,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error submitting group incident:', error);
       throw error;
     });
 };
@@ -3111,6 +3143,7 @@ export default {
     busCancelTravel,
     busCompleteTravel,
     reOrderStudentQueue,
-    submitIndividualIncident,
+    submitBusIndividualIncident,
+    submitBusGroupIncident,
     // end schcool bus
 };
