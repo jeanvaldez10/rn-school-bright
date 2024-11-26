@@ -1,62 +1,34 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { BackHandler, FlatList, Image, Pressable, Text, View } from 'react-native';
+import { BackHandler, FlatList, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScaledSheet } from 'react-native-size-matters';
 import BackNavigationBar from '../../../../components/BackNavigationBar';
 import ProgressHud from '../../../../components/ProgressHud';
-import ClassLevelModal from '../../../../components/SelectListModal';
 import Color from '../../../../constants/color';
 import ApiManager from '../../../../managers/ApiManager';
-import Storage from '../../../../managers/StorageManager';
-import images from '../../../../themes/Images';
 import translang from '../../../../utils/language.utils';
-
-const routes = [
-  {
-    title: 'route 1',
-  },
-  {
-    title: 'route 2',
-  },
-  {
-    title: 'route 3',
-  },
-];
+import ReportItem from './ReportItem';
+import ReportItem1 from './RepoertItem1';
 
 const DetailedAlightingReport = ({ navigation }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [items, setItems] = useState(routes);
+  const busID = navigation.getParam('busID');
+  const isEvening = navigation.getParam('isEvening');
+  const date = '2567-11-18'; //navigation.getParam('date');
 
-  const [shopList, setShopList] = useState([]);
-  const [userInfo, setUserInfo] = useState({});
+  console.log(busID, isEvening, date);
+
+  const [reportList, setReportList] = useState([]);
+
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedBus, setSelectedBus] = useState();
-
-  useEffect(() => {
-    loadData(userInfo);
-  }, [loadData, userInfo]);
-
-  useEffect(() => {
-    loadUserInfo();
-  }, [loadUserInfo]);
 
   const back = useCallback(() => {
-    navigation.navigate('UserInfo');
+    navigation.navigate('PassengerAlightingReport');
   }, [navigation]);
 
   const handleBackButton = useCallback(() => {
     back();
     return true;
   }, [back]);
-
-  useEffect(() => {
-    const loadUserInfoAndData = async () => {
-      const userInfo = await Storage.getUserInfo();
-      setUserInfo(userInfo);
-    };
-
-    loadUserInfoAndData();
-  }, [loadData]);
 
   useEffect(() => {
     const backhandler = BackHandler.addEventListener('hardwareBackPress', handleBackButton);
@@ -66,110 +38,48 @@ const DetailedAlightingReport = ({ navigation }) => {
     };
   }, [handleBackButton, navigation]);
 
-  const loadUserInfo = useCallback(async () => {
+  useEffect(() => {
+    initialize();
+  }, [initialize]);
+
+  const initialize = useCallback(async () => {
     setIsLoading(true);
     try {
-      const user = await Storage.getUser();
-      const { ID: userId, SchoolId: schoolId } = user;
-      const userInfo = await ApiManager.getUserInfo(userId, schoolId);
-      setUserInfo(userInfo);
-      console.log('UserInfo updated');
+      const data = await ApiManager.getPassengerBoardingAlightingReportDetails(
+        date,
+        busID,
+        isEvening,
+      );
+      setReportList(data.lstData);
     } catch (error) {
-      console.log('UserInfo error', error);
+      console.log(error);
+      alert(error.message || 'Failed to fetch data.');
     } finally {
       setIsLoading(false);
     }
-  }, []);
-
-  const loadData = useCallback((userInfo) => {
-    const { SchoolID } = userInfo || {};
-
-    if (!SchoolID) {
-      return;
-    }
-    setIsLoading(true);
-    ApiManager.getShopList(SchoolID)
-      .then((list) => {
-        setShopList(list);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
-
-  const onListSelect = (item) => {
-    setShowModal(false);
-    navigation.navigate('BusDetailScreen', {
-      route: item?.id,
-      bus: selectedBus.id,
-      userInfo,
-    });
-  };
+  }, [busID, date, isEvening]);
 
   const renderItem = ({ item }) => {
-    return (
-      <View style={styles.itemContainer}>
-        <View style={styles.group1}>
-          <Image source={images.man_user} style={styles.itemAvatar} />
-          <Text style={styles.text1}>เด็กหญิงหนึ่ง สคูลไบร์ท</Text>
-        </View>
-        <View style={styles.group2}>
-          <Text style={styles.text2}>รอบเช้า</Text>
-          <Text style={styles.text3}>วันที่ 2 กันยายน 2567</Text>
-        </View>
-        <View style={styles.group2}>
-          <Text style={styles.text2}>ขึ้นรถ : 6.30 น. </Text>
-
-          <Pressable style={[styles.buttons, { backgroundColor: Color.green_button_color }]}>
-            <Text style={styles.buttonText}>{translang.t('BUS_CHECK_IN_STATUS_CHECKED_IN')}</Text>
-          </Pressable>
-        </View>
-        <View style={styles.group2}>
-          <Text style={styles.text2}>ขึ้นรถ : 15.00 น. </Text>
-
-          <Pressable style={[styles.buttons, { backgroundColor: Color.green_button_color }]}>
-            <Text style={styles.buttonText}>{translang.t('BUS_CHECK_IN_STATUS_CHECKED_IN')}</Text>
-          </Pressable>
-        </View>
-        <View style={styles.group2}>
-          <Text style={styles.text2}>ลงรถ : 16.10 น. </Text>
-
-          <Pressable style={[styles.buttons, { backgroundColor: Color.green_button_color }]}>
-            <Text style={styles.buttonText}>{translang.t('BUS_CHECK_IN_STATUS_CHECKED_IN')}</Text>
-          </Pressable>
-        </View>
-      </View>
-    );
+    return <ReportItem1 item={item} />;
   };
 
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
       <BackNavigationBar title={translang.t('BUS_ALIGHTING_REPORT')} onMenuTap={back} />
-      {shopList.length > 0 || isLoading ? (
+      {reportList.length > 0 || isLoading ? (
         <FlatList
           contentContainerStyle={styles.contentContainerStyle}
-          data={shopList}
+          data={reportList}
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderItem}
-          ListHeaderComponent={
-            <Text style={styles.pageTitle}>รอบเช้า วันที่ 2 กันยายน 2567</Text>
-          }
+          ListHeaderComponent={<Text style={styles.pageTitle}>รอบเช้า วันที่ 2 กันยายน 2567</Text>}
         />
       ) : (
         <View style={styles.noSupportWrapper}>
-          <Text style={styles.noSupportText}>{translang.t('NOT_SUPPORT_STRING')}</Text>
+          <Text style={styles.noSupportText}>{translang.t('NOT_FOUND_DATA')}</Text>
         </View>
       )}
-      <ClassLevelModal
-        isVisible={showModal}
-        onListSelect={onListSelect}
-        listData={items}
-        dialogTtitle={translang.t('SELECT_ROUTE')}
-      />
+
       <ProgressHud isVisible={isLoading} />
     </SafeAreaView>
   );

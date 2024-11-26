@@ -117,9 +117,9 @@ const PassengerAlightingReport = ({ navigation }) => {
     <PassengerAlightingReportTab
       navigation={navigation}
       reportList={morningList}
-      userInfo={userInfo}
       date={selectedDate}
       total={morningTotalCount}
+      isEvening={false}
       isSelected={selectedTabIndex === 0}
     />
   );
@@ -128,9 +128,9 @@ const PassengerAlightingReport = ({ navigation }) => {
     <PassengerAlightingReportTab
       navigation={navigation}
       reportList={eveningList}
-      userInfo={userInfo}
       date={selectedDate}
       total={eveningTotalCount}
+      isEvening={true}
       isSelected={selectedTabIndex === 1}
     />
   );

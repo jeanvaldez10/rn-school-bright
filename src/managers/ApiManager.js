@@ -2963,11 +2963,11 @@ const getPassengerBoardingAlightingReports = (sDate, isEvening) => {
       });
   };
 
-  const getPassengerBoardingAlightingReportDetails = (sDate, isEvening, nBusID) => {
+  const getPassengerBoardingAlightingReportDetails = (sDate, nBusID, isEvening) => {
     const params = {
       sDate: moment(sDate).format('DD/MM/YYYY'),
+      nBusID,
       isEvening,
-      nBusID
     };
     return schoolBusHttpClient
       .post(apiUrls.getPassengerBoardingAlightingReportDetails(), params)

@@ -1,24 +1,20 @@
 import moment from 'moment';
-import React, { useState } from 'react';
-import { Image, Pressable, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { Image, Pressable, ScrollView, Text, View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
-import { BarChart, Grid, PieChart, XAxis } from 'react-native-svg-charts';
 import Color from '../../../../constants/color';
 import Images from '../../../../themes/Images';
 import translang from '../../../../utils/language.utils';
 import HorizontalScrollableBars from './BarChart';
 
 const PassengerAlightingReportTab = (props) => {
-  const [userInfo] = useState(props.userInfo);
+  const { reportList, total, isEvening } = props;
 
-  const { reportList, total } = props;
-
-  console.log(reportList, '----');
-
-  const onMoreDetails = () => {
-    props.navigation.navigate('StudentAlightingReport', {
+  const onMoreDetails = (item) => () => {
+    props.navigation.navigate('DetailedAlightingReport', {
       date: props.date,
-      userInfo,
+      busID: item.nBusID,
+      isEvening,
     });
   };
 
@@ -32,7 +28,7 @@ const PassengerAlightingReportTab = (props) => {
       nAlightingPercent,
     } = item;
     return (
-      <Pressable style={styles.busItem} onPress={onMoreDetails}>
+      <Pressable style={styles.busItem} onPress={onMoreDetails(item)}>
         <Image source={image} style={styles.busImage} />
         <View style={styles.wrapper1}>
           <View style={styles.wrapper2}>
@@ -65,7 +61,6 @@ const PassengerAlightingReportTab = (props) => {
   const date = moment(props.date).format('DD MMMM YYYY');
   const titleText = translang.t('ALL_STUDENTS') + ` ${total} ` + translang.t('PEOPLE');
 
-  console.log(reportList);
   return (
     <View style={styles.container} key={props.reportList}>
       <ScrollView style={styles.container}>
