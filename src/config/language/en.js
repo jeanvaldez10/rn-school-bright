@@ -1327,6 +1327,7 @@ export default {
   THIS_WEEK: 'This Week',
   CHECK_IN: 'CheckIn',
   CHECK_OUT: 'CheckOut',
+  ALL_STUDENTS: 'All Students',
 
   // End of schoolBus
 };

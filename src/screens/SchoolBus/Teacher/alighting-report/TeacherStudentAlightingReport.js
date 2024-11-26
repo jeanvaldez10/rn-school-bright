@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { BackHandler, Dimensions, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScaledSheet } from 'react-native-size-matters';
@@ -7,194 +7,171 @@ import BackNavigationBar from '../../../../components/BackNavigationBar';
 import CalendarModal from '../../../../components/CalendarModal';
 import ProgressHud from '../../../../components/ProgressHud';
 import Color from '../../../../constants/color';
+import Storage from '../../../../managers/StorageManager';
 
 import moment from 'moment';
 import ApiManager from '../../../../managers/ApiManager';
-import Storage from '../../../../managers/StorageManager';
 import translang from '../../../../utils/language.utils';
 import MorningAlightingReportTab from './MorningAlightingReportTab';
 
-export default class TeacherAlightingReport extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showModal: false,
-      showCalendarModal: false,
-      userInfo: {},
-      selectedTabIndex: 0,
-      tabRoutes: [],
-      selectedDate: '',
-      studentReportList: {},
-      personalReportList: {},
-    };
-  }
+const TeacherAlightingReport = ({ navigation }) => {
+  const [showCalendarModal, setShowCalendarModal] = useState(false);
+  const [selectedTabIndex, setSelectedTabIndex] = useState(0);
+  const [selectedDate, setSelectedDate] = useState(moment());
+  const [morningList, setMorningList] = useState([]);
+  const [eveningList, setEveningList] = useState([]);
+  const [morningTotalCount, setMoringTotalCount] = useState(0);
+  const [eveningTotalCount, setEveningTotalCount] = useState(0);
 
-  handleBackButton = () => {
-    if (this.state.showCalendarModal) {
-      this.setState({ showCalendarModal: false });
+  const [userInfo, setUserInfo] = useState({});
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const routes = [
+    {
+      key: 'morning',
+      title: translang.t('BUS_MORNING_SESSION'),
+    },
+    {
+      key: 'evening',
+      title: translang.t('BUS_EVENING_SESSION'),
+    },
+  ];
+  const back = useCallback(() => {
+    navigation.navigate('ReportForTeacher');
+  }, [navigation]);
+
+  const handleBackButton = useCallback(() => {
+    if (showCalendarModal) {
+      setShowCalendarModal(false);
       return true;
     }
-    this.back();
+    back();
     return true;
-  };
+  }, [showCalendarModal, back]);
 
-  async componentDidMount() {
-    this.backhandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButton);
+    return () => backHandler.remove();
+  }, [handleBackButton]);
 
-    const userInfo = await Storage.getUserInfo();
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
 
-    const routes = [
-      {
-        key: 'morning',
-        title: translang.t('BUS_MORNING_SESSION'),
-      },
-      {
-        key: 'evening',
-        title: translang.t('BUS_EVENING_SESSION'),
-      },
-    ];
+  const loadData = useCallback(async () => {
+    setIsLoading(true);
 
-    const today = moment().format('YYYY-MM-DD');
-    this.setState(
-      { userInfo: userInfo, selectedDate: today, selectedTabIndex: 0, tabRoutes: routes },
-      () => {
-        this.loadData();
-      },
-    );
-  }
-
-  componentWillUnmount = () => {
-    if (this.backhandler) {
-      this.backhandler.remove();
+    try {
+      const user = await Storage.getUser();
+      const { ID: userId, SchoolId: schoolId } = user;
+      const userInfo = await ApiManager.getUserInfo(userId, schoolId);
+      setUserInfo(userInfo);
+      // Change the date later
+      const morningData = await ApiManager.getPassengerBoardingAlightingReports(
+        '2567-11-18',
+        false,
+      );
+      setMorningList(morningData.lstData);
+      setMoringTotalCount(morningData.nTotalStudentsCnt);
+      // Change the date later
+      const eveningData = await ApiManager.getPassengerBoardingAlightingReports('2567-11-18', true);
+      setEveningList(eveningData.lstData);
+      setEveningTotalCount(eveningData.nTotalStudentsCnt);
+      console.log(selectedDate);
+    } catch (e) {
+      alert(e.message || 'Failed to fetch data');
     }
-    if (this.focusListener) {
-      this.focusListener.remove();
-    }
-  };
 
-  back = () => {
-    this.props.navigation.navigate('ReportForTeacher');
-  };
+    setIsLoading(false);
+  }, [selectedDate]);
 
-  loadData = () => {
-    this.setState({ isLoading: true });
-
-    const userInfo = this.state.userInfo;
-    const date = this.state.selectedDate;
-
-    ApiManager.getAttendanceSchoolReportGraph(userInfo.SchoolID, date)
-      .then((list) => {
-        let studentList = {};
-        let personalList = {};
-
-        if ((list.student ?? []).length > 0) {
-          studentList = list.student[0];
-        }
-        if ((list.employees ?? []).length > 0) {
-          personalList = list.employees[0];
-        }
-
-        this.setState({
-          studentReportList: studentList,
-          personalReportList: personalList,
-          isLoading: false,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        this.setState({ isLoading: false });
-      });
-  };
-
-  onDateSelected = (date) => {
-    if (date === null) {
-      this.setState({ showCalendarModal: false });
+  const onDateSelected = (date) => {
+    if (!date) {
+      setShowCalendarModal(false);
     } else {
-      const _date = moment(date).format('YYYY-MM-DD');
-      this.setState({ showCalendarModal: false, selectedDate: _date }, () => {
-        this.loadData();
-      });
+      setShowCalendarModal(false);
+      setSelectedDate(moment(date));
     }
   };
 
-  renderTabBar = (props) => {
-    return (
-      <TabBar
-        {...props}
-        style={{ ...styles.tabBar }}
-        indicatorStyle={{ height: 50, backgroundColor: Color.n_default_brown, borderRadius: 20 }}
-        inactiveColor={Color.n_default_orange}
-        activeColor={Color.white}
-        labelStyle={{
-          fontWeight: 'bold',
-          fontSize: 17,
-          fontFamily: 'THSarabunNew',
-          marginTop: 'auto',
-          marginBottom: 'auto',
-          textTransform: 'none',
-        }}
+  const renderTabBar = (props) => (
+    <TabBar
+      {...props}
+      style={{ ...styles.tabBar }}
+      indicatorStyle={{ height: 50, backgroundColor: Color.n_default_brown, borderRadius: 20 }}
+      inactiveColor={Color.n_default_orange}
+      activeColor={Color.white}
+      labelStyle={{
+        fontWeight: 'bold',
+        fontSize: 17,
+        fontFamily: 'THSarabunNew',
+        marginTop: 'auto',
+        marginBottom: 'auto',
+        textTransform: 'none',
+      }}
+    />
+  );
+
+  const renderMorningTab = () => (
+    <MorningAlightingReportTab
+      navigation={navigation}
+      reportList={morningList}
+      userInfo={userInfo}
+      date={selectedDate}
+      total={morningTotalCount}
+      isSelected={selectedTabIndex === 0}
+    />
+  );
+
+  const renderEveningTab = () => (
+    <MorningAlightingReportTab
+      navigation={navigation}
+      reportList={eveningList}
+      userInfo={userInfo}
+      date={selectedDate}
+      total={eveningTotalCount}
+      isSelected={selectedTabIndex === 1}
+    />
+  );
+
+  const initialLayout = { width: Dimensions.get('window').width };
+
+  return (
+    <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
+      <BackNavigationBar
+        title={translang.t('BUS_ALIGHTING_REPORT')}
+        onMenuTap={back}
+        is_calendar="1"
+        onCalendarTap={() => setShowCalendarModal(true)}
       />
-    );
-  };
 
-  renderMoringTab = () => (
-    <MorningAlightingReportTab
-      navigation={this.props.navigation}
-      reportList={this.state.studentReportList}
-      date={this.state.selectedDate}
-      isSelected={this.state.selectedTabIndex === 0}
-    />
-  );
-
-  renderEveningTab = () => (
-    <MorningAlightingReportTab
-      navigation={this.props.navigation}
-      reportList={this.state.personalReportList}
-      date={this.state.selectedDate}
-      isSelected={this.state.selectedTabIndex === 1}
-    />
-  );
-
-  render() {
-    const initialLayout = { width: Dimensions.get('window').width };
-
-    return (
-      <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
-        <BackNavigationBar
-          title={translang.t('BUS_ALIGHTING_REPORT')}
-          onMenuTap={() => this.back()}
-          is_calendar="1"
-          onCalendarTap={() => this.setState({ showCalendarModal: true })}
+      <View style={styles.container}>
+        <TabView
+          style={styles.tabView}
+          navigationState={{ index: selectedTabIndex, routes }}
+          renderTabBar={renderTabBar}
+          renderScene={({ route }) => {
+            switch (route.key) {
+              case 'morning':
+                return renderMorningTab();
+              case 'evening':
+                return renderEveningTab();
+              default:
+                return null;
+            }
+          }}
+          onIndexChange={setSelectedTabIndex}
+          initialLayout={initialLayout}
+          swipeEnabled={false}
         />
+      </View>
 
-        <View style={styles.container}>
-          <TabView
-            style={styles.tabView}
-            navigationState={{ index: this.state.selectedTabIndex, routes: this.state.tabRoutes }}
-            renderTabBar={this.renderTabBar}
-            renderScene={({ route }) => {
-              switch (route.key) {
-                case 'morning':
-                  return this.renderMoringTab();
-                case 'evening':
-                  return this.renderEveningTab();
-              }
-            }}
-            onIndexChange={(index) => this.setState({ selectedTabIndex: index })}
-            initialLayout={initialLayout}
-            swipeEnabled={false}
-          />
-        </View>
-        <CalendarModal
-          isVisible={this.state.showCalendarModal}
-          type={'single'}
-          onDateSelect={(result) => this.onDateSelected(result)}
-        />
-        <ProgressHud isVisible={this.state.isLoading} />
-      </SafeAreaView>
-    );
-  }
-}
+      <CalendarModal isVisible={showCalendarModal} type="single" onDateSelect={onDateSelected} />
+      <ProgressHud isVisible={isLoading} />
+    </SafeAreaView>
+  );
+};
 
 const styles = ScaledSheet.create({
   container: {
@@ -205,11 +182,9 @@ const styles = ScaledSheet.create({
     width: '90%',
     height: 50,
     borderRadius: 20,
-
     marginVertical: 20,
     marginLeft: 'auto',
     marginRight: 'auto',
-
     backgroundColor: Color.white,
     shadowColor: 'black',
     shadowOffset: {
@@ -224,3 +199,5 @@ const styles = ScaledSheet.create({
     flex: 1,
   },
 });
+
+export default TeacherAlightingReport;

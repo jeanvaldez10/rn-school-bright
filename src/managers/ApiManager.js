@@ -2949,6 +2949,35 @@ const getVehicleCheckInOutListWithDate = (busId, ddate, edate) => {
     });
 };
 
+const getPassengerBoardingAlightingReports = (sDate, isEvening) => {
+    const params = {
+      sDate: moment(sDate).format('DD/MM/YYYY'),
+      isEvening
+    };
+    return schoolBusHttpClient
+      .post(apiUrls.getPassengerBoardingAlightingReports(), params)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error reading reports:', error);
+        throw error;
+      });
+  };
+
+  const getPassengerBoardingAlightingReportDetails = (sDate, isEvening, nBusID) => {
+    const params = {
+      sDate: moment(sDate).format('DD/MM/YYYY'),
+      isEvening,
+      nBusID
+    };
+    return schoolBusHttpClient
+      .post(apiUrls.getPassengerBoardingAlightingReportDetails(), params)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error reading reports:', error);
+        throw error;
+      });
+  };
+
 
 export default {
     getVerification,
@@ -3184,5 +3213,7 @@ export default {
     getBusIncidentList,
     readBusIncident,
     getVehicleCheckInOutListWithDate,
+    getPassengerBoardingAlightingReports,
+    getPassengerBoardingAlightingReportDetails,
     // end schcool bus
 };

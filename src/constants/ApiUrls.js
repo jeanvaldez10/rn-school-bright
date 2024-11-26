@@ -1068,6 +1068,14 @@ class ApiUrls {
   getReportVehicleCheckInOut() {
     return '/ReportVehicleCheckInOut'
   }
+
+  getPassengerBoardingAlightingReports() {
+    return '/ReportAllCheckInOut'
+  }
+
+  getPassengerBoardingAlightingReportDetails() {
+    return '/ReportCheckInOutDetail'
+  }
 }
 
 

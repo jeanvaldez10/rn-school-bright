@@ -1313,5 +1313,7 @@ export default {
   CHECK_IN: 'ขึ้นรถ',
   CHECK_OUT: 'ลงรถ',
 
+  ALL_STUDENTS: 'นักเรียนทั้งหมด',
+
   // End of schoolBus
 };

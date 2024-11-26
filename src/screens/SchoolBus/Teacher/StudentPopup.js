@@ -13,7 +13,7 @@ export default function StudentPopup({
   nTravelID,
   userInfo,
 }) {
-  const { sFatherPhone = '081-234-5678', sMotherPhone = '081-234-5678' } = student || {};
+  const { sFatherPhone, sMotherPhone } = student || {};
 
   const openDialPad = (phoneNumber) => {
     const url = `tel:${phoneNumber}`;
@@ -56,7 +56,7 @@ export default function StudentPopup({
                   <Image source={images.ic_call_yellow} style={styles.image}></Image>
                   <View style={styles.group1}>
                     <Text style={styles.number}>
-                      {translang.t('FATHER')}: {'081-234-5678'}
+                      {translang.t('FATHER')}: {sFatherPhone}
                     </Text>
                   </View>
                 </Pressable>
@@ -64,7 +64,7 @@ export default function StudentPopup({
                   <Image source={images.ic_call_yellow} style={styles.image}></Image>
                   <View style={styles.group1}>
                     <Text style={styles.number}>
-                      {translang.t('MOTHER')}: {'081-234-5678'}
+                      {translang.t('MOTHER')}: {sMotherPhone}
                     </Text>
                   </View>
                 </Pressable>
