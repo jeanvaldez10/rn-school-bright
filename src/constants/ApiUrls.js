@@ -1064,6 +1064,10 @@ class ApiUrls {
   readBusIncident(incidentID) {
     return `/ReadIncidentDetail/${incidentID}`
   }
+
+  getReportVehicleCheckInOut() {
+    return '/ReportVehicleCheckInOut'
+  }
 }
 
 

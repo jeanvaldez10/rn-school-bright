@@ -264,9 +264,9 @@ import BusDetailScreen from './screens/SchoolBus/Teacher/BusDetailScreen';
 import StudentBusIncidentReport from './screens/SchoolBus/Teacher/StudentBusIncidentReport';
 import GroupIncidentReport from './screens/SchoolBus/Teacher/GroupIncidentReport';
 import IncidentReportingReport from './screens/SchoolBus/Teacher/IncidentReportingReport';
-import TeacherBusAlightingReport from './screens/SchoolBus/Teacher/TeacherBusAlightingReport';
+import TeacherBusAlightingReport from './screens/SchoolBus/Teacher/alighting-report/TeacherBusAlightingReport';
 import TeacherStudentAlightingReport from './screens/SchoolBus/Teacher/alighting-report/TeacherStudentAlightingReport';
-import StudentAlightingReport from './screens/SchoolBus/Teacher/alighting-report/StudentAlightingReport';
+import StudentAlightingReport from './screens/SchoolBus/Student/StudentAlightingReport';
 import MorningBusDetails from './screens/SchoolBus/Student/MorningBusDetails';
 
 const screenWidth = Dimensions.get('window').width;

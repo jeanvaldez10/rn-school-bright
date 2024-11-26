@@ -1310,7 +1310,8 @@ export default {
   BUS_TEACHER_STAFF: 'ครู/บุคลากร',
 
   THIS_WEEK: 'สัปดาห์นี้',
-
+  CHECK_IN: 'ขึ้นรถ',
+  CHECK_OUT: 'ลงรถ',
 
   // End of schoolBus
 };

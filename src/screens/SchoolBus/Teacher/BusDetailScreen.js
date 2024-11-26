@@ -38,7 +38,7 @@ import SortableList from 'react-native-sortable-list';
 // Geolocation.setRNConfiguration({});
 
 const BusDetailScreen = ({ navigation }) => {
-  //const [selectedBus] = useState(navigation.getParam('bus'));
+  const [selectedBus] = useState(navigation.getParam('bus'));
   const [userInfo] = useState(navigation.getParam('userInfo'));
 
   const [selectedSchedule] = useState(navigation.getParam('schedule'));
@@ -282,7 +282,9 @@ const BusDetailScreen = ({ navigation }) => {
   };
 
   const onPassengerReport = () => {
-    navigation.navigate('TeacherBusAlightingReport');
+    navigation.navigate('TeacherBusAlightingReport', {
+      busID: selectedBus.nBusID,
+    });
   };
 
   const RenderTravelButton = () => {

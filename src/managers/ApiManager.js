@@ -2934,6 +2934,22 @@ const readBusIncident = (incidentID) => {
     });
 };
 
+const getVehicleCheckInOutListWithDate = (busId, ddate, edate) => {
+  const params = {
+    nBusID: busId,
+    sDateFrom: moment(ddate).format('DD/MM/YYYY'),
+    sDateTo: moment(edate).format('DD/MM/YYYY'),
+  };
+  return schoolBusHttpClient
+    .post(apiUrls.getReportVehicleCheckInOut(), params)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error reading reports:', error);
+      throw error;
+    });
+};
+
+
 export default {
     getVerification,
     getLogStatus,
@@ -3167,5 +3183,6 @@ export default {
     submitBusGroupIncident,
     getBusIncidentList,
     readBusIncident,
+    getVehicleCheckInOutListWithDate,
     // end schcool bus
 };
