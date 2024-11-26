@@ -2914,6 +2914,26 @@ const submitBusGroupIncident = ({
     });
 };
 
+const getBusIncidentList = () => {
+  return schoolBusHttpClient
+    .post(apiUrls.getBusIncidentList(), {})
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error retrieving incidents:', error);
+      throw error;
+    });
+};
+
+const readBusIncident = (incidentID) => {
+  return schoolBusHttpClient
+    .post(apiUrls.readBusIncident(incidentID), {})
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error reading incident:', error);
+      throw error;
+    });
+};
+
 export default {
     getVerification,
     getLogStatus,
@@ -3145,5 +3165,7 @@ export default {
     reOrderStudentQueue,
     submitBusIndividualIncident,
     submitBusGroupIncident,
+    getBusIncidentList,
+    readBusIncident,
     // end schcool bus
 };

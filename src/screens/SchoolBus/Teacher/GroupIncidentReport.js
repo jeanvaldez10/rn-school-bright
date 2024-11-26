@@ -44,7 +44,6 @@ const GroupIncidentReport = ({ navigation }) => {
   const [isSendToParent, setIsSentToParent] = useState(false);
   const [groupType, setGroupType] = useState(0);
 
-  console.log(nTravelID, userInfo);
   // Back button handler
   const handleBackButton = useCallback(() => {
     navigation.goBack();

@@ -4,18 +4,9 @@ import GradientButton from '../../../components/GradientButton';
 import Color from '../../../constants/color';
 import translang from '../../../utils/language.utils';
 
-export default function ReportPopup({ isVisible, onClose }) {
-  const openDialPad = (phoneNumber) => {
-    const url = `tel:${phoneNumber}`;
-    Linking.openURL(url).catch((err) => Alert.alert('Failed to open dial pad', err.message));
-  };
+export default function ReportPopup({ isVisible, onClose, incident }) {
+  const { sDate, sTime, sVehicleBrandModel, sVehicleLicensePlate, sMessage } = incident || {};
 
-  const onPressCallMother = () => {
-    openDialPad('081-234-5678');
-    onClose();
-  };
-
-  console;
   return (
     <Modal animationType="none" transparent={true} key="modal" visible={isVisible}>
       <View style={styles.centeredView}>
@@ -23,22 +14,22 @@ export default function ReportPopup({ isVisible, onClose }) {
           <View style={styles.wrapper1}>
             <View style={styles.item1}>
               <Text style={styles.subTitle}>ผู้ส่ง /103146 : </Text>
-              <Text style={styles.details}>อบ 1212 กรุงเทพมหานคร</Text>
+              <Text style={styles.details}>{sVehicleLicensePlate}</Text>
             </View>
-            <View style={styles.item1} onPress={onPressCallMother}>
+            <View style={styles.item1}>
               <Text style={styles.subTitle}>ส่งถึง /1201031 : </Text>
-              <Text style={styles.details}>Toyota Commuter</Text>
+              <Text style={styles.details}>{sVehicleBrandModel}</Text>
             </View>
 
-            <View style={styles.item1} onPress={onPressCallMother}>
-              <Text style={styles.subTitle}>1/9/2567 : </Text>
+            <View style={styles.item1}>
+              <Text style={styles.subTitle}>{sDate} {sTime} </Text>
             </View>
           </View>
 
           <View style={styles.divider} />
           <View style={styles.wrapper1}>
             <Text style={styles.header}>{translang.t('INCIDENT_REPORT')}</Text>
-            <Text style={styles.text1}>รถยนต์มีปัญหา ทางโรงเรียนกำลังดำเนิน การแก้ไขอยู่นะคะ</Text>
+            <Text style={styles.text1}>{sMessage}</Text>
           </View>
 
           <GradientButton

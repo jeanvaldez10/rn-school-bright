@@ -437,6 +437,7 @@ const images = {
   ic_three_line: require("../assets/images/new/ic_three_line.png"),
 
   ic_school_bus_1: require("../assets/images/new/ic_school_bus_1.png"),
+  ic_school_bus_2: require("../assets/images/new/ic_school_bus_2.png"),
   ic_school_bus_blue: require("../assets/images/new/ic_school_bus_blue.png"),
   ic_school_bus_green: require("../assets/images/new/ic_school_bus_green.png"),
   ic_checked_green: require("../assets/images/new/ic_checked_green.png"),

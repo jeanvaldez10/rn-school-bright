@@ -1324,5 +1324,7 @@ export default {
   QUEUE_ORDER: 'Queue Order',
   BUS_TEACHER_STAFF: 'Teacher/Staff',
 
+  THIS_WEEK: 'This Week',
+
   // End of schoolBus
 };

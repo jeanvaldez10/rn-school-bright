@@ -1309,6 +1309,8 @@ export default {
   QUEUE_ORDER: 'ลำดับคิว',
   BUS_TEACHER_STAFF: 'ครู/บุคลากร',
 
+  THIS_WEEK: 'สัปดาห์นี้',
+
 
   // End of schoolBus
 };

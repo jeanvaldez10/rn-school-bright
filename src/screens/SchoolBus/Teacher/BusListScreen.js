@@ -20,21 +20,9 @@ import ApiManager from '../../../managers/ApiManager';
 import Storage from '../../../managers/StorageManager';
 import translang from '../../../utils/language.utils';
 
-const routes = [
-  {
-    title: 'route 1',
-  },
-  {
-    title: 'route 2',
-  },
-  {
-    title: 'route 3',
-  },
-];
-
 const BusListScreen = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
-  const [schedules, setSchedules] = useState(routes);
+  const [schedules, setSchedules] = useState([]);
   const [loadingSchedule, setLoadingSchedule] = useState(false);
 
   const [bustList, setBusList] = useState([]);

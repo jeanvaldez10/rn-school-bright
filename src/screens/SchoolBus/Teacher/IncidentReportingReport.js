@@ -1,45 +1,37 @@
 import { Text } from 'native-base';
 import React, { useCallback, useEffect, useState } from 'react';
-import { BackHandler, FlatList, Image, TouchableOpacity, View } from 'react-native';
+import {
+  ActivityIndicator,
+  BackHandler,
+  FlatList,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScaledSheet } from 'react-native-size-matters';
-import busIcon from '../../../assets/images/services/m_school_bus.png';
 import BackNavigationBar from '../../../components/BackNavigationBar';
-import GradientButton from '../../../components/GradientButton';
 import ProgressHud from '../../../components/ProgressHud';
-import ClassLevelModal from '../../../components/SelectListModal';
 import Color from '../../../constants/color';
 import ApiManager from '../../../managers/ApiManager';
 import Storage from '../../../managers/StorageManager';
+import images from '../../../themes/Images';
 import translang from '../../../utils/language.utils';
 import ReportPopup from './ReportPopup';
-import images from '../../../themes/Images';
-
-const routes = [
-  {
-    title: 'route 1',
-  },
-  {
-    title: 'route 2',
-  },
-  {
-    title: 'route 3',
-  },
-];
 
 const IncidentReportingReport = ({ navigation }) => {
-  const [shopList, setShopList] = useState([]);
+  const [incidentsToday, setIncidentsToday] = useState([]);
+  const [incidentsIn7Days, setIncidentsIn7Days] = useState([]);
+
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
+  const [selectedIncident, setSelectedIncident] = useState(null);
 
   useEffect(() => {
-    loadData(userInfo);
-  }, [loadData, userInfo]);
-
-  useEffect(() => {
-    loadUserInfo();
-  }, [loadUserInfo]);
+    initialize();
+  }, [initialize]);
 
   const back = useCallback(() => {
     navigation.goBack();
@@ -51,15 +43,6 @@ const IncidentReportingReport = ({ navigation }) => {
   }, [back]);
 
   useEffect(() => {
-    const loadUserInfoAndData = async () => {
-      const userInfo = await Storage.getUserInfo();
-      setUserInfo(userInfo);
-    };
-
-    loadUserInfoAndData();
-  }, [loadData]);
-
-  useEffect(() => {
     const backhandler = BackHandler.addEventListener('hardwareBackPress', handleBackButton);
 
     return () => {
@@ -67,59 +50,90 @@ const IncidentReportingReport = ({ navigation }) => {
     };
   }, [handleBackButton, navigation]);
 
-  const loadUserInfo = useCallback(async () => {
+  const initialize = useCallback(async () => {
     setIsLoading(true);
     try {
       const user = await Storage.getUser();
       const { ID: userId, SchoolId: schoolId } = user;
       const userInfo = await ApiManager.getUserInfo(userId, schoolId);
       setUserInfo(userInfo);
-      console.log('UserInfo updated');
+      loadIncidentList();
     } catch (error) {
       console.log('UserInfo error', error);
-    } finally {
-      setIsLoading(false);
     }
-  }, []);
+  }, [loadIncidentList]);
 
-  const loadData = useCallback((userInfo) => {
-    const { SchoolID } = userInfo || {};
-
-    if (!SchoolID) {
-      return;
-    }
+  const loadIncidentList = useCallback(() => {
     setIsLoading(true);
-    ApiManager.getShopList(SchoolID)
-      .then((list) => {
-        setShopList(list);
+    ApiManager.getBusIncidentList()
+      .then((data) => {
+        if (data.status === 1) {
+          setIncidentsToday(data.lstIncidentsInToday || []);
+          setIncidentsIn7Days(data.lstIncidentsIn7Days || []);
+        } else {
+          alert(data.message);
+        }
       })
       .catch((error) => {
         console.log(error);
+        alert('Failed to fetch incidents list.');
       })
       .finally(() => {
         setIsLoading(false);
       });
   }, []);
 
-  const renderItem = ({ item }) => {
-    const { name, driver } = item;
+  const handleReadIncident = (item, isToday) => {
+    ApiManager.readBusIncident(item.nIncidentID);
+    let newIncidents = isToday ? [...incidentsToday] : [...incidentsIn7Days];
+    const incidentIndex = newIncidents.findIndex((incident) => incident.nIncidentID === item.nIncidentID);
+    if (incidentIndex > -1) {
+      newIncidents[incidentIndex] = {
+        ...newIncidents[incidentIndex],
+        isAlreadyRead: true,
+      }
+
+      isToday ? setIncidentsToday(newIncidents) : setIncidentsIn7Days(newIncidents);
+    }
+  };
+
+  const IncidentItem = ({ item, isToday = false }) => {
+    const {
+      sDate,
+      sTime,
+      sVehicleBrandModel,
+      sVehicleLicensePlate,
+      isAlreadyRead,
+    } = item;
 
     const onClickItem = () => {
+      setSelectedIncident(item);
       setShowReportModal(true);
+      handleReadIncident(item, isToday);
     };
 
     return (
-      <TouchableOpacity style={styles.menuEachStyle} activeOpacity={0.5} onPress={onClickItem}>
-        <Image source={images.ic_school_bus_1} style={styles.image}></Image>
+      <TouchableOpacity
+        style={[
+          styles.menuEachStyle,
+          !isAlreadyRead && { backgroundColor: Color.n_default_orange_light },
+        ]}
+        activeOpacity={0.5}
+        onPress={onClickItem}
+      >
+        <Image
+          source={isAlreadyRead ? images.ic_school_bus_2 : images.ic_school_bus_1}
+          style={styles.image}
+        ></Image>
         <View style={styles.group2}>
           <View style={styles.group3}>
-            <Text style={styles.text1}>6.00</Text>
-            <Text style={styles.text1}>1/9/2567</Text>
+            <Text style={styles.text1}>{sTime}</Text>
+            <Text style={styles.text1}>{sDate}</Text>
           </View>
           <Text style={[styles.topText, { color: Color.n_default_orange }]}>
-            {name || 'อบ 1212 กรุงเทพมหานคร'}
+            {sVehicleLicensePlate}
           </Text>
-          <Text style={styles.topText}>{driver || 'Toyota Commuter'}</Text>
+          <Text style={styles.topText}>{sVehicleBrandModel}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -131,24 +145,54 @@ const IncidentReportingReport = ({ navigation }) => {
         title={translang.t('DOT_MENU_INCIDENT_REPORTING_REPORT')}
         onMenuTap={back}
       />
-      {shopList.length > 0 || isLoading ? (
-        <FlatList
-          contentContainerStyle={styles.contentContainerStyle}
-          data={shopList}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={renderItem}
-        />
-      ) : (
-        <View style={styles.noSupportWrapper}>
-          <Text style={styles.noSupportText}>{translang.t('NOT_SUPPORT_STRING')}</Text>
-        </View>
-      )}
+      <ScrollView contentContainerStyle={styles.contentContainerStyle}>
+        {incidentsToday.length > 0 || isLoading ? (
+          <>
+            {isLoading ? null : (
+              <>
+                <Text style={styles.label1}>{translang.t('TODAY')}</Text>
+                {incidentsToday.map((incident, index) => (
+                  <IncidentItem item={incident} isToday={true} key={index.toString()} />
+                ))}
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <Text style={styles.label1}>{translang.t('TODAY')}</Text>
+            <View style={styles.noSupportWrapper}>
+              <Text style={styles.noSupportText}>{translang.t('NOT_FOUND_DATA')}</Text>
+            </View>
+          </>
+        )}
+        {incidentsIn7Days.length > 0 || isLoading ? (
+          <>
+            {isLoading ? null : (
+              <>
+                <Text style={styles.label1}>{translang.t('THIS_WEEK')}</Text>
+                {incidentsIn7Days.map((incident, index) => (
+                  <IncidentItem item={incident} key={index.toString()} />
+                ))}
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <Text style={styles.label1}>{translang.t('THIS_WEEK')}</Text>
+
+            <View style={styles.noSupportWrapper}>
+              <Text style={styles.noSupportText}>{translang.t('NOT_FOUND_DATA')}</Text>
+            </View>
+          </>
+        )}
+      </ScrollView>
 
       <ProgressHud isVisible={isLoading} />
 
       <ReportPopup
         isVisible={showReportModal}
         onClose={() => setShowReportModal(false)}
+        incident={selectedIncident}
         navigation={navigation}
       />
     </SafeAreaView>
@@ -168,16 +212,14 @@ const styles = ScaledSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 60,
   },
-  pageTitle: {
-    marginBottom: 16,
+  label1: {
+    marginVertical: 16,
     fontSize: 24,
     fontWeight: 'normal',
-    color: Color.n_default_orange,
-    alignSelf: 'center',
+    color: Color.expand_child_text,
   },
   menuEachStyle: {
     borderRadius: 15,
-    backgroundColor: Color.n_default_orange_light,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -186,11 +228,11 @@ const styles = ScaledSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 2,
-    marginBottom: 20,
+    backgroundColor: Color.white,
+    marginBottom: 16,
     padding: 15,
-
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   group2: {
     flex: 1,
@@ -219,19 +261,6 @@ const styles = ScaledSheet.create({
     fontSize: 14,
     color: Color.n_default_gray,
     textAlign: 'left',
-  },
-  noSupportWrapper: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  noSupportText: {
-    fontFamily: 'THSarabunNew',
-    fontSize: 20,
-    color: Color.n_default_gray,
-    padding: 20,
-    textAlign: 'center',
   },
 });
 

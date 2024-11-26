@@ -1056,6 +1056,14 @@ class ApiUrls {
   submitBusGroupIncident() {
     return '/SubmitIncident/Group';
   }
+
+  getBusIncidentList() {
+    return '/GetIncidents';
+  }
+
+  readBusIncident(incidentID) {
+    return `/ReadIncidentDetail/${incidentID}`
+  }
 }
 
 
