@@ -12,7 +12,7 @@ import Storage from '../../../../managers/StorageManager';
 import moment from 'moment';
 import ApiManager from '../../../../managers/ApiManager';
 import translang from '../../../../utils/language.utils';
-import MorningAlightingReportTab from './MorningAlightingReportTab';
+import PassengerAlightingReportTab from './PassengerAlightingReportTab';
 
 const TeacherAlightingReport = ({ navigation }) => {
   const [showCalendarModal, setShowCalendarModal] = useState(false);
@@ -114,7 +114,7 @@ const TeacherAlightingReport = ({ navigation }) => {
   );
 
   const renderMorningTab = () => (
-    <MorningAlightingReportTab
+    <PassengerAlightingReportTab
       navigation={navigation}
       reportList={morningList}
       userInfo={userInfo}
@@ -125,7 +125,7 @@ const TeacherAlightingReport = ({ navigation }) => {
   );
 
   const renderEveningTab = () => (
-    <MorningAlightingReportTab
+    <PassengerAlightingReportTab
       navigation={navigation}
       reportList={eveningList}
       userInfo={userInfo}

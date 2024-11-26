@@ -266,7 +266,7 @@ import GroupIncidentReport from './screens/SchoolBus/Teacher/GroupIncidentReport
 import IncidentReportingReport from './screens/SchoolBus/Teacher/IncidentReportingReport';
 import TeacherBusAlightingReport from './screens/SchoolBus/Teacher/alighting-report/TeacherBusAlightingReport';
 import TeacherStudentAlightingReport from './screens/SchoolBus/Teacher/alighting-report/TeacherStudentAlightingReport';
-import StudentAlightingReport from './screens/SchoolBus/Student/StudentAlightingReport';
+import DetailedAlightingReport from './screens/SchoolBus/Teacher/alighting-report/DetailedAlightingReport';
 import MorningBusDetails from './screens/SchoolBus/Student/MorningBusDetails';
 
 const screenWidth = Dimensions.get('window').width;
@@ -491,8 +491,8 @@ const MainAppRouteConfigs = {
       headerShown: false,
     },
   },
-  StudentAlightingReport: {
-    screen: StudentAlightingReport,
+  DetailedAlightingReport: {
+    screen: DetailedAlightingReport,
     navigationOptions: {
       headerShown: false,
     },

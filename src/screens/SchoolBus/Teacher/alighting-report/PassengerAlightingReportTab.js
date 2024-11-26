@@ -72,7 +72,7 @@ const MorningAlitingReportTab = (props) => {
         <Text style={styles.topText1}>{date}</Text>
         <Text style={styles.topText2}>{titleText}</Text>
         <View style={styles.content}>
-          <HorizontalScrollableBars data={[...reportList, ...reportList,...reportList,...reportList,...reportList,...reportList,...reportList,...reportList,...reportList,]} />
+          <HorizontalScrollableBars data={reportList} />
         </View>
         {reportList.map((item, index) => (
           <RenderItem

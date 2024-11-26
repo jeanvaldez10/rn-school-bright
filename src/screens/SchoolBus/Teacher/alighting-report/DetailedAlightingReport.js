@@ -2,14 +2,14 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { BackHandler, FlatList, Image, Pressable, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScaledSheet } from 'react-native-size-matters';
-import BackNavigationBar from '../../../components/BackNavigationBar';
-import ProgressHud from '../../../components/ProgressHud';
-import ClassLevelModal from '../../../components/SelectListModal';
-import Color from '../../../constants/color';
-import ApiManager from '../../../managers/ApiManager';
-import Storage from '../../../managers/StorageManager';
-import images from '../../../themes/Images';
-import translang from '../../../utils/language.utils';
+import BackNavigationBar from '../../../../components/BackNavigationBar';
+import ProgressHud from '../../../../components/ProgressHud';
+import ClassLevelModal from '../../../../components/SelectListModal';
+import Color from '../../../../constants/color';
+import ApiManager from '../../../../managers/ApiManager';
+import Storage from '../../../../managers/StorageManager';
+import images from '../../../../themes/Images';
+import translang from '../../../../utils/language.utils';
 
 const routes = [
   {
@@ -23,7 +23,7 @@ const routes = [
   },
 ];
 
-const StudentAlightingReport = ({ navigation }) => {
+const DetailedAlightingReport = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [items, setItems] = useState(routes);
 
@@ -284,4 +284,4 @@ const styles = ScaledSheet.create({
   },
 });
 
-export default StudentAlightingReport;
+export default DetailedAlightingReport;
