@@ -94,7 +94,7 @@ const MorningBusDetails = ({ navigation }) => {
   };
 
   const onPassengerReport = () => {
-    navigation.navigate('TeacherBusAlightingReport');
+    navigation.navigate('VehiclePassgngerAlightingReport');
   };
 
   const handleToggleMapView = () => {

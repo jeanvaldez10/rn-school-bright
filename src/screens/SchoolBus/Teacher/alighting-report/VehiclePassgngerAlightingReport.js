@@ -21,7 +21,7 @@ import Storage from '../../../../managers/StorageManager';
 import translang from '../../../../utils/language.utils';
 import ReportItem from './ReportItem';
 
-const TeacherBusReport = ({ navigation }) => {
+const VehiclePassgngerAlightingReport = ({ navigation }) => {
   const [busID] = useState(navigation.getParam('busID'));
 
   const [userInfo, setUserInfo] = useState({});
@@ -203,7 +203,7 @@ const TeacherBusReport = ({ navigation }) => {
   );
 };
 
-export default TeacherBusReport;
+export default VehiclePassgngerAlightingReport;
 
 const styles = ScaledSheet.create({
   container: {

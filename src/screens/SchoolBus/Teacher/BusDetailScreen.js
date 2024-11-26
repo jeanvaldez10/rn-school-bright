@@ -282,7 +282,7 @@ const BusDetailScreen = ({ navigation }) => {
   };
 
   const onPassengerReport = () => {
-    navigation.navigate('TeacherBusAlightingReport', {
+    navigation.navigate('VehiclePassgngerAlightingReport', {
       busID: selectedBus.nBusID,
     });
   };

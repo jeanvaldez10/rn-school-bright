@@ -264,8 +264,8 @@ import BusDetailScreen from './screens/SchoolBus/Teacher/BusDetailScreen';
 import StudentBusIncidentReport from './screens/SchoolBus/Teacher/StudentBusIncidentReport';
 import GroupIncidentReport from './screens/SchoolBus/Teacher/GroupIncidentReport';
 import IncidentReportingReport from './screens/SchoolBus/Teacher/IncidentReportingReport';
-import TeacherBusAlightingReport from './screens/SchoolBus/Teacher/alighting-report/TeacherBusAlightingReport';
-import TeacherStudentAlightingReport from './screens/SchoolBus/Teacher/alighting-report/TeacherStudentAlightingReport';
+import VehiclePassgngerAlightingReport from './screens/SchoolBus/Teacher/alighting-report/VehiclePassgngerAlightingReport';
+import PassengerAlightingReport from './screens/SchoolBus/Teacher/alighting-report/PassengerAlightingReport';
 import DetailedAlightingReport from './screens/SchoolBus/Teacher/alighting-report/DetailedAlightingReport';
 import MorningBusDetails from './screens/SchoolBus/Student/MorningBusDetails';
 
@@ -479,14 +479,14 @@ const MainAppRouteConfigs = {
       headerShown: false,
     },
   },
-  TeacherBusAlightingReport: {
-    screen: TeacherBusAlightingReport,
+  VehiclePassgngerAlightingReport: {
+    screen: VehiclePassgngerAlightingReport,
     navigationOptions: {
       headerShown: false,
     },
   },
-  TeacherStudentAlightingReport: {
-    screen: TeacherStudentAlightingReport,
+  PassengerAlightingReport: {
+    screen: PassengerAlightingReport,
     navigationOptions: {
       headerShown: false,
     },

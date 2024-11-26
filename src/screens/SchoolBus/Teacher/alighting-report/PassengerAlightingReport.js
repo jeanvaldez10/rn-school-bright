@@ -14,7 +14,7 @@ import ApiManager from '../../../../managers/ApiManager';
 import translang from '../../../../utils/language.utils';
 import PassengerAlightingReportTab from './PassengerAlightingReportTab';
 
-const TeacherAlightingReport = ({ navigation }) => {
+const PassengerAlightingReport = ({ navigation }) => {
   const [showCalendarModal, setShowCalendarModal] = useState(false);
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const [selectedDate, setSelectedDate] = useState(moment());
@@ -200,4 +200,4 @@ const styles = ScaledSheet.create({
   },
 });
 
-export default TeacherAlightingReport;
+export default PassengerAlightingReport;

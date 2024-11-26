@@ -75,7 +75,7 @@ export default class ReportForTeacherNoTabScreen extends React.Component {
     else if (key == 'student_leave')
       this.props.navigation.navigate('ReportTeacherStudentLeave', {parent: 'ReportForTeacher'});
     else if(key === 'alighting_report')
-      this.props.navigation.navigate('TeacherStudentAlightingReport', {parent: 'ReportForTeacher'});
+      this.props.navigation.navigate('PassengerAlightingReport', {parent: 'ReportForTeacher'});
     else if (key == 'student_behavior')
       this.props.navigation.navigate('ReportBehavior', {parent: 'ReportForTeacher'});
     else if (key == 'excute_attendance')

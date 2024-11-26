@@ -8,7 +8,7 @@ import Images from '../../../../themes/Images';
 import translang from '../../../../utils/language.utils';
 import HorizontalScrollableBars from './BarChart';
 
-const MorningAlitingReportTab = (props) => {
+const PassengerAlightingReportTab = (props) => {
   const [userInfo] = useState(props.userInfo);
 
   const { reportList, total } = props;
@@ -177,4 +177,4 @@ const styles = ScaledSheet.create({
   },
 });
 
-export default MorningAlitingReportTab;
+export default PassengerAlightingReportTab;
