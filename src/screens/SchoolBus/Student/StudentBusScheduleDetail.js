@@ -24,6 +24,7 @@ import CollapseMapIcon from '../../../assets/images/new/ic_collapse_map.png';
 import ExpandMapIcon from '../../../assets/images/new/ic_expand_map.png';
 import Storage from '../../../managers/StorageManager';
 import StuffPopup from './StuffPopup';
+import MapView, { Marker, UrlTile } from 'react-native-maps';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -41,7 +42,7 @@ const StudentBusScheduleDetail = ({ navigation }) => {
   const [infoRoute, setInfoRoute] = useState({});
   const [infoTravel, setInfoTravel] = useState({});
 
-  const { sLocationUpdateTime } = infoLocation;
+  const { sLocationUpdateTime, dLat = 0, dLng = 0 } = infoLocation;
 
   const { sLicensePlate, sBrandModel, sDriverName, sDriverPhoto, sDriverPhone } = infoVehicle;
   const { sDate, sTime, isEvening } = infoRoute;
@@ -165,6 +166,38 @@ const StudentBusScheduleDetail = ({ navigation }) => {
 
       <ScrollView contentContainerStyle={styles.contentContainerStyle} style={styles.scrollView}>
         <View style={[styles.mapViewContainer, mapExpanded && { height: screenHeight * 0.75 }]}>
+          <MapView
+            style={styles.map}
+            provider={'google'}
+            zoomEnabled={mapExpanded}
+            rotateEnabled={mapExpanded}
+            scrollEnabled={mapExpanded}
+            camera={{
+              center: {
+                latitude: dLat || 0,
+                longitude: dLng || 0,
+              },
+              zoom: 20,
+              pitch: 0,
+              heading: 0,
+            }}
+          >
+            <Marker
+              coordinate={{ latitude: dLat || 0, longitude: dLng || 0 }}
+              title="Bus Location"
+              description="Current location of the bus"
+              anchor={{
+                x: 0,
+                y: 0,
+              }}
+            >
+              <Image
+                source={Images.m_school_bus}
+                style={[styles.marker, mapExpanded && { width: 56, height: 56 }]}
+                resizeMode="contain"
+              />
+            </Marker>
+          </MapView>
           <Pressable style={styles.mapSwitchButton} onPress={handleToggleMapView}>
             <Image
               source={mapExpanded ? CollapseMapIcon : ExpandMapIcon}
@@ -265,6 +298,15 @@ const styles = StyleSheet.create({
   mapViewContainer: {
     height: 240,
     width: '100%',
+  },
+  map: {
+    width: '100%',
+    height: '100%',
+  },
+  marker: {
+    width: 36,
+    height: 36,
+    resizeMode: 'contain',
   },
   detailsView: {
     width: '100%',

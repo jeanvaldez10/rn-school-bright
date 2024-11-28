@@ -440,6 +440,8 @@ const images = {
   ic_school_bus_2: require("../assets/images/new/ic_school_bus_2.png"),
   ic_school_bus_blue: require("../assets/images/new/ic_school_bus_blue.png"),
   ic_school_bus_green: require("../assets/images/new/ic_school_bus_green.png"),
+  ic_school_bus_marker_small: require("../assets/images/new/ic_school_bus_marker_small.png"),
+  ic_school_bus_marker_large: require("../assets/images/new/ic_school_bus_marker_large.png"),
   ic_checked_green: require("../assets/images/new/ic_checked_green.png"),
   ic_checked_disabled: require("../assets/images/new/ic_checked_disabled.png"),
 };

@@ -16,6 +16,7 @@
 #import <FlipperKitNetworkPlugin/FlipperKitNetworkPlugin.h>
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 
 static void InitializeFlipper(UIApplication *application) {
@@ -33,7 +34,7 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  
+  [GMSServices provideAPIKey:@"AIzaSyCq1Q8vHASVdlC14nbcZKpzZUa6BIPvHjw"];
   [FIRApp configure];
   #ifdef FB_SONARKIT_ENABLED
     InitializeFlipper(application);
@@ -54,7 +55,6 @@ static void InitializeFlipper(UIApplication *application) {
 
   UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
   center.delegate = self;
-
     
   return YES;
 }
