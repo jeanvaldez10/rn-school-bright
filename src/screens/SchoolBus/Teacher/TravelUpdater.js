@@ -7,8 +7,6 @@ const TravelUpdater = () => {
   const updateTravelStatuses = useCallback(async () => {
     const startedSchedules = await StorageManager.getStartedSchedules();
 
-    console.log(startedSchedules);
-
     for (const scheduleID of startedSchedules) {
       try {
         const data = await ApiManager.getBusScheduleDetail(scheduleID).catch(() => null);
@@ -17,7 +15,7 @@ const TravelUpdater = () => {
           Geolocation.getCurrentPosition(
             async (position) => {
               const { latitude, longitude } = position.coords;
-              await ApiManager.updateBusLocation(data?.infoTravel?.nTravelID, latitude, longitude);
+              ApiManager.updateBusLocation(data?.infoTravel?.nTravelID, latitude, longitude);
             },
             (error) => {
               console.error('Error fetching location for ongoing travel:', error);
@@ -38,7 +36,7 @@ const TravelUpdater = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       updateTravelStatuses();
-    }, 60000);
+    }, 30000);
     return () => clearInterval(interval);
   }, [updateTravelStatuses]);
 

@@ -33,6 +33,8 @@ const GroupIncidentReport = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalBody, setModalBody] = useState('');
+  const [alertStatus, setAlertStatus] = useState(''); // success or warning
+
   const [submitting, setSubmitting] = useState(false);
 
   const [description, setDescription] = useState('');
@@ -55,6 +57,12 @@ const GroupIncidentReport = ({ navigation }) => {
     return () => BackHandler.removeEventListener('hardwareBackPress', handleBackButton);
   }, [handleBackButton]);
 
+  const showAlert = useCallback((message, status) => {
+    setModalBody(message);
+    setAlertStatus(status);
+    setShowModal(true);
+  }, []);
+
   const handleToggleParent = useCallback(() => {
     if (isSendToParent) {
       setGroupType(0);
@@ -67,8 +75,7 @@ const GroupIncidentReport = ({ navigation }) => {
       return;
     }
     if (description === '') {
-      setShowModal(true);
-      setModalBody(translang.t('INPUT_DESCRIPTION'));
+      showAlert(translang.t('INPUT_DESCRIPTION'), 'warning');
       return;
     }
 
@@ -84,15 +91,13 @@ const GroupIncidentReport = ({ navigation }) => {
         sImageURLs: attachedImages.map((file) => file.FileURL).join(','),
       });
       if (result.status === 1) {
-        setShowModal(true);
-        setModalBody(translang.t('SUCCESS_INCIDENT_SUBMIT'));
+        showAlert(translang.t('SUCCESS_INCIDENT_SUBMIT'), 'success');
       } else {
         throw Error(result.message);
       }
     } catch (e) {
       console.log(e);
-      setShowModal(true);
-      setModalBody(e.message || translang.t('ERROR_OCCURED_TRY_AGAIN'));
+      showAlert(e.message || translang.t('ERROR_OCCURED_TRY_AGAIN'), 'warning');
     }
     setSubmitting(false);
   };
@@ -107,15 +112,13 @@ const GroupIncidentReport = ({ navigation }) => {
       let uris = attachedFiles;
 
       if (uris.length + results.length > 10) {
-        setShowModal(true);
-        setModalBody(translang.t('CANTSELECT_LIMIT'));
+        showAlert(translang.t('CANTSELECT_LIMIT'), 'warning');
         return;
       }
       setIsLoading(true);
       results.forEach((item) => {
         if (item.size > 25000000) {
-          setShowModal(true);
-          setModalBody(translang.t('OVERSIZE_ALERT'));
+          showAlert(translang.t('OVERSIZE_ALERT'), 'warning');
           setIsLoading(false);
           return;
         }
@@ -152,15 +155,14 @@ const GroupIncidentReport = ({ navigation }) => {
         let showUris = showAttachImages;
 
         if (uris.length + response.assets.length > 10) {
-          setShowModal(true);
-          setModalBody(translang.t('CANTSELECT_LIMIT'));
+          showAlert(translang.t('CANTSELECT_LIMIT'), 'warning');
+
           return;
         }
         setIsLoading(true);
         response.assets.forEach((item) => {
           if (item.fileSize > 25000000) {
-            setShowModal(true);
-            setModalBody(translang.t('OVERSIZE_ALERT'));
+            showAlert(translang.t('OVERSIZE_ALERT'), 'warning');
             return;
           }
 
@@ -246,7 +248,11 @@ const GroupIncidentReport = ({ navigation }) => {
     { text: translang.t('REPORT_SEND_TO_PARENTS_ALL'), key: 3 },
   ];
 
-  console.log(modalBody);
+  const alertImage = alertStatus === 'success' ? Images.checked : Images.n_ic_warning;
+  const alertButtonColor =
+    alertStatus === 'success'
+      ? [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]
+      : [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end];
 
   // UI Components
   return (
@@ -362,9 +368,9 @@ const GroupIncidentReport = ({ navigation }) => {
 
       <AlertWithImageModal
         isVisible={showModal}
-        image={Images.alert_inbox}
+        image={alertImage}
+        buttonColors={alertButtonColor}
         message={JSON.stringify(modalBody)}
-        buttonColors={[Color.red_orange, Color.soft_red]}
         isVerticalGradient={false}
         onClose={() => {
           setShowModal(false);

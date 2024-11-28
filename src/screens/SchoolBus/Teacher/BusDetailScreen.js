@@ -189,7 +189,9 @@ const BusDetailScreen = ({ navigation }) => {
           const result = await updateFunc(nTravelID);
           result.status === 1;
           if (result.status === 1) {
-            StorageManager.saveScheduleID(nScheduleID);
+            if (newStatus === TravelStatuses.DEPARTED) {
+              StorageManager.saveScheduleID(nScheduleID);
+            }
 
             await onSwitchSuccess(newStatus);
           } else {

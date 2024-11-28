@@ -35,6 +35,7 @@ const IncidentReport = ({ navigation }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [modalBody, setModalBody] = useState('');
+  const [alertStatus, setAlertStatus] = useState(''); // success or warning
 
   const [description, setDescription] = useState('');
 
@@ -51,6 +52,12 @@ const IncidentReport = ({ navigation }) => {
     return true;
   }, [navigation]);
 
+  const showAlert = useCallback((message, status) => {
+    setModalBody(message);
+    setAlertStatus(status);
+    setShowModal(true);
+  }, []);
+
   useEffect(() => {
     BackHandler.addEventListener('hardwareBackPress', handleBackButton);
     return () => BackHandler.removeEventListener('hardwareBackPress', handleBackButton);
@@ -62,8 +69,8 @@ const IncidentReport = ({ navigation }) => {
     }
 
     if (description === '') {
-      setShowModal(true);
-      setModalBody(translang.t('INPUT_DESCRIPTION'));
+      showAlert(translang.t('INPUT_DESCRIPTION'), 'warning');
+
       return;
     }
 
@@ -77,14 +84,12 @@ const IncidentReport = ({ navigation }) => {
         sImageURLs: attachedImages.map((file) => file.FileURL).join(','),
       });
       if (result.status === 1) {
-        setShowModal(true);
-        setModalBody(translang.t('SUCCESS_INCIDENT_SUBMIT'));
+        showAlert(translang.t('SUCCESS_INCIDENT_SUBMIT'), 'success');
       } else {
         throw Error(result.message);
       }
     } catch (e) {
-      setShowModal(true);
-      setModalBody(e.message || translang.t('ERROR_OCCURED_TRY_AGAIN'));
+      showAlert(e.message || translang.t('ERROR_OCCURED_TRY_AGAIN'), 'warning');
     }
     setSubmitting(false);
   };
@@ -99,15 +104,15 @@ const IncidentReport = ({ navigation }) => {
       let uris = attachedFiles;
 
       if (uris.length + results.length > 10) {
-        setShowModal(true);
-        setModalBody(translang.t('CANTSELECT_LIMIT'));
+        showAlert(translang.t('CANTSELECT_LIMIT'), 'warning');
+
         return;
       }
       setIsLoading(true);
       results.forEach((item) => {
         if (item.size > 25000000) {
-          setShowModal(true);
-          setModalBody(translang.t('OVERSIZE_ALERT'));
+          showAlert(translang.t('OVERSIZE_ALERT'), 'warning');
+
           setIsLoading(false);
           return;
         }
@@ -145,15 +150,15 @@ const IncidentReport = ({ navigation }) => {
         let showUris = showAttachImages;
 
         if (uris.length + response.assets.length > 10) {
-          setShowModal(true);
-          setModalBody(translang.t('CANTSELECT_LIMIT'));
+          showAlert(translang.t('CANTSELECT_LIMIT'), 'warning');
+
           return;
         }
         setIsLoading(true);
         response.assets.forEach((item) => {
           if (item.fileSize > 25000000) {
-            setShowModal(true);
-            setModalBody(translang.t('OVERSIZE_ALERT'));
+            showAlert(translang.t('OVERSIZE_ALERT'), 'warning');
+
             return;
           }
 
@@ -231,6 +236,12 @@ const IncidentReport = ({ navigation }) => {
       </TouchableOpacity>
     );
   };
+
+  const alertImage = alertStatus === 'success' ? Images.checked : Images.n_ic_warning;
+  const alertButtonColor =
+    alertStatus === 'success'
+      ? [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]
+      : [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end];
 
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
@@ -330,9 +341,9 @@ const IncidentReport = ({ navigation }) => {
 
       <AlertWithImageModal
         isVisible={showModal}
-        image={Images.alert_inbox}
+        image={alertImage}
+        buttonColors={alertButtonColor}
         message={JSON.stringify(modalBody)}
-        buttonColors={[Color.red_orange, Color.soft_red]}
         isVerticalGradient={false}
         onClose={() => {
           setShowModal(false);
