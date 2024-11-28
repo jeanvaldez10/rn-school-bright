@@ -3044,6 +3044,26 @@ const getPassengerBoardingAlightingReports = (sDate, isEvening) => {
       });
   };
 
+  const getStudentPickUpDropOffReport = (ddate, edate) => {
+    const params = {
+      nBusID: 0,
+      sDateFrom: moment(ddate).format('DD/MM/YYYY'),
+      sDateTo: moment(edate).format('DD/MM/YYYY'),
+    };
+    return schoolBusHttpClient
+      .post(apiUrls.getStudentPickUpDropOffReport(), params, {
+        headers: {
+          isStudent: true,
+        },
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error reading reports:', error);
+        throw error;
+      });
+  };
+  
+
 export default {
     getVerification,
     getLogStatus,
@@ -3284,5 +3304,6 @@ export default {
     getScheduleDetailForStudent,
     getStudentBusIncidentList,
     readStudentBusIncident,
+    getStudentPickUpDropOffReport,
     // end schcool bus
 };

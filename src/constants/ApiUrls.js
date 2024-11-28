@@ -1092,6 +1092,10 @@ class ApiUrls {
   readStudentBusIncident(incidentID) {
     return `/Student/ReadIncidentDetail/${incidentID}`
   }
+
+  getStudentPickUpDropOffReport() {
+    return `/Student/ReportCheckInOut`
+  }
 }
 
 

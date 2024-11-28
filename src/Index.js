@@ -269,6 +269,7 @@ import PassengerAlightingReport from './screens/SchoolBus/Teacher/alighting-repo
 import DetailedAlightingReport from './screens/SchoolBus/Teacher/alighting-report/DetailedAlightingReport';
 import StudentBusScheduleDetail from './screens/SchoolBus/Student/StudentBusScheduleDetail';
 import StudentIncidentReportingReport from './screens/SchoolBus/Student/StudentIncidentReportingReport';
+import StudentPickupDropOffReport from './screens/SchoolBus/Student/StudentPickupDropOffReport';
 
 const screenWidth = Dimensions.get('window').width;
 const drawerWidth = 0;
@@ -512,6 +513,12 @@ const MainAppRouteConfigs = {
   },
   StudentIncidentReportingReport: {
     screen: StudentIncidentReportingReport,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  StudentPickupDropOffReport: {
+    screen: StudentPickupDropOffReport,
     navigationOptions: {
       headerShown: false,
     },

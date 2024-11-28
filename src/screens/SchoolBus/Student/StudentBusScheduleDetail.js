@@ -123,7 +123,7 @@ const StudentBusScheduleDetail = ({ navigation }) => {
   };
 
   const onPassengerReport = () => {
-    navigation.navigate('VehiclePassgngerAlightingReport');
+    navigation.navigate('StudentPickupDropOffReport');
   };
 
   const handleToggleMapView = () => {

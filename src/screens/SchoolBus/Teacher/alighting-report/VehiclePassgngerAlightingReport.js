@@ -63,7 +63,7 @@ const VehiclePassgngerAlightingReport = ({ navigation }) => {
         startDate,
         '2567-11-22',
       );
-      setReportList(data.lstData);
+      setReportList(data.lstData || []);
     } catch (error) {
       console.log(error);
       alert(error.message || 'Failed to fetch data.');
