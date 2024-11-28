@@ -1084,6 +1084,14 @@ class ApiUrls {
   getScheduleDetailForStudent() {
     return '/Student/GetScheduleDetail'
   }
+
+  getStudentBusIncidentList() {
+    return '/Student/GetIncidents'
+  }
+
+  readStudentBusIncident(incidentID) {
+    return `/Student/ReadIncidentDetail/${incidentID}`
+  }
 }
 
 

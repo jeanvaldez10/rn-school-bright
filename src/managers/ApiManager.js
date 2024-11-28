@@ -3008,6 +3008,42 @@ const getPassengerBoardingAlightingReports = (sDate, isEvening) => {
       });
   };
 
+  const getStudentBusIncidentList = () => {
+    return schoolBusHttpClient
+      .post(
+        apiUrls.getStudentBusIncidentList(),
+        {},
+        {
+          headers: {
+            isStudent: true,
+          },
+        },
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error retrieving incidents:', error);
+        throw error;
+      });
+  };
+
+  const readStudentBusIncident = (incidentID) => {
+    return schoolBusHttpClient
+      .post(
+        apiUrls.readStudentBusIncident(incidentID),
+        {},
+        {
+          headers: {
+            isStudent: true,
+          },
+        },
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error reading incident:', error);
+        throw error;
+      });
+  };
+
 export default {
     getVerification,
     getLogStatus,
@@ -3246,5 +3282,7 @@ export default {
     getPassengerBoardingAlightingReportDetails,
     checkTodayBusScheduleForStudent,
     getScheduleDetailForStudent,
+    getStudentBusIncidentList,
+    readStudentBusIncident,
     // end schcool bus
 };

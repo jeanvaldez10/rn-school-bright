@@ -118,18 +118,8 @@ const StudentBusScheduleDetail = ({ navigation }) => {
     setShowStuffModal(true);
   }, []);
 
-  const onGroupIncidentReport = () => {
-    let params = {
-      deliveryFormat: {},
-      recipient: {},
-      selectedIds: [],
-      userInfo: {},
-    };
-    navigation.navigate('GroupIncidentReport', { params });
-  };
-
   const onReportingReport = () => {
-    navigation.navigate('IncidentReportingReport');
+    navigation.navigate('StudentIncidentReportingReport');
   };
 
   const onPassengerReport = () => {
@@ -141,7 +131,6 @@ const StudentBusScheduleDetail = ({ navigation }) => {
   };
 
   const moreActions = [
-    translang.t('DOT_MENU_GROUP_ICIDENT_REPORT'),
     translang.t('DOT_MENU_INCIDENT_REPORTING_REPORT'),
     translang.t('DOT_MENU_PASSENGER_REPORT'),
   ];
@@ -169,9 +158,8 @@ const StudentBusScheduleDetail = ({ navigation }) => {
         is_more="1"
         actions={moreActions}
         onMoreTap={(value, index) => {
-          if (index === 2) onGroupIncidentReport();
-          else if (index === 3) onReportingReport();
-          else if (index === 4) onPassengerReport();
+          if (index === 0) onReportingReport();
+          else if (index === 1) onPassengerReport();
         }}
       />
 
