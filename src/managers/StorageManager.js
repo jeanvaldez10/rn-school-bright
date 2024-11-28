@@ -133,7 +133,6 @@ const setStartedSchedules = async (data) => {
 const saveScheduleID = async (nScheduleID) => {
   try {
     let storedScheduleIDs = await getStartedSchedules();
-    alert(storedScheduleIDs);
 
     if (!storedScheduleIDs.includes(nScheduleID)) {
       storedScheduleIDs.push(nScheduleID);
