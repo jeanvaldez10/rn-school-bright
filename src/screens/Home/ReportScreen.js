@@ -83,6 +83,8 @@ export default class ReportScreen extends React.Component {
       this.props.navigation.navigate('ReportOrderList');
     else if (key == 'behavior'){
       this.props.navigation.navigate('ReportStudentBehaviorScoreList', {parent: 'Report', userInfo: this.state.userInfo,});
+    } else if( key === 'school-bus') {
+      this.props.navigation.navigate('StudentPickupDropOffReport');
     }
 
       // this.props.navigation.navigate('ReportBehaviorStudentList', {parent: 'Report', userInfo: this.state.userInfo,});
@@ -113,7 +115,13 @@ export default class ReportScreen extends React.Component {
                 label={translang.t('REPORT_leave')}
               />
             </TouchableOpacity>
-
+            <TouchableOpacity style={styles.menuEachStyle} activeOpacity={0.5} onPress={() => { this.onClickItem('school-bus') }} >
+              <ReportIconInfoItem
+                topTextStyle={{color: Color.n_default_orange}}
+                icon_mark={Images.ic_school_bus_blue}
+                  label={translang.t('BUS_ALIGHTING_REPORT')}
+              />
+            </TouchableOpacity>
             <TouchableOpacity style={styles.menuEachStyle} activeOpacity={0.5} onPress={() => { this.onClickItem('topup') }} >
               <ReportIconInfoItem
                 topTextStyle={{color: Color.n_default_orange}}
@@ -137,7 +145,7 @@ export default class ReportScreen extends React.Component {
                 label={translang.t('REPORT_behaviorscore')}
               />
             </TouchableOpacity>
-
+           
           </ScrollView>
         </View>
 

@@ -204,19 +204,29 @@ const StudentBusScheduleDetail = ({ navigation }) => {
               heading: 0,
             }}
           >
-            <Marker
-              coordinate={{ latitude: dLat || 0, longitude: dLng || 0 }}
-              title="Bus Location"
-              description="Current location of the bus"
-              anchor={{
-                x: 0,
-                y: 0,
-              }}
-              image={
-                mapExpanded ? Images.ic_school_bus_marker_large : Images.ic_school_bus_marker_small
-              }
-            />
+            {!isLoading && (
+              <Marker
+                coordinate={{ latitude: dLat || 0, longitude: dLng || 0 }}
+                title="Bus Location"
+                description="Current location of the bus"
+                anchor={{
+                  x: 0,
+                  y: 0,
+                }}
+                image={
+                  mapExpanded
+                    ? Images.ic_school_bus_marker_large
+                    : Images.ic_school_bus_marker_small
+                }
+                icon={
+                  mapExpanded
+                    ? Images.ic_school_bus_marker_large
+                    : Images.ic_school_bus_marker_small
+                }
+              />
+            )}
           </MapView>
+
           <Pressable style={styles.mapSwitchButton} onPress={handleToggleMapView}>
             <Image
               source={mapExpanded ? CollapseMapIcon : ExpandMapIcon}
