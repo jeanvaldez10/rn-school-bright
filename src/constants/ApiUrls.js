@@ -8,8 +8,8 @@ export const SHOP_BASE_URL_DEV = 'https://paymentapi-dev.schoolbright.co/api';
 export const BASE_WEBSITE_URL = 'https://system.schoolbright.co';
 export const ACADEMIC_WEBSITE_URL = 'https://academic.schoolbright.co/api';
 export const ACADEMIC_WEBSITE_URL_DEV = 'https://dev-academic.schoolbright.co/api'; 
-export const SCHOOL_BUS_URL = 'https://sbbus-dev.schoolbright.co/MobileAPI/Teacher'; 
-export const SCHOOL_BUS_URL_DEV = 'https://sbbus-dev.schoolbright.co/MobileAPI/Teacher'; 
+export const SCHOOL_BUS_URL = 'https://sbbus-dev.schoolbright.co/MobileAPI'; 
+export const SCHOOL_BUS_URL_DEV = 'https://sbbus-dev.schoolbright.co/MobileAPI'; 
 
 import translang, {getCurrentLocale} from '../utils/language.utils';
 
@@ -1014,67 +1014,75 @@ class ApiUrls {
   }
 
   getBusList() {
-    return '/GetBuses';
+    return '/Teacher/GetBuses';
   }
 
   getTodayBusSchedule() {
-    return `/GetBusTodaySchedules`;
+    return `/Teacher/GetBusTodaySchedules`;
   }
 
   getBusScheduleDetail() {
-    return  '/GetScheduleDetail';
+    return  '/Teacher/GetScheduleDetail';
   }
 
   busStartTravel() {
-    return '/StartTravel';
+    return '/Teacher/StartTravel';
   }
 
   cacelBusTravel() {
-    return '/CancelTravel';
+    return '/Teacher/CancelTravel';
   }
 
   completeBusTravel() {
-    return '/CompleteTravel';
+    return '/Teacher/CompleteTravel';
   }
 
   buscheckInStudent() {
-    return '/CheckInStudent';
+    return '/Teacher/CheckInStudent';
   }
 
   busCheckoutStudent() {
-    return '/CheckOutStudent';
+    return '/Teacher/CheckOutStudent';
   }
 
   reOrderStudentQueue() {
-    return '/Schedule/ReOrderStudents';
+    return '/Teacher/Schedule/ReOrderStudents';
   }
 
   submitBusIndividualIncident() {
-    return '/SubmitIncident/Individual';
+    return '/Teacher/SubmitIncident/Individual';
   }
 
   submitBusGroupIncident() {
-    return '/SubmitIncident/Group';
+    return '/Teacher/SubmitIncident/Group';
   }
 
   getBusIncidentList() {
-    return '/GetIncidents';
+    return '/Teacher/GetIncidents';
   }
 
   readBusIncident(incidentID) {
-    return `/ReadIncidentDetail/${incidentID}`
+    return `/Teacher/ReadIncidentDetail/${incidentID}`
   }
 
   getReportVehicleCheckInOut() {
-    return '/ReportVehicleCheckInOut'
+    return '/Teacher/ReportVehicleCheckInOut'
   }
 
   getPassengerBoardingAlightingReports() {
-    return '/ReportAllCheckInOut'
+    return '/Teacher/ReportAllCheckInOut'
   }
 
   getPassengerBoardingAlightingReportDetails() {
-    return '/ReportCheckInOutDetail'
+    return '/Teacher/ReportCheckInOutDetail'
+  }
+
+  checkTodayBusScheduleForStudent() {
+    return '/Student/CheckTodaySchedules'
+  }
+
+  getScheduleDetailForStudent() {
+    return '/Student/GetScheduleDetail'
   }
 }
 

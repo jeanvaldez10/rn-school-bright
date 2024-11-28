@@ -1328,6 +1328,12 @@ export default {
   CHECK_IN: 'CheckIn',
   CHECK_OUT: 'CheckOut',
   ALL_STUDENTS: 'All Students',
+  NO_SCHEDULE_FOUND: 'Not found schedule.',
+  CALL_TEACHER: 'Call Teacher',
+  TEACHER_STUFF: 'Teacher',
+
+  UPDATED_AS_OF: 'Updated as of',
+
 
   // End of schoolBus
 };

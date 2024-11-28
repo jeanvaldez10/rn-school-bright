@@ -8,6 +8,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import AlertWithImageModal from '../../../components/AlertWithImageModal';
@@ -21,46 +22,80 @@ import images from '../../../themes/Images';
 import CustomRadioButtonItem from '../../../components/CustomRadioButtonItem';
 import CollapseMapIcon from '../../../assets/images/new/ic_collapse_map.png';
 import ExpandMapIcon from '../../../assets/images/new/ic_expand_map.png';
+import Storage from '../../../managers/StorageManager';
+import StuffPopup from './StuffPopup';
+
 const screenHeight = Dimensions.get('window').height;
 
-const MorningBusDetails = ({ navigation }) => {
-  const [userInfo] = useState(navigation.getParam('userInfo'));
-  const [students, setStudents] = useState([]);
-
+const StudentBusScheduleDetail = ({ navigation }) => {
+  const scheduleID = navigation.getParam('scheduleID');
+  const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showStuffModal, setShowStuffModal] = useState(false);
+
   const [alertContent, setAlertContent] = useState('');
+
+  const [infoLocation, setInfoLocation] = useState({});
+  const [infoVehicle, setInfoVehicle] = useState({});
+  const [infoRoute, setInfoRoute] = useState({});
+  const [infoTravel, setInfoTravel] = useState({});
+
+  const { sLocationUpdateTime } = infoLocation;
+
+  const { sLicensePlate, sBrandModel, sDriverName, sDriverPhoto, sDriverPhone } = infoVehicle;
+  const { sDate, sTime, isEvening } = infoRoute;
+  const {
+    nStatus,
+    nQueueOrder,
+    sCheckInTime,
+    sCheckOutTime,
+    nCheckInStatus,
+    nCheckOutStatus,
+    sTeacherName,
+    sTeacherPhoto,
+  } = infoTravel;
 
   const [mapExpanded, setMapExpanded] = useState(false);
 
   useEffect(() => {
-    loadData(userInfo);
-  }, [loadData, userInfo]);
+    initialize();
+  }, [initialize]);
 
-  const loadData = useCallback((userInfo) => {
-    const { SchoolID } = userInfo || {};
-
-    if (!SchoolID) {
-      return;
-    }
+  const initialize = useCallback(async () => {
     setIsLoading(true);
-    ApiManager.getShopList(SchoolID)
-      .then((list) => {
-        setStudents(
-          list.map((item) => ({
-            ...item,
-            checkInStatus: 'unspecified',
-            checkoutStatus: 'unspecified',
-          })),
-        );
+    try {
+      const user = await Storage.getUser();
+      const { ID: userId, SchoolId: schoolId } = user;
+      const userInfo = await ApiManager.getUserInfo(userId, schoolId);
+      setUserInfo(userInfo);
+      loadDetails();
+    } catch (error) {
+      console.log('UserInfo error', error);
+    }
+  }, [loadDetails]);
+
+  const loadDetails = useCallback(() => {
+    setIsLoading(true);
+    ApiManager.getScheduleDetailForStudent(scheduleID)
+      .then((data) => {
+        if (data.status === 1) {
+          setInfoLocation(data.infoLocation);
+          setInfoVehicle(data.infoVehicle);
+          setInfoRoute(data.infoRoute);
+          setInfoTravel(data.infoTravel);
+        } else {
+          alert(data.message);
+        }
       })
       .catch((error) => {
         console.log(error);
+        alert('Failed to fetch details.');
       })
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [scheduleID]);
 
   const back = useCallback(() => {
     navigation.pop();
@@ -78,6 +113,10 @@ const MorningBusDetails = ({ navigation }) => {
       backhandler.remove();
     };
   }, [handleBackButton, navigation]);
+
+  const handlePressStuff = useCallback(() => {
+    setShowStuffModal(true);
+  }, []);
 
   const onGroupIncidentReport = () => {
     let params = {
@@ -102,8 +141,6 @@ const MorningBusDetails = ({ navigation }) => {
   };
 
   const moreActions = [
-    translang.t('DOT_MENU_QUEUE_MANAGE'),
-    translang.t('DOT_MENU_BUS_DETAILS'),
     translang.t('DOT_MENU_GROUP_ICIDENT_REPORT'),
     translang.t('DOT_MENU_INCIDENT_REPORTING_REPORT'),
     translang.t('DOT_MENU_PASSENGER_REPORT'),
@@ -151,14 +188,28 @@ const MorningBusDetails = ({ navigation }) => {
 
         <View style={styles.detailsView}>
           <View style={styles.avatarWrapper}>
-            <Image source={images.women_user} style={styles.avatar} />
+            <Image
+              source={sDriverPhoto ? { uri: sDriverPhoto } : images.women_user}
+              style={styles.avatar}
+            />
           </View>
+          <Text style={styles.text4}>
+            {translang.t('UPDATED_AS_OF')} {sLocationUpdateTime || '-'}
+          </Text>
           <View style={styles.wrapper1}>
-            <Text style={styles.text1}>นายหนึ่ง สคูลไบร์ท</Text>
-            <Text style={styles.text2}>{translang.t('DRIVER_NUMBER')}: 081-234-5678</Text>
-            <Text style={styles.text2}>อบ 1212 กรุงเทพมหานคร : Toyota Commuter</Text>
-            <Text style={styles.text2}>{translang.t('VEHICLE_ROUTE')}: 26/08/2567</Text>
-            <Text style={styles.text2}>{translang.t('DEPATURE_TIME')}:5:00</Text>
+            <Text style={styles.text1}>{sDriverName}</Text>
+            <Text style={styles.text2}>
+              {translang.t('DRIVER_NUMBER')}: {sDriverPhone}
+            </Text>
+            <Text style={styles.text2}>
+              {sLicensePlate} : {sBrandModel}
+            </Text>
+            <Text style={styles.text2}>
+              {translang.t('VEHICLE_ROUTE')}: {sDate}
+            </Text>
+            <Text style={styles.text2}>
+              {translang.t('DEPATURE_TIME')}: {sTime}
+            </Text>
           </View>
 
           <View style={styles.statusContainer}>
@@ -166,7 +217,7 @@ const MorningBusDetails = ({ navigation }) => {
               <View key={item.value} style={styles.radioContainer}>
                 <CustomRadioButtonItem
                   radioSize={16}
-                  isSelected={true}
+                  isSelected={nStatus === item.value}
                   selectedColor={Color.green_color_bg}
                 />
                 <Text style={styles.radioLabel}>{item.title}</Text>
@@ -174,24 +225,29 @@ const MorningBusDetails = ({ navigation }) => {
             ))}
           </View>
           <View style={styles.row1}>
-            <Text style={styles.text3}>ลำดับคิว</Text>
-            <Text style={styles.text3}>1</Text>
+            <Text style={styles.text3}>{translang.t('QUEUE_ORDER')}</Text>
+            <Text style={styles.text3}>{nQueueOrder}</Text>
           </View>
           <View style={styles.row1}>
             <Text style={styles.text3}>{translang.t('BUS_CHECK_IN_STATUS_CHECKED_IN')} </Text>
-            <Text style={styles.text3}>18/09/2024 06:00</Text>
+            <Text style={styles.text3}>{sCheckInTime}</Text>
           </View>
           <View style={styles.row1}>
             <Text style={styles.text3}>{translang.t('BUS_CHECK_IN_STATUS_CHECKED_OUT')} </Text>
-            <Text style={styles.text3}>_</Text>
+            <Text style={styles.text3}>{sCheckOutTime}</Text>
           </View>
-          <View style={styles.row1}>
-            <Text style={styles.text3}>{translang.t('BUS_TEACHER_STAFF')} </Text>
-            <View style={styles.teacherStaffContainer}>
-              <Image source={images.women_user} style={styles.staffAvatar} />
-              <Text style={styles.staffText}>18/09/2024 06:00</Text>
-            </View>
-          </View>
+          {sDriverName ? (
+            <TouchableOpacity style={styles.row1} onPress={handlePressStuff}>
+              <Text style={styles.text3}>{translang.t('BUS_TEACHER_STAFF')} </Text>
+              <View style={styles.teacherStaffContainer}>
+                <Image
+                  source={sTeacherPhoto ? { uri: sTeacherPhoto } : images.women_user}
+                  style={styles.staffAvatar}
+                />
+                <Text style={styles.staffText}>{sTeacherName}</Text>
+              </View>
+            </TouchableOpacity>
+          ) : null}
         </View>
       </ScrollView>
       <ProgressHud isVisible={isLoading} />
@@ -200,6 +256,13 @@ const MorningBusDetails = ({ navigation }) => {
         onClose={() => setShowModal(false)}
         image={Images.n_ic_warning}
         message={alertContent}
+      />
+      <StuffPopup
+        isVisible={showStuffModal}
+        stuff={{
+          stuffPhone: '12345678',
+        }}
+        onClose={() => setShowStuffModal(false)}
       />
     </SafeAreaView>
   );
@@ -280,6 +343,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
   },
+  text4: {
+    position: 'absolute',
+    top: 4,
+    right: 10,
+    color: '#45494D',
+    textAlign: 'center',
+    fontSize: 16,
+  },
   statusContainer: {
     width: '100%',
     alignItems: 'center',
@@ -339,4 +410,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MorningBusDetails;
+export default StudentBusScheduleDetail;

@@ -1314,6 +1314,10 @@ export default {
   CHECK_OUT: 'ลงรถ',
 
   ALL_STUDENTS: 'นักเรียนทั้งหมด',
-
+  NO_SCHEDULE_FOUND: 'Not found schedule.',
+  CALL_TEACHER: 'โทรหาครู',
+  TEACHER_STUFF: 'ครู',
+  UPDATED_AS_OF: 'อัปเดต ณ เวลา',
+  
   // End of schoolBus
 };

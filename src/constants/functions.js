@@ -69,6 +69,52 @@ export const gotoPageAfterAuth = async (menuGroupID, subMenuID, pageName, params
   });
 }
 
+export const gotoAfterCheckSchedule = (pageName, params, _this) => {
+  _this.setState({ isLoading: true });
+
+  const handleNavigation = (scheduleID, isEvening) => {
+    if (scheduleID) {
+      _this.props.navigation.navigate(pageName, { isEvening, scheduleID });
+    } else {
+      _this.setState({ 
+        showModal: true, 
+        modalBody: translang.t('NO_SCHEDULE_FOUND') 
+      });
+    }
+  };
+
+  ApiManager.checkTodayBusScheduleForStudent()
+    .then((res) => {
+      _this.setState({ isLoading: false });
+
+      if (res.status === 1) {
+        switch (pageName) {
+          case 'EveningBusScheduleDetail':
+            handleNavigation(res.nEveningScheduleID, true);
+            break;
+          case 'MorningBusScheduleDetail':
+            handleNavigation(res.nMorningScheduleID, false);
+            break;
+          default:
+            break;
+        }
+      } else {
+        _this.setState({ 
+          showModal: true, 
+          modalBody: res.message 
+        });
+      }
+    })
+    .catch((error) => {
+      console.error('Error checking schedule:', error);
+      _this.setState({ 
+        isLoading: false, 
+        showModal: true, 
+        modalBody: translang.t('ERROR_OCCURED_TRY_AGAIN') 
+      });
+    });
+};
+
 export const navigateMenu = async (item, _this) => {
   if (item.func == 'modal') {
     _this.setState({showMenuModal: true, subMenuList: item.subMenu});
@@ -76,6 +122,8 @@ export const navigateMenu = async (item, _this) => {
     _this.props.navigation.navigate(item.link);
   } else if (item.func == 'gotoPageAfterLeavePermission') {
     gotoPageAfterLeavePermission(item.link, {}, _this);
+  }else if (item.func == 'gotoAfterCheckSchedule') {
+    gotoAfterCheckSchedule(item.link, {}, _this);
   } else if (item.func == 'gotoPageAfterAuth') {
     gotoPageAfterAuth(item.menuGroupID, item.subMenuID, item.link, {param: 'subscribe'}, _this);
   } else if (item.func == 'coming') {

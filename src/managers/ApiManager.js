@@ -2978,6 +2978,35 @@ const getPassengerBoardingAlightingReports = (sDate, isEvening) => {
       });
   };
 
+  const checkTodayBusScheduleForStudent = () => {
+    const params = {};
+    return schoolBusHttpClient
+      .post(apiUrls.checkTodayBusScheduleForStudent(), params, {
+        headers: {
+            isStudent: true
+        }
+  })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error checking schedule:', error);
+        throw error;
+      });
+  };
+
+  const getScheduleDetailForStudent = (scheduleID) => {
+    const params = { nScheduleID: scheduleID };
+    return schoolBusHttpClient
+      .post(apiUrls.getScheduleDetailForStudent(), params, {
+        headers: {
+            isStudent: true
+        }
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error checking schedule:', error);
+        throw error;
+      });
+  };
 
 export default {
     getVerification,
@@ -3215,5 +3244,7 @@ export default {
     getVehicleCheckInOutListWithDate,
     getPassengerBoardingAlightingReports,
     getPassengerBoardingAlightingReportDetails,
+    checkTodayBusScheduleForStudent,
+    getScheduleDetailForStudent,
     // end schcool bus
 };

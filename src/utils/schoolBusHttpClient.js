@@ -5,6 +5,9 @@ import Storage from '../managers/StorageManager';
 const TEMP_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjAxIiwiZW1haWwiOiIwMV84NDlfMDFAc2Nob29sYnJpZ2h0LmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3Bvc3RhbGNvZGUiOiI4NDkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiI1NjA5NjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9oYXNoIjoiMDEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL2V4cGlyYXRpb24iOiIxMS8yNy8yMDI0IDk6MDE6MTEgQU0iLCJuYmYiOjE3MzI2MTE2NzEsImV4cCI6MTczMjY5ODA3MSwiaWF0IjoxNzMyNjExNjcxfQ.zal0wbaY7hRlNTiT4zra5jTaJvG80-czIfFwpN6r2gw';
 
+const STUDENT_TEMP_TOKEN =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwNzE1IiwiZW1haWwiOiJwaWNYWFhYQHNjaG9vbGJyaWdodC5jbyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3Bvc3RhbGNvZGUiOiI4NDkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiI1ODE3MjgiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9oYXNoIjoiMTExMTExIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiMTEvMTIvMjAyNCA1OjAzOjM3IFBNIiwibmJmIjoxNzMxMDg1NDE3LCJleHAiOjE3MzE0MzEwMTcsImlhdCI6MTczMTA4NTQxN30.VBxMaoBMYa7o1cueHcV8p22sOxMKghve-aPyffTdTFY';
+
 const schoolBusHttpClient = axios.create({
   baseURL: SCHOOL_BUS_URL,
 });
@@ -19,7 +22,7 @@ const addAuthToken = async (config) => {
       config.baseURL = SCHOOL_BUS_URL;
     }
 
-    config.headers['jabjaikey'] = TEMP_TOKEN; //tokenInfo.token;
+    config.headers['jabjaikey'] = config.headers.isStudent ? STUDENT_TEMP_TOKEN : TEMP_TOKEN; //tokenInfo.token;
 
     console.log('request url:', config.baseURL + config.url);
     return config;
