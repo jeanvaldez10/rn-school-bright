@@ -191,6 +191,7 @@ const StudentBusScheduleDetail = ({ navigation }) => {
           <MapView
             style={styles.map}
             provider={'google'}
+            mapType="hybrid"
             zoomEnabled={mapExpanded}
             rotateEnabled={mapExpanded}
             scrollEnabled={mapExpanded}
@@ -199,7 +200,7 @@ const StudentBusScheduleDetail = ({ navigation }) => {
                 latitude: dLat || 0,
                 longitude: dLng || 0,
               },
-              zoom: 20,
+              zoom: 15,
               pitch: 0,
               heading: 0,
             }}

@@ -2978,6 +2978,21 @@ const getPassengerBoardingAlightingReports = (sDate, isEvening) => {
       });
   };
 
+  const updateBusLocation = (nTravelID, dLat, dLng) => {
+    const params = {
+      nTravelID,
+      dLat,
+      dLng,
+    };
+    return schoolBusHttpClient
+      .post(apiUrls.updateBusLocation(), params)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error updating location:', error);
+        throw error;
+      });
+  };
+
   const checkTodayBusScheduleForStudent = () => {
     const params = {};
     return schoolBusHttpClient
@@ -3062,6 +3077,7 @@ const getPassengerBoardingAlightingReports = (sDate, isEvening) => {
         throw error;
       });
   };
+  
   
 
 export default {
@@ -3300,6 +3316,7 @@ export default {
     getVehicleCheckInOutListWithDate,
     getPassengerBoardingAlightingReports,
     getPassengerBoardingAlightingReportDetails,
+    updateBusLocation,
     checkTodayBusScheduleForStudent,
     getScheduleDetailForStudent,
     getStudentBusIncidentList,

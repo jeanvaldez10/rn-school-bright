@@ -1077,6 +1077,10 @@ class ApiUrls {
     return '/Teacher/ReportCheckInOutDetail'
   }
 
+  updateBusLocation() {
+    return '/Teacher/Travel/UpdateCurrentLocation'
+  }
+
   checkTodayBusScheduleForStudent() {
     return '/Student/CheckTodaySchedules'
   }

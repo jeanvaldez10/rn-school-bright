@@ -109,6 +109,45 @@ const setAllMenuStudent = data => Storage.setObject(AsyncStorageKey.allMenuStude
 
 const getAllMenuTeacher = () => Storage.getObject(AsyncStorageKey.allMenuTeacher);
 const setAllMenuTeacher = data => Storage.setObject(AsyncStorageKey.allMenuTeacher, data);
+const getStartedSchedules = async () => {
+  try {
+    const schedules = await Storage.getObject(AsyncStorageKey.startedSchedules);
+    if (Array.isArray(schedules)) {
+      return schedules;
+    } else {
+      return [];
+    }
+  } catch (e) {
+    return [];
+  }
+};
+
+const setStartedSchedules = async (data) => {
+  try {
+    return await Storage.setObject(AsyncStorageKey.startedSchedules, data);
+  } catch (e) {
+    return false;
+  }
+};
+
+const saveScheduleID = async (nScheduleID) => {
+  try {
+    let storedScheduleIDs = await getStartedSchedules();
+    alert(storedScheduleIDs);
+
+    if (!storedScheduleIDs.includes(nScheduleID)) {
+      storedScheduleIDs.push(nScheduleID);
+
+      setStartedSchedules(storedScheduleIDs);
+
+      console.log('Schedule ID added successfully:', nScheduleID);
+    } else {
+      console.log('Schedule ID already exists in storage:', nScheduleID);
+    }
+  } catch (error) {
+    console.error('Error saving schedule ID:', error);
+  }
+};
 
 export default {
     getLineConnectionType,
@@ -197,4 +236,7 @@ export default {
 
     getAllMenuTeacher,
     setAllMenuTeacher,
+    getStartedSchedules,
+    setStartedSchedules,
+    saveScheduleID,
 };

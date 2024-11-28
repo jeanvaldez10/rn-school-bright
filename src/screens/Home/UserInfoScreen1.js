@@ -63,6 +63,7 @@ import SelectAttendanceModal from "../../components/SelectListModalNoTitle";
 import moment from "moment";
 import arrayWithHoles from "@babel/runtime/helpers/esm/arrayWithHoles";
 import { getUniqueId } from "react-native-device-info";
+import TravelUpdater from "../SchoolBus/Teacher/TravelUpdater";
 
 class UserInfoScreen1 extends React.Component {
   constructor(props) {
@@ -777,6 +778,7 @@ class UserInfoScreen1 extends React.Component {
 
     return (
       <SafeAreaView style={styles.container} edges={["right", "left", "top"]}>
+        <TravelUpdater />
         <View style={{ flex: 1 }}>
           <TabView
             style={styles.tabView}

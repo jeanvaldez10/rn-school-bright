@@ -34,6 +34,7 @@ import StudentItem from './StudentItem';
 import StudentPopup from './StudentPopup';
 import StudentStatusModal from './StudentStatusModal';
 import SortableList from 'react-native-sortable-list';
+import StorageManager from '../../../managers/StorageManager';
 
 // Geolocation.setRNConfiguration({});
 
@@ -186,9 +187,14 @@ const BusDetailScreen = ({ navigation }) => {
 
         if (updateFunc) {
           const result = await updateFunc(nTravelID);
-          result.status === 1
-            ? await onSwitchSuccess(newStatus)
-            : showAlert(result.message, 'warning');
+          result.status === 1;
+          if (result.status === 1) {
+            StorageManager.saveScheduleID(nScheduleID);
+
+            await onSwitchSuccess(newStatus);
+          } else {
+            showAlert(result.message, 'warning');
+          }
         }
       } catch (e) {
         console.error('Switch travel status error', e);
