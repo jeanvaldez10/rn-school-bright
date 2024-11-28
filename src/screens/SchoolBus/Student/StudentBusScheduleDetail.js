@@ -45,7 +45,7 @@ const StudentBusScheduleDetail = ({ navigation }) => {
   const { sLocationUpdateTime, dLat = 0, dLng = 0 } = infoLocation;
 
   const { sLicensePlate, sBrandModel, sDriverName, sDriverPhoto, sDriverPhone } = infoVehicle;
-  const { sDate, sTime, isEvening } = infoRoute;
+  const { sDate, sTime } = infoRoute;
   const {
     nStatus,
     nQueueOrder,
@@ -61,7 +61,29 @@ const StudentBusScheduleDetail = ({ navigation }) => {
 
   useEffect(() => {
     initialize();
-  }, [initialize]);
+    const interval = setInterval(fetchBusLocation, 5000); // Fetch location every 5 seconds
+
+    return () => {
+      clearInterval(interval); // Clean up interval on unmount
+    };
+  }, [fetchBusLocation, initialize]);
+
+  const fetchBusLocation = useCallback(async () => {
+    ApiManager.getScheduleDetailForStudent(scheduleID)
+      .then((data) => {
+        if (data.status === 1) {
+          setInfoLocation(data.infoLocation);
+          setInfoVehicle(data.infoVehicle);
+          setInfoRoute(data.infoRoute);
+          setInfoTravel(data.infoTravel);
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [scheduleID]);
 
   const initialize = useCallback(async () => {
     setIsLoading(true);
@@ -190,13 +212,10 @@ const StudentBusScheduleDetail = ({ navigation }) => {
                 x: 0,
                 y: 0,
               }}
-            >
-              <Image
-                source={Images.m_school_bus}
-                style={[styles.marker, mapExpanded && { width: 56, height: 56 }]}
-                resizeMode="contain"
-              />
-            </Marker>
+              image={
+                mapExpanded ? Images.ic_school_bus_marker_large : Images.ic_school_bus_marker_small
+              }
+            />
           </MapView>
           <Pressable style={styles.mapSwitchButton} onPress={handleToggleMapView}>
             <Image
