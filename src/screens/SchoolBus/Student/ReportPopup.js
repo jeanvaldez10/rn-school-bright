@@ -1,11 +1,12 @@
 import React from 'react';
-import { Alert, Linking, Modal, StyleSheet, Text, View } from 'react-native';
+import { Modal, StyleSheet, Text, View } from 'react-native';
 import GradientButton from '../../../components/GradientButton';
 import Color from '../../../constants/color';
 import translang from '../../../utils/language.utils';
 
-export default function ReportPopup({ isVisible, onClose, incident }) {
-  const { sDate, sTime, sVehicleBrandModel, sVehicleLicensePlate, sMessage } = incident || {};
+export default function ReportPopup({ isVisible, onClose, incidentDetails }) {
+  const { sDate, sTime, infoSender, sMessage } = incidentDetails || {};
+  const { sName: senderName } = infoSender || {};
 
   return (
     <Modal animationType="none" transparent={true} key="modal" visible={isVisible}>
@@ -13,16 +14,14 @@ export default function ReportPopup({ isVisible, onClose, incident }) {
         <View style={styles.dialogStyle}>
           <View style={styles.wrapper1}>
             <View style={styles.item1}>
-              <Text style={styles.subTitle}>ผู้ส่ง /103146 : </Text>
-              <Text style={styles.details}>{sVehicleLicensePlate}</Text>
-            </View>
-            <View style={styles.item1}>
-              <Text style={styles.subTitle}>ส่งถึง /1201031 : </Text>
-              <Text style={styles.details}>{sVehicleBrandModel}</Text>
+              <Text style={styles.subTitle}>{translang.t('REPORT_SENDER')} : </Text>
+              <Text style={styles.details}>{senderName}</Text>
             </View>
 
             <View style={styles.item1}>
-              <Text style={styles.subTitle}>{sDate} {sTime} </Text>
+              <Text style={styles.subTitle}>
+                {sDate} {sTime}{' '}
+              </Text>
             </View>
           </View>
 

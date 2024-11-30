@@ -1064,7 +1064,7 @@ class ApiUrls {
   readBusIncident(incidentID) {
     return `/Teacher/ReadIncidentDetail/${incidentID}`
   }
-  
+
   readAllBusIncidentForTeacher() {
     return `/Teacher/ReadAllIncidents`
   }
@@ -1099,6 +1099,10 @@ class ApiUrls {
 
   readStudentBusIncident(incidentID) {
     return `/Student/ReadIncidentDetail/${incidentID}`
+  }
+
+  readAllStudentBusIncidents() {
+    return `/Student/ReadAllIncidents`
   }
 
   getStudentPickUpDropOffReport() {
