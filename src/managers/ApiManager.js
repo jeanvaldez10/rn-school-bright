@@ -2934,6 +2934,16 @@ const readBusIncident = (incidentID) => {
     });
 };
 
+const readAllBusIncidentForTeacher = () => {
+  return schoolBusHttpClient
+    .post(apiUrls.readAllBusIncidentForTeacher(), {})
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error reading incidents:', error);
+      throw error;
+    });
+};
+
 const getVehicleCheckInOutListWithDate = (busId, ddate, edate) => {
   const params = {
     nBusID: busId,
@@ -3322,5 +3332,6 @@ export default {
     getStudentBusIncidentList,
     readStudentBusIncident,
     getStudentPickUpDropOffReport,
+    readAllBusIncidentForTeacher,
     // end schcool bus
 };

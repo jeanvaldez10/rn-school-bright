@@ -28,6 +28,7 @@ const IncidentReportingReport = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
   const [selectedIncident, setSelectedIncident] = useState(null);
+  const [selectedIncidentDetails, setSelectedIncidentDetails] = useState(null);
 
   useEffect(() => {
     initialize();
@@ -63,13 +64,25 @@ const IncidentReportingReport = ({ navigation }) => {
     }
   }, [loadIncidentList]);
 
-  const loadIncidentList = useCallback(() => {
+  const loadIncidentList = useCallback((readType = 0) => {
+    // 0 - all, 1 - read, 2 - unread
     setIsLoading(true);
     ApiManager.getBusIncidentList()
       .then((data) => {
         if (data.status === 1) {
-          setIncidentsToday(data.lstIncidentsInToday || []);
-          setIncidentsIn7Days(data.lstIncidentsIn7Days || []);
+          let allIncidentsToday = data.lstIncidentsInToday || [];
+          let allIncidentsIn7Days = data.lstIncidentsIn7Days || [];
+
+          if (readType === 1) {
+            allIncidentsToday = allIncidentsToday.filter((incident) => incident.isAlreadyRead);
+            allIncidentsIn7Days = allIncidentsIn7Days.filter((incident) => incident.isAlreadyRead);
+          } else if (readType === 2) {
+            allIncidentsToday = allIncidentsToday.filter((incident) => !incident.isAlreadyRead);
+            allIncidentsIn7Days = allIncidentsIn7Days.filter((incident) => !incident.isAlreadyRead);
+          }
+
+          setIncidentsToday(allIncidentsToday);
+          setIncidentsIn7Days(allIncidentsIn7Days);
         } else {
           alert(data.message);
         }
@@ -83,33 +96,41 @@ const IncidentReportingReport = ({ navigation }) => {
       });
   }, []);
 
-  const handleReadIncident = (item, isToday) => {
-    ApiManager.readBusIncident(item.nIncidentID);
-    let newIncidents = isToday ? [...incidentsToday] : [...incidentsIn7Days];
-    const incidentIndex = newIncidents.findIndex((incident) => incident.nIncidentID === item.nIncidentID);
-    if (incidentIndex > -1) {
-      newIncidents[incidentIndex] = {
-        ...newIncidents[incidentIndex],
-        isAlreadyRead: true,
-      }
+  const handleReadIncident = async (item, isToday) => {
+    try {
+      setIsLoading(true);
+      const result = await ApiManager.readBusIncident(item.nIncidentID);
+      let newIncidents = isToday ? [...incidentsToday] : [...incidentsIn7Days];
+      const incidentIndex = newIncidents.findIndex(
+        (incident) => incident.nIncidentID === item.nIncidentID,
+      );
+      if (incidentIndex > -1) {
+        newIncidents[incidentIndex] = {
+          ...newIncidents[incidentIndex],
+          isAlreadyRead: true,
+        };
 
-      isToday ? setIncidentsToday(newIncidents) : setIncidentsIn7Days(newIncidents);
+        isToday ? setIncidentsToday(newIncidents) : setIncidentsIn7Days(newIncidents);
+      }
+      setIsLoading(false);
+      return result;
+    } catch (e) {
+      setIsLoading(false);
+      return null;
     }
   };
 
   const IncidentItem = ({ item, isToday = false }) => {
-    const {
-      sDate,
-      sTime,
-      sVehicleBrandModel,
-      sVehicleLicensePlate,
-      isAlreadyRead,
-    } = item;
+    const { sDate, sTime, sVehicleBrandModel, sVehicleLicensePlate, isAlreadyRead } = item;
 
-    const onClickItem = () => {
+    const onClickItem = async () => {
       setSelectedIncident(item);
-      setShowReportModal(true);
-      handleReadIncident(item, isToday);
+
+      const readResult = await handleReadIncident(item, isToday);
+      if (readResult) {
+        setSelectedIncidentDetails(readResult.infoIncident);
+        setShowReportModal(true);
+      }
     };
 
     return (
@@ -139,11 +160,44 @@ const IncidentReportingReport = ({ navigation }) => {
     );
   };
 
+  const moreActions = [
+    translang.t('NOTIFICATION_all'),
+    translang.t('NOTIFICATION_read'),
+    translang.t('NOTIFICATION_unread'),
+    translang.t('NOTIFICATION_readall'),
+  ];
+
+  const onAllSelect = useCallback(() => {
+    loadIncidentList(0);
+  }, [loadIncidentList]);
+
+  const onReadSelect = useCallback(() => {
+    loadIncidentList(1);
+  }, [loadIncidentList]);
+
+  const onUnreadSelect = useCallback(() => {
+    loadIncidentList(2);
+  }, [loadIncidentList]);
+
+  const onReadAllSelect = useCallback(() => {
+    ApiManager.readAllBusIncidentForTeacher()
+      .then(loadIncidentList)
+      .catch(() => null);
+  }, [loadIncidentList]);
+
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
       <BackNavigationBar
         title={translang.t('DOT_MENU_INCIDENT_REPORTING_REPORT')}
         onMenuTap={back}
+        is_more="1"
+        actions={moreActions}
+        onMoreTap={(value, index) => {
+          if (index === 0) onAllSelect();
+          else if (index === 1) onReadSelect();
+          else if (index === 2) onUnreadSelect();
+          else if (index === 3) onReadAllSelect();
+        }}
       />
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         {incidentsToday.length > 0 || isLoading ? (
@@ -192,7 +246,7 @@ const IncidentReportingReport = ({ navigation }) => {
       <ReportPopup
         isVisible={showReportModal}
         onClose={() => setShowReportModal(false)}
-        incident={selectedIncident}
+        incidentDetails={selectedIncidentDetails}
         navigation={navigation}
       />
     </SafeAreaView>

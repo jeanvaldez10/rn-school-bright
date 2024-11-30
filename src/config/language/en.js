@@ -1327,6 +1327,9 @@ export default {
   THIS_WEEK: 'This Week',
   CHECK_IN: 'CheckIn',
   CHECK_OUT: 'CheckOut',
+  REPORT_SENDER: "Sender",
+  REPORT_SEND_TO: 'Send to',
+
   ALL_STUDENTS: 'All Students',
   NO_SCHEDULE_FOUND: 'Not found schedule.',
   CALL_TEACHER: 'Call Teacher',

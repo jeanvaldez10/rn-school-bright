@@ -1312,6 +1312,8 @@ export default {
   THIS_WEEK: 'สัปดาห์นี้',
   CHECK_IN: 'ขึ้นรถ',
   CHECK_OUT: 'ลงรถ',
+  REPORT_SENDER: "ผู้ส่ง",
+  REPORT_SEND_TO: 'ส่งถึง',
 
   ALL_STUDENTS: 'นักเรียนทั้งหมด',
   NO_SCHEDULE_FOUND: 'Not found schedule.',
