@@ -48,7 +48,7 @@ export default function StudentPopup({
           <Text style={styles.header}>{translang.t('SELECT_ITEM')}</Text>
           {!!sFatherPhone || !!sMotherPhone ? (
             <>
-              <Text style={styles.text1}>{translang.t('CALL_TEACHER')}</Text>
+              <Text style={styles.text1}>{translang.t('REPORT_INCIDENT')}</Text>
 
               <View style={styles.divider} />
               <View style={styles.wrapper1}>

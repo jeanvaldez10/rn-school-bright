@@ -23,7 +23,7 @@ export default function StuffPopup({ isVisible, onClose, stuff }) {
       <View style={styles.centeredView}>
         <View style={styles.dialogStyle}>
           <Text style={styles.header}>{translang.t('SELECT_ITEM')}</Text>
-          <Text style={styles.text1}>{translang.t('REPORT_INCIDENT')}</Text>
+          <Text style={styles.text1}>{translang.t('CALL_TEACHER')}</Text>
 
           <View style={styles.divider} />
           <View style={styles.wrapper1}>
