@@ -155,7 +155,7 @@ const BackNavigationBar = ({ title, ...props }) => {
             <Image source={Images.n_ic_back} style={styles.iconimg} />
           </TouchableOpacity>
         )}
-        <View style={styles.titleContainer}>
+        <View style={[styles.titleContainer, props.titleContainerStyle]}>
           {is_searching && (
             <TextInput
               style={{ color: Color.white, fontSize: 22 }}

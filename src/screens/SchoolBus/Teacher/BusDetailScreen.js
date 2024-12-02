@@ -298,7 +298,8 @@ const BusDetailScreen = ({ navigation }) => {
   const RenderTravelButton = () => {
     if (
       !Object.values(TravelStatuses).includes(travelStatus) ||
-      travelStatus === TravelStatuses.ARRIVED
+      travelStatus === TravelStatuses.ARRIVED ||
+      travelStatus === TravelStatuses.CANCELLED
     ) {
       return null;
     }
@@ -358,6 +359,7 @@ const BusDetailScreen = ({ navigation }) => {
         TravelButton={RenderTravelButton}
         is_more="1"
         actions={moreActions}
+        titleContainerStyle={styles.titleContainer}
         onMoreTap={(value, index) => {
           if (index === 0) onHandleQueue();
           else if (index === 1) onVehicleDetail();
@@ -469,6 +471,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Color.n_background_white,
+  },
+  titleContainer: {
+    left: -60
   },
   subContainer: {
     flex: 1,

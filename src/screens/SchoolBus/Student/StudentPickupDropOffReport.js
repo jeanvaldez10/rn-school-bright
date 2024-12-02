@@ -16,7 +16,6 @@ import translang from '../../../utils/language.utils';
 import ReportItem from './ReportItem';
 
 const StudentPickupDropOffReport = ({ navigation }) => {
-
   const [userInfo, setUserInfo] = useState({});
   const [reportList, setReportList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +33,7 @@ const StudentPickupDropOffReport = ({ navigation }) => {
       setShowEndCalendar(false);
       return true;
     }
-    navigation.goBack();
+    navigation.navigate('Report');
     return true;
   }, [showStartCalendar, showEndCalendar, navigation]);
 
@@ -87,7 +86,7 @@ const StudentPickupDropOffReport = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
-      <BackNavigationBar title={translang.t('PASSENGER_REPORT')} onMenuTap={handleBackButton} />
+      <BackNavigationBar title={translang.t('BUS_DROP_PICKUP')} onMenuTap={handleBackButton} />
 
       <View style={styles.container}>
         <View style={styles.topRangeContainer}>

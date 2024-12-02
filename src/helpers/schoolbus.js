@@ -39,8 +39,6 @@ export const getNextTravelStatus = (currentStatus) => {
       return TravelStatuses.DEPARTED;
     case TravelStatuses.DEPARTED:
       return TravelStatuses.CANCELLED;
-    case TravelStatuses.CANCELLED:
-      return TravelStatuses.DEPARTED;
     default:
       return '';
   }
@@ -58,13 +56,13 @@ export const getTravelSwitchSuccessMessage = (status) => {
 export const getTravelButtonLabel = (travelStatus) => {
   switch (travelStatus) {
     case TravelStatuses.NOT_DEPARTED:
-      return translang.t('START_TRAVEL');
+      return translang.t('START_JOURNEY');
     case TravelStatuses.DEPARTED:
       return translang.t('CANCEL_TRAVEL');
     case TravelStatuses.ARRIVED:
       return translang.t('ARRIVED_TRAVEL');
     case TravelStatuses.CANCELLED:
-      return translang.t('RESTART_TRAVEL');
+      return translang.t('CANCELLED_TRAVEL');
     default:
       return '';
   }

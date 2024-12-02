@@ -93,12 +93,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   subTitle: {
-    fontSize: 22,
+    fontSize: 19,
     color: '#707070',
+    fontWeight: 'bold',
   },
   details: {
     flex: 1,
-    fontSize: 22,
+    fontSize: 19,
     color: '#45494D',
   },
   divider: {

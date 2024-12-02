@@ -1259,12 +1259,12 @@ export default {
   NOT_DEPARTRED: 'Not Departed',
   DEPARTED: 'Departed',
   ARRIVED: 'Arrived',
-  START_TRAVEL: 'Start',
+  START_JOURNEY: 'เริ่มเดินทาง',
   RESTART_TRAVEL: 'Restart',
 
-  COMPLETE_TRAVEL: 'Complete',
+  COMPLETE_TRAVEL: 'Complete Task',
   ARRIVED_TRAVEL: 'Arrived',
-  CANCEL_TRAVEL: 'Cancel',
+  CANCEL_TRAVEL: 'ยกเลิกงาน',
   CANCELLED_TRAVEL: 'Cancelled',
 
   TURN_ON_GPS: 'Please turn on gps',
@@ -1309,11 +1309,12 @@ export default {
   SUCCESS_INCIDENT_SUBMIT: 'SUCCESS',
   VEHICLE_REGISTRATION: 'Vehicle Registration',
   BUS_MODEL: 'Car brand/Model',
-  DRIVER_NAME: 'Driver name',
-  DRIVER_PHONE_NUMBER: 'Phone number',
+  DRIVER_NAME: 'Driver\'s Name',
+  DRIVER_PHONE_NUMBER: 'Driver\'s Phone Number',
 
-  PASSENGER_REPORT: 'หน้ารายงานขึ้น-ลงรถรับส่ง',
-  BUS_ALIGHTING_REPORT: 'รายงานขึ้น-ลงรถรับส่ง',
+  PASSENGER_REPORT: 'Passenger Boarding and Alighting Report',
+  BUS_ALIGHTING_REPORT: 'Passenger Boarding and Alighting Report',
+  BUS_DROP_PICKUP: 'Report on Pickup and Drop-off',
 
   BUS_MORNING_SESSION: 'Morning Session',
   BUS_EVENING_SESSION: 'Evening Session',

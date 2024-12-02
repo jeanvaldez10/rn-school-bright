@@ -1193,7 +1193,7 @@ export default {
   discipline: 'พฤติกรรม',
   savings: 'เงินออม',
   recycle_bank: 'ธนาคารขยะ',
-  schoolBus: 'รถโรงเรียน',
+  schoolBus: 'School Bus',
 
   arrange: 'จัดเรียง',
   all_your_accounts: 'บัญชีทั้งหมดของคุณ',
@@ -1250,7 +1250,7 @@ export default {
   START_JOURNEY: 'เริ่มเดินทาง',
   COMPLETE_TRAVEL: 'เสร็จสิ้นงาน',
   ARRIVED_TRAVEL: 'Arrived',
-  CANCEL_TRAVEL: 'Cancel',
+  CANCEL_TRAVEL: 'ยกเลิกงาน',
   CANCELLED_TRAVEL: 'Cancelled',
 
   TURN_ON_GPS: 'กรุณาเปิด gps',
@@ -1288,18 +1288,19 @@ export default {
 
   DOT_MENU_QUEUE_MANAGE: 'จัดล่าดับคิว',
   DOT_MENU_BUS_DETAILS: 'รายละเอียดรถ',
-  DOT_MENU_GROUP_ICIDENT_REPORT: 'Group Incident Report',
+  DOT_MENU_GROUP_ICIDENT_REPORT: 'แจ้งเหต',
   DOT_MENU_INCIDENT_REPORTING_REPORT: 'รายงานการแจ้งเหตุ',
   DOT_MENU_PASSENGER_REPORT: 'หน้ารายงานขึ้น-ลงรถรับส่ง',
   SUCCESS_INCIDENT_SUBMIT: 'แจ้งเหตุเรียบร้อย',
 
   VEHICLE_REGISTRATION: 'ทะเบียนรถ',
   BUS_MODEL: 'ยี่ห้อรถ / รุ่นรถ',
-  DRIVER_NAME: 'เลือกชื่อคนขับ',
+  DRIVER_NAME: 'ชื่อคนขับ',
   DRIVER_PHONE_NUMBER: 'เบอร์โทร',
 
   PASSENGER_REPORT: 'หน้ารายงานขึ้น-ลงรถรับส่ง',
   BUS_ALIGHTING_REPORT: 'รายงานขึ้น-ลงรถรับส่ง',
+  BUS_DROP_PICKUP: 'รายงานขึ้น-ลงรถรับส่ง',
 
   BUS_MORNING_SESSION: 'รอบเช้า',
   BUS_EVENING_SESSION: 'รอบบ่าย',
