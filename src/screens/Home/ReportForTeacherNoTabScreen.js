@@ -232,6 +232,7 @@ export default class ReportForTeacherNoTabScreen extends React.Component {
                   topTextStyle={styles.menuTitle}
                   icon_mark={Images.ic_school_bus_blue}
                   label={translang.t('BUS_ALIGHTING_REPORT')}
+                  isMultiLine
                 />
               </TouchableOpacity>
             </View>}

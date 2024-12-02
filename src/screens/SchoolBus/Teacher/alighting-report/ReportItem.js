@@ -60,12 +60,11 @@ const ReportItem = ({ item }) => {
   const morningCheckoutLabel =
     BusStatusColorMap[nMorningCheckOutStatus === 1 ? 3 : nMorningCheckOutStatus]?.title;
 
-    const eveningCheckInColor = BusStatusColorMap[nEveningCheckInStatus]?.color;
+  const eveningCheckInColor = BusStatusColorMap[nEveningCheckInStatus]?.color;
   const eveningCheckInLabel = BusStatusColorMap[nEveningCheckInStatus]?.title;
   const eveningCheckOutColor = BusStatusColorMap[nEveningCheckOutStatus]?.color;
   const eveningCheckoutLabel =
     BusStatusColorMap[nEveningCheckOutStatus === 1 ? 3 : nEveningCheckOutStatus]?.title;
-
 
   return (
     <View style={styles.itemContainer}>
@@ -78,11 +77,11 @@ const ReportItem = ({ item }) => {
       </View>
       <View style={styles.group2}>
         <Text style={styles.text2}>{translang.t('BUS_MORNING_SESSION')}</Text>
-        <Text style={styles.text3}>{moment(sDate, 'DD/MM/YYYY').format('DD/MM/YYYY')}</Text>
+        <Text style={styles.text3}>{moment(sDate, 'DD/MM/YYYY').format('DD MMMM YYYY')}</Text>
       </View>
       <View style={styles.group2}>
         <Text style={styles.text2}>
-          {translang.t('CHECK_IN')} : {sMorningCheckInTime}
+          {translang.t('CHECK_IN')} : <Text style={styles.text4}>{sMorningCheckInTime}</Text>
         </Text>
 
         <Pressable style={[styles.buttons, { backgroundColor: morningCheckInColor }]}>
@@ -91,7 +90,7 @@ const ReportItem = ({ item }) => {
       </View>
       <View style={styles.group2}>
         <Text style={styles.text2}>
-          {translang.t('CHECK_OUT')} : {sMorningCheckOutTime}
+          {translang.t('CHECK_OUT')} : <Text style={styles.text4}>{sMorningCheckOutTime}</Text>
         </Text>
 
         <Pressable style={[styles.buttons, { backgroundColor: morningCheckOutColor }]}>
@@ -102,7 +101,7 @@ const ReportItem = ({ item }) => {
 
       <View style={styles.group2}>
         <Text style={styles.text2}>
-          {translang.t('CHECK_IN')} : {sEveningCheckInTime}
+          {translang.t('CHECK_IN')} : <Text style={styles.text4}>{sEveningCheckInTime}</Text>
         </Text>
 
         <Pressable style={[styles.buttons, { backgroundColor: eveningCheckInColor }]}>
@@ -111,7 +110,7 @@ const ReportItem = ({ item }) => {
       </View>
       <View style={styles.group2}>
         <Text style={styles.text2}>
-          {translang.t('CHECK_OUT')} : {sEveningCheckOutTime}
+          {translang.t('CHECK_OUT')} : <Text style={styles.text4}>{sEveningCheckOutTime}</Text>
         </Text>
 
         <Pressable style={[styles.buttons, { backgroundColor: eveningCheckOutColor }]}>
@@ -156,6 +155,7 @@ const styles = StyleSheet.create({
     color: Color.n_default_gray_dark,
     fontSize: 20,
     fontFamily: 'THSarabunNew',
+    fontWeight: 'bold',
   },
   group2: {
     marginTop: 4,
@@ -166,10 +166,16 @@ const styles = StyleSheet.create({
   text2: {
     color: Color.n_default_gray_dark,
     fontSize: 20,
+    fontWeight: 'bold',
   },
   text3: {
     flex: 1,
     textAlign: 'right',
+    color: Color.n_default_gray_dark,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  text4: {
     color: Color.n_default_gray_dark,
     fontSize: 20,
   },

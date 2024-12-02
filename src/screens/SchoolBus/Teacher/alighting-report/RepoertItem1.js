@@ -67,7 +67,7 @@ const ReportItem1 = ({ item }) => {
 
       <View style={styles.group2}>
         <Text style={styles.text2}>
-          {translang.t('CHECK_IN')} : {sCheckInTime}
+          {translang.t('CHECK_IN')} : <Text style={styles.text3}>{sCheckInTime}</Text>
         </Text>
 
         <Pressable style={[styles.buttons, { backgroundColor: morningCheckInColor }]}>
@@ -76,7 +76,7 @@ const ReportItem1 = ({ item }) => {
       </View>
       <View style={styles.group2}>
         <Text style={styles.text2}>
-          {translang.t('CHECK_OUT')} : {sCheckOutTime}
+          {translang.t('CHECK_OUT')} : <Text style={styles.text3}>{sCheckOutTime}</Text>
         </Text>
 
         <Pressable style={[styles.buttons, { backgroundColor: morningCheckOutColor }]}>
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
     color: Color.n_default_gray_dark,
     fontSize: 20,
     fontFamily: 'THSarabunNew',
+    fontWeight: 'bold',
   },
   group2: {
     marginTop: 4,
@@ -129,6 +130,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   text2: {
+    color: Color.n_default_gray_dark,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  text3: {
     color: Color.n_default_gray_dark,
     fontSize: 20,
   },
