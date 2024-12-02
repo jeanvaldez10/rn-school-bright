@@ -151,7 +151,10 @@ const BackNavigationBar = ({ title, ...props }) => {
       {/* <GeneralStatusBarGradientColor barStyle="light-content" backgroundColor={Color.backgroundTopBar} /> */}
       <View style={[styles.container, props.style]}>
         {!backHidden && (
-          <TouchableOpacity onPress={() => onMenuTap()} style={styles.iconContainer}>
+          <TouchableOpacity
+            onPress={() => onMenuTap()}
+            style={[styles.iconContainer, styles.backButtonContainer]}
+          >
             <Image source={Images.n_ic_back} style={styles.iconimg} />
           </TouchableOpacity>
         )}
@@ -296,9 +299,7 @@ const BackNavigationBar = ({ title, ...props }) => {
             </TouchableOpacity>
           )}
 
-          {is_travel && (
-            <TravelButton />
-          )}
+          {is_travel && <TravelButton />}
 
           {is_more && (
             <PopupMenu
@@ -337,7 +338,9 @@ const BackNavigationBar = ({ title, ...props }) => {
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
-    height: 65,
+    alignItems: 'center',
+    flexDirection: 'row',
+    height: undefined,
     backgroundColor: Color.white,
     shadowColor: 'black',
     shadowOffset: {
@@ -347,31 +350,35 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     elevation: 3,
     borderBottomRightRadius: 0,
+    paddingVertical: 12,
     paddingHorizontal: 18,
     marginBottom: 2,
   },
   iconContainer: {
     width: 35,
-    height: 60,
     borderRadius: 24,
     alignItems: 'center',
     justifyContent: 'center',
     zIndex: 2,
-    position: 'relative',
+  },
+  backButtonContainer: {
+    position: 'absolute',
+    left: 15,
   },
   icon: {
     color: Color.n_default_orange,
     fontSize: 25,
   },
   titleContainer: {
+    flex: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
     bottom: 0,
+    paddingHorizontal: 48,
   },
   title: {
     color: Color.n_default_orange,
@@ -382,11 +389,12 @@ const styles = StyleSheet.create({
 
   iconListContainer: {
     position: 'absolute',
-    right: 0,
     top: 0,
     bottom: 0,
+    right: 15,
     flexDirection: 'row',
-    marginRight: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
   cartcntContainer: {
@@ -419,7 +427,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: 'grey',
   },
-  
 });
 
 export default BackNavigationBar;

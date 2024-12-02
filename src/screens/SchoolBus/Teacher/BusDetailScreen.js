@@ -473,7 +473,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.n_background_white,
   },
   titleContainer: {
-    left: -60
+    left: -24
   },
   subContainer: {
     flex: 1,
