@@ -58,7 +58,7 @@ export default {
   DRAWER_edit_classattend: 'แก้ไขเช็กชื่อรายวิชา',
   DRAWER_behaviorscore: 'คะแนนพฤติกรรม',
   DRAWER_add_behavior: 'เพิ่มคะแนนพฤติกรรม',
-  DRAWER_reduce_behavior: 'ลดคะแนนพฤติกรรม',
+  DRAWER_reduce_behavior: 'ตัดคะแนนพฤติกรรม',
   DRAWER_sendindiv: 'รายบุคคล',
   DRAWER_sendgroup: 'รายกลุ่ม',
   DRAWER_broadcast: 'ประชาสัมพันธ์',
@@ -1168,7 +1168,7 @@ export default {
   checkInAttendance: 'เช็กชื่อ\nหน้าเสาธง',
   editCheckInAttendance: 'แก้ไขเช็กชื่อ\nหน้าเสาธง',
   checkOutAttendance: 'เช็กชื่อเลิกเรียน',
-  addDisciplineScore: 'เพิ่มคะแนนความประพฤติ',
+  addDisciplineScore: 'เพิ่มคะแนนพฤติกรรม',
   reduceDisciplineScore: 'ตัดคะแนนความประพฤติ',
   leaveRequest: 'จดหมายลาหยุด',
   sdqHomeVisit: 'ประเมิน/\nเยี่ยมบ้าน',
@@ -1240,6 +1240,11 @@ export default {
   REMAINING_LEAVE_DAYS: 'วันลาคงเหลือ',
   LEAVE_TYPE: 'ประเภทการลา',
   LEAVE_DAYS_IN_CURRENT_PERIOD: 'จำนวนวันลาในรอบปัจจุบัน',
+
+  DISCIPLINE_SEARCH_BAHVIOR_LIST: "ค้นหารายการพฤติกรรม",
+  DISCIPLINE_POINT_ADDED: "เพิ่ม",
+  DISCIPLINE_POINT_DEDUCTED: "ลด",
+  DISCIPLINE_POINT_REMAINING: "คงเหลือ",
 
   // start of schoolBus
   LIST_OF_VEHICLES: 'รายการรถ',

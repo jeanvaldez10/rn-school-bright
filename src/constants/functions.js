@@ -35,6 +35,9 @@ export const gotoPageAfterLeavePermission = (pageName, params, _this) => {
 }
 
 export const gotoPageAfterAuth = async (menuGroupID, subMenuID, pageName, params, _this) => {
+  _this.props.navigation.navigate(pageName, params);
+  return; 
+
   ApiManager.checkAuthStatus(_this.state.userInfo.ID, _this.state.loginInfo.token, _this.state.deviceInfo.fcmtoken)
     .then(res => {
       _this.setState({authInfo: res}, () => {

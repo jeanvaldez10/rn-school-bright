@@ -430,6 +430,9 @@ const images = {
   ic_close_cross: require("../assets/images/ic_close_cross.png"),
 
   ic_alert: require("../assets/images/new/alert.png"),
+
+  n_ic_qrcode_1: require("../assets/images/new/n_ic_qrcode_1.png"),
+  n_ic_search_group: require("../assets/images/new/n_ic_search_group.png"),
 };
 
 export default images;

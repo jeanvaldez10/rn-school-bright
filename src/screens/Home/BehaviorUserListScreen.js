@@ -241,7 +241,7 @@ export default class BehaviorUserListScreen extends React.Component {
       isExpand = true
     }
 
-    const enableState = student.Student_State == '0'?true:false;
+    const enableState = student.Student_State == '0' ? true : false;
 
     if(enableState){
       return (
