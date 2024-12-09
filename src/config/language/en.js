@@ -1256,28 +1256,30 @@ export default {
   // start of schoolBus
   LIST_OF_VEHICLES: 'Vehicles',
   SELECT_ROUTE: 'Select Route',
+  MORNING_ROUND: 'Morning Round',
+  EVENING_ROUND: 'Evening Round',
+
   NOT_DEPARTRED: 'Not Departed',
   DEPARTED: 'Departed',
   ARRIVED: 'Arrived',
-  START_JOURNEY: 'เริ่มเดินทาง',
+  START_JOURNEY: 'Start Travel',
   RESTART_TRAVEL: 'Restart',
 
   COMPLETE_TRAVEL: 'Complete Task',
   ARRIVED_TRAVEL: 'Arrived',
-  CANCEL_TRAVEL: 'ยกเลิกงาน',
+  CANCEL_TRAVEL: 'Cancel',
   CANCELLED_TRAVEL: 'Cancelled',
 
   TURN_ON_GPS: 'Please turn on gps',
   BUS_SUCCESSFUL_DEPART:  'Successfully departed!',
   BUS_SUCCESSFUL_CANCEL: 'successfully cancelled!',
   BUS_SUCCESSFUL_ARRIVE: 'The bus is arrived!',
-  BUS_CHECK_STUDENT_STATUS: 'Please check all the students first.',
 
   SELECT_ITEM: 'Select an item',
   CALL_PARENT: 'Call the parents',
   REPORT_INCIDENT: 'Report incident',
   INCIDENT_REPORT: 'Incident report',
-  CHECK_STUDENT_STATUS: 'กรุณาเช็กนักเรียนให้ครบก่อนค่ะ',
+  CHECK_STUDENT_STATUS: 'Please Check Student Status.',
   CHECK_STUDENT_QUEUE:
     'Please check the students in queue order. If you need to check this student, you can reorder the queue.',
 
@@ -1291,6 +1293,7 @@ export default {
 
   REPORT_INCIDENT_TO_PARENT: 'Report to parents',
   REPORT_INCIDENT_TO_GROUP: 'Report to group',
+  DATE_NUMBER: '',
 
   REPORT_TYPE_SCHOOL: 'School',
   REPORT_TYPE_PARENT: 'Parent',

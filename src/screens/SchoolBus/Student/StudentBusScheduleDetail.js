@@ -287,7 +287,7 @@ const StudentBusScheduleDetail = ({ navigation }) => {
             <Text style={styles.text3}>{translang.t('BUS_CHECK_IN_STATUS_CHECKED_OUT')} </Text>
             <Text style={styles.text3}>{sCheckOutTime}</Text>
           </View>
-          {sDriverName ? (
+          {sTeacherName ? (
             <TouchableOpacity style={styles.row1} onPress={handlePressStuff}>
               <Text style={styles.text3}>{translang.t('BUS_TEACHER_STAFF')} </Text>
               <View style={styles.teacherStaffContainer}>

@@ -77,7 +77,7 @@ const ReportItem = ({ item }) => {
       </View>
       <View style={styles.group2}>
         <Text style={styles.text2}>{translang.t('BUS_MORNING_SESSION')}</Text>
-        <Text style={styles.text3}>{moment(sDate, 'DD/MM/YYYY').format('DD MMMM YYYY')}</Text>
+        <Text style={styles.text3}>{translang.t('DATE_NUMBER')}{moment(sDate, 'DD/MM/YYYY').format('DD MMMM YYYY')}</Text>
       </View>
       <View style={styles.group2}>
         <Text style={styles.text2}>

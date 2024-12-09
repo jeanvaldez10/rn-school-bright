@@ -309,7 +309,11 @@ const BusDetailScreen = ({ navigation }) => {
         containerStyle={styles.gradientButtonContainer}
         buttonStyle={styles.gradientButton}
         textStyle={styles.gradientButtonText}
-        colors={[Color.green_button_color]}
+        colors={[
+          travelStatus === TravelStatuses.NOT_DEPARTED
+            ? Color.green_button_color
+            : Color.n_scorpion,
+        ]}
         isVerticalGradient={true}
         label={buttonLabel}
         ContentComponent={
@@ -380,6 +384,20 @@ const BusDetailScreen = ({ navigation }) => {
               <Text style={styles.radioLabel}>{item.title}</Text>
             </View>
           ))}
+        </View>
+        <View
+          style={styles.group1}
+        >
+          <Text
+            style={styles.text1}
+          >
+            {translang.t('CHECK_IN')}
+          </Text>
+          <Text
+            style={styles.text1}
+          >
+            {translang.t('CHECK_OUT')}
+          </Text>
         </View>
         <SortableList
           style={styles.sortableList}
@@ -473,7 +491,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.n_background_white,
   },
   titleContainer: {
-    left: -24
+    left: -24,
   },
   subContainer: {
     flex: 1,
@@ -489,7 +507,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.n_background_white,
     borderRadius: 15,
     marginHorizontal: 16,
-    marginBottom: 12,
+    marginBottom: 24,
     paddingHorizontal: 20,
     paddingVertical: 10,
     shadowColor: '#000000',
@@ -509,8 +527,22 @@ const styles = StyleSheet.create({
     color: Color.n_default_gray,
     marginTop: 4,
   },
+  group1: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    width: '100%',
+  },
+  text1: {
+    textAlign: 'center',
+    color: Color.n_default_orange,
+    fontFamily: 'THSarabunNew',
+    fontSize: 15,
+    fontWeight: 'bold',
+    paddingHorizontal: 16,
+  },
   flatlist: {
-    paddingVertical: 16,
+    paddingBottom: 16,
+    paddingTop: 12,
     paddingHorizontal: 16,
   },
   nextButton: { height: 75, borderRadius: 38 },

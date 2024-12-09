@@ -98,7 +98,7 @@ const VehiclePassgngerAlightingReport = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
-      <BackNavigationBar title={translang.t('PASSENGER_REPORT')} onMenuTap={handleBackButton} />
+      <BackNavigationBar title={translang.t('BUS_ALIGHTING_REPORT')} onMenuTap={handleBackButton} />
 
       <View style={styles.container}>
         <View style={styles.topRangeContainer}>

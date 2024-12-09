@@ -1244,12 +1244,15 @@ export default {
   // start of schoolBus
   LIST_OF_VEHICLES: 'รายการรถ',
   SELECT_ROUTE: 'เลือกรอบ',
+  MORNING_ROUND: 'เช้า รอบที่',
+  EVENING_ROUND: 'เย็น รอบที่',
+
   NOT_DEPARTRED: 'ยังไม่เดินทาง',
   DEPARTED: 'ออกเดินทาง',
   ARRIVED: 'ถึงที่หมาย',
   START_JOURNEY: 'เริ่มเดินทาง',
   COMPLETE_TRAVEL: 'เสร็จสิ้นงาน',
-  ARRIVED_TRAVEL: 'Arrived',
+  ARRIVED_TRAVEL: 'เสร็จสิ้นงาน',
   CANCEL_TRAVEL: 'ยกเลิกงาน',
   CANCELLED_TRAVEL: 'Cancelled',
 
@@ -1257,15 +1260,14 @@ export default {
   BUS_SUCCESSFUL_DEPART:  'เริ่มงานสำเร็จ',
   BUS_SUCCESSFUL_CANCEL: 'ยกเลิกเรียบร้อย',
   BUS_SUCCESSFUL_ARRIVE: 'The bus is arrived!',
-  BUS_CHECK_STUDENT_STATUS: 'กรุณาเช็กนักเรียนให้ครบก่อนค่ะ',
 
   SELECT_ITEM: 'เลือกรายการ',
   CALL_PARENT: 'โทรหาผู้ปกครอง',
   REPORT_INCIDENT: 'การแจ้งเหตุ',
   INCIDENT_REPORT: 'แจ้งเหตุ',
-  CHECK_STUDENT_STATUS: 'Please Check Student Status',
+  CHECK_STUDENT_STATUS: 'กรุณาเช็กนักเรียนให้ครบก่อนค่ะ',
   CHECK_STUDENT_QUEUE:
-    'กรุณาเช็กนักเรียนตามลำดับคิว หากต้องการเช็กนักเรียนคนนี้, ท่านสามารถจัดลำดับคิวใหม่ได้',
+    'กรุณาเช็กนักเรียนตามลำดับคิว หากต้องการเซ็กนักเรียนคนนี้ ท่านสามารถจัดลำดับคิวใหม่ได้',
 
   BUS_CHECK_IN_STATUS_CHECKED_IN: 'เช็กอิน',
   BUS_CHECK_IN_STATUS_CHECKED_OUT: 'เช็กเอาท์',
@@ -1278,6 +1280,7 @@ export default {
   REPORT_INCIDENT_TO_PARENT: 'ส่งข้อความให้ผู้ปกครอง',
   REPORT_INCIDENT_TO_GROUP: 'แจ้งเหตุรายกลุ่ม',
 
+  DATE_NUMBER: 'วันที่ ',
   REPORT_TYPE_SCHOOL: 'ส่งหาโรงเรียน',
   REPORT_TYPE_PARENT: 'ส่งหาผู้ปกครอง',
   REPORT_SEND_TO_SCHOOL: 'ส่งหาโรงเรียน',

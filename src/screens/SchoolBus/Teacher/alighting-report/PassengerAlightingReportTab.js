@@ -58,7 +58,7 @@ const PassengerAlightingReportTab = (props) => {
     );
   };
 
-  const date = moment(props.date).format('DD MMMM YYYY');
+  const date = translang.t('DATE_NUMBER') + moment(props.date).format('DD MMMM YYYY');
   const titleText = translang.t('ALL_STUDENTS') + ` ${total} ` + translang.t('PEOPLE');
 
   return (

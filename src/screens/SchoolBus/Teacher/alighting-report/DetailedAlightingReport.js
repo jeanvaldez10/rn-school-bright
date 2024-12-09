@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
 import { BackHandler, FlatList, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -7,7 +8,6 @@ import ProgressHud from '../../../../components/ProgressHud';
 import Color from '../../../../constants/color';
 import ApiManager from '../../../../managers/ApiManager';
 import translang from '../../../../utils/language.utils';
-import ReportItem from './ReportItem';
 import ReportItem1 from './RepoertItem1';
 
 const DetailedAlightingReport = ({ navigation }) => {
@@ -72,7 +72,9 @@ const DetailedAlightingReport = ({ navigation }) => {
           data={reportList}
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderItem}
-          ListHeaderComponent={<Text style={styles.pageTitle}>รอบเช้า วันที่ 2 กันยายน 2567</Text>}
+          ListHeaderComponent={
+            <Text style={styles.pageTitle}>{translang.t('DATE_NUMBER')}{moment(date).format('DD MMMM YYYY')}</Text>
+          }
         />
       ) : (
         <View style={styles.noSupportWrapper}>

@@ -150,10 +150,19 @@ const BusListScreen = ({ navigation }) => {
     );
   };
 
-  const scheduleDataformatted = schedules.map((schedule) => ({
-    ...schedule,
-    title: `${schedule.isMorning ? 'Morning' : 'Evening'} : ${schedule.sTime}`,
-  }));
+  const scheduleDataformatted = schedules.map((schedule, _, array) => {
+    const categoryIndex =
+      array.filter((s) => s.isMorning === schedule.isMorning).indexOf(schedule) + 1;
+
+    const timeLabel = schedule.isMorning
+      ? `${translang.t('MORNING_ROUND')} ${categoryIndex} :`
+      : `${translang.t('EVENING_ROUND')} ${categoryIndex} :`;
+
+    return {
+      ...schedule,
+      title: `${timeLabel} ${schedule.sTime}`,
+    };
+  });
 
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
