@@ -264,15 +264,18 @@ const StudentBusScheduleDetail = ({ navigation }) => {
           </View>
 
           <View style={styles.statusContainer}>
-            {Object.values(TravelStatusMap).map((item) => (
-              <View key={item.value} style={styles.radioContainer}>
-                <CustomRadioButtonItem
-                  radioSize={16}
-                  isSelected={nStatus === item.value}
-                  selectedColor={Color.green_color_bg}
-                />
-                <Text style={styles.radioLabel}>{item.title}</Text>
-              </View>
+            {Object.values(TravelStatusMap).map((item, index) => (
+              <>
+                <View key={item.value} style={styles.radioContainer}>
+                  <CustomRadioButtonItem
+                    radioSize={16}
+                    isSelected={nStatus === item.value}
+                    selectedColor={Color.green_color_bg}
+                  />
+                  <Text style={styles.radioLabel}>{item.title}</Text>
+                </View>
+                {index !== 2 && <Text style={styles.travelArrow}>{'>>>'}</Text>}
+              </>
             ))}
           </View>
           <View style={styles.row1}>
@@ -378,6 +381,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 50,
+  },
+  travelArrow: {
+    fontSize: 20,
+    color: '#B1B1B1',
+    fontWeight: 'bold',
+    marginHorizontal: 12,
   },
   wrapper1: {
     width: '100%',

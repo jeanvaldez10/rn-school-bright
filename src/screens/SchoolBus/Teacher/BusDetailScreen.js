@@ -374,30 +374,24 @@ const BusDetailScreen = ({ navigation }) => {
       />
       <View style={styles.subContainer}>
         <View style={styles.statusContainer}>
-          {Object.values(TravelStatusMap).map((item) => (
-            <View key={item.value} style={styles.radioContainer}>
-              <CustomRadioButtonItem
-                radioSize={16}
-                isSelected={travelStatus === item.value}
-                selectedColor={Color.green_color_bg}
-              />
-              <Text style={styles.radioLabel}>{item.title}</Text>
-            </View>
+          {Object.values(TravelStatusMap).map((item, index) => (
+            <>
+              <View key={item.value} style={styles.radioContainer}>
+                <CustomRadioButtonItem
+                  radioSize={16}
+                  isSelected={travelStatus === item.value}
+                  selectedColor={Color.green_color_bg}
+                />
+                <Text style={styles.radioLabel}>{item.title}</Text>
+              </View>
+              {index !== 2 && <Text style={styles.travelArrow}>{'>>>'}</Text>}
+              
+            </>
           ))}
         </View>
-        <View
-          style={styles.group1}
-        >
-          <Text
-            style={styles.text1}
-          >
-            {translang.t('CHECK_IN')}
-          </Text>
-          <Text
-            style={styles.text1}
-          >
-            {translang.t('CHECK_OUT')}
-          </Text>
+        <View style={styles.group1}>
+          <Text style={styles.text1}>{translang.t('CHECK_IN')}</Text>
+          <Text style={styles.text1}>{translang.t('CHECK_OUT')}</Text>
         </View>
         <SortableList
           style={styles.sortableList}
@@ -527,10 +521,17 @@ const styles = StyleSheet.create({
     color: Color.n_default_gray,
     marginTop: 4,
   },
+  travelArrow: {
+    fontSize: 20,
+    color: '#B1B1B1',
+    fontWeight: 'bold',
+    marginHorizontal: 12,
+  },
   group1: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     width: '100%',
+    paddingRight: 16
   },
   text1: {
     textAlign: 'center',
