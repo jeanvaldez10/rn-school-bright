@@ -79,7 +79,7 @@ export default function StudentPopup({
             <Pressable style={styles.item1} onPress={onPressReportIncident}>
               <Image source={images.ic_warning_yellow} style={styles.image}></Image>
               <View style={styles.group1}>
-                <Text style={styles.number}>{translang.t('Incident Report')}</Text>
+                <Text style={styles.number}>{translang.t('INCIDENT_REPORT')}</Text>
               </View>
             </Pressable>
           </View>

@@ -8,7 +8,7 @@ export const SHOP_BASE_URL_DEV = 'https://paymentapi-dev.schoolbright.co/api';
 export const BASE_WEBSITE_URL = 'https://system.schoolbright.co';
 export const ACADEMIC_WEBSITE_URL = 'https://academic.schoolbright.co/api';
 export const ACADEMIC_WEBSITE_URL_DEV = 'https://dev-academic.schoolbright.co/api'; 
-export const SCHOOL_BUS_URL = 'https://sbbus-dev.schoolbright.co/MobileAPI'; 
+export const SCHOOL_BUS_URL = 'https://sbbus.schoolbright.co/MobileAPI'; 
 export const SCHOOL_BUS_URL_DEV = 'https://sbbus-dev.schoolbright.co/MobileAPI'; 
 
 import translang, {getCurrentLocale} from '../utils/language.utils';

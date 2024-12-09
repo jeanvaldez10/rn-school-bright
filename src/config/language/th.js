@@ -1261,7 +1261,7 @@ export default {
 
   SELECT_ITEM: 'เลือกรายการ',
   CALL_PARENT: 'โทรหาผู้ปกครอง',
-  REPORT_INCIDENT: 'แจ้งเหตุ',
+  REPORT_INCIDENT: 'การแจ้งเหตุ',
   INCIDENT_REPORT: 'แจ้งเหตุ',
   CHECK_STUDENT_STATUS: 'Please Check Student Status',
   CHECK_STUDENT_QUEUE:
@@ -1286,9 +1286,9 @@ export default {
   REPORT_SEND_TO_PARENTS_NOT_CHECKEDOUT: 'ส่งหาผู้ปกครองของนักเรียนที่ยัง ไม่เช็กเอาท์',
   REPORT_SEND_TO_PARENTS_ALL: 'ส่งหาผู้ปกครองของนักเรียนทุกคน บนรถ',
 
-  DOT_MENU_QUEUE_MANAGE: 'จัดล่าดับคิว',
+  DOT_MENU_QUEUE_MANAGE: 'จัดลำดับคิว',
   DOT_MENU_BUS_DETAILS: 'รายละเอียดรถ',
-  DOT_MENU_GROUP_ICIDENT_REPORT: 'แจ้งเหต',
+  DOT_MENU_GROUP_ICIDENT_REPORT: 'แจ้งเหตุ',
   DOT_MENU_INCIDENT_REPORTING_REPORT: 'รายงานการแจ้งเหตุ',
   DOT_MENU_PASSENGER_REPORT: 'หน้ารายงานขึ้น-ลงรถรับส่ง',
   SUCCESS_INCIDENT_SUBMIT: 'แจ้งเหตุเรียบร้อย',
