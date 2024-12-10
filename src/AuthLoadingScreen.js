@@ -18,8 +18,6 @@ import VersionCheck from 'react-native-version-check';
 import {getOneUserInfo, removeUser, updatePassword} from './utils/DBManager';
 import {getCurrentLocale} from './utils/language.utils';
 import messaging from '@react-native-firebase/messaging';
-import PushNotification from "react-native-push-notification";
-import PushNotificationIOS from "@react-native-community/push-notification-ios";
 import Constant from './constants/constants';
 import crashlytics from '@react-native-firebase/crashlytics';
 
@@ -46,11 +44,13 @@ class AuthLoadingScreen extends Component {
 
     componentDidMount() {
         this._bootstrapAsync();
+        this.props.navigation.addListener('focus', () => {
+            console.log("reloaded////////////////////");
+          });
     }
 
     componentWillUnmount() {
     }
-
 
     _bootstrapAsync = async () => {
         Constant.isRunning = false;
@@ -64,7 +64,6 @@ class AuthLoadingScreen extends Component {
 
         const system = Platform.OS;
         const version = VersionCheck.getCurrentVersion();
-
 
         if (dLang != "th" && dLang != "en") {
             setLocale(I18n.currentLocale());
@@ -132,80 +131,7 @@ class AuthLoadingScreen extends Component {
                 console.log("fcm token:", token);
                 token = await messaging().getToken();
                 console.log("fcm token:", token);
-                const self = this;
-
-                PushNotification.configure({
-                    onRegister: function (token) {
-                        console.log("TOKEN:", token);
-                    },
-                    onNotification: async function (notification) {
-                        if (notification.userInteraction) {
-                            self.clickedPushNotifcation(notification);
-                        } else {
-                            if (Platform.OS == 'android') {
-                                PushNotification.localNotification({
-                                    title: notification.title, // (optional)
-                                    message: notification.message, // (required)
-                                    data: notification.data,
-                                    channelId: "MY_CHANNEL_ID", // (required)
-                                    smallIcon: '@mipmap/school_bright_icon_data'
-                                });
-                            }
-
-                            if (notification.data.push_mtype == 401) {
-                                const user = await Storage.getUser();
-                                if (!_.isEmpty(user)) {
-                                    await Storage.setUser({...user, isDeviceVerified: true});
-                                }
-                                self.props.navigation.navigate("App");
-                            } else if (notification.data.push_mtype == 402) {
-                                self.logOut();
-                            }
-                        }
-                        notification.finish(PushNotificationIOS.FetchResult.NoData);
-                    },
-                    onRegistrationError: function (err) {
-                        console.error("onRegistrationError", err.message, err);
-                    },
-                    permissions: {
-                        alert: true,
-                        badge: true,
-                        sound: true,
-                    },
-                    popInitialNotification: true,
-                    requestPermissions: true,
-                });
-
-                if (!Constant.isRunning) {
-                    messaging().onMessage((msg) => {
-                        const notification = msg.notification;
-                        if (Platform.OS == 'ios') {
-                            console.log("NOTIFICATION FOR IOS: ", notification);
-                            PushNotificationIOS.addNotificationRequest({
-                                id: msg.messageId,
-                                title: notification.title,
-                                body: notification.body,
-                                userInfo: msg.data,
-                            });
-                        }
-                    });
-
-                    messaging().setBackgroundMessageHandler(async notification => {
-                        if (notification.data.push_mtype == 401) {
-                            console.log("device trust");
-                            const user = await Storage.getUser();
-                            if (!_.isEmpty(user)) {
-                                await Storage.setUser({...user, isDeviceVerified: true});
-                            }
-                            self.props.navigation.navigate("App");
-                        } else if (notification.data.push_mtype == 402) {
-                            console.log("device not trust");
-                            self.logOut();
-                        }
-                    });
-                }
             }
-
         } catch (e) {
             token = 'aaaa';
         }
@@ -369,7 +295,6 @@ class AuthLoadingScreen extends Component {
 
     render() {
         return (
-
             <View style={styles.container}>
                 <ActivityIndicator/>
             </View>
