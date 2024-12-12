@@ -25,6 +25,7 @@ export default class BehaviorQRCodeScreen extends React.Component {
       userInfo: {},
       studentId: '',
       qrcodeData: {},
+      qrcodeDataList: [],
       type: 0,    /// 0: add, 1: reduce
       active: true,
     };

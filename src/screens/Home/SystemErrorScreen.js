@@ -9,7 +9,7 @@ import {
 import {ScaledSheet} from "react-native-size-matters";
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import GradientButton from '../../components/GradientButton';
+import GradientSmallButton from '../../components/GradientSmallButton';
 import ValidationComponent from 'react-native-form-validator';
 import Images from '../../themes/Images';
 import Color from '../../constants/color';
@@ -21,8 +21,8 @@ export default class SystemErrorScreen extends ValidationComponent {
   constructor(props) {
     super(props);
     this.state = {
-      thText: "",
-      enText: "",
+      thText: props.thText,
+      enText: props.enText,
     };
   }
 
@@ -47,8 +47,8 @@ export default class SystemErrorScreen extends ValidationComponent {
 
   async componentDidMount() {
     const {navigation} = this.props;
-    const enText = this.props.navigation.getParam('enText') ?? '';
-    const thText = this.props.navigation.getParam('thText') ?? '';
+    const enText = this.props.navigation.getParam('enText') ?? this.state.enText;
+    const thText = this.props.navigation.getParam('thText') ?? this.state.thText;
     this.setState({enText: enText, thText: thText});
     this.focusListener = navigation.addListener("didFocus", async () => {
       if (this.backhandler) {
@@ -70,11 +70,11 @@ export default class SystemErrorScreen extends ValidationComponent {
   };
 
   next = async () => {
-    BackHandler.exitApp();
-  };
-
-  skip = () => {
-    this.props.navigation.navigate('VerifyWarning', {parent: 'VerifyLineConnect'});
+    if (this.props.onClose !== undefined) {
+      this.props.onClose();
+    } else {
+      BackHandler.exitApp();
+    }
   };
 
   render() {
@@ -90,12 +90,12 @@ export default class SystemErrorScreen extends ValidationComponent {
                 <View style={styles.textContainer}>
                   <Text style={styles.AlertText}> {getCurrentLocale() === 'en' ? enText: thText} </Text>
                 </View>
-                <View style={styles.DividerLine}/>
-                <GradientButton
+                {/* <View style={styles.DividerLine}/> */}
+                <GradientSmallButton
                   containerStyle={styles.loginBtn}
-                  label={translang.t('COMMON_ok')}
-                  colors={[Color.green_button_color]}
+                  label={translang.t('HOME_close')}
                   _onPress={() => this.next()}
+                  opacity={1}
                 />
               </View>
             </View>
@@ -121,14 +121,14 @@ const styles = ScaledSheet.create({
   },
   textContainer: {
     borderRadius: 16,
-    backgroundColor: '#F1A456',
+    // backgroundColor: '#F1A456',
     padding: 16,
     marginTop: 25,
 
   },
   AlertText: {
     fontSize: "24@ms",
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
     fontWeight: 'bold'
   },
@@ -140,8 +140,8 @@ const styles = ScaledSheet.create({
   },
 
   loginBtn: {
-    width: '100%',
-    height: 70,
+    width: 200,
+    height: 40,
     paddingHorizontal: 30,
     marginTop: 20
   },

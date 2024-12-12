@@ -433,6 +433,9 @@ const images = {
 
   n_ic_qrcode_1: require("../assets/images/new/n_ic_qrcode_1.png"),
   n_ic_search_group: require("../assets/images/new/n_ic_search_group.png"),
+
+  ic_user: require("../assets/images/new/ic_user.png"),
+  ic_behavior_add_student_id: require("../assets/images/new/ic_behavior_add_student_id.png"),
 };
 
 export default images;

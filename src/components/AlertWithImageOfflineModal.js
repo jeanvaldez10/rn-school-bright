@@ -71,6 +71,7 @@ const styles = ScaledSheet.create({
   dialogStyle: {
     width: '75%',
     paddingHorizontal: 10,
+    paddingVertical: 20,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,

@@ -107,7 +107,7 @@ export default class VerifyPhoneSuccessScreen extends ValidationComponent {
 
   confirm = async () => {
     if(this.state.type == 0){
-      this.props.navigation.navigate('VerifyLineConnect', {parent: 'VerifyPhoneInput', type: this.state.type});
+      this.props.navigation.navigate('VerifyWarning', {parent: 'VerifyPhoneInput'});
     }else{
       this.props.navigation.navigate('SecuritySetting', {parent: 'Setting'});
     }

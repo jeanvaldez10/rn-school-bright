@@ -66,6 +66,7 @@ import { getUniqueId } from "react-native-device-info";
 import PushNotification from "react-native-push-notification";
 import PushNotificationIOS from "@react-native-community/push-notification-ios";
 import messaging from '@react-native-firebase/messaging';
+import SystemErrorScreen from "./SystemErrorScreen";
 
 class UserInfoScreen1 extends React.Component {
   constructor(props) {
@@ -1053,10 +1054,10 @@ class UserInfoScreen1 extends React.Component {
           ]}
         />
 
-        {this.state.serverInfo && this.state.serverInfo.StatusCode != 200 && (
+        {this.state.serverInfo && this.state.serverInfo.StatusCode !== 200 && (
           <Modal animationType="slide" transparent={true} key="modal">
-            <View style={styles.centeredView}>
-              <LinearGradient
+            {/* <View style={styles.centeredView}> */}
+              {/* <LinearGradient
                 style={styles.dialogStyle}
                 colors={[
                   Color.n_button_gradient_orange_start,
@@ -1101,8 +1102,9 @@ class UserInfoScreen1 extends React.Component {
                   containerStyle={{ marginBottom: 20 }}
                   _onPress={() => this.closeApp()}
                 />
-              </LinearGradient>
-            </View>
+              </LinearGradient> */}
+            {/* </View> */}
+            <SystemErrorScreen enText={translang.t("SERVER_NOTIFY")} thText={translang.t("SERVER_NOTIFY")} />
           </Modal>
         )}
       </SafeAreaView>

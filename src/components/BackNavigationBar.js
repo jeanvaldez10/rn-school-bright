@@ -110,6 +110,12 @@ const BackNavigationBar = ({title, ...props}) => {
         props.onMessageTap();
     }
 
+    const onUserTap = () => {
+        if (props.onUserTap != undefined) {
+            props.onUserTap();
+        }
+    }
+
     const is_notification = props.is_notification;
     const notificount = props.notifi_count ? props.notifi_count : 0;
 
@@ -140,6 +146,9 @@ const BackNavigationBar = ({title, ...props}) => {
     const messageUnreadCnt = props.msgCount ? props.msgCount : 0;
 
     const is_info = props.is_info;
+
+    const is_user = props.is_user;
+    const userCount = props.userCount;
 
     const backHidden = props.backHidden;
 
@@ -343,6 +352,20 @@ const BackNavigationBar = ({title, ...props}) => {
                             source={Images.ic_deselect_all}
                             style={styles.iconimg}
                         />
+                    </TouchableOpacity>}
+
+                    {is_user &&
+                    <TouchableOpacity
+                        onPress={() => onUserTap()}
+                        style={{...styles.iconContainer, flexDirection: 'row'}}>
+                        <Image
+                            source={Images.ic_user}
+                            style={{width: 16, height: 16, resizeMode: 'contain'}}
+                        />
+                        {userCount > 0 &&
+                        <View style={{marginHorizontal: 6}}>
+                            <Text style={{textAlign: 'center', fontSize: 22, fontWeight: '900', color: Color.gray}}>{userCount}</Text>
+                        </View>}
                     </TouchableOpacity>}
                 </View>
             </View>

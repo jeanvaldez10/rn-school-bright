@@ -140,7 +140,7 @@ export default class VerifyPhoneCodeScreen extends ValidationComponent {
 
 
   skip = () => {
-    this.props.navigation.navigate('VerifyLineConnect');
+    this.props.navigation.navigate('VerifyWarning', {parent: 'VerifyPhoneCode'});
   };
 
   render() {
