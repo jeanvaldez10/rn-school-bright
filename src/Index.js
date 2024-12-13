@@ -261,6 +261,9 @@ import VerifyIdentifyIDSuccessScreen from './screens/Auth/VerifyIdentifyIDSucces
 import AppSplashScreen from './SplashScreen';
 import AuthLoadingScreen from './AuthLoadingScreen';
 import VehicleList from './screens/SchoolBus/VehicleList';
+import VerifySlipScreen from './screens/Home/VerifySlipScreen';
+import VerifySlipPaymentListScreen from './screens/Home/VerifySlipPaymentListScreen';
+import VerifySlipUploadScreen from './screens/Home/VerifySlipUploadScreen';
 
 const screenWidth = Dimensions.get('window').width;
 const drawerWidth = 0;
@@ -1365,6 +1368,24 @@ const DrawerRouteConfigs = {
     screen: VehicleList,
     navigationOptions: {
       headerShown: true,
+    },
+  },
+  VerifySlip: {
+    screen: VerifySlipScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  VerifySlipPaymentList: {
+    screen: VerifySlipPaymentListScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  VerifySlipUpload: {
+    screen: VerifySlipUploadScreen,
+    navigationOptions: {
+      headerShown: false,
     },
   },
 };

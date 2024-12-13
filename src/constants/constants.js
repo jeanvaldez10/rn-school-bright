@@ -566,6 +566,14 @@ export const defaultAllMenuTeacher = {
       link: 'Shop',
       func: 'coming',
     },
+    {
+      key: 'verifySlip',
+      image: Images.m_verify_slip,
+      section: 'financial',
+      quick_menu: false,
+      link: 'VerifySlip',
+      func: 'link',
+    }
   ],
   general: [
     {

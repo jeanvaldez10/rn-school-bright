@@ -408,6 +408,7 @@ const images = {
   m_discipline: require("../assets/images/services/m_discipline.png"),
   m_edit_checkin: require("../assets/images/services/m_edit_checkin.png"),
   m_saving: require("../assets/images/services/m_savings.png"),
+  m_verify_slip: require("../assets/images/services/m_verify_slip.png"),
 
   mask: require("../assets/images/services/mask.png"),
   qr_code: require("../assets/images/services/qr_code.png"),
