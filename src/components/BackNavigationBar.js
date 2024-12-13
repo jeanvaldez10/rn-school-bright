@@ -116,6 +116,12 @@ const BackNavigationBar = ({title, ...props}) => {
         }
     }
 
+    const onVerifySlip = () => {
+        if (props.onVerifySlipTap != undefined) {
+            props.onVerifySlipTap();
+        }
+    }
+
     const is_notification = props.is_notification;
     const notificount = props.notifi_count ? props.notifi_count : 0;
 
@@ -138,6 +144,7 @@ const BackNavigationBar = ({title, ...props}) => {
     const is_deselectAll = props.is_deselectAll;
     const is_search = props.is_search;
     const is_searching = props.is_searching;
+    const is_verify_slip = props.is_verify_slip;
 
     const is_skip = props.is_skip;
     const onPressSkip = props.onPressSkip;
@@ -220,6 +227,17 @@ const BackNavigationBar = ({title, ...props}) => {
                         <View style={styles.notificntContainer}>
                             <Text style={styles.notificount}>{notificount}</Text>
                         </View>}
+                    </TouchableOpacity>}
+
+                    {is_verify_slip &&
+                    <TouchableOpacity
+                        onPress={() => onVerifySlip()}
+                        style={styles.iconContainer}>
+                        <Image
+                            source={Images.ic_verify_slilp}
+                            style={styles.iconimg}
+                        />
+
                     </TouchableOpacity>}
 
                     {is_help &&

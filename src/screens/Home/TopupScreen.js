@@ -188,6 +188,10 @@ export default class TopupScreen extends React.Component {
           onMenuTap={() => this.back()}
           is_help={true}
           onHelpTap={()=>this.setState({showAlertModal: true})}
+          is_verify_slip={true}
+          onVerifySlipTap={() => {
+            this.props.navigation.navigate('VerifySlip', {parent: 'Topup'});
+          }}
         />
 
         <View style={styles.container}>

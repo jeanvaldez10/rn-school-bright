@@ -68,7 +68,12 @@ export default class VerifySlipScreen extends React.Component {
   };
 
   back = () => {
-    this.props.navigation.goBack();
+    const parentRoute = this.props.navigation.getParam('parent');
+    if (parentRoute) {
+      this.props.navigation.navigate(parentRoute);
+    } else {
+      this.props.navigation.goBack();
+    }
   };
 
   toggleDrawer = () => {
