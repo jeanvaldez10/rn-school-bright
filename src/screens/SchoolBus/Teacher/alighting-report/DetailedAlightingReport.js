@@ -9,6 +9,8 @@ import Color from '../../../../constants/color';
 import ApiManager from '../../../../managers/ApiManager';
 import translang from '../../../../utils/language.utils';
 import ReportItem1 from './RepoertItem1';
+import AlertWithImageModal from '../../../../components/AlertWithImageModal';
+import images from '../../../../themes/Images';
 
 const DetailedAlightingReport = ({ navigation }) => {
   const busID = navigation.getParam('busID');
@@ -18,8 +20,9 @@ const DetailedAlightingReport = ({ navigation }) => {
   console.log(busID, isEvening, date);
 
   const [reportList, setReportList] = useState([]);
-
   const [isLoading, setIsLoading] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertContent, setAlertContent] = useState('');
 
   const back = useCallback(() => {
     navigation.navigate('PassengerAlightingReport');
@@ -53,7 +56,8 @@ const DetailedAlightingReport = ({ navigation }) => {
       setReportList(data.lstData);
     } catch (error) {
       console.log(error);
-      alert(error.message || 'Failed to fetch data.');
+      setShowAlertModal(true);
+      setAlertContent(translang.t('ERROR_OCCURED_TRY_AGAIN'));
     } finally {
       setIsLoading(false);
     }
@@ -73,7 +77,10 @@ const DetailedAlightingReport = ({ navigation }) => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={renderItem}
           ListHeaderComponent={
-            <Text style={styles.pageTitle}>{translang.t('DATE_NUMBER')}{moment(date).format('DD MMMM YYYY')}</Text>
+            <Text style={styles.pageTitle}>
+              {translang.t('DATE_NUMBER')}
+              {moment(date).format('DD MMMM YYYY')}
+            </Text>
           }
         />
       ) : (
@@ -81,7 +88,13 @@ const DetailedAlightingReport = ({ navigation }) => {
           <Text style={styles.noSupportText}>{translang.t('NOT_FOUND_DATA')}</Text>
         </View>
       )}
-
+      <AlertWithImageModal
+        isVisible={showAlertModal}
+        onClose={() => setShowAlertModal(false)}
+        message={alertContent}
+        image={images.n_ic_warning}
+        buttonColors={[Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]}
+      />
       <ProgressHud isVisible={isLoading} />
     </SafeAreaView>
   );

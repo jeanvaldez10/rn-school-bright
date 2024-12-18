@@ -85,11 +85,11 @@ const BusDetailScreen = ({ navigation }) => {
         setInfoTravel(data.infoTravel);
         setInfoVehicle(data.infoVehicle);
       } else {
-        showAlert(data.message || 'Failed to fetch data.', 'warning');
+        showAlert(data.message, 'warning');
       }
     } catch (e) {
       console.log(e, 'Schedule Details Error');
-      showAlert(e.message || 'Failed to fetch data.', 'warning');
+      showAlert(translang.t('ERROR_OCCURED_TRY_AGAIN'), 'warning');
     }
     setIsLoading(false);
   }, [nScheduleID, showAlert]);
@@ -200,7 +200,7 @@ const BusDetailScreen = ({ navigation }) => {
         }
       } catch (e) {
         console.error('Switch travel status error', e);
-        showAlert(e.message || 'Failed to update travel status.', 'warning');
+        showAlert(translang.t('ERROR_OCCURED_TRY_AGAIN'), 'warning');
       } finally {
         setSwitchingTravelStatus(false);
       }
@@ -230,10 +230,10 @@ const BusDetailScreen = ({ navigation }) => {
     try {
       const result = await updateFunc(infoTravel.nTravelID, selectedStudent.sStudentID, newStatus);
       if (result.status !== 1) {
-        handleErrorCheckInOut(result.message || 'Error updating student status.');
+        handleErrorCheckInOut(result.message || '');
       }
     } catch (e) {
-      handleErrorCheckInOut(e.message || 'Error updating student status.');
+      handleErrorCheckInOut(translang.t('ERROR_OCCURED_TRY_AGAIN'));
     }
   };
 
@@ -253,7 +253,7 @@ const BusDetailScreen = ({ navigation }) => {
           : showAlert(result.message, 'warning');
       } catch (e) {
         console.error('Switch travel status error', e);
-        showAlert(e.message || 'Failed to complete travel.', 'warning');
+        showAlert(translang.t('CHECK_STUDENT_STATUS'), 'warning');
       } finally {
         setCompletingTravel(false);
       }

@@ -19,7 +19,6 @@ const TravelUpdater = () => {
             },
             (error) => {
               console.error('Error fetching location for ongoing travel:', error);
-              alert('Error fetching location for ongoing travel.');
             },
           );
         } else {

@@ -19,11 +19,15 @@ import Color from '../../../constants/color';
 import ApiManager from '../../../managers/ApiManager';
 import Storage from '../../../managers/StorageManager';
 import translang from '../../../utils/language.utils';
+import AlertWithImageModal from '../../../components/AlertWithImageModal';
+import images from '../../../themes/Images';
 
 const BusListScreen = ({ navigation }) => {
   const [showModal, setShowModal] = useState(false);
   const [schedules, setSchedules] = useState([]);
   const [loadingSchedule, setLoadingSchedule] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertContent, setAlertContent] = useState('');
 
   const [bustList, setBusList] = useState([]);
   const [userInfo, setUserInfo] = useState({});
@@ -71,12 +75,14 @@ const BusListScreen = ({ navigation }) => {
         if (data.status === 1) {
           setBusList(data.lstData || []);
         } else {
-          alert(data.message);
+          setShowAlertModal(true);
+          setAlertContent(data.message);
         }
       })
       .catch((error) => {
         console.log(error);
-        alert('Failed to fetch bus list.');
+        setShowAlertModal(true);
+        setAlertContent(translang.t('ERROR_OCCURED_TRY_AGAIN'));
       })
       .finally(() => {
         setIsLoading(false);
@@ -96,12 +102,14 @@ const BusListScreen = ({ navigation }) => {
           setSchedules(data.lstData || []);
           setShowModal(true);
         } else {
-          alert(data.message);
+          setShowAlertModal(true);
+          setAlertContent(data.message);
         }
       })
       .catch((error) => {
         console.log(error);
-        alert('Failed to fetch schedules.');
+        setShowAlertModal(true);
+        setAlertContent(translang.t('ERROR_OCCURED_TRY_AGAIN'));
       })
       .finally(() => {
         setLoadingSchedule(false);
@@ -187,6 +195,13 @@ const BusListScreen = ({ navigation }) => {
         onListSelect={onListSelect}
         listData={scheduleDataformatted}
         dialogTtitle={translang.t('SELECT_ROUTE')}
+      />
+      <AlertWithImageModal
+        isVisible={showAlertModal}
+        onClose={() => setShowAlertModal(false)}
+        message={alertContent}
+        image={images.n_ic_warning}
+        buttonColors={[Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]}
       />
       <ProgressHud isVisible={isLoading} />
     </SafeAreaView>

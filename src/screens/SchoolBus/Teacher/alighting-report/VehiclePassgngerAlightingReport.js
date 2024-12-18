@@ -1,12 +1,6 @@
 import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-  BackHandler,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native';
+import { BackHandler, FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScaledSheet } from 'react-native-size-matters';
 import BackNavigationBar from '../../../../components/BackNavigationBar';
@@ -20,6 +14,8 @@ import ApiManager from '../../../../managers/ApiManager';
 import Storage from '../../../../managers/StorageManager';
 import translang from '../../../../utils/language.utils';
 import ReportItem from './ReportItem';
+import AlertWithImageModal from '../../../../components/AlertWithImageModal';
+import images from '../../../../themes/Images';
 
 const VehiclePassgngerAlightingReport = ({ navigation }) => {
   const [busID] = useState(navigation.getParam('busID'));
@@ -31,6 +27,8 @@ const VehiclePassgngerAlightingReport = ({ navigation }) => {
   const [endDate, setEndDate] = useState(moment());
   const [showStartCalendar, setShowStartCalendar] = useState(false);
   const [showEndCalendar, setShowEndCalendar] = useState(false);
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertContent, setAlertContent] = useState('');
 
   let mindate = moment().subtract(6, 'M');
   mindate = moment(mindate).startOf('month');
@@ -66,7 +64,8 @@ const VehiclePassgngerAlightingReport = ({ navigation }) => {
       setReportList(data.lstData || []);
     } catch (error) {
       console.log(error);
-      alert(error.message || 'Failed to fetch data.');
+      setShowAlertModal(true);
+      setAlertContent(translang.t('ERROR_OCCURED_TRY_AGAIN'));
     } finally {
       setIsLoading(false);
     }
@@ -196,6 +195,14 @@ const VehiclePassgngerAlightingReport = ({ navigation }) => {
         // maxDate={moment()}
         minDate={mindate}
         onDateSelect={(result) => onEndDateSelected(result)}
+      />
+
+      <AlertWithImageModal
+        isVisible={showAlertModal}
+        onClose={() => setShowAlertModal(false)}
+        message={alertContent}
+        image={images.n_ic_warning}
+        buttonColors={[Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]}
       />
 
       <ProgressHud isVisible={isLoading} />

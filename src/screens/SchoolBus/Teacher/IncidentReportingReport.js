@@ -19,6 +19,7 @@ import Storage from '../../../managers/StorageManager';
 import images from '../../../themes/Images';
 import translang from '../../../utils/language.utils';
 import ReportPopup from './ReportPopup';
+import AlertWithImageModal from '../../../components/AlertWithImageModal';
 
 const IncidentReportingReport = ({ navigation }) => {
   const [incidentsToday, setIncidentsToday] = useState([]);
@@ -29,6 +30,8 @@ const IncidentReportingReport = ({ navigation }) => {
   const [showReportModal, setShowReportModal] = useState(false);
   const [selectedIncident, setSelectedIncident] = useState(null);
   const [selectedIncidentDetails, setSelectedIncidentDetails] = useState(null);
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertContent, setAlertContent] = useState('');
 
   useEffect(() => {
     initialize();
@@ -84,12 +87,14 @@ const IncidentReportingReport = ({ navigation }) => {
           setIncidentsToday(allIncidentsToday);
           setIncidentsIn7Days(allIncidentsIn7Days);
         } else {
-          alert(data.message);
+          setShowAlertModal(true);
+          setAlertContent(data.message);
         }
       })
       .catch((error) => {
         console.log(error);
-        alert('Failed to fetch incidents list.');
+        setShowAlertModal(true);
+        setAlertContent(translang.t('ERROR_OCCURED_TRY_AGAIN'));
       })
       .finally(() => {
         setIsLoading(false);
@@ -248,6 +253,14 @@ const IncidentReportingReport = ({ navigation }) => {
         onClose={() => setShowReportModal(false)}
         incidentDetails={selectedIncidentDetails}
         navigation={navigation}
+      />
+
+      <AlertWithImageModal
+        isVisible={showAlertModal}
+        onClose={() => setShowAlertModal(false)}
+        message={alertContent}
+        image={images.n_ic_warning}
+        buttonColors={[Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]}
       />
     </SafeAreaView>
   );

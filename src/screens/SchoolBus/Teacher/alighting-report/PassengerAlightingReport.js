@@ -13,6 +13,8 @@ import moment from 'moment';
 import ApiManager from '../../../../managers/ApiManager';
 import translang from '../../../../utils/language.utils';
 import PassengerAlightingReportTab from './PassengerAlightingReportTab';
+import AlertWithImageModal from '../../../../components/AlertWithImageModal';
+import images from '../../../../themes/Images';
 
 const PassengerAlightingReport = ({ navigation }) => {
   const [showCalendarModal, setShowCalendarModal] = useState(false);
@@ -22,6 +24,8 @@ const PassengerAlightingReport = ({ navigation }) => {
   const [eveningList, setEveningList] = useState([]);
   const [morningTotalCount, setMoringTotalCount] = useState(0);
   const [eveningTotalCount, setEveningTotalCount] = useState(0);
+  const [showAlertModal, setShowAlertModal] = useState(false);
+  const [alertContent, setAlertContent] = useState('');
 
   const [userInfo, setUserInfo] = useState({});
 
@@ -80,7 +84,8 @@ const PassengerAlightingReport = ({ navigation }) => {
       setEveningTotalCount(eveningData.nTotalStudentsCnt);
       console.log(selectedDate);
     } catch (e) {
-      alert(e.message || 'Failed to fetch data');
+      setShowAlertModal(true);
+      setAlertContent(translang.t('ERROR_OCCURED_TRY_AGAIN'));
     }
 
     setIsLoading(false);
@@ -169,6 +174,13 @@ const PassengerAlightingReport = ({ navigation }) => {
 
       <CalendarModal isVisible={showCalendarModal} type="single" onDateSelect={onDateSelected} />
       <ProgressHud isVisible={isLoading} />
+      <AlertWithImageModal
+        isVisible={showAlertModal}
+        onClose={() => setShowAlertModal(false)}
+        message={alertContent}
+        image={images.n_ic_warning}
+        buttonColors={[Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]}
+      />
     </SafeAreaView>
   );
 };

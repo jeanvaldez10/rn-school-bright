@@ -32,10 +32,12 @@ const StudentBusScheduleDetail = ({ navigation }) => {
   const scheduleID = navigation.getParam('scheduleID');
   const [userInfo, setUserInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+
   const [showStuffModal, setShowStuffModal] = useState(false);
 
+  const [showAlertModal, setShowAlertModal] = useState(false);
   const [alertContent, setAlertContent] = useState('');
+  const [alertStatus, setAlertStatus] = useState(''); // success or warning
 
   const [infoLocation, setInfoLocation] = useState({});
   const [infoVehicle, setInfoVehicle] = useState({});
@@ -76,8 +78,6 @@ const StudentBusScheduleDetail = ({ navigation }) => {
           setInfoVehicle(data.infoVehicle);
           setInfoRoute(data.infoRoute);
           setInfoTravel(data.infoTravel);
-        } else {
-          alert(data.message);
         }
       })
       .catch((error) => {
@@ -108,12 +108,16 @@ const StudentBusScheduleDetail = ({ navigation }) => {
           setInfoRoute(data.infoRoute);
           setInfoTravel(data.infoTravel);
         } else {
-          alert(data.message);
+          setShowAlertModal(true);
+          setAlertContent(data.message);
+          setAlertStatus('warning');
         }
       })
       .catch((error) => {
         console.log(error);
-        alert('Failed to fetch details.');
+        setShowAlertModal(true);
+        setAlertContent(translang.t('ERROR_OCCURED_TRY_AGAIN'));
+        setAlertStatus('warning');
       })
       .finally(() => {
         setIsLoading(false);
@@ -172,6 +176,12 @@ const StudentBusScheduleDetail = ({ navigation }) => {
       title: translang.t('ARRIVED'),
     },
   };
+
+  const alertImage = alertStatus === 'success' ? Images.checked : Images.n_ic_warning;
+  const alertButtonColor =
+    alertStatus === 'success'
+      ? [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]
+      : [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end];
 
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
@@ -306,10 +316,11 @@ const StudentBusScheduleDetail = ({ navigation }) => {
       </ScrollView>
       <ProgressHud isVisible={isLoading} />
       <AlertWithImageModal
-        isVisible={showModal}
-        onClose={() => setShowModal(false)}
-        image={Images.n_ic_warning}
+        isVisible={showAlertModal}
+        onClose={() => setShowAlertModal(false)}
         message={alertContent}
+        image={alertImage}
+        buttonColors={alertButtonColor}
       />
       <StuffPopup
         isVisible={showStuffModal}
