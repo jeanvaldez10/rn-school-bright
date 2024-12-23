@@ -20,13 +20,15 @@ import {getCurrentLocale} from './utils/language.utils';
 import messaging from '@react-native-firebase/messaging';
 import Constant from './constants/constants';
 import crashlytics from '@react-native-firebase/crashlytics';
-
+import AlertWithImageOfflineModal from './components/AlertWithImageOfflineModal';
+import SystemErrorScreen from "./screens/Home/SystemErrorScreen";
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import {setGoVerifyLineSuccess} from "./redux/actions";
 import CheckVerification from "./components/CheckVerification";
 import Color from "./constants/color";
+import Images from './themes/Images';
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -40,13 +42,17 @@ class AuthLoadingScreen extends Component {
 
     constructor() {
         super();
+
+        this.state = {
+            showModalOffline: false,
+        };
     }
 
     componentDidMount() {
         this._bootstrapAsync();
         this.props.navigation.addListener('focus', () => {
-            console.log("reloaded////////////////////");
-          });
+        console.log("reloaded////////////////////");
+        });
     }
 
     componentWillUnmount() {
@@ -91,25 +97,29 @@ class AuthLoadingScreen extends Component {
                 // const device_verified = await CheckVerification.checkVerificationDevice('token', user.ID, user.SchoolId);
                 // const result = await CheckVerification.checkVerification(user.SchoolId, user.ID);
 
-                const deviceInfo = await Storage.getDeviceInfo();
-                const verification_status = await ApiManager.getVerification(deviceInfo.fcmtoken, user.ID, user.SchoolId, imei);
-                const {authentication, verify, policy} = verification_status;
-                const {user:user_verify, device} = verify;
+                try {
+                    const deviceInfo = await Storage.getDeviceInfo();
+                    const verification_status = await ApiManager.getVerification(deviceInfo.fcmtoken, user.ID, user.SchoolId, imei);
 
-                const verifyNeed = (user_verify.email.result.code != 100) && (user_verify.phone.result.code != 100) && (user_verify.line.result.code != 100);
-
-
-                if ((device.StatusCode != "200") || verifyNeed) {
-                    this.logOut();
-                } else {
-                    if (this.props.devReducer.goVerifyLineSuccess) {
-                        this.props.setGoVerifyLineSuccess(false);
-                        this.props.navigation.navigate('VerifyLineSuccess');
-                    } else if (currentDeviceInfo && currentDeviceInfo.version != version) {
-                        this.props.navigation.navigate('App');
+                    const {authentication, verify, policy} = verification_status;
+                    const {user:user_verify, device} = verify;
+    
+                    const verifyNeed = (user_verify.email.result.code != 100) && (user_verify.phone.result.code != 100) && (user_verify.line.result.code != 100);
+    
+                    if ((device.StatusCode != "200") || verifyNeed) {
+                        this.logOut();
                     } else {
-                        this.props.navigation.navigate(!_.isEmpty(user) ? 'App' : 'Auth');
+                        if (this.props.devReducer.goVerifyLineSuccess) {
+                            this.props.setGoVerifyLineSuccess(false);
+                            this.props.navigation.navigate('VerifyLineSuccess');
+                        } else if (currentDeviceInfo && currentDeviceInfo.version != version) {
+                            this.props.navigation.navigate('App');
+                        } else {
+                            this.props.navigation.navigate(!_.isEmpty(user) ? 'App' : 'Auth');
+                        }
                     }
+                } catch (e) {
+                    this.setState({showModalOffline: true});
                 }
             } else {
                 this.props.navigation.navigate('Auth');
@@ -296,7 +306,16 @@ class AuthLoadingScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ActivityIndicator/>
+                {
+                this.state.showModalOffline ?
+                    <SystemErrorScreen enText={translang.t("SERVER_NOTIFY")} thText={translang.t("SERVER_NOTIFY")} onClose={() => {
+                        this.setState({showModalOffline: false}, () => {
+                            this._bootstrapAsync();
+                        })
+                    }} />
+                :
+                    <ActivityIndicator/>
+                }
             </View>
         );
     }
@@ -304,8 +323,8 @@ class AuthLoadingScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: Color.backgroundColor,
+        flex: 1,
     }
 })
 

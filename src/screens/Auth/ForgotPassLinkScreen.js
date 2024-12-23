@@ -46,7 +46,7 @@ export default class ForgotPassLinkScreen extends ValidationComponent {
       verifyOptions: [
         {text: 'Email   ', key: 0, value: 1, disabled: true,},
         {text: 'SMS     ', key: 1, value: 2, disabled: true,},
-        {text: 'Line     ', key: 2, value: 3,  disabled: true,}
+        // {text: 'Line     ', key: 2, value: 3,  disabled: true,}
       ],
       selectedOption: null,
       resObj: null,
@@ -86,7 +86,7 @@ export default class ForgotPassLinkScreen extends ValidationComponent {
     if(resObj){
       let verifyOptions = [{key: 0, value: 1, text: `Email   ${resObj.MessageChanel.email.Label}`, disabled: !resObj.MessageChanel.email.Status},
         {key: 1, value: 2, text: `SMS     ${resObj.MessageChanel.phone.Label}`, disabled: !resObj.MessageChanel.phone.Status},
-        {key: 2, value: 3, text: `Line     ${resObj.MessageChanel.line.Label}`, disabled: !resObj.MessageChanel.line.Status},
+        // {key: 2, value: 3, text: `Line     ${resObj.MessageChanel.line.Label}`, disabled: !resObj.MessageChanel.line.Status},
       ];
       this.setState({resObj: resObj, verifyOptions:verifyOptions, type: type});
     }
@@ -100,7 +100,7 @@ export default class ForgotPassLinkScreen extends ValidationComponent {
   }
 
   getChannel = (i) =>{
-    const channels = ['email', 'phone', 'line'];
+    const channels = ['email', 'phone'];
     return channels[i-1]
   }
 

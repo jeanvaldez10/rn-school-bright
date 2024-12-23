@@ -315,7 +315,8 @@ export default class BehaviorEditScreen extends React.Component {
     };
 
     render() {
-        const nextButtonColor = this.state.isReduce ? [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end] : [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]
+        // const nextButtonColor = this.state.isReduce ? [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end] : [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]
+        const nextButtonColor = [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end];
         const scoreData = this.state.filteredIndexes.length === 0 ? this.state.scoreData : this.state.filteredIndexes.map(i => this.state.scoreData[i]);
 
         return (

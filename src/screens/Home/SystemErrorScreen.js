@@ -41,14 +41,25 @@ export default class SystemErrorScreen extends ValidationComponent {
       this.backhandler.remove();
     }
 
-    const parentRoute = this.props.navigation.getParam('parent') ?? 'App';
-    this.props.navigation.navigate(parentRoute);
+    if (this.props.navigation) {
+      const parentRoute = this.props.navigation.getParam('parent') ?? 'App';
+      this.props.navigation.navigate(parentRoute);
+    } else if (this.props.onClose) {
+      this.props.onClose();
+    }
   };
 
   async componentDidMount() {
     const {navigation} = this.props;
-    const enText = this.props.navigation.getParam('enText') ?? this.state.enText;
-    const thText = this.props.navigation.getParam('thText') ?? this.state.thText;
+
+    let enText = this.state.enText;
+    let thText = this.state.thText;
+
+    if (this.props.navigation) {
+      enText = this.props.navigation.getParam('enText') ?? this.state.enText;
+      thText = this.props.navigation.getParam('thText') ?? this.state.thText;
+    }
+    
     this.setState({enText: enText, thText: thText});
     this.focusListener = navigation.addListener("didFocus", async () => {
       if (this.backhandler) {
@@ -56,8 +67,7 @@ export default class SystemErrorScreen extends ValidationComponent {
       }
       this.backhandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
 
-  });
-
+    });
   }
 
   componentWillUnmount = () => {
@@ -93,7 +103,7 @@ export default class SystemErrorScreen extends ValidationComponent {
                 {/* <View style={styles.DividerLine}/> */}
                 <GradientSmallButton
                   containerStyle={styles.loginBtn}
-                  label={translang.t('HOME_close')}
+                  label={translang.t('TRY_AGAIN')}
                   _onPress={() => this.next()}
                   opacity={1}
                 />

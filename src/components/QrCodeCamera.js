@@ -78,7 +78,9 @@ class QrCodeCamera extends Component {
             </View>
             <View style={styles.bottomOverlay}>
               {this.state.message && 
-                <Text>{this.state.message}</Text>
+                <Text style={{textAlign: 'center', fontSize: 26, fontWeight: '700', fontWeight: 'normal', fontFamily: 'THSarabunNew', color: 'white'}}>
+                  {this.state.message}
+                </Text>
               }
             </View>
           </View>

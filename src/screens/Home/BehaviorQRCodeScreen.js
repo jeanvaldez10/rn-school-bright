@@ -121,22 +121,32 @@ export default class BehaviorQRCodeScreen extends React.Component {
     });
   };
 
-  getResult = () => {
-    const type = this.state.type;
-    const selectedStudents = this.state.qrcodeData;
+  addUserToList = () => {
+    if (this.state.qrcodeData) {
+      const list = [...this.state.qrcodeDataList, this.state.qrcodeData];
+      this.setState({ qrcodeData:  {}, qrcodeDataList: list, showUserInfoModal: false, studentId: '' });
+    }
+  };
 
-    const tempStudent = [{
-      FirstNameTH: selectedStudents.name,
-      LastNameTH: selectedStudents.lastname,
-      FirstNameEN: selectedStudents.name,
-      LastNameEN: selectedStudents.lastname,
-      StudentPicture: selectedStudents.picture,
-      StudentID: selectedStudents.studentId}];
+  getResult = () => {
+    this.setState({qrcodeScanned: false, isLoading: false, showCheckoutDataModal: false, active: false});
+
+    const type = this.state.type;
+    const studentList = this.state.qrcodeDataList.map(q => {
+      return {
+        FirstNameTH: q.name,
+        LastNameTH: q.lastname,
+        FirstNameEN: q.name,
+        LastNameEN: q.lastname,
+        StudentPicture: q.picture,
+        StudentID: q.studentId
+      }
+    });
 
     const params = {
       classLevel: this.state.classLevel,
       classRoom: this.state.classRoom,
-      students: tempStudent,
+      students: studentList,
       isReduce: type == 1,
       parent: 'BehaviorQRCode',
       'isRefresh': true,
@@ -157,7 +167,7 @@ export default class BehaviorQRCodeScreen extends React.Component {
         />
 
         {this.state.active &&
-        <QrCodeCamera onSuccess={this.barcodeRecognized}/>
+        <QrCodeCamera onSuccess={this.barcodeRecognized} message={translang.t('STUDENT_CAN_SELECTED_VIA_QRCODE')}/>
         }
 
         <AlertWithImageModal
@@ -174,8 +184,8 @@ export default class BehaviorQRCodeScreen extends React.Component {
           data={this.state.qrcodeData}
           onCancel={() => this.setState({ showCheckoutDataModal: false, qrcodeScanned: false, isLoading: false })}
           onOk={() => {
-            this.setState({qrcodeScanned: false, isLoading: false, showCheckoutDataModal: false, active: false});
-            this.getResult();
+            this.setState({qrcodeScanned: false, isLoading: false, showCheckoutDataModal: false});
+            this.addUserToList();
           }}
         />
         <ProgressHud isVisible={this.state.isLoading} />

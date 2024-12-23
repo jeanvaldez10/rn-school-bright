@@ -1047,7 +1047,7 @@ export default {
   Resend_Code: "Resend the code",
 
   Email_verification_successful: "Email verification successful",
-  Email_verification_fail: "You haven't verified your phone number.",
+  Email_verification_fail: "You haven't verified your email.",
   Enter_phone: "Please enter a phone number in Thailand.",
 
   Enter_phone_code: "Please enter the verification code received via SMS.",
@@ -1276,6 +1276,7 @@ export default {
   ATTACH_SLIP_IMAGE: "Attach slip image",
   PLEASE_SELECT_BANK: "Please select a bank",
   SELECT_IMAGE: "Select image",
+  STUDENT_CAN_SELECTED_VIA_QRCODE: "Student can be selected via QRCode",
 
   // start of schoolBus
   LIST_OF_VEHICLES: 'Vehicles',

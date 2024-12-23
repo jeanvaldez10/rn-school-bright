@@ -194,7 +194,7 @@ export default class BehaviorStudentIDScreen extends React.Component {
               <TouchableOpacity style={styles.eachNumContainer} activeOpacity={0.3} onPress={() => { this.onClickNum(9) }}><Text style={styles.eachNumTxt}>9</Text></TouchableOpacity>
             </View>
             <View style={{ height: 100, flexDirection: 'row', justifyContent: 'space-between' }}>
-              <TouchableOpacity style={{...styles.eachNumContainer, backgroundColor: Color.transparent, elevation: 0}} activeOpacity={0.3} onPress={() => { this.onClickClear() }}><Text style={{...styles.eachNumTxt, fontSize: 30, color: Color.n_default_orange}}>{translang.t('COMMON_clear')}</Text></TouchableOpacity>
+              <TouchableOpacity style={{...styles.eachNumContainer, backgroundColor: Color.transparent, elevation: 0}} activeOpacity={0.3} onPress={() => { this.onClickClear() }}><Text style={{...styles.eachNumTxt, fontSize: 28, color: Color.n_default_orange}}>{translang.t('COMMON_clear')}</Text></TouchableOpacity>
               <TouchableOpacity style={styles.eachNumContainer} activeOpacity={0.3} onPress={() => { this.onClickNum(0) }}><Text style={styles.eachNumTxt}>0</Text></TouchableOpacity>
               <TouchableOpacity style={{...styles.eachNumContainer, backgroundColor: Color.transparent, elevation: 0}} activeOpacity={0.3} onPress={() => { this.onClickDelete() }}><Image source={Images.n_ic_arrow_left_orange} style={styles.backIcon} /></TouchableOpacity>
             </View>
