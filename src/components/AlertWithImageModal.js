@@ -30,15 +30,15 @@ export default function AlertWithImageModal({
             activeOpacity={0.7}>
             <View style={styles.centeredView} >
               <View style={styles.dialogStyle}>
-                { image &&
+                { !!image &&
                   <Image source={image} style={styles.image} />
                 }
-                { title && title !== '' &&
+                { !!title &&
                   <Text style={[styles.text, styles.title, titleStyle]}>
                     {title}
                   </Text>
                 }
-                { message && message !== '' &&
+                { !!message &&
                   <ScrollView style={{maxHeight: 400}}>
                     <Text style={[styles.text, messageStyle]}>
                       {message}

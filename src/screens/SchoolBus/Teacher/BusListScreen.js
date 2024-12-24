@@ -103,7 +103,7 @@ const BusListScreen = ({ navigation }) => {
           setShowModal(true);
         } else {
           setShowAlertModal(true);
-          setAlertContent(data.message);
+          setAlertContent(data.message || 'Error occured. Please try again.');
         }
       })
       .catch((error) => {
