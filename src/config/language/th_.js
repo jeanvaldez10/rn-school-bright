@@ -368,7 +368,7 @@ export default {
   ATTENDANCE_summary: 'สรุปยอด',
   ATTENDANCE_submit: 'ยืนยัน',
   ATTENDANCE_checkout_attendance: 'เช็คชื่อเลิกเรียน',
-  ATTENDANCE_checkout_enter_studentid: 'ใส่รหัสนักเรียน',
+  ATTENDANCE_checkout_enter_studentid: 'กรอกรหัสนักเรียน',
 
   ATTENDANCE_STATUS_on_time: 'ตรงเวลา',
   ATTENDANCE_STATUS_late: 'สาย',
@@ -444,7 +444,7 @@ export default {
   ADD_SCORE_SCAN_QR_CODE: 'เพิ่มคะแนน สแกน คิวอาร์โค้ด',
   ADD_SCORE_WITH_STUDENT_ID: 'เพิ่มคะแนนด้วยรหัสนักเรียน',
   REDUCE_SCORE_SCAN_QR_CODE: 'ลดคะแนน สแกน คิวอาร์โค้ด',
-  REDUCE_SCORE_WITH_STUDENT_ID: 'ลดคะแนนด้วยรหัสนักเรียน',
+  REDUCE_SCORE_WITH_STUDENT_ID: 'ตัดคะแนนพฤติกรรม',
   NO_REGISTERED_COURSES: 'ไม่มีรายวิชาที่ลงทะเบียน',
   PASSWORD_INCORRECT: 'รหัสผ่านไม่ถูกต้อง',
   WRONG_PIN_CODE: 'รหัส Pin ผิด',

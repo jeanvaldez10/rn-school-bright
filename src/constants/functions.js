@@ -76,7 +76,7 @@ export const navigateMenu = async (item, _this) => {
   if (item.func == 'modal') {
     _this.setState({showMenuModal: true, subMenuList: item.subMenu});
   } else if (item.func == 'link') {
-    _this.props.navigation.navigate(item.link);
+    _this.props.navigation.navigate(item.link, {parent: null});
   } else if (item.func == 'gotoPageAfterLeavePermission') {
     gotoPageAfterLeavePermission(item.link, {}, _this);
   } else if (item.func == 'gotoPageAfterAuth') {

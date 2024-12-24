@@ -69,6 +69,7 @@ export default class VerifySlipScreen extends React.Component {
 
   back = () => {
     const parentRoute = this.props.navigation.getParam('parent');
+    console.log('---------', parentRoute);
     if (parentRoute) {
       this.props.navigation.navigate(parentRoute);
     } else {

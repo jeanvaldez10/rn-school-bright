@@ -374,7 +374,7 @@ export default {
   ATTENDANCE_summary: 'สรุปยอด',
   ATTENDANCE_submit: 'ยืนยัน',
   ATTENDANCE_checkout_attendance: 'เช็กชื่อเลิกเรียน',
-  ATTENDANCE_checkout_enter_studentid: 'ใส่รหัสนักเรียน',
+  ATTENDANCE_checkout_enter_studentid: 'กรอกรหัสนักเรียน',
 
   ATTENDANCE_STATUS_on_time: 'ตรงเวลา',
   ATTENDANCE_STATUS_late: 'สาย',
@@ -1259,7 +1259,7 @@ export default {
   SELECT_ITEM: "เลือกรายการ",  
   AMOUNT: "จำนวนเงิน",  
   CREATED_DATE_QRCODE: "วันที่สร้าง QR Code",  
-  REFERENCE_NO: "เลขอ้างอิง",  
+  REFERENCE_NO: "หมายเลขอ้างอิง",  
   UPLOAD_SLIP: "อัปโหลดสลิป",  
   PAYMENT_BANK: "ธนาคารที่ชำระ",  
   ATTACH_SLIP_IMAGE: "แนบรูปภาพสลิป",  

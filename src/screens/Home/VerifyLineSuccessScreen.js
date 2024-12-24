@@ -148,7 +148,7 @@ export default class VerifyLineSuccessScreen extends ValidationComponent {
                                 data={[
                                     {label: translang.t('SETTING_addEmail')},
                                     {label: translang.t('SETTING_EditPhoneNumber')},
-                                    {label: translang.t('SETTING_Line')},
+                                    // {label: translang.t('SETTING_Line')},
                                 ]}
                                 barColor={'lightgrey'}
                                 labelTextStyle={{fontFamily: 'THSarabunNew', color: 'darkgrey', fontSize: 20}}

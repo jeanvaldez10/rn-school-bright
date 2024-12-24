@@ -72,7 +72,7 @@ export default class VerifySlipPaymentListScreen extends React.Component {
       <TouchableOpacity style={styles.listItem} onPress={() => this.onSelectItem(index)}>
         <View style={styles.itemLine}>
           <Text style={styles.itemText}>{translang.t('AMOUNT')}</Text>
-          <Text style={styles.itemText}>{2000}</Text>
+          <Text style={styles.itemText}>{`2000 ${translang.t('COIN_CURRENCY')}`}</Text>
         </View>
 
         <View style={styles.itemLine}>
