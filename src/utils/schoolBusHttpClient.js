@@ -29,7 +29,6 @@ const addAuthToken = async (config) => {
       config.headers['jabjaikey'] = tokenInfo.token; // config.headers.isStudent ? STUDENT_TEMP_TOKEN : TEMP_TOKEN; //
       config.headers[`JabjaiKey-${tokenInfo.SchoolId}-${tokenInfo.ID}`] = tokenInfo.token;
     }
-    console.log(config.headers)
     console.log('request url:', config.baseURL + config.url);
     return config;
   } catch (error) {
