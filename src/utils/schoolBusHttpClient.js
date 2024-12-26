@@ -6,7 +6,7 @@ import ApiManager from '../managers/ApiManager';
 import NavigationService from '../NavigationService';
 
 const TEMP_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjAxIiwiZW1haWwiOiIwMV84NDlfMDFAc2Nob29sYnJpZ2h0LmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3Bvc3RhbGNvZGUiOiI4NDkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiI1NjA5NjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9oYXNoIjoiMDEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL2V4cGlyYXRpb24iOiIxMi8zLzIwMjQgMTI6Mzc6MjYgQU0iLCJuYmYiOjE3MzMwOTk4NDYsImV4cCI6MTczMzE4NjI0NiwiaWF0IjoxNzMzMDk5ODQ2fQ.NEoQ50_qg7pidDmPLkJNUk495ztJ6Hz68x5rIQtBS5k';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjAxIiwiZW1haWwiOiIwMV84NDlfMDFAc2Nob29sYnJpZ2h0LmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3Bvc3RhbGNvZGUiOiI4NDkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiI1NjA5NjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9oYXNoIjoiMDEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL2V4cGlyYXRpb24iOiIxMi8yNS8yMDI0IDM6MjU6NDUgQU0iLCJuYmYiOjE3MzUwMTA3NDUsImV4cCI6MTczNTA5NzE0NSwiaWF0IjoxNzM1MDEwNzQ1fQ.Xw3X5qp2kL9ssXeCraJwp4_x30z0dKXlXl3fhMQrZC4';
 
 const STUDENT_TEMP_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEwNzE1IiwiZW1haWwiOiJwaWNYWFhYQHNjaG9vbGJyaWdodC5jbyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL3Bvc3RhbGNvZGUiOiI4NDkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9zaWQiOiI1ODE3MjgiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9oYXNoIjoiMTExMTExIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiMTEvMTIvMjAyNCA1OjAzOjM3IFBNIiwibmJmIjoxNzMxMDg1NDE3LCJleHAiOjE3MzE0MzEwMTcsImlhdCI6MTczMTA4NTQxN30.VBxMaoBMYa7o1cueHcV8p22sOxMKghve-aPyffTdTFY';
@@ -25,9 +25,11 @@ const addAuthToken = async (config) => {
       config.baseURL = SCHOOL_BUS_URL_DEV;
     }
 
-    config.headers['jabjaikey'] =  config.headers.isStudent ? STUDENT_TEMP_TOKEN : TEMP_TOKEN; // tokenInfo.token; //
-    config.headers[`JabjaiKey-${tokenInfo.SchoolId}-${tokenInfo.ID}`] = tokenInfo.token;
-
+    if (tokenInfo) {
+      config.headers['jabjaikey'] = tokenInfo.token; // config.headers.isStudent ? STUDENT_TEMP_TOKEN : TEMP_TOKEN; //
+      config.headers[`JabjaiKey-${tokenInfo.SchoolId}-${tokenInfo.ID}`] = tokenInfo.token;
+    }
+    console.log(config.headers)
     console.log('request url:', config.baseURL + config.url);
     return config;
   } catch (error) {
@@ -35,6 +37,7 @@ const addAuthToken = async (config) => {
     throw error;
   }
 };
+
 const handleRequestError = (error) => {
   console.error('Request error:', error);
   return Promise.reject(error);
@@ -56,8 +59,8 @@ schoolBusHttpClient.interceptors.response.use(
   async (error) => {
     console.log(
       'api error,',
-      error.config.baseURL,
-      error.config.url,
+      error.config?.baseURL,
+      error.config?.url,
       '----',
       error.response?.data?.Message,
       '---',
@@ -66,7 +69,7 @@ schoolBusHttpClient.interceptors.response.use(
     const originalConfig = error.config;
     console.log('config header:', originalConfig?.headers);
     if (error.response) {
-      if (error.response.status === 401 && !originalConfig?._retry) {
+      if (error.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
         try {
           const tokenInfo = await Storage.getUser();
@@ -81,6 +84,7 @@ schoolBusHttpClient.interceptors.response.use(
           return schoolBusHttpClient(originalConfig);
         } catch (_error) {
           console.log('Token Update error:', _error);
+          NavigationService.setShowTokenError();
           if (_error.response && _error.response?.data) {
             return Promise.reject(_error.response.data);
           }

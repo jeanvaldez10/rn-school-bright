@@ -98,13 +98,8 @@ const StudentStatusModal = ({ isVisible, onSelect, onCan, checkMode = 'in' }) =>
           <View>
             <View style={styles.row}>
               {renderStatusItem(1)}
-              {renderStatusItem(-2)}
+              {renderStatusItem(0)}
             </View>
-            <View style={styles.row}>
-              {renderStatusItem(-1)}
-              {renderStatusItem(-3)}
-            </View>
-            <View style={styles.row}>{renderStatusItem(0)}</View>
           </View>
         )}
       </TouchableOpacity>

@@ -18,6 +18,8 @@ import AlertWithImageModal from '../../../components/AlertWithImageModal';
 import images from '../../../themes/Images';
 
 const StudentPickupDropOffReport = ({ navigation }) => {
+  const parentRoute = navigation.getParam('parent');
+
   const [userInfo, setUserInfo] = useState({});
   const [reportList, setReportList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,9 +39,14 @@ const StudentPickupDropOffReport = ({ navigation }) => {
       setShowEndCalendar(false);
       return true;
     }
-    navigation.navigate('Report');
+    if (parentRoute) {
+      navigation.navigate(parentRoute);
+    } else {
+      navigation.goBack();
+    }
+    
     return true;
-  }, [showStartCalendar, showEndCalendar, navigation]);
+  }, [showStartCalendar, showEndCalendar, navigation, parentRoute]);
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', handleBackButton);
@@ -54,7 +61,7 @@ const StudentPickupDropOffReport = ({ navigation }) => {
       const userInfo = await ApiManager.getUserInfo(userId, schoolId);
       setUserInfo(userInfo);
       console.log(endDate);
-      const data = await ApiManager.getStudentPickUpDropOffReport(startDate, '2567-11-25');
+      const data = await ApiManager.getStudentPickUpDropOffReport(startDate, endDate);
       setReportList(data.lstData || []);
     } catch (error) {
       console.log(error);

@@ -59,9 +59,6 @@ const PassengerAlightingReport = ({ navigation }) => {
     return () => backHandler.remove();
   }, [handleBackButton]);
 
-  useEffect(() => {
-    loadData();
-  }, [loadData]);
 
   const loadData = useCallback(async () => {
     setIsLoading(true);
@@ -73,13 +70,13 @@ const PassengerAlightingReport = ({ navigation }) => {
       setUserInfo(userInfo);
       // Change the date later
       const morningData = await ApiManager.getPassengerBoardingAlightingReports(
-        '2567-11-18',
+        selectedDate,
         false,
       );
       setMorningList(morningData.lstData);
       setMoringTotalCount(morningData.nTotalStudentsCnt);
       // Change the date later
-      const eveningData = await ApiManager.getPassengerBoardingAlightingReports('2567-11-18', true);
+      const eveningData = await ApiManager.getPassengerBoardingAlightingReports(selectedDate, true);
       setEveningList(eveningData.lstData);
       setEveningTotalCount(eveningData.nTotalStudentsCnt);
       console.log(selectedDate);
@@ -90,6 +87,12 @@ const PassengerAlightingReport = ({ navigation }) => {
 
     setIsLoading(false);
   }, [selectedDate]);
+
+  useEffect(() => {
+    loadData();
+  }, [loadData]);
+
+  
 
   const onDateSelected = (date) => {
     if (!date) {

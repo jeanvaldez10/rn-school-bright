@@ -66,7 +66,7 @@ const BusDetailScreen = ({ navigation }) => {
   const [showBusModal, setShowBusModal] = useState(false);
 
   const { nScheduleID } = selectedSchedule;
-  const { nStatus: travelStatus, nTravelID } = infoTravel || {};
+  const { nStatus: travelStatus, nTravelID, hasStartedByOther } = infoTravel || {};
 
   const sortedStudents = [...students].sort((a, b) => a.nOrder - b.nOrder);
 
@@ -122,7 +122,16 @@ const BusDetailScreen = ({ navigation }) => {
     setShowStudentModal(true);
   };
 
+  console.log(nTravelID);
+
   const onPressCheckIn = (student) => () => {
+    if (
+      travelStatus === TravelStatuses.ARRIVED ||
+      travelStatus === TravelStatuses.CANCELLED ||
+      hasStartedByOther
+    ) {
+      return;
+    }
     if (hasUnspecifiedCheckInBefore(students, student)) {
       showAlert(translang.t('CHECK_STUDENT_QUEUE'), 'warning');
       return;
@@ -133,6 +142,17 @@ const BusDetailScreen = ({ navigation }) => {
   };
 
   const onPressCheckout = (student) => () => {
+    if (
+      travelStatus === TravelStatuses.ARRIVED ||
+      travelStatus === TravelStatuses.CANCELLED ||
+      hasStartedByOther
+    ) {
+      return;
+    }
+
+    if (![1, 2].includes(student.nCheckInStatus)) {
+      return;
+    }
     setSelectedStudent(student);
     setCheckMode('out');
     setShowStudentStatusModal(true);
@@ -173,37 +193,38 @@ const BusDetailScreen = ({ navigation }) => {
   };
 
   const onPressJourney = async () => {
-    if (!switchingTravelStatus) {
-      const newStatus = getNextTravelStatus(travelStatus);
+    if (switchingTravelStatus || hasStartedByOther) {
+      return;
+    }
+    const newStatus = getNextTravelStatus(travelStatus);
 
-      try {
-        if (!(await checkGPSPermission())) {
-          showAlert(translang.t('TURN_ON_GPS'), 'warning');
-          return;
-        }
-
-        setSwitchingTravelStatus(true);
-        const updateFunc = getTravelStatusUpdateFunction(newStatus);
-
-        if (updateFunc) {
-          const result = await updateFunc(nTravelID);
-          result.status === 1;
-          if (result.status === 1) {
-            if (newStatus === TravelStatuses.DEPARTED) {
-              StorageManager.saveScheduleID(nScheduleID);
-            }
-
-            await onSwitchSuccess(newStatus);
-          } else {
-            showAlert(result.message, 'warning');
-          }
-        }
-      } catch (e) {
-        console.error('Switch travel status error', e);
-        showAlert(translang.t('ERROR_OCCURED_TRY_AGAIN'), 'warning');
-      } finally {
-        setSwitchingTravelStatus(false);
+    try {
+      if (!(await checkGPSPermission())) {
+        showAlert(translang.t('TURN_ON_GPS'), 'warning');
+        return;
       }
+
+      setSwitchingTravelStatus(true);
+      const updateFunc = getTravelStatusUpdateFunction(newStatus);
+
+      if (updateFunc) {
+        const result = await updateFunc(nTravelID);
+        result.status === 1;
+        if (result.status === 1) {
+          if (newStatus === TravelStatuses.DEPARTED) {
+            StorageManager.saveScheduleID(nScheduleID);
+          }
+
+          await onSwitchSuccess(newStatus);
+        } else {
+          showAlert(result.message, 'warning');
+        }
+      }
+    } catch (e) {
+      console.error('Switch travel status error', e);
+      showAlert(translang.t('ERROR_OCCURED_TRY_AGAIN'), 'warning');
+    } finally {
+      setSwitchingTravelStatus(false);
     }
   };
 
@@ -219,9 +240,24 @@ const BusDetailScreen = ({ navigation }) => {
     const studentIndex = newStudentList.findIndex(
       (student) => student.sStudentID === selectedStudent.sStudentID,
     );
+
+    const nCheckInStatus =
+      checkMode === 'in' ? newStatus : newStudentList[studentIndex].nCheckInStatus;
+
+    let nCheckOutStatus =
+      checkMode === 'out' ? newStatus : newStudentList[studentIndex].nCheckOutStatus;
+    if (checkMode === 'in' && [0, 1, 2].includes(newStatus)) {
+      nCheckOutStatus = 0;
+    } else if (checkMode === 'out' && [0, 1].includes(newStatus)) {
+      nCheckOutStatus = newStatus;
+    } else if (checkMode === 'in') {
+      nCheckOutStatus = nCheckInStatus;
+    }
+
     newStudentList[studentIndex] = {
       ...newStudentList[studentIndex],
-      [checkMode === 'in' ? 'nCheckInStatus' : 'nCheckOutStatus']: newStatus,
+      nCheckInStatus,
+      nCheckOutStatus,
     };
     setStudents(newStudentList);
 
@@ -232,31 +268,34 @@ const BusDetailScreen = ({ navigation }) => {
       if (result.status !== 1) {
         handleErrorCheckInOut(result.message || '');
       }
+
+      console.log(result);
     } catch (e) {
       handleErrorCheckInOut(translang.t('ERROR_OCCURED_TRY_AGAIN'));
     }
   };
 
   const onPressComplete = async () => {
-    if (!completingTravel) {
-      try {
-        if (TravelStatuses.ARRIVED && !canCompleteTask(students)) {
-          showAlert(translang.t('CHECK_STUDENT_STATUS'), 'warning');
-          return;
-        }
-
-        setCompletingTravel(true);
-
-        const result = await ApiManager.busCompleteTravel(nTravelID);
-        result.status === 1
-          ? await onSwitchSuccess(TravelStatuses.ARRIVED)
-          : showAlert(result.message, 'warning');
-      } catch (e) {
-        console.error('Switch travel status error', e);
+    if (hasStartedByOther || completingTravel) {
+      return;
+    }
+    try {
+      if (TravelStatuses.ARRIVED && !canCompleteTask(students)) {
         showAlert(translang.t('CHECK_STUDENT_STATUS'), 'warning');
-      } finally {
-        setCompletingTravel(false);
+        return;
       }
+
+      setCompletingTravel(true);
+
+      const result = await ApiManager.busCompleteTravel(nTravelID);
+      result.status === 1
+        ? await onSwitchSuccess(TravelStatuses.ARRIVED)
+        : showAlert(result.message, 'warning');
+    } catch (e) {
+      console.error('Switch travel status error', e);
+      showAlert(translang.t('CHECK_STUDENT_STATUS'), 'warning');
+    } finally {
+      setCompletingTravel(false);
     }
   };
 
@@ -270,6 +309,13 @@ const BusDetailScreen = ({ navigation }) => {
   };
 
   const onHandleQueue = () => {
+    if (
+      travelStatus === TravelStatuses.ARRIVED ||
+      travelStatus === TravelStatuses.CANCELLED ||
+      hasStartedByOther
+    ) {
+      return;
+    }
     setReordering(true);
   };
 
@@ -354,12 +400,14 @@ const BusDetailScreen = ({ navigation }) => {
       ? [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]
       : [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end];
 
+  console.log(nScheduleID);
+
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
       <BackNavigationBar
         title={translang.t('schoolBus')}
         onMenuTap={back}
-        is_travel={true}
+        is_travel={!hasStartedByOther}
         TravelButton={RenderTravelButton}
         is_more="1"
         actions={moreActions}
@@ -385,7 +433,6 @@ const BusDetailScreen = ({ navigation }) => {
                 <Text style={styles.radioLabel}>{item.title}</Text>
               </View>
               {index !== 2 && <Text style={styles.travelArrow}>{'>>>'}</Text>}
-              
             </>
           ))}
         </View>
@@ -424,13 +471,10 @@ const BusDetailScreen = ({ navigation }) => {
             _onPress={onPressConfirmReorder}
           />
         ) : (
-          (travelStatus === TravelStatuses.ARRIVED || travelStatus === TravelStatuses.DEPARTED) && (
+          travelStatus === TravelStatuses.DEPARTED &&
+          !hasStartedByOther && (
             <GradientButton
-              label={
-                travelStatus === TravelStatuses.ARRIVED
-                  ? translang.t('ARRIVED_TRAVEL')
-                  : translang.t('COMPLETE_TRAVEL')
-              }
+              label={translang.t('COMPLETE_TRAVEL')}
               containerStyle={styles.nextButtonContainer}
               buttonStyle={styles.nextButton}
               enabled={travelStatus === TravelStatuses.DEPARTED}
@@ -531,7 +575,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     width: '100%',
-    paddingRight: 16
+    paddingRight: 16,
   },
   text1: {
     textAlign: 'center',

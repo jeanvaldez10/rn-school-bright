@@ -84,7 +84,7 @@ export default class ReportScreen extends React.Component {
     else if (key == 'behavior'){
       this.props.navigation.navigate('ReportStudentBehaviorScoreList', {parent: 'Report', userInfo: this.state.userInfo,});
     } else if( key === 'school-bus') {
-      this.props.navigation.navigate('StudentPickupDropOffReport');
+      this.props.navigation.navigate('StudentPickupDropOffReport', { parent: 'Report' });
     }
 
       // this.props.navigation.navigate('ReportBehaviorStudentList', {parent: 'Report', userInfo: this.state.userInfo,});

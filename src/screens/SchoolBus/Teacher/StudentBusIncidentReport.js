@@ -343,7 +343,7 @@ const IncidentReport = ({ navigation }) => {
         isVisible={showModal}
         image={alertImage}
         buttonColors={alertButtonColor}
-        message={JSON.stringify(modalBody)}
+        message={modalBody}
         isVerticalGradient={false}
         onClose={() => {
           setShowModal(false);

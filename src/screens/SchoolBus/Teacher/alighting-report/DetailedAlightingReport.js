@@ -15,7 +15,7 @@ import images from '../../../../themes/Images';
 const DetailedAlightingReport = ({ navigation }) => {
   const busID = navigation.getParam('busID');
   const isEvening = navigation.getParam('isEvening');
-  const date = '2567-11-18'; //navigation.getParam('date');
+  const date = navigation.getParam('date');
 
   console.log(busID, isEvening, date);
 

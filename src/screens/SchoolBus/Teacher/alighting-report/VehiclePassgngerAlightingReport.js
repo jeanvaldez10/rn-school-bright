@@ -56,11 +56,7 @@ const VehiclePassgngerAlightingReport = ({ navigation }) => {
       const userInfo = await ApiManager.getUserInfo(userId, schoolId);
       setUserInfo(userInfo);
       console.log(endDate);
-      const data = await ApiManager.getVehicleCheckInOutListWithDate(
-        busID,
-        startDate,
-        '2567-11-22',
-      );
+      const data = await ApiManager.getVehicleCheckInOutListWithDate(busID, startDate, endDate);
       setReportList(data.lstData || []);
     } catch (error) {
       console.log(error);
