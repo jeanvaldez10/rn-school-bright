@@ -2947,8 +2947,8 @@ const readAllBusIncidentForTeacher = () => {
 const getVehicleCheckInOutListWithDate = (busId, ddate, edate) => {
   const params = {
     nBusID: busId,
-    sDateFrom: moment(ddate).format('DD/MM/YYYY'),
-    sDateTo: moment(edate).format('DD/MM/YYYY'),
+    sDateFrom: moment(ddate).add(543, 'years').format('DD/MM/YYYY'),
+    sDateTo: moment(edate).add(543, 'years').format('DD/MM/YYYY'),
   };
   return schoolBusHttpClient
     .post(apiUrls.getReportVehicleCheckInOut(), params)
@@ -2961,7 +2961,7 @@ const getVehicleCheckInOutListWithDate = (busId, ddate, edate) => {
 
 const getPassengerBoardingAlightingReports = (sDate, isEvening) => {
     const params = {
-      sDate: moment(sDate).format('DD/MM/YYYY'),
+      sDate: moment(sDate).add(543, 'years').format('DD/MM/YYYY'),
       isEvening
     };
     return schoolBusHttpClient
@@ -2975,7 +2975,7 @@ const getPassengerBoardingAlightingReports = (sDate, isEvening) => {
 
   const getPassengerBoardingAlightingReportDetails = (sDate, nBusID, isEvening) => {
     const params = {
-      sDate: moment(sDate).format('DD/MM/YYYY'),
+      sDate: moment(sDate).add(543, 'years').format('DD/MM/YYYY'),
       nBusID,
       isEvening,
     };
@@ -3090,8 +3090,8 @@ const getPassengerBoardingAlightingReports = (sDate, isEvening) => {
   const getStudentPickUpDropOffReport = (ddate, edate) => {
     const params = {
       nBusID: 0,
-      sDateFrom: moment(ddate).format('DD/MM/YYYY'),
-      sDateTo: moment(edate).format('DD/MM/YYYY'),
+      sDateFrom: moment(ddate).add(543, 'years').format('DD/MM/YYYY'), 
+      sDateTo: moment(edate).add(543, 'years').format('DD/MM/YYYY'),
     };
     return schoolBusHttpClient
       .post(apiUrls.getStudentPickUpDropOffReport(), params, {
