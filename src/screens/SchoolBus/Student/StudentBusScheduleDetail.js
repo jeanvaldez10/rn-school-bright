@@ -17,7 +17,7 @@ import ProgressHud from '../../../components/ProgressHud';
 import Color from '../../../constants/color';
 import ApiManager from '../../../managers/ApiManager';
 import Images from '../../../themes/Images';
-import translang from '../../../utils/language.utils';
+import translang, { getCurrentLocale } from '../../../utils/language.utils';
 import images from '../../../themes/Images';
 import CustomRadioButtonItem from '../../../components/CustomRadioButtonItem';
 import CollapseMapIcon from '../../../assets/images/new/ic_collapse_map.png';
@@ -25,6 +25,7 @@ import ExpandMapIcon from '../../../assets/images/new/ic_expand_map.png';
 import Storage from '../../../managers/StorageManager';
 import StuffPopup from './StuffPopup';
 import MapView, { Marker, UrlTile } from 'react-native-maps';
+import moment from 'moment';
 
 const screenHeight = Dimensions.get('window').height;
 
@@ -266,7 +267,10 @@ const StudentBusScheduleDetail = ({ navigation }) => {
               {sLicensePlate} : {sBrandModel}
             </Text>
             <Text style={styles.text2}>
-              {translang.t('VEHICLE_ROUTE')}: {sDate}
+              {translang.t('VEHICLE_ROUTE')}:{' '}
+              {moment(sDate, 'DD/MM/YYYY')
+                .add(getCurrentLocale() === 'th' ? 0 : -543, 'years')
+                .format('DD MMMM YYYY')}
             </Text>
             <Text style={styles.text2}>
               {translang.t('DEPATURE_TIME')}: {sTime}

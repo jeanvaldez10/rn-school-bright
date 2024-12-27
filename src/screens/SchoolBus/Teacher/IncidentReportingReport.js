@@ -17,9 +17,10 @@ import Color from '../../../constants/color';
 import ApiManager from '../../../managers/ApiManager';
 import Storage from '../../../managers/StorageManager';
 import images from '../../../themes/Images';
-import translang from '../../../utils/language.utils';
+import translang, { getCurrentLocale } from '../../../utils/language.utils';
 import ReportPopup from './ReportPopup';
 import AlertWithImageModal from '../../../components/AlertWithImageModal';
+import moment from 'moment';
 
 const IncidentReportingReport = ({ navigation }) => {
   const [incidentsToday, setIncidentsToday] = useState([]);
@@ -87,8 +88,8 @@ const IncidentReportingReport = ({ navigation }) => {
           setIncidentsToday(allIncidentsToday);
           setIncidentsIn7Days(allIncidentsIn7Days);
         } else {
-          setShowAlertModal(true);
-          setAlertContent(data.message);
+          // setShowAlertModal(true);
+          // setAlertContent(data.message);
         }
       })
       .catch((error) => {
@@ -154,7 +155,11 @@ const IncidentReportingReport = ({ navigation }) => {
         <View style={styles.group2}>
           <View style={styles.group3}>
             <Text style={styles.text1}>{sTime}</Text>
-            <Text style={styles.text1}>{sDate}</Text>
+            <Text style={styles.text1}>
+              {moment(sDate, 'DD/MM/YYYY')
+                .add(getCurrentLocale() === 'th' ? 0 : -543, 'years')
+                .format('DD/MM/YYYY')}
+            </Text>
           </View>
           <Text style={[styles.topText, { color: Color.n_default_orange }]}>
             {sVehicleLicensePlate}

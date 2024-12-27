@@ -87,12 +87,11 @@ const StudentIncidentReportingReport = ({ navigation }) => {
           setIncidentsToday(allIncidentsToday);
           setIncidentsIn7Days(allIncidentsIn7Days);
         } else {
-          setShowAlertModal(true);
-          setAlertContent(data.message);
+          // setShowAlertModal(true);
+          // setAlertContent('Failed to fetch incidents list.');
         }
       })
       .catch((error) => {
-        alert('Failed to fetch incidents list.');
         setShowAlertModal(true);
         setAlertContent(translang.t('ERROR_OCCURED_TRY_AGAIN'));
       })

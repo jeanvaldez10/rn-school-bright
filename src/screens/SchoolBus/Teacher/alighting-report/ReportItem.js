@@ -80,7 +80,7 @@ const ReportItem = ({ item }) => {
         <Text style={styles.text3}>
           {translang.t('DATE_NUMBER')}
           {moment(sDate, 'DD/MM/YYYY')
-            .add(getCurrentLocale() === 'th' ? -543 : 0, 'years')
+            .add(getCurrentLocale() === 'th' ? 0 : -543, 'years')
             .format('DD MMMM YYYY')}
         </Text>
       </View>

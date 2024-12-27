@@ -2,7 +2,8 @@ import React from 'react';
 import { Modal, StyleSheet, Text, View } from 'react-native';
 import GradientButton from '../../../components/GradientButton';
 import Color from '../../../constants/color';
-import translang from '../../../utils/language.utils';
+import translang, { getCurrentLocale } from '../../../utils/language.utils';
+import moment from 'moment';
 
 export default function ReportPopup({ isVisible, onClose, incidentDetails }) {
   const { sDate, sTime, infoSender, infoReceiver, sMessage } = incidentDetails || {};
@@ -25,7 +26,10 @@ export default function ReportPopup({ isVisible, onClose, incidentDetails }) {
 
             <View style={styles.item1}>
               <Text style={styles.subTitle}>
-                {sDate} {sTime}{' '}
+                {moment(sDate, 'DD/MM/YYYY')
+                  .add(getCurrentLocale() === 'th' ? 0 : -543, 'years')
+                  .format('DD/MM/YYYY')}{' '}
+                {sTime}{' '}
               </Text>
             </View>
           </View>
