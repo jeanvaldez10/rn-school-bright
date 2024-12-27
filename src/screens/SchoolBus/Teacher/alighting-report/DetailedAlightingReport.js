@@ -7,7 +7,7 @@ import BackNavigationBar from '../../../../components/BackNavigationBar';
 import ProgressHud from '../../../../components/ProgressHud';
 import Color from '../../../../constants/color';
 import ApiManager from '../../../../managers/ApiManager';
-import translang from '../../../../utils/language.utils';
+import translang, { getCurrentLocale } from '../../../../utils/language.utils';
 import ReportItem1 from './RepoertItem1';
 import AlertWithImageModal from '../../../../components/AlertWithImageModal';
 import images from '../../../../themes/Images';
@@ -79,7 +79,9 @@ const DetailedAlightingReport = ({ navigation }) => {
           ListHeaderComponent={
             <Text style={styles.pageTitle}>
               {translang.t('DATE_NUMBER')}
-              {moment(date).format('DD MMMM YYYY')}
+              {moment(date)
+                .add(getCurrentLocale() === 'th' ? 543 : 0, 'years')
+                .format('DD MMMM YYYY')}
             </Text>
           }
         />

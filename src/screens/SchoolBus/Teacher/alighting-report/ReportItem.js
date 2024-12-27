@@ -5,7 +5,7 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import Color from '../../../../constants/color';
 
 import images from '../../../../themes/Images';
-import translang from '../../../../utils/language.utils';
+import translang, { getCurrentLocale } from '../../../../utils/language.utils';
 
 const ReportItem = ({ item }) => {
   // can't be in constants as language switch is affected.
@@ -77,7 +77,12 @@ const ReportItem = ({ item }) => {
       </View>
       <View style={styles.group2}>
         <Text style={styles.text2}>{translang.t('BUS_MORNING_SESSION')}</Text>
-        <Text style={styles.text3}>{translang.t('DATE_NUMBER')}{moment(sDate, 'DD/MM/YYYY').format('DD MMMM YYYY')}</Text>
+        <Text style={styles.text3}>
+          {translang.t('DATE_NUMBER')}
+          {moment(sDate, 'DD/MM/YYYY')
+            .add(getCurrentLocale() === 'th' ? -543 : 0, 'years')
+            .format('DD MMMM YYYY')}
+        </Text>
       </View>
       <View style={styles.group2}>
         <Text style={styles.text2}>

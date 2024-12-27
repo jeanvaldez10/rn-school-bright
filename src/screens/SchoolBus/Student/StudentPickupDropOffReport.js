@@ -12,7 +12,7 @@ import ProgressHud from '../../../components/ProgressHud';
 import Color from '../../../constants/color';
 import ApiManager from '../../../managers/ApiManager';
 import Storage from '../../../managers/StorageManager';
-import translang from '../../../utils/language.utils';
+import translang, { getCurrentLocale } from '../../../utils/language.utils';
 import ReportItem from './ReportItem';
 import AlertWithImageModal from '../../../components/AlertWithImageModal';
 import images from '../../../themes/Images';
@@ -44,7 +44,7 @@ const StudentPickupDropOffReport = ({ navigation }) => {
     } else {
       navigation.goBack();
     }
-    
+
     return true;
   }, [showStartCalendar, showEndCalendar, navigation, parentRoute]);
 
@@ -144,7 +144,9 @@ const StudentPickupDropOffReport = ({ navigation }) => {
                   fontWeight: 'bold',
                 }}
               >
-                {moment(startDate).format('DD MMMM YYYY')}
+                {moment(startDate)
+                  .add(getCurrentLocale() === 'th' ? 543 : 0, 'years')
+                  .format('DD MMMM YYYY')}
               </Text>
             </TouchableOpacity>
             <View style={{ height: '80%', width: 1, backgroundColor: Color.white }} />
@@ -163,7 +165,9 @@ const StudentPickupDropOffReport = ({ navigation }) => {
                   fontWeight: 'bold',
                 }}
               >
-                {moment(endDate).format('DD MMMM YYYY')}
+                {moment(endDate)
+                  .add(getCurrentLocale() === 'th' ? 543 : 0, 'years')
+                  .format('DD MMMM YYYY')}
               </Text>
             </TouchableOpacity>
           </View>

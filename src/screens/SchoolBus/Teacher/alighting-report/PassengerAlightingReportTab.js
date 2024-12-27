@@ -4,7 +4,7 @@ import { Image, Pressable, ScrollView, Text, View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 import Color from '../../../../constants/color';
 import Images from '../../../../themes/Images';
-import translang from '../../../../utils/language.utils';
+import translang, { getCurrentLocale } from '../../../../utils/language.utils';
 import HorizontalScrollableBars from './BarChart';
 
 const PassengerAlightingReportTab = (props) => {
@@ -58,7 +58,11 @@ const PassengerAlightingReportTab = (props) => {
     );
   };
 
-  const date = translang.t('DATE_NUMBER') + moment(props.date).format('DD MMMM YYYY');
+  const date =
+    translang.t('DATE_NUMBER') +
+    moment(props.date)
+      .add(getCurrentLocale() === 'th' ? 543 : 0, 'years')
+      .format('DD MMMM YYYY');
   const titleText = translang.t('ALL_STUDENTS') + ` ${total} ` + translang.t('PEOPLE');
 
   return (
