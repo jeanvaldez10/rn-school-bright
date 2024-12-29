@@ -1036,7 +1036,7 @@ export default {
 
   Agree_Connect: 'Agree and Connect',
   Line_Connection_Succeeded: 'Line connection succeeded.',
-  Verify_Start: 'Please Update your email information. mobile number or connect Line to activate Two-step security system. ',
+  Verify_Start: 'Please Update your email information or mobile number to activate Two-step security system. ',
   Common_Start: 'Start',
 
   Step: "Step",

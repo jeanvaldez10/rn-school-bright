@@ -140,7 +140,7 @@ export default class VerifyPhoneSuccessScreen extends ValidationComponent {
                 stepWidth={50}
                 stepHeight={50}
                 showLabel={true}
-                barLength={70}
+                barLength={130}
                 barThickeness={2}
                 data={[
                   {label: translang.t('SETTING_addEmail')},

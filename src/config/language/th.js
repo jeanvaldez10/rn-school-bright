@@ -1018,7 +1018,7 @@ export default {
   Agree_Connect: 'Agree and Connect',
   Line_Connection_Succeeded: 'เชื่อมต่อ Line สำเร็จ',
   Verify_Start:
-    'กรุณาอัปเดตข้อมูลอีเมล เบอร์โทรศัพท์ หรือ เชื่อมต่อบัญชี Line เพื่อเปิดใช้งานระบบรักษาความปลอดภัยสองขั้นตอน',
+    'กรุณาอัปเดตข้อมูลอีเมล เบอร์โทรศัพท์ เพื่อเปิดใช้งานระบบรักษาความปลอดภัยสองขั้นตอน',
   Common_Start: 'เริ่มต้น',
 
   Step: 'ขั้นตอนที่',
@@ -1263,7 +1263,7 @@ export default {
   UPLOAD_SLIP: "อัปโหลดสลิป",  
   PAYMENT_BANK: "ธนาคารที่ชำระ",  
   ATTACH_SLIP_IMAGE: "แนบรูปภาพสลิป",  
-  PLEASE_SELECT_BANK: "กรุณาเลือกธนาคาร",  
+  PLEASE_SELECT_BANK: "กรุณาเลือกธนาคาร",
   SELECT_IMAGE: "เลือกรูปภาพ", 
   STUDENT_CAN_SELECTED_VIA_QRCODE: "สามารถเลือกนักเรียนได้ผ่านการสแกน",
 

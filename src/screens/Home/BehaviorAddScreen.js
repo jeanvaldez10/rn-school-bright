@@ -225,7 +225,7 @@ export default class BehaviorAddScreen extends React.Component {
 
             <TouchableOpacity style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={this.onEnterStdID}>
               <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                <Image source={Images.n_ic_search_group} style={{width: 24, height: 24}} />
+                <Image source={Images.n_ic_search_group} style={{width: 22, height: 22}} />
                 <Text style={styles.tabItemTitle}>{translang.t('ENTER_STDID')}</Text>
               </View>
             </TouchableOpacity>
@@ -363,7 +363,7 @@ const styles = ScaledSheet.create({
   },
   tabItemTitle: {
     marginLeft: 8,
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'center',
     color: Color.n_default_orange,
   },
