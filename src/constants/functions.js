@@ -35,6 +35,9 @@ export const gotoPageAfterLeavePermission = (pageName, params, _this) => {
 }
 
 export const gotoPageAfterAuth = async (menuGroupID, subMenuID, pageName, params, _this) => {
+  _this.props.navigation.navigate(pageName, params);
+  return; 
+
   ApiManager.checkAuthStatus(_this.state.userInfo.ID, _this.state.loginInfo.token, _this.state.deviceInfo.fcmtoken)
     .then(res => {
       _this.setState({authInfo: res}, () => {
@@ -73,7 +76,7 @@ export const navigateMenu = async (item, _this) => {
   if (item.func == 'modal') {
     _this.setState({showMenuModal: true, subMenuList: item.subMenu});
   } else if (item.func == 'link') {
-    _this.props.navigation.navigate(item.link);
+    _this.props.navigation.navigate(item.link, {parent: null});
   } else if (item.func == 'gotoPageAfterLeavePermission') {
     gotoPageAfterLeavePermission(item.link, {}, _this);
   } else if (item.func == 'gotoPageAfterAuth') {

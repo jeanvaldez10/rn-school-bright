@@ -110,6 +110,18 @@ const BackNavigationBar = ({title, ...props}) => {
         props.onMessageTap();
     }
 
+    const onUserTap = () => {
+        if (props.onUserTap != undefined) {
+            props.onUserTap();
+        }
+    }
+
+    const onVerifySlip = () => {
+        if (props.onVerifySlipTap != undefined) {
+            props.onVerifySlipTap();
+        }
+    }
+
     const is_notification = props.is_notification;
     const notificount = props.notifi_count ? props.notifi_count : 0;
 
@@ -132,6 +144,7 @@ const BackNavigationBar = ({title, ...props}) => {
     const is_deselectAll = props.is_deselectAll;
     const is_search = props.is_search;
     const is_searching = props.is_searching;
+    const is_verify_slip = props.is_verify_slip;
 
     const is_skip = props.is_skip;
     const onPressSkip = props.onPressSkip;
@@ -140,6 +153,9 @@ const BackNavigationBar = ({title, ...props}) => {
     const messageUnreadCnt = props.msgCount ? props.msgCount : 0;
 
     const is_info = props.is_info;
+
+    const is_user = props.is_user;
+    const userCount = props.userCount;
 
     const backHidden = props.backHidden;
 
@@ -211,6 +227,17 @@ const BackNavigationBar = ({title, ...props}) => {
                         <View style={styles.notificntContainer}>
                             <Text style={styles.notificount}>{notificount}</Text>
                         </View>}
+                    </TouchableOpacity>}
+
+                    {is_verify_slip &&
+                    <TouchableOpacity
+                        onPress={() => onVerifySlip()}
+                        style={styles.iconContainer}>
+                        <Image
+                            source={Images.ic_verify_slilp}
+                            style={styles.iconimg}
+                        />
+
                     </TouchableOpacity>}
 
                     {is_help &&
@@ -343,6 +370,20 @@ const BackNavigationBar = ({title, ...props}) => {
                             source={Images.ic_deselect_all}
                             style={styles.iconimg}
                         />
+                    </TouchableOpacity>}
+
+                    {is_user &&
+                    <TouchableOpacity
+                        onPress={() => onUserTap()}
+                        style={{...styles.iconContainer, flexDirection: 'row'}}>
+                        <Image
+                            source={Images.ic_user}
+                            style={{width: 16, height: 16, resizeMode: 'contain'}}
+                        />
+                        {userCount > 0 &&
+                        <View style={{marginHorizontal: 6}}>
+                            <Text style={{textAlign: 'center', fontSize: 22, fontWeight: '900', color: Color.gray}}>{userCount}</Text>
+                        </View>}
                     </TouchableOpacity>}
                 </View>
             </View>

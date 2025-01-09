@@ -122,7 +122,7 @@ export default class VerifyWarningScreen extends ValidationComponent {
     const emailVerify = verifyInfo.emailVerify ?? false;
     const phoneVerify = verifyInfo.phoneVerify ?? false;
     const lineConnect = verifyInfo.lineConnect ?? false;
-    const confirmShow = emailVerify || phoneVerify || lineConnect;
+    const confirmShow = emailVerify || phoneVerify; // || lineConnect;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -144,12 +144,12 @@ export default class VerifyWarningScreen extends ValidationComponent {
                 stepWidth={50}
                 stepHeight={50}
                 showLabel={true}
-                barLength={70}
+                barLength={130}
                 barThickeness={2}
                 data={[
                   {label: translang.t('SETTING_addEmail')},
                   {label: translang.t('SETTING_EditPhoneNumber')},
-                  {label: translang.t('SETTING_Line')},
+                  // {label: translang.t('SETTING_Line')},
                 ]}
                 barColor={'lightgrey'}
                 labelTextStyle={{fontFamily: 'THSarabunNew', color: 'darkgrey', fontSize: 20}}
@@ -203,10 +203,10 @@ export default class VerifyWarningScreen extends ValidationComponent {
               <Text style={styles.itemText}>{verifyInfo.phoneVerify ? translang.t("Phone_verified_successfully") : translang.t("Not_verified_phone")}</Text>
             </View>
 
-            <View style={styles.itemContainer}>
+            {/* <View style={styles.itemContainer}>
               <Image source={verifyInfo.lineConnect ? Images.n_img_complete_green : Images.ic_close_red} style={styles.itemImage} resizeMode='contain'/>
               <Text style={styles.itemText}>{verifyInfo.lineConnect ? translang.t("Line_Connection_Succeeded") : translang.t("Not_connected_line")}</Text>
-            </View>
+            </View> */}
           </View>
 
 

@@ -271,9 +271,9 @@ export default class ReportBehaviorScoreStudentListScreen extends React.Componen
             {this.state.filteredStudent.length > 0 && (
               <>
               <View style={{flex: 1}} />
-              <Text style={{width: 40, marginLeft: 10, fontFamily: 'THSarabunNew', fontWeight: '600', fontSize: 15}}>{translang.t('ADD')}</Text>
-              <Text style={{width: 40, marginRight: 10, fontFamily: 'THSarabunNew', fontWeight: '600', fontSize: 15}}>{translang.t('REDUCE')}</Text>
-              <Text style={{width: 50, fontFamily: 'THSarabunNew', fontWeight: '600', fontSize: 15}}>{translang.t('REPORT_remaining')}</Text>
+              <Text style={{width: 40, marginLeft: 10, color: Color.n_default_orange, fontFamily: 'THSarabunNew', fontWeight: '600', fontSize: 15}}>{translang.t('DISCIPLINE_POINT_ADDED')}</Text>
+              <Text style={{width: 40, marginRight: 10, color: Color.n_default_orange, fontFamily: 'THSarabunNew', fontWeight: '600', fontSize: 15}}>{translang.t('DISCIPLINE_POINT_DEDUCTED')}</Text>
+              <Text style={{width: 50, fontFamily: 'THSarabunNew', color: Color.n_default_orange, fontWeight: '600', fontSize: 15}}>{translang.t('DISCIPLINE_POINT_REMAINING')}</Text>
               </>
             )}
           </View>

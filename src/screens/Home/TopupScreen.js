@@ -186,8 +186,12 @@ export default class TopupScreen extends React.Component {
         <BackNavigationBar
           title={translang.t('DRAWER_topup')}
           onMenuTap={() => this.back()}
-          is_help={true}
-          onHelpTap={()=>this.setState({showAlertModal: true})}
+          is_info={true}
+          onInfoTap={()=>this.setState({showAlertModal: true})}
+          is_verify_slip={isStudent ? false : true}
+          onVerifySlipTap={() => {
+            this.props.navigation.navigate('VerifySlip', {parent: 'Topup'});
+          }}
         />
 
         <View style={styles.container}>

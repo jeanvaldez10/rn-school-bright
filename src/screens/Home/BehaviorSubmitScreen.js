@@ -214,7 +214,8 @@ export default class BehaviorSubmitScreen extends React.Component {
       totalScore += score.Score;
     });
 
-    const buttonColor = this.state.isReduce ? [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end] : [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]
+    // const buttonColor = this.state.isReduce ? [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end] : [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]
+    const buttonColor = [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end];
     const totalScoreColor = this.state.isReduce ? Color.n_default_orange : Color.n_button_gradient_green_start;
     const alertImage = this.state.modalBody === translang.t('COMPLETED') ? Images.checked : Images.n_ic_warning;
     const alertButtonColor = this.state.modalBody !== translang.t('COMPLETED') ? [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end] : [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end];

@@ -54,28 +54,33 @@ shopHttpClient.interceptors.response.use(response => {
   // console.log("shop error,", error.response.data.Message);
   const originalConfig = error.config;
   if (error.response) {
-    if (error.response.status === 401 && !originalConfig._retry) {
-      originalConfig._retry = true;
+    // if (error.response.status === 401 && !originalConfig._retry) {
+    //   originalConfig._retry = true;
 
-      try {
-        const tokenInfo = await Storage.getUser();
-        const rs = await ApiManager.updateToken(tokenInfo.token, tokenInfo.SchoolId, tokenInfo.ID);
-        if (rs.success) {
-          await Storage.setUser({...tokenInfo, "token": rs.token})
-        }
-        return shopHttpClient(originalConfig)
-      } catch (_error) {
-        console.log("shop Again error");
-        if (_error.response && _error.response.data) {
-          return Promise.reject(_error.response.data);
-        }
-        return Promise.reject(_error);
-      }
+    //   try {
+    //     const tokenInfo = await Storage.getUser();
+    //     const rs = await ApiManager.updateToken(tokenInfo.token, tokenInfo.SchoolId, tokenInfo.ID);
+    //     if (rs.success) {
+    //       await Storage.setUser({...tokenInfo, "token": rs.token})
+    //     }
+    //     return shopHttpClient(originalConfig)
+    //   } catch (_error) {
+    //     console.log("shop Again error");
+    //     if (_error.response && _error.response.data) {
+    //       return Promise.reject(_error.response.data);
+    //     }
+    //     return Promise.reject(_error);
+    //   }
 
-    }
+    // }
 
-    if (error.response.status === 401 && originalConfig._retry) {
-      console.log("shop again error");
+    // if (error.response.status === 401 && originalConfig._retry) {
+    //   console.log("shop again error");
+    //   NavigationService.setShowTokenError();
+    // }
+
+    if (error.response.status === 401) {
+      console.log("Again error");
       NavigationService.setShowTokenError();
     }
 

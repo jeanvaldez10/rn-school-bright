@@ -63,6 +63,10 @@ import SelectAttendanceModal from "../../components/SelectListModalNoTitle";
 import moment from "moment";
 import arrayWithHoles from "@babel/runtime/helpers/esm/arrayWithHoles";
 import { getUniqueId } from "react-native-device-info";
+import PushNotification from "react-native-push-notification";
+import PushNotificationIOS from "@react-native-community/push-notification-ios";
+import messaging from '@react-native-firebase/messaging';
+import SystemErrorScreen from "./SystemErrorScreen";
 
 class UserInfoScreen1 extends React.Component {
   constructor(props) {
@@ -167,7 +171,180 @@ class UserInfoScreen1 extends React.Component {
         this.getNewsAnnouncementData(user.ID, user.SchoolID);
       }
     );
+
+    this.configPushNotification();
   }
+
+  configPushNotification = async () => {
+    const authStatus = await messaging().requestPermission();
+    if (authStatus === messaging.AuthorizationStatus.AUTHORIZED || authStatus === messaging.AuthorizationStatus.PROVISIONAL) {
+      const self = this;
+
+      PushNotification.configure({
+        onRegister: (token) => {
+            console.log("TOKEN:", token);
+        },
+        onNotification: async (notification) => {
+          if (notification.userInteraction) {
+              self.clickedPushNotifcation(notification);
+          } else {
+            if (Platform.OS === 'android') {
+              PushNotification.localNotification({
+                  title: notification.title, // (optional)
+                  message: notification.message, // (required)
+                  data: notification.data,
+                  channelId: "MY_CHANNEL_ID", // (required)
+                  smallIcon: '@mipmap/school_bright_icon_data'
+              });
+            }
+
+            if (notification.data.push_mtype === 401) {
+              const user = await Storage.getUser();
+              if (!_.isEmpty(user)) {
+                  await Storage.setUser({...user, isDeviceVerified: true});
+              }
+              self.props.navigation.navigate("App");
+            } else if (notification.data.push_mtype === 402) {
+                self.logOut();
+            }
+          }
+          notification.finish(PushNotificationIOS.FetchResult.NoData);
+        },
+        onRegistrationError: (err) => {
+            console.error("onRegistrationError", err.message, err);
+        },
+        permissions: {
+            alert: true,
+            badge: true,
+            sound: true,
+        },
+        popInitialNotification: true,
+        requestPermissions: true,
+      });
+
+      if (!Constant.isRunning) {
+        messaging().onMessage((msg) => {
+          const notification = msg.notification;
+          if (Platform.OS === 'ios') {
+            console.log("NOTIFICATION FOR IOS: ", notification);
+            PushNotificationIOS.addNotificationRequest({
+              id: msg.messageId,
+              title: notification.title,
+              body: notification.body,
+              userInfo: msg.data,
+            });
+          }
+        });
+
+        messaging().setBackgroundMessageHandler(async notification => {
+          if (notification.data.push_mtype === 401) {
+            console.log("device trust");
+            const user = await Storage.getUser();
+            if (!_.isEmpty(user)) {
+                await Storage.setUser({...user, isDeviceVerified: true});
+            }
+            self.props.navigation.navigate("App");
+          } else if (notification.data.push_mtype === 402) {
+            console.log("device not trust");
+            self.logOut();
+          }
+        });
+      }
+    }
+  }
+
+  clickedPushNotifcation = async (msg) => {
+    const user = await Storage.getUser();
+    if (!_.isEmpty(user)) {
+      let messageid = "";
+      let schoolID = "";
+      let userID = "";
+      let messageType = "";
+
+      if (msg.data) {
+        messageid = msg.data.push_mid;
+        schoolID = msg.data.push_schoolid;
+        userID = msg.data.push_userid;
+        messageType = msg.data.push_mtype;
+
+        this.checkPushNotification(messageid, schoolID, user, messageType);
+      }
+    }
+  };
+
+  checkPushNotification = (messageid, schoolID, user, messageType) => {
+    const userid = user.ID;
+    const school_id = schoolID;
+
+    ApiManager.checkPushnotificationUrl(messageid, userid, school_id)
+        .then(res => {
+            if (res !== user.ID) {
+                this.gotoProfile(res, messageid, schoolID);
+            } else {
+                this.openMessage(userid, messageid, school_id);
+            }
+        }).catch(error => {
+        console.log("checkPushnotificationUrl", error);
+    });
+  }
+
+  gotoProfile = async (userid, messageid, schoolID) => {
+    const item = await getOneUserInfo(userid);
+    if (item !== undefined) {
+      ApiManager.signin(item.userloginid, item.userpassword, item.schoolID, getUniqueId(), '1.1.1.1')
+        .then(async success => {
+          if (!success) {
+              const msg = translang.t('INCORRECT_USERNAME_PWD') + '\n' + translang.t('CONTACT_YOUER_SCHOOL_ADMIN');
+              return Promise.reject(msg);
+          }
+
+          const user = await Storage.getUser();
+          const userId = user.ID;
+          const schoolId = user.SchoolId;
+          return ApiManager.getUserInfo(userId, schoolId);
+        })
+        .then(() => {
+          this.openMessage(userid, messageid, schoolID);
+        })
+        .catch(err => {
+          console.log("gotoProfile", err);
+        });
+    } else {
+      console.log("No Profile Info");
+    }
+  }
+
+  openMessage = async (userid, messageid, schoolid) => {
+    const lang = getCurrentLocale();
+    const userInfo = await Storage.getUserInfo();
+
+    ApiManager.readNewsMessage(userid, messageid, '', lang).then(detail => {
+      if (detail.nType === 8 || detail.nType === -8) {
+        console.log("Open Message1");
+        this.props.navigation.navigate('LeaveRequestDetail', {
+            letterId: detail.nMessageID,
+            userInfo: userInfo,
+            from: 'App',
+            type: 'notification'
+        });
+      } else if (detail.nType == 7) {
+        this.props.navigation.navigate('ReportExecutiveAttendance', {
+            parent: 'App',
+            date: detail.dSend,
+            userInfo: userInfo
+        });
+      } else if (detail.nType == 6) {
+        this.props.navigation.navigate('OnlineStudentHomeworkDetailForNotification', {
+            parent: 'App',
+            homeworkID: detail.homework_id
+        });
+      } else {
+        this.props.navigation.navigate('MessageHistoryForNotification', {userid: userid, detail: detail});
+      }
+    }).catch(error => {
+      console.log("openMessage", error);
+    });
+  };
 
   getUrls = async (dev) => {
     try {
@@ -833,22 +1010,9 @@ class UserInfoScreen1 extends React.Component {
           isVisible={isAuthDlg}
           image={Images.n_ic_warning}
           showCancelButton={false}
-          confirmButtonText={
-            this.state.authInfo.resCode == 500
-              ? translang.t("TRY_AGAIN")
-              : translang.t("COMMON_confirm")
-          }
-          message={
-            getCurrentLocale() == "en"
-              ? this.state.authInfo.resDesc
-              : this.state.authInfo.resDescTH
-          }
-          onClose={() => {
-            this.setState({ isAuthDlg: false });
-          }}
-          onConfirm={() => {
-            this.clickAuthStatus();
-          }}
+          message = {this.state.authInfo.resDesc}
+          onClose={() => { this.setState({ isAuthDlg: false }) }}
+          onConfirm={() => {this.clickAuthStatus();}}
         />
 
         <AppUpdateModal
@@ -890,10 +1054,10 @@ class UserInfoScreen1 extends React.Component {
           ]}
         />
 
-        {this.state.serverInfo && this.state.serverInfo.StatusCode != 200 && (
+        {this.state.serverInfo && this.state.serverInfo.StatusCode !== 200 && (
           <Modal animationType="slide" transparent={true} key="modal">
-            <View style={styles.centeredView}>
-              <LinearGradient
+            {/* <View style={styles.centeredView}> */}
+              {/* <LinearGradient
                 style={styles.dialogStyle}
                 colors={[
                   Color.n_button_gradient_orange_start,
@@ -938,8 +1102,9 @@ class UserInfoScreen1 extends React.Component {
                   containerStyle={{ marginBottom: 20 }}
                   _onPress={() => this.closeApp()}
                 />
-              </LinearGradient>
-            </View>
+              </LinearGradient> */}
+            {/* </View> */}
+            <SystemErrorScreen enText={translang.t("SERVER_NOTIFY")} thText={translang.t("SERVER_NOTIFY")} />
           </Modal>
         )}
       </SafeAreaView>

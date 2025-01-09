@@ -26,6 +26,7 @@ export default class BehaviorStudentIDScreen extends React.Component {
       userInfo: {},
       studentId: '',
       qrcodeData: {},
+      qrcodeDataList: [],
       type: 1,  /// 0: add, 1: reduce
       parent: 'App',
     };
@@ -94,7 +95,7 @@ export default class BehaviorStudentIDScreen extends React.Component {
     this.setState({ studentId: '' });
   };
 
-  __next = () => {
+  __search = () => {
     this.setState({ isLoading: true });
 
     ApiManager.getQRCodeDataWithID(this.state.userInfo.SchoolID, this.state.studentId, getCurrentLocale()).then(result => {
@@ -115,29 +116,36 @@ export default class BehaviorStudentIDScreen extends React.Component {
     });
   };
 
-  getResult = () => {
+  __next = () => {
     const type = this.state.type;
-    const selectedStudents = this.state.qrcodeData;
-
-    const tempStudent = [{
-      FirstNameTH: selectedStudents.name,
-      LastNameTH: selectedStudents.lastname,
-      FirstNameEN: selectedStudents.name,
-      LastNameEN: selectedStudents.lastname,
-      StudentPicture: selectedStudents.picture,
-      StudentID: selectedStudents.studentId}];
+    const studentList = this.state.qrcodeDataList.map(q => {
+      return {
+        FirstNameTH: q.name,
+        LastNameTH: q.lastname,
+        FirstNameEN: q.name,
+        LastNameEN: q.lastname,
+        StudentPicture: q.picture,
+        StudentID: q.studentId
+      }
+    });
 
     const params = {
       classLevel: this.state.classLevel,
       classRoom: this.state.classRoom,
-      students: tempStudent,
+      students: studentList,
       isReduce: type === 1,
       userInfo: this.state.userInfo,
       parent: 'BehaviorStudentID',
       'isRefresh': true,
-
     };
     this.props.navigation.navigate('BehaviorEdit', params);
+  };
+
+  addUserToList = () => {
+    if (this.state.qrcodeData) {
+      const list = [...this.state.qrcodeDataList, this.state.qrcodeData];
+      this.setState({ qrcodeData:  {}, qrcodeDataList: list, showUserInfoModal: false, studentId: '' });
+    }
   };
 
   render() {
@@ -145,15 +153,19 @@ export default class BehaviorStudentIDScreen extends React.Component {
     const alertButtonColor = this.state.modalBody === translang.t('UPDATE_SUCCESS') ? [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end] : [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end];
 
     const title = this.state.type === 0 ? translang.t('ADD_SCORE_WITH_STUDENT_ID') : translang.t('REDUCE_SCORE_WITH_STUDENT_ID');
-    const nextButtonColor = this.state.type === 0 ? [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end] : [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end];
+    const searchButtonColor = [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end];
+    const nextButtonColor = [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end];
 
     return (
       <SafeAreaView style={styles.container} edges={['right', 'top', 'bottom', 'left']}>
         <BackNavigationBar
           title={title}
           onMenuTap={() => this.back()}
+          is_user={true}
+          userCount={this.state.qrcodeDataList.length}
         />
         <ScrollView>
+          <Image source={Images.ic_behavior_add_student_id} style={{width: 70, height: 70, resizeMode: 'contain', width: '100%', marginTop: 30}} />
           <Text style={styles.studentIdTitle}>{title}</Text>
           <CustomTextInput
             inputWrapperStyle={styles.enterStudentId}
@@ -165,7 +177,7 @@ export default class BehaviorStudentIDScreen extends React.Component {
             value={this.state.studentId}
           />
 
-          <View style={{ flex: 1, margin: 30 }}>
+          <View style={{ flex: 1, marginHorizontal: 30, marginVertical: 10 }}>
             <View style={{ height: 100, flexDirection: 'row', justifyContent: 'space-between' }}>
               <TouchableOpacity style={styles.eachNumContainer} activeOpacity={0.3} onPress={() => { this.onClickNum(1) }}><Text style={styles.eachNumTxt}>1</Text></TouchableOpacity>
               <TouchableOpacity style={styles.eachNumContainer} activeOpacity={0.3} onPress={() => { this.onClickNum(2) }}><Text style={styles.eachNumTxt}>2</Text></TouchableOpacity>
@@ -182,18 +194,29 @@ export default class BehaviorStudentIDScreen extends React.Component {
               <TouchableOpacity style={styles.eachNumContainer} activeOpacity={0.3} onPress={() => { this.onClickNum(9) }}><Text style={styles.eachNumTxt}>9</Text></TouchableOpacity>
             </View>
             <View style={{ height: 100, flexDirection: 'row', justifyContent: 'space-between' }}>
-              <TouchableOpacity style={{...styles.eachNumContainer, backgroundColor: Color.transparent, elevation: 0}} activeOpacity={0.3} onPress={() => { this.onClickClear() }}><Text style={{...styles.eachNumTxt, fontSize: 30, color: Color.n_default_orange}}>{translang.t('COMMON_clear')}</Text></TouchableOpacity>
+              <TouchableOpacity style={{...styles.eachNumContainer, backgroundColor: Color.transparent, elevation: 0}} activeOpacity={0.3} onPress={() => { this.onClickClear() }}><Text style={{...styles.eachNumTxt, fontSize: 28, color: Color.n_default_orange}}>{translang.t('COMMON_clear')}</Text></TouchableOpacity>
               <TouchableOpacity style={styles.eachNumContainer} activeOpacity={0.3} onPress={() => { this.onClickNum(0) }}><Text style={styles.eachNumTxt}>0</Text></TouchableOpacity>
               <TouchableOpacity style={{...styles.eachNumContainer, backgroundColor: Color.transparent, elevation: 0}} activeOpacity={0.3} onPress={() => { this.onClickDelete() }}><Image source={Images.n_ic_arrow_left_orange} style={styles.backIcon} /></TouchableOpacity>
             </View>
           </View>
-          <NextButton
+
+          <View style={{flexDirection: 'row'}}>
+            <NextButton
+              label={translang.t('Search')}
+              containerStyle={{width: '45%', marginLeft: 'auto', marginRight: 'auto', marginBottom: 30, }}
+              buttonStyle={{ height: 65, borderRadius: 38,}}
+              colors={searchButtonColor}
+              isVerticalGradient={false}
+              _onPress={() => this.__search()} />
+
+            <NextButton
               label={translang.t('COMMON_next')}
-              containerStyle={{width: '90%', marginLeft: 'auto', marginRight: 'auto', marginBottom: 30, }}
-              buttonStyle={{ height: 75, borderRadius: 38,}}
+              containerStyle={{width: '45%', marginLeft: 'auto', marginRight: 'auto', marginBottom: 30, }}
+              buttonStyle={{ height: 65, borderRadius: 38,}}
               colors={nextButtonColor}
               isVerticalGradient={false}
               _onPress={() => this.__next()} />
+          </View>
         </ScrollView>
 
         <ProgressHud isVisible={this.state.isLoading} />
@@ -212,7 +235,7 @@ export default class BehaviorStudentIDScreen extends React.Component {
           onCancel={() => this.setState({ showUserInfoModal: false })}
           onOk={() => {
             this.setState({ showUserInfoModal: false });
-            this.getResult();
+            this.addUserToList();
           }}
         />
       </SafeAreaView>
@@ -233,11 +256,11 @@ const styles = ScaledSheet.create({
       fontWeight: 'bold',
       color: Color.n_default_gray,
 
-      marginTop: 30,
-      marginBottom: 15,
+      marginTop: 10,
+      marginBottom: 5,
     },
     enterStudentId: {
-      marginBottom: 25,
+      marginBottom: 10,
       marginHorizontal: 30,
       borderColor: Color.n_default_brown,
       borderRadius: 0,

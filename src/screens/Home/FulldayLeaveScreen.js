@@ -86,15 +86,20 @@ export default class FulldayLeaveScreen extends React.Component {
       leaveTypes = await ApiManager.getTeacherLeaveType(userInfo.SchoolID);
     }
 
-    const leaveInfos = await ApiManager.getLeaveInfos(userInfo.ID);
+    try {
+      const leaveInfos = await ApiManager.getLeaveInfos(userInfo.ID);
+      this.setState({
+        leaveInfoList: leaveInfos,
+      });
+    } catch (e) {
+      console.log("Error on fetching leave infos: ", e.message);
+    }
 
-    console.log('-----', leaveInfos);
     this.setState({
       userInfo: userInfo,
       leaveReasonList: leaveTypes,
       isAddressRembemr: isRemember,
       AddressInfo: AddressInfo,
-      leaveInfoList: leaveInfos,
     });
   }
 

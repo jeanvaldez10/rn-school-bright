@@ -35,6 +35,8 @@ const addAuthToken = async (config) => {
       config.headers[`JabjaiKey-${tokenInfo.SchoolId}-${tokenInfo.ID}`] = tokenInfo.token;
     }
 
+    console.log("Http Header: ", config.headers);
+
     const apiTypeRegex = /(Payment|Schoolbright)\s+API/;
     const urlMatch = config.url.match(/\/device\/system\/apiurls\?applicationtype=(.*)/);
     if (urlMatch && apiTypeRegex.test(urlMatch[1])) {
@@ -74,28 +76,33 @@ apiHttpClient.interceptors.response.use(response => {
   const originalConfig = error.config;
   console.log("config header:", originalConfig?.headers);
   if (error.response){
-    if (error.response.status === 401 && !originalConfig._retry) {
-      originalConfig._retry = true;
-      try {
-        const tokenInfo = await Storage.getUser();
-        const rs = await ApiManager.updateToken(tokenInfo.token, tokenInfo.SchoolId, tokenInfo.ID);
-        if(rs.success){
-          await Storage.setUser({...tokenInfo, "token":rs.token})
-        }
-        return apiHttpClient(originalConfig)
-      }
-      catch (_error) {
-        console.log("Token Update error:", _error);
-        NavigationService.setShowTokenError();
-        if(_error.response && _error.response?.data){
-          return Promise.reject(_error.response.data);
-        }
-        return Promise.reject(_error);
-      }
+    // if (error.response.status === 401 && !originalConfig._retry) {
+    //   originalConfig._retry = true;
+    //   try {
+    //     const tokenInfo = await Storage.getUser();
+    //     const rs = await ApiManager.updateToken(tokenInfo.token, tokenInfo.SchoolId, tokenInfo.ID);
+    //     if(rs.success){
+    //       await Storage.setUser({...tokenInfo, "token":rs.token})
+    //     }
+    //     return apiHttpClient(originalConfig)
+    //   }
+    //   catch (_error) {
+    //     console.log("Token Update error:", _error);
+    //     NavigationService.setShowTokenError();
+    //     if(_error.response && _error.response?.data){
+    //       return Promise.reject(_error.response.data);
+    //     }
+    //     return Promise.reject(_error);
+    //   }
 
-    }
+    // }
 
-    if (error.response.status === 401 && originalConfig._retry) {
+    // if (error.response.status === 401 && originalConfig._retry) {
+    //   console.log("Again error");
+    //   NavigationService.setShowTokenError();
+    // }
+
+    if (error.response.status === 401) {
       console.log("Again error");
       NavigationService.setShowTokenError();
     }

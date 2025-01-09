@@ -51,6 +51,7 @@ import {
   getVersion,
   getBuildNumber,
 } from "react-native-device-info";
+import SystemErrorScreen from "../Home/SystemErrorScreen";
 
 class LoginScreen extends ValidationComponent {
   constructor(props) {
@@ -550,7 +551,8 @@ class LoginScreen extends ValidationComponent {
 
         {this.state.serverInfo && this.state.serverInfo.StatusCode != 200 && (
           <Modal animationType="slide" transparent={true} key="modal">
-            <View style={styles.centeredView}>
+            <SystemErrorScreen enText={this.state.serverInfo.Message} thText={this.state.serverInfo.Message} />
+            {/* <View style={styles.centeredView}>
               <LinearGradient
                 style={styles.dialogStyle}
                 colors={[
@@ -570,13 +572,6 @@ class LoginScreen extends ValidationComponent {
                     source={Images.n_applogo_logo_only}
                     style={styles.modalLogo}
                   />
-                  {/*<Text style={{*/}
-                  {/*  fontFamily: 'THSarabunNew',*/}
-                  {/*  fontSize: 18,*/}
-                  {/*  color: 'white',*/}
-                  {/*  textAlign: 'center',*/}
-                  {/*  marginTop: 10,*/}
-                  {/*}}>{translang.t('NOTIFY_TITLE')}</Text>*/}
                 </View>
                 <ScrollView
                   style={{ flex: 1, marginHorizontal: 20, marginVertical: 15 }}
@@ -603,7 +598,7 @@ class LoginScreen extends ValidationComponent {
                   _onPress={() => this.closeApp()}
                 />
               </LinearGradient>
-            </View>
+            </View> */}
           </Modal>
         )}
       </SafeAreaView>

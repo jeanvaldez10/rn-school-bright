@@ -11,6 +11,17 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
 console.disableYellowBox = true;
 
 class QrCodeCamera extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: '',
+    };
+  }
+
+  componentDidMount() {
+    this.setState({message: this.props.message});
+  }
+
   onSuccess(e) {
     const onSuccess = this.props.onSuccess;
     if (onSuccess) {
@@ -65,7 +76,13 @@ class QrCodeCamera extends Component {
 
               <View style={styles.leftAndRightOverlay} />
             </View>
-            <View style={styles.bottomOverlay} />
+            <View style={styles.bottomOverlay}>
+              {this.state.message && 
+                <Text style={{textAlign: 'center', fontSize: 26, fontWeight: '700', fontWeight: 'normal', fontFamily: 'THSarabunNew', color: 'white'}}>
+                  {this.state.message}
+                </Text>
+              }
+            </View>
           </View>
         }
       />

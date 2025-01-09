@@ -258,8 +258,12 @@ import VerifyIdentifyID2Screen from './screens/Auth/VerifyIdentifyID2Screen';
 import VerifyIdentifyID3Screen from './screens/Auth/VerifyIdentifyID3Screen';
 import CheckVerification from './components/CheckVerification';
 import VerifyIdentifyIDSuccessScreen from './screens/Auth/VerifyIdentifyIDSuccessScreen';
+import AppSplashScreen from './SplashScreen';
 import AuthLoadingScreen from './AuthLoadingScreen';
 import VehicleList from './screens/SchoolBus/VehicleList';
+import VerifySlipScreen from './screens/Home/VerifySlipScreen';
+import VerifySlipPaymentListScreen from './screens/Home/VerifySlipPaymentListScreen';
+import VerifySlipUploadScreen from './screens/Home/VerifySlipUploadScreen';
 
 const screenWidth = Dimensions.get('window').width;
 const drawerWidth = 0;
@@ -1366,6 +1370,24 @@ const DrawerRouteConfigs = {
       headerShown: true,
     },
   },
+  VerifySlip: {
+    screen: VerifySlipScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  VerifySlipPaymentList: {
+    screen: VerifySlipPaymentListScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  VerifySlipUpload: {
+    screen: VerifySlipUploadScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
 };
 
 const DrawerNavigatorConfigs = {
@@ -1543,6 +1565,7 @@ const HelperNavigator = createStackNavigator(HelperRouteConfigs, HelperNavigator
 const HelperContainer = createAppContainer(HelperNavigator);
 
 const AppSwitchRouteConfigs = {
+  Splash: AppSplashScreen,
   AuthLoading: AuthLoadingScreen,
   Helper: HelperContainer,
   Auth: AuthContainer,
@@ -1554,7 +1577,7 @@ const AppSwitchRouteConfigs = {
 };
 
 const AppSwitchNavigatorConfigs = {
-  initialRouteName: 'AuthLoading',
+  initialRouteName: 'Splash',
 };
 
 const AppSwitchNavigator = createSwitchNavigator(AppSwitchRouteConfigs, AppSwitchNavigatorConfigs);
@@ -1727,7 +1750,7 @@ class Index extends Component {
           passwordError: null,
           reLoginUser: '',
         });
-        NavigationService.navigate('AuthLoading');
+        NavigationService.navigate('Splash');
       })
       .catch((err) => {
         console.log('Drawer', err);
@@ -1843,6 +1866,7 @@ class Index extends Component {
           loading={this.state.isLoading}
           userName={this.state.reLoginUser}
           onConfirm={() => {
+            this.setState({ showReLoginModal: false });
             this.reLogin();
           }}
           onForgot={() => {
