@@ -375,6 +375,7 @@ const images = {
   Alert_t: require("../assets/images/new/alert_t.png"),
   BLUE_SUCCESS: require("../assets/images/new/blue_success.png"),
   BLUE_DOWNLOAD: require("../assets/images/new/blue_download.png"),
+  ic_remaining_days: require("../assets/images/new/ic_remaining_days.png"),
 
 
   add_account: require("../assets/images/services/add_account.png"),

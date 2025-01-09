@@ -153,6 +153,7 @@ const BackNavigationBar = ({title, ...props}) => {
     const messageUnreadCnt = props.msgCount ? props.msgCount : 0;
 
     const is_info = props.is_info;
+    const is_leave = props.is_leave;
 
     const is_user = props.is_user;
     const userCount = props.userCount;
@@ -344,6 +345,17 @@ const BackNavigationBar = ({title, ...props}) => {
                             style={styles.iconContainer}>
                             <Image
                                 source={Images.ic_alert}
+                                style={styles.iconimg}
+                            />
+                        </TouchableOpacity>
+                    )}
+
+                    {is_leave && (
+                        <TouchableOpacity
+                            onPress={() => onInfoTap()}
+                            style={styles.iconContainer}>
+                            <Image
+                                source={Images.ic_remaining_days}
                                 style={styles.iconimg}
                             />
                         </TouchableOpacity>

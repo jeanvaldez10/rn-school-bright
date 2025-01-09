@@ -246,7 +246,7 @@ export default class FulldayLeaveScreen extends React.Component {
         <BackNavigationBar
           title={translang.t("DRAWER_leave")}
           onMenuTap={() => this.back()}
-          is_info={true}
+          is_leave={true}
           onInfoTap={() => {
             this.setState({ showInfoModal: true });
           }}
