@@ -46,6 +46,8 @@ const GroupIncidentReport = ({ navigation }) => {
   const [isSendToParent, setIsSentToParent] = useState(false);
   const [groupType, setGroupType] = useState(0);
 
+  const [reportSubmitted, setReportSubmitted] = useState(false);
+
   // Back button handler
   const handleBackButton = useCallback(() => {
     navigation.goBack();
@@ -91,6 +93,7 @@ const GroupIncidentReport = ({ navigation }) => {
         sImageURLs: attachedImages.map((file) => file.FileURL).join(','),
       });
       if (result.status === 1) {
+        setReportSubmitted(true);
         showAlert(translang.t('SUCCESS_INCIDENT_SUBMIT'), 'success');
       } else {
         throw Error(result.message);
@@ -100,6 +103,13 @@ const GroupIncidentReport = ({ navigation }) => {
       showAlert(e.message || translang.t('ERROR_OCCURED_TRY_AGAIN'), 'warning');
     }
     setSubmitting(false);
+  };
+
+  const handlePopupClose = () => {
+    setShowModal(false);
+    if (reportSubmitted) {
+      navigation.pop();
+    }
   };
 
   const onChooseFile = async () => {
@@ -372,9 +382,7 @@ const GroupIncidentReport = ({ navigation }) => {
         buttonColors={alertButtonColor}
         message={modalBody}
         isVerticalGradient={false}
-        onClose={() => {
-          setShowModal(false);
-        }}
+        onClose={handlePopupClose}
       />
 
       <ImageView

@@ -44,6 +44,7 @@ const IncidentReport = ({ navigation }) => {
   const [showAttachImages, setShowAttachImages] = useState([]);
   const [showImageView, setShowImageView] = useState(false);
   const [selImageIndex, setSelImageIndex] = useState(0);
+  const [reportSubmitted, setReportSubmitted] = useState(false);
 
   const { sPhoto, sFirstName, sLastName, sStudentID } = student || {};
 
@@ -84,6 +85,7 @@ const IncidentReport = ({ navigation }) => {
         sImageURLs: attachedImages.map((file) => file.FileURL).join(','),
       });
       if (result.status === 1) {
+        setReportSubmitted(true);
         showAlert(translang.t('SUCCESS_INCIDENT_SUBMIT'), 'success');
       } else {
         throw Error(result.message);
@@ -92,6 +94,13 @@ const IncidentReport = ({ navigation }) => {
       showAlert(e.message || translang.t('ERROR_OCCURED_TRY_AGAIN'), 'warning');
     }
     setSubmitting(false);
+  };
+
+  const handlePopupClose = () => {
+    setShowModal(false);
+    if (reportSubmitted) {
+      navigation.pop();
+    }
   };
 
   const onChooseFile = async () => {
@@ -345,9 +354,7 @@ const IncidentReport = ({ navigation }) => {
         buttonColors={alertButtonColor}
         message={modalBody}
         isVerticalGradient={false}
-        onClose={() => {
-          setShowModal(false);
-        }}
+        onClose={handlePopupClose}
       />
 
       <ImageView
