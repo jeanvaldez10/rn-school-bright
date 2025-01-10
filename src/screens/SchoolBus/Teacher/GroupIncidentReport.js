@@ -40,7 +40,6 @@ const GroupIncidentReport = ({ navigation }) => {
   const [description, setDescription] = useState('');
   const [attachedFiles, setAttachedFiles] = useState([]);
   const [attachedImages, setAttachedImages] = useState([]);
-  const [showAttachImages, setShowAttachImages] = useState([]);
   const [showImageView, setShowImageView] = useState(false);
   const [selImageIndex, setSelImageIndex] = useState(0);
   const [isSendToParent, setIsSentToParent] = useState(false);
@@ -162,7 +161,6 @@ const GroupIncidentReport = ({ navigation }) => {
       if (response.assets) {
         let requestCnt = 0;
         let uris = attachedImages;
-        let showUris = showAttachImages;
 
         if (uris.length + response.assets.length > 10) {
           showAlert(translang.t('CANTSELECT_LIMIT'), 'warning');
@@ -179,13 +177,15 @@ const GroupIncidentReport = ({ navigation }) => {
           ApiManager.uploadImage('broadcast', userInfo.SchoolID, item)
             .then((data) => {
               console.log(data);
-              uris.push({ FileType: data[0].FileType, FileURL: data[0].FileURL });
-              showUris.push({ uri: data[0].FileURL });
+              uris.push({
+                FileType: data[0].FileType,
+                FileURL: data[0].FileURL,
+                uri: data[0].FileURL,
+              });
               requestCnt = requestCnt + 1;
               if (requestCnt == response.assets.length) {
                 setIsLoading(false);
                 setAttachedImages(uris);
-                setShowAttachImages(showUris);
               }
             })
             .catch((error) => {
@@ -232,15 +232,14 @@ const GroupIncidentReport = ({ navigation }) => {
         key={index}
         onPress={() => {
           setShowImageView(true);
-          setSelImageIndex(index);
+          setSelImageIndex(index); 
         }}
       >
         <Image style={{ width: 50, height: 70 }} source={{ uri: item.uri }} />
         <TouchableOpacity
           style={{ position: 'absolute', top: -10, right: -10 }}
           onPress={() => {
-            setAttachedFiles(attachedImages.filter((item, idex) => idex != index));
-            setShowAttachImages(showAttachImages.filter((item, idex) => idex != index));
+            setAttachedImages(attachedImages.filter((item, idex) => idex != index));
           }}
         >
           <Image
@@ -348,7 +347,7 @@ const GroupIncidentReport = ({ navigation }) => {
           </TouchableOpacity>
 
           <FlatList
-            data={showAttachImages}
+            data={attachedImages}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => renderAttachImages(item, index)}
             horizontal
@@ -386,7 +385,7 @@ const GroupIncidentReport = ({ navigation }) => {
       />
 
       <ImageView
-        images={showAttachImages}
+        images={attachedImages}
         imageIndex={selImageIndex}
         visible={showImageView}
         onRequestClose={() => {
