@@ -136,24 +136,6 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     padding: 12,
   },
-  group1: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 4,
-  },
-  itemAvatar: {
-    width: 24,
-    height: 24,
-    borderRadius: 30,
-    marginRight: 8,
-  },
-  text1: {
-    flex: 1,
-    color: Color.n_default_gray_dark,
-    fontSize: 20,
-    fontFamily: 'THSarabunNew',
-  },
   group2: {
     marginTop: 4,
     flexDirection: 'row',
@@ -172,6 +154,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   buttons: {
+    flexDirection: 'row',
+    minWidth: 120,
     justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'wrap',

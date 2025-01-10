@@ -185,6 +185,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   buttons: {
+    flexDirection: 'row',
+    minWidth: 120,
     justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'wrap',

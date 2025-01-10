@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     flexDirection: 'row',
     marginVertical: 5,
-    paddingHorizontal: 20,
+    paddingHorizontal: 8,
     paddingVertical: 10,
     shadowColor: '#000000',
     shadowOffset: {
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   buttonContainer: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
   },
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 25,
     height: 40,
-    marginLeft: 8,
+    marginLeft: 4,
     shadowColor: '#1C191966',
     shadowOffset: {
       width: 0,
