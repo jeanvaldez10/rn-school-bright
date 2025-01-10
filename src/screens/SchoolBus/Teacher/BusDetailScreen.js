@@ -28,7 +28,7 @@ import {
 } from '../../../helpers/schoolbus';
 import ApiManager from '../../../managers/ApiManager';
 import Images from '../../../themes/Images';
-import translang from '../../../utils/language.utils';
+import translang, { getCurrentLocale } from '../../../utils/language.utils';
 import BusPopup from './BusPopups';
 import StudentItem from './StudentItem';
 import StudentPopup from './StudentPopup';
@@ -78,7 +78,7 @@ const BusDetailScreen = ({ navigation }) => {
     setIsLoading(true);
 
     try {
-      const data = await ApiManager.getBusScheduleDetail(nScheduleID);
+      const data = await ApiManager.getBusScheduleDetail(nScheduleID, getCurrentLocale());
 
       if (data.status === 1) {
         setStudents(data.lstStudents || []);

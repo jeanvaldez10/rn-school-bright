@@ -2777,11 +2777,19 @@ const getBusSchedule = (nBusID) => {
     });
 };
 
-const getBusScheduleDetail = (nScheduleID) => {
+const getBusScheduleDetail = (nScheduleID, lang) => {
   return schoolBusHttpClient
-    .post(apiUrls.getBusScheduleDetail(), {
-      nScheduleID,
-    })
+    .post(
+      apiUrls.getBusScheduleDetail(),
+      {
+        nScheduleID,
+      },
+      {
+        headers: {
+            sblanguage: lang,
+        },
+      },
+    )
     .then((response) => response.data)
     .catch((error) => {
       console.error('Error fetching bus schedule details:', error);
