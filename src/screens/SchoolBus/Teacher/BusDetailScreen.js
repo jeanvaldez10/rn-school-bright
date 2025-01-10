@@ -355,11 +355,11 @@ const BusDetailScreen = ({ navigation }) => {
         containerStyle={styles.gradientButtonContainer}
         buttonStyle={styles.gradientButton}
         textStyle={styles.gradientButtonText}
-        colors={[
+        colors={
           travelStatus === TravelStatuses.NOT_DEPARTED
-            ? Color.green_button_color
-            : Color.n_scorpion,
-        ]}
+            ? [Color.green_button_color]
+            : [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]
+        }
         isVerticalGradient={true}
         label={buttonLabel}
         ContentComponent={
@@ -399,8 +399,6 @@ const BusDetailScreen = ({ navigation }) => {
     alertStatus === 'success'
       ? [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]
       : [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end];
-
-  console.log(nScheduleID);
 
   return (
     <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>

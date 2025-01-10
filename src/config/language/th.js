@@ -1259,7 +1259,7 @@ export default {
   TURN_ON_GPS: 'กรุณาเปิด gps',
   BUS_SUCCESSFUL_DEPART:  'เริ่มงานสำเร็จ',
   BUS_SUCCESSFUL_CANCEL: 'ยกเลิกเรียบร้อย',
-  BUS_SUCCESSFUL_ARRIVE: 'The bus is arrived!',
+  BUS_SUCCESSFUL_ARRIVE: 'ปรับสถานะเรียบร้อย',
 
   SELECT_ITEM: 'เลือกรายการ',
   CALL_PARENT: 'โทรหาผู้ปกครอง',
