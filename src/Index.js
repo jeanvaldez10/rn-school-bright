@@ -271,7 +271,6 @@ import DetailedAlightingReport from './screens/SchoolBus/Teacher/alighting-repor
 import StudentBusScheduleDetail from './screens/SchoolBus/Student/StudentBusScheduleDetail';
 import StudentIncidentReportingReport from './screens/SchoolBus/Student/StudentIncidentReportingReport';
 import StudentPickupDropOffReport from './screens/SchoolBus/Student/StudentPickupDropOffReport';
-import VehicleList from './screens/SchoolBus/VehicleList';
 import VerifySlipScreen from './screens/Home/VerifySlipScreen';
 import VerifySlipPaymentListScreen from './screens/Home/VerifySlipPaymentListScreen';
 import VerifySlipUploadScreen from './screens/Home/VerifySlipUploadScreen';
@@ -1443,12 +1442,6 @@ const DrawerRouteConfigs = {
   },
   YourDevice: {
     screen: YourDevicesScreen,
-    navigationOptions: {
-      headerShown: true,
-    },
-  },
-  VehicleList: {
-    screen: VehicleList,
     navigationOptions: {
       headerShown: true,
     },
