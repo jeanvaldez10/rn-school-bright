@@ -295,7 +295,7 @@ export default class SecuritySettingScreen extends React.Component {
               </TouchableOpacity>
               }
 
-              <TouchableOpacity style={styles.menuEachStyle} activeOpacity={0.5} onPress={() => {
+              {/* <TouchableOpacity style={styles.menuEachStyle} activeOpacity={0.5} onPress={() => {
                 this.onClickItem('line_connect')
               }}>
                 <SecuritySettingInfoItem
@@ -307,7 +307,7 @@ export default class SecuritySettingScreen extends React.Component {
                   secondTextStyle={lineConnect ? styles.verifiedColor : {}}
                   image_visible={true}
                 />
-              </TouchableOpacity>
+              </TouchableOpacity> */}
 
               <TouchableOpacity style={styles.menuEachStyle} activeOpacity={0.5} onPress={() => {
                 this.onClickItem('your_devices')

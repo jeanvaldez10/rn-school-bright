@@ -37,6 +37,7 @@ export default class HalfdayLeaveScreen extends React.Component {
       userInfo: {},
       leaveReasonList: [],
       leaveSeasonList: [],
+      leaveInfoList: [],
 
       isAddressRembemr: false,
       AddressInfo: {},
@@ -76,6 +77,15 @@ export default class HalfdayLeaveScreen extends React.Component {
       leaveTypes = await ApiManager.getStudentLeaveType(userInfo.SchoolID);
     }else{
       leaveTypes = await ApiManager.getTeacherLeaveType(userInfo.SchoolID);
+    }
+
+    try {
+      const leaveInfos = await ApiManager.getLeaveInfos(userInfo.ID);
+      this.setState({
+        leaveInfoList: leaveInfos,
+      });
+    } catch (e) {
+      console.log("Error on fetching leave infos: ", e.message);
     }
 
     let leaveSeasonList = [translang.t('MORNING'), translang.t('AFTERNOON')];
@@ -273,9 +283,13 @@ export default class HalfdayLeaveScreen extends React.Component {
           dialogTtitle={translang.t('LEAVE_season')}
         />
 
-        <LeaveInfoModal isVisible={this.state.showInfoModal} onOkPress={() => {
-          this.setState({showInfoModal: false});
-        }} />
+        <LeaveInfoModal
+          isVisible={this.state.showInfoModal}
+          onOkPress={() => {
+            this.setState({ showInfoModal: false });
+          }}
+          leaveInfoList={this.state.leaveInfoList}
+        />
       </SafeAreaView>
     );
   }

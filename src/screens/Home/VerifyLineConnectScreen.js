@@ -170,12 +170,12 @@ export default class VerifyLineConnectScreen extends ValidationComponent {
                 stepWidth={50}
                 stepHeight={50}
                 showLabel={true}
-                barLength={70}
+                barLength={130}
                 barThickeness={2}
                 data={[
                   {label: translang.t('SETTING_addEmail')},
                   {label: translang.t('SETTING_EditPhoneNumber')},
-                  {label: translang.t('SETTING_Line')},
+                  // {label: translang.t('SETTING_Line')},
                 ]}
                 barColor={'lightgrey'}
                 labelTextStyle={{fontFamily: 'THSarabunNew', color: 'darkgrey', fontSize: 20}}

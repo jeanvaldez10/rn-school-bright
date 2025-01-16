@@ -16,6 +16,7 @@ import ApiManager from '../../managers/ApiManager';
 import _ from 'lodash';
 import * as ImagePicker from 'react-native-image-picker';
 import CustomTextInput from "../../components/CustomTextInput";
+import CustomTextSearch from '../../components/CustomTextSearch';
 
 export default class BehaviorEditScreen extends React.Component {
     constructor(props) {
@@ -26,7 +27,7 @@ export default class BehaviorEditScreen extends React.Component {
             modalBody: '',
             userInfo: {},
             scoreData: [],
-            selectedIndexes: [],
+            filteredIndexes: [],
             studentList: [],
             classLevel: {},
             classRoom: {},
@@ -34,6 +35,8 @@ export default class BehaviorEditScreen extends React.Component {
 
             attachedImages: [],
             isRefresh: false,
+
+            searchVal: '',
         };
     }
 
@@ -103,7 +106,7 @@ export default class BehaviorEditScreen extends React.Component {
         this.setState({isLoading: true});
         const promise = this.state.isReduce ? ApiManager.getReduceBehaviorScoreList(this.state.userInfo.SchoolID) : ApiManager.getAddBehaviorScoreList(this.state.userInfo.SchoolID);
         promise.then(list => {
-            this.setState({isLoading: false, scoreData: list, selectedIndexes: []});
+            this.setState({isLoading: false, scoreData: list, filteredIndexes: []});
         }).catch(error => {
             console.log(error);
             this.setState({isLoading: false});
@@ -111,15 +114,12 @@ export default class BehaviorEditScreen extends React.Component {
     }
 
     __next = async () => {
-        if (this.state.selectedIndexes.length === 0) {
+        const selectedScoreData = this.state.scoreData.filter(d => d.isSelected);
+        if (selectedScoreData.length === 0) {
             this.setState({showErrorModal: true, modalBody: translang.t('COMMON_msg_select_one')});
         } else {
-            const scores = this.state.selectedIndexes.map(value => {
-                return this.state.scoreData[value];
-            });
-
             const params = {
-                scores: scores,
+                scores: selectedScoreData,
                 classLevel: this.state.classLevel,
                 classRoom: this.state.classRoom,
                 students: this.state.studentList,
@@ -132,6 +132,20 @@ export default class BehaviorEditScreen extends React.Component {
         }
     };
 
+    _onChangeSearchVal = (searchVal) => {
+        const filteredIndexes = [];
+        if (searchVal !== '') {
+          this.state.scoreData.forEach((data, index) => {
+            const NameEN = data.BehaviorsNameEN || "";
+            const NameTH = data.BehaviorsName || "";
+            if (NameEN.toLowerCase().includes(searchVal.toLowerCase()) || NameTH.toLowerCase().includes(searchVal.toLowerCase())) {
+              filteredIndexes.push(index);
+            }
+          });
+        }
+        this.setState({searchVal, filteredIndexes});
+    };
+
     onSelectItem = (index) => {
         const data = this.state.scoreData[index];
         const behaviorName = getCurrentLocale() === 'th' ? data.BehaviorsName : data.BehaviorsNameEN ?? data.BehaviorsName
@@ -139,13 +153,14 @@ export default class BehaviorEditScreen extends React.Component {
     };
 
     onTapItemRadio = (index) => {
-        let selectedIndexes = this.state.selectedIndexes;
-        if (selectedIndexes.includes(index)) {
-            selectedIndexes = _.without(selectedIndexes, index);
+        const scoreData = this.state.scoreData;
+        if (scoreData[index].isSelected) {
+            scoreData[index].isSelected = false;
         } else {
-            selectedIndexes.push(index);
+            scoreData[index].isSelected = true;
         }
-        this.setState({selectedIndexes});
+
+        this.setState({scoreData: scoreData});
     };
 
     onChooseImage = () => {
@@ -170,14 +185,13 @@ export default class BehaviorEditScreen extends React.Component {
             selectionLimit: 0,
         }
 
-
         ImagePicker.launchImageLibrary(options, (response) => {
             if (response.assets) {
                 const uris = response.assets.map(asset => {
                     return asset.uri;
                 });
-                let scoreData = this.state.scoreData;
-                let attachedImages = scoreData[index].attachedImages ?? [];
+                const scoreData = this.state.scoreData;
+                const attachedImages = scoreData[index].attachedImages ?? [];
                 scoreData[index].attachedImages = attachedImages.concat(response.assets);
                 this.setState({scoreData: scoreData});
             }
@@ -217,33 +231,43 @@ export default class BehaviorEditScreen extends React.Component {
         this.setState({scoreData: scoreData});
     }
 
-    renderItem = (index0) => {
-        const data = this.state.scoreData[index0];
+    renderItem = (index) => {
+        let _index = index;
+
+        if (this.state.filteredIndexes.length > 0 && index < this.state.filteredIndexes.length) {
+            _index = this.state.filteredIndexes[index];
+        }
+
+        const data = this.state.scoreData[_index];
         let showNote = false;
         if (data.showNote) {
             showNote = true;
         }
         const note = data.Note ?? '';
         const attachedImages = data.attachedImages ?? [];
-        const isSelected = this.state.selectedIndexes.includes(index0);
+        const isSelected = !!data.isSelected;
         return (
             <View style={{marginBottom:12}}>
-                <TouchableOpacity style={styles.listItem} onPress={() => this.onSelectItem(index0)}>
+                <TouchableOpacity style={styles.listItem}>
                     <View style={styles.listItemView}>
                         <CustomRadioButtonItem
                             isSelected={isSelected}
                             selectedColor={this.state.isReduce ? Color.n_default_orange : Color.n_button_gradient_green_start}
-                            onPress={() => this.onTapItemRadio(index0)}
+                            onPress={() => this.onTapItemRadio(_index)}
                             radioSize={30}/>
-                        <Text style={styles.scoreDescription}>
-                            {getCurrentLocale() === 'th' ? data.BehaviorsName : data.BehaviorsNameEN ?? data.BehaviorsName}
-                        </Text>
+                        <View style={{flex: 1, marginLeft: 16, justifyContent: 'center'}}>
+                            <TouchableOpacity onPress={() => this.onSelectItem(_index)}>
+                                <Text style={styles.scoreDescription}>
+                                    {getCurrentLocale() === 'th' ? data.BehaviorsName : data.BehaviorsNameEN ?? data.BehaviorsName}
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
                         <Text
                             style={[styles.scoreValue, this.state.isReduce ? {color: Color.n_default_orange} : {color: Color.n_button_gradient_green_start}]}>{this.state.isReduce ? `-${data.Score}` : `+${data.Score}`}</Text>
 
                         <View>
                             <TouchableOpacity style={{...styles.flexButton, backgroundColor: Color.n_default_orange}}
-                                              onPress={() => this.onChooseImageIndex(index0)}>
+                                              onPress={() => this.onChooseImageIndex(_index)}>
                                 <Text style={styles.flexButtonText}>{translang.t('Attached_Pictures')}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
@@ -252,7 +276,7 @@ export default class BehaviorEditScreen extends React.Component {
                                     backgroundColor: Color.green_button_next_color2,
                                     marginTop: 8
                                 }}
-                                onPress={() => this.toggleNote(index0)}>
+                                onPress={() => this.toggleNote(_index)}>
                                 <Text style={styles.flexButtonText}>{translang.t('Note')}</Text>
                             </TouchableOpacity>
                         </View>
@@ -266,7 +290,7 @@ export default class BehaviorEditScreen extends React.Component {
                         data={attachedImages}
                         keyExtractor={(item, index) => index.toString()}
                         ItemSeparatorComponent={this.ItemSeparatorView}
-                        renderItem={({item, index}) => this.renderAttachImages(item, index, index0)}
+                        renderItem={({item, index}) => this.renderAttachImages(item, index, _index)}
                         horizontal
                     />
                 </View>
@@ -276,10 +300,10 @@ export default class BehaviorEditScreen extends React.Component {
                     <View style={styles.listItemTextBox}>
                         <CustomTextInput placeholder={translang.t("Note_placeholder")} value={note}
                                          onChangeText={(text) => {
-                                             this.updateNote(index0, text)
+                                             this.updateNote(_index, text)
                                          }}/>
                         <TouchableOpacity style={styles.deleteIconBox} onPress={() => {
-                            this.updateNote(index0, '')
+                            this.updateNote(_index, '')
                         }}>
                             <Image source={Images.n_img_trash} style={styles.deleteIcon}/>
                         </TouchableOpacity>
@@ -291,7 +315,9 @@ export default class BehaviorEditScreen extends React.Component {
     };
 
     render() {
-        const nextButtonColor = this.state.isReduce ? [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end] : [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]
+        // const nextButtonColor = this.state.isReduce ? [Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end] : [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]
+        const nextButtonColor = [Color.n_button_gradient_green_start, Color.n_button_gradient_green_end];
+        const scoreData = this.state.filteredIndexes.length === 0 ? this.state.scoreData : this.state.filteredIndexes.map(i => this.state.scoreData[i]);
 
         return (
             <SafeAreaView style={styles.container} edges={['right', 'top', 'left']}>
@@ -304,8 +330,31 @@ export default class BehaviorEditScreen extends React.Component {
                 />
 
                 <View style={styles.container}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, height: 60, width: '100%', paddingHorizontal: 30,}}>
+                        <CustomTextSearch
+                            inputStyle={{
+                                borderColor: Color.n_default_brown,
+                                fontSize: 27
+                            }}
+                            inputWrapperStyle={{
+                                height: 50,
+                                flex: 1,
+                                borderRadius: 25,
+                                borderColor: Color.n_default_orange,
+                                borderWidth: 1
+                            }}
+                            value={this.state.searchVal}
+                            onChangeText={this._onChangeSearchVal}
+                            placeholder={translang.t('DISCIPLINE_SEARCH_BAHVIOR_LIST')}
+                            placeholderTextColor={Color.n_default_orange}
+                            clickSearch={()=>{
+
+                            }}
+                        />
+                    </View>
+                        
                     <FlatList style={styles.list}
-                              data={this.state.scoreData}
+                              data={scoreData}
                               keyExtractor={(item, index) => index.toString()}
                               renderItem={({item, index}) => this.renderItem(index)}
                     />
@@ -409,12 +458,10 @@ const styles = ScaledSheet.create({
     },
 
     scoreDescription: {
-        flex: 1,
         fontFamily: 'THSarabunNew',
         fontSize: 16,
+        fontWeight: 'bold',
         color: Color.n_default_gray,
-        marginLeft: 16,
-
     },
     scoreValue: {
         fontFamily: 'THSarabunNew',

@@ -122,10 +122,10 @@ export default class LeaveHistory extends React.Component {
   };
 
   __next = async () => {
-    const title = translang.t('NUMBER_LEAVE_DAYS_NOT_ENOUGH');
-    const message = translang.t('CHECK_LEAVE_DAYS_AT_TOP_RIGHT_CORNER');
-    this.setState({ isLoading: false, showModal: true, modalTitle: title, modalBody: message,  modalType: 0 });
-    return;
+    // const title = translang.t('NUMBER_LEAVE_DAYS_NOT_ENOUGH');
+    // const message = translang.t('CHECK_LEAVE_DAYS_AT_TOP_RIGHT_CORNER');
+    // this.setState({ isLoading: false, showModal: true, modalTitle: title, modalBody: message,  modalType: 0 });
+    // return;
 
     this.setState({ isLoading: true });
 
@@ -143,8 +143,10 @@ export default class LeaveHistory extends React.Component {
       if (result) {
         this.setState({ isLoading: false, showModal: true, modalTitle: undefined, modalBody: translang.t('COMPLETED'), modalType: 1 });
       } else {
-        const message = translang.t('REACHED_LEAVE_REQ_LIMIT'); // + '\n' + translang.t('CONTACT_YOUER_SCHOOL_ADMIN');
-        this.setState({ isLoading: false, showModal: true, modalBody: message,  modalType: 0 });
+        // const message = translang.t('REACHED_LEAVE_REQ_LIMIT'); // + '\n' + translang.t('CONTACT_YOUER_SCHOOL_ADMIN');
+        const title = translang.t('NUMBER_LEAVE_DAYS_NOT_ENOUGH');
+        const message = translang.t('CHECK_LEAVE_DAYS_AT_TOP_RIGHT_CORNER');
+        this.setState({ isLoading: false, showModal: true, modalTitle: title, modalBody: message,  modalType: 0 });
       }
     }).catch(error => {
       console.log("RNFS READFILE", error);

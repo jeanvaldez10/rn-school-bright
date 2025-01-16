@@ -411,6 +411,8 @@ const images = {
   m_discipline: require("../assets/images/services/m_discipline.png"),
   m_edit_checkin: require("../assets/images/services/m_edit_checkin.png"),
   m_saving: require("../assets/images/services/m_savings.png"),
+  m_verify_slip: require("../assets/images/services/m_verify_slip.png"),
+  ic_verify_slilp: require("../assets/images/new/ic_verify_slip.png"),
 
   mask: require("../assets/images/services/mask.png"),
   qr_code: require("../assets/images/services/qr_code.png"),
@@ -444,6 +446,11 @@ const images = {
   ic_school_bus_marker_large: require("../assets/images/new/ic_school_bus_marker_large.png"),
   ic_checked_green: require("../assets/images/new/ic_checked_green.png"),
   ic_checked_disabled: require("../assets/images/new/ic_checked_disabled.png"),
+  n_ic_qrcode_1: require("../assets/images/new/n_ic_qrcode_1.png"),
+  n_ic_search_group: require("../assets/images/new/n_ic_search_group.png"),
+
+  ic_user: require("../assets/images/new/ic_user.png"),
+  ic_behavior_add_student_id: require("../assets/images/new/ic_behavior_add_student_id.png"),
 };
 
 export default images;

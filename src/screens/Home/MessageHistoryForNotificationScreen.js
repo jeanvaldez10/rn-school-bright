@@ -97,8 +97,8 @@ export default class MessageHistoryForNotificationScreen extends React.Component
       this.setState({isLoading: false});
       console.log("OpenFilesError", error);
     });
-
   }
+
   getUrlExtension = (url, filetype) => {
     let res = url.split(/[#?]/)[0].split(".").pop().trim();
     if(res.length > 4){

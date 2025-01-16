@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, BackHandler, TouchableOpacity } from 'react-native';
+import { View, Image, BackHandler, TouchableOpacity } from 'react-native';
 import { Text } from 'native-base';
 import { ScaledSheet } from 'react-native-size-matters';
 import NextButton from '../../components/NextButton';
@@ -209,17 +209,27 @@ export default class BehaviorAddScreen extends React.Component {
         <BackNavigationBar
           title={translang.t('DRAWER_add_behavior')}
           onMenuTap={() => this.back()}
-          is_more="1"
-          actions={[translang.t('QR_Code'), translang.t('ENTER_STDID')]}
-          onMoreTap={(value, index) => {
-            if (index === 0)
-              this.onQRCode()
-            else if (index === 1)
-              this.onEnterStdID()
-          }}
         />
 
         <ScrollView style={styles.container} contentContainerStyle={{flexGrow: 1}}>
+
+          <View style={styles.tabContainer}>
+            <TouchableOpacity style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={this.onQRCode}>
+              <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                <Image source={Images.n_ic_qrcode_1} style={{width: 15, height: 15}} />
+                <Text style={styles.tabItemTitle}>{translang.t('QR_Code')}</Text>
+              </View>
+            </TouchableOpacity>
+
+            <View style={{width: 2, marginVertical: 15, backgroundColor: Color.n_default_orange}} />
+
+            <TouchableOpacity style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={this.onEnterStdID}>
+              <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                <Image source={Images.n_ic_search_group} style={{width: 22, height: 22}} />
+                <Text style={styles.tabItemTitle}>{translang.t('ENTER_STDID')}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
 
           <TouchableOpacity onPress={this._onChangeClassLevel} style={{...styles.bigContainer, marginTop: 30}} activeOpacity={1.0}>
             <View style={{ flex: 1, alignItems: 'center' }}>
@@ -333,5 +343,28 @@ const styles = ScaledSheet.create({
     backgroundColor: Color.n_default_orange,
     position: 'absolute',
     bottom: 35,
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    marginTop: 20,
+    height: 60,
+    borderRadius: 30, 
+    overflow: 'hidden', 
+    shadowColor: '#000',
+    shadowOffset: {
+        width: 0,
+        height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 3,
+    backgroundColor: Color.white,
+  },
+  tabItemTitle: {
+    marginLeft: 8,
+    fontSize: 14,
+    textAlign: 'center',
+    color: Color.n_default_orange,
   },
 });

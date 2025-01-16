@@ -648,17 +648,9 @@ class UserInfoScreen extends React.Component {
           isVisible={isAuthDlg}
           image={Images.n_ic_warning}
           showCancelButton={false}
-          message={
-            getCurrentLocale() == "en"
-              ? this.state.authInfo.resDesc
-              : this.state.authInfo.resDescTH
-          }
-          onClose={() => {
-            this.setState({ isAuthDlg: false });
-          }}
-          onConfirm={() => {
-            this.clickAuthStatus();
-          }}
+          message = {this.state.authInfo.resDesc}
+          onClose={() => { this.setState({ isAuthDlg: false }) }}
+          onConfirm={() => {this.clickAuthStatus();}}
         />
 
         <AppUpdateModal

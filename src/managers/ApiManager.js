@@ -54,10 +54,9 @@ const signinForAdd = (userName, password, schoolId, imei, ip) => {
         .then((data) => {
             if (data.ID == null || data.ID == 0) {
                 return Promise.reject('Failed to login');
-            } else {
-                StorageManager.setTempUser(data);
-                return apiHttpClient.get(apiUrls.getPermission(), {params: {school_id: schoolId}});
             }
+            StorageManager.setTempUser(data);
+            return apiHttpClient.get(apiUrls.getPermission(), {params: {school_id: schoolId}});
         })
         .then(response => response.data)
         .then(permission => {
@@ -2719,7 +2718,7 @@ const getStudentLeaveType = (schoolID) => {
     const promise = apiHttpClient.get(apiUrls.getStudentLeaveType(schoolID), params)
         .then(response => response.data)
         .then(async (data) => {
-            return data.data || [];
+            return data;
         });
     return promise
 }

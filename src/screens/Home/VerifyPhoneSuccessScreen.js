@@ -107,7 +107,7 @@ export default class VerifyPhoneSuccessScreen extends ValidationComponent {
 
   confirm = async () => {
     if(this.state.type == 0){
-      this.props.navigation.navigate('VerifyLineConnect', {parent: 'VerifyPhoneInput', type: this.state.type});
+      this.props.navigation.navigate('VerifyWarning', {parent: 'VerifyPhoneInput'});
     }else{
       this.props.navigation.navigate('SecuritySetting', {parent: 'Setting'});
     }
@@ -140,12 +140,12 @@ export default class VerifyPhoneSuccessScreen extends ValidationComponent {
                 stepWidth={50}
                 stepHeight={50}
                 showLabel={true}
-                barLength={70}
+                barLength={130}
                 barThickeness={2}
                 data={[
                   {label: translang.t('SETTING_addEmail')},
                   {label: translang.t('SETTING_EditPhoneNumber')},
-                  {label: translang.t('SETTING_Line')},
+                  // {label: translang.t('SETTING_Line')},
                 ]}
                 barColor={'lightgrey'}
                 labelTextStyle={{fontFamily: 'THSarabunNew', color: 'darkgrey', fontSize: 20}}

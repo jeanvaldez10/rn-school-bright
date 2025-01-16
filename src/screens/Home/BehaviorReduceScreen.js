@@ -213,17 +213,27 @@ export default class BehaviorReduceScreen extends React.Component {
         <BackNavigationBar
           title={translang.t('DRAWER_reduce_behavior')}
           onMenuTap={() => this.back()}
-          is_more="1"
-          actions={[translang.t('QR_Code'), translang.t('ENTER_STDID')]}
-          onMoreTap={(value, index) => {
-            if (index === 0)
-              this.onQRCode()
-            else if (index === 1)
-              this.onEnterStdID()
-          }}
         />
 
         <ScrollView style={styles.container} contentContainerStyle={{flexGrow: 1}}>
+          <View style={styles.tabContainer}>
+            <TouchableOpacity style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={this.onQRCode}>
+              <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                <Image source={Images.n_ic_qrcode_1} style={{width: 15, height: 15}} />
+                <Text style={styles.tabItemTitle}>{translang.t('QR_Code')}</Text>
+              </View>
+            </TouchableOpacity>
+
+            <View style={{width: 2, marginVertical: 15, backgroundColor: Color.n_default_orange}} />
+
+            <TouchableOpacity style={{flex: 1, justifyContent: 'center', alignItems: 'center'}} onPress={this.onEnterStdID}>
+              <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
+                <Image source={Images.n_ic_search_group} style={{width: 24, height: 24}} />
+                <Text style={styles.tabItemTitle}>{translang.t('ENTER_STDID')}</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+
           <TouchableOpacity onPress={this._onChangeClassLevel} style={{...styles.bigContainer, marginTop: 30,}} activeOpacity={1.0}>
             <View style={{ flex: 1, alignItems: 'center' }}>
               <Text style={{ ...styles.title2, textAlign: 'center' }}>{translang.t('BEHAVIOR_classlevel')}</Text>
@@ -246,7 +256,7 @@ export default class BehaviorReduceScreen extends React.Component {
             label={translang.t('COMMON_next')}
             containerStyle={{width: 290, marginLeft: 'auto', marginRight: 'auto', marginVertical: 10,}}
             buttonStyle={{ borderRadius: 38, height: 75 }}
-            colors={[Color.n_button_gradient_orange_start, Color.n_button_gradient_orange_end]}
+            colors={[Color.n_button_gradient_green_start, Color.n_button_gradient_green_end]}
             isVerticalGradient={false}
             _onPress={() => this.__next()} />
 
@@ -337,5 +347,28 @@ const styles = ScaledSheet.create({
     backgroundColor: Color.n_default_orange, 
     position: 'absolute', 
     bottom: 35,
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    marginTop: 20,
+    height: 60,
+    borderRadius: 30, 
+    overflow: 'hidden', 
+    shadowColor: '#000',
+    shadowOffset: {
+        width: 0,
+        height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 3,
+    backgroundColor: Color.white,
+  },
+  tabItemTitle: {
+    marginLeft: 8,
+    fontSize: 16,
+    textAlign: 'center',
+    color: Color.n_default_orange,
   },
 });
