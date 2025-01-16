@@ -1048,10 +1048,6 @@ export default {
   Phone_verified_successfully: "Phone number verified successfully.",
   Connected_line: "You have connected to Line.",
 
-  Enter_phone_code: 'Please enter the verification code received via SMS.',
-  Phone_verified_successfully: 'Phone number verified successfully.',
-  Connected_line: 'You have connected to Line.',
-
   Ready: 'Ready',
   Warning: 'Warning',
 
