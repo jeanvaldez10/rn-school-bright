@@ -260,6 +260,17 @@ import CheckVerification from './components/CheckVerification';
 import VerifyIdentifyIDSuccessScreen from './screens/Auth/VerifyIdentifyIDSuccessScreen';
 import AppSplashScreen from './SplashScreen';
 import AuthLoadingScreen from './AuthLoadingScreen';
+import BusListScreen from './screens/SchoolBus/Teacher/BusListScreen';
+import BusDetailScreen from './screens/SchoolBus/Teacher/BusDetailScreen';
+import StudentBusIncidentReport from './screens/SchoolBus/Teacher/StudentBusIncidentReport';
+import GroupIncidentReport from './screens/SchoolBus/Teacher/GroupIncidentReport';
+import IncidentReportingReport from './screens/SchoolBus/Teacher/IncidentReportingReport';
+import VehiclePassgngerAlightingReport from './screens/SchoolBus/Teacher/alighting-report/VehiclePassgngerAlightingReport';
+import PassengerAlightingReport from './screens/SchoolBus/Teacher/alighting-report/PassengerAlightingReport';
+import DetailedAlightingReport from './screens/SchoolBus/Teacher/alighting-report/DetailedAlightingReport';
+import StudentBusScheduleDetail from './screens/SchoolBus/Student/StudentBusScheduleDetail';
+import StudentIncidentReportingReport from './screens/SchoolBus/Student/StudentIncidentReportingReport';
+import StudentPickupDropOffReport from './screens/SchoolBus/Student/StudentPickupDropOffReport';
 import VehicleList from './screens/SchoolBus/VehicleList';
 import VerifySlipScreen from './screens/Home/VerifySlipScreen';
 import VerifySlipPaymentListScreen from './screens/Home/VerifySlipPaymentListScreen';
@@ -441,6 +452,78 @@ const MainAppRouteConfigs = {
   },
   UpdatePassword: {
     screen: UpdatePassScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  BusListScreen: {
+    screen: BusListScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  BusDetailScreen: {
+    screen: BusDetailScreen,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  StudentBusIncidentReport: {
+    screen: StudentBusIncidentReport,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  GroupIncidentReport: {
+    screen: GroupIncidentReport,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  IncidentReportingReport: {
+    screen: IncidentReportingReport,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  VehiclePassgngerAlightingReport: {
+    screen: VehiclePassgngerAlightingReport,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  PassengerAlightingReport: {
+    screen: PassengerAlightingReport,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  DetailedAlightingReport: {
+    screen: DetailedAlightingReport,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  MorningBusScheduleDetail: {
+    screen: StudentBusScheduleDetail,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  EveningBusScheduleDetail: {
+    screen: StudentBusScheduleDetail,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  StudentIncidentReportingReport: {
+    screen: StudentIncidentReportingReport,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  StudentPickupDropOffReport: {
+    screen: StudentPickupDropOffReport,
     navigationOptions: {
       headerShown: false,
     },

@@ -7,7 +7,10 @@ export const SHOP_BASE_URL = 'https://bk-paysb.schoolbright.co/api';
 export const SHOP_BASE_URL_DEV = 'https://paymentapi-dev.schoolbright.co/api';
 export const BASE_WEBSITE_URL = 'https://system.schoolbright.co';
 export const ACADEMIC_WEBSITE_URL = 'https://academic.schoolbright.co/api';
-export const ACADEMIC_WEBSITE_URL_DEV = 'https://dev-academic.schoolbright.co/api';
+export const ACADEMIC_WEBSITE_URL_DEV = 'https://dev-academic.schoolbright.co/api'; 
+export const SCHOOL_BUS_URL = 'https://sbbus.schoolbright.co/MobileAPI'; 
+export const SCHOOL_BUS_URL_DEV = 'https://sbbus-dev.schoolbright.co/MobileAPI'; 
+
 import translang, {getCurrentLocale} from '../utils/language.utils';
 
 class ApiUrls {
@@ -1008,6 +1011,102 @@ class ApiUrls {
 
   getLeaveInfo(UserID) {
     return `/studentLeave/GetLeaveInfo?UserId=${UserID}`;
+  }
+
+  getBusList() {
+    return '/Teacher/GetBuses';
+  }
+
+  getTodayBusSchedule() {
+    return `/Teacher/GetBusTodaySchedules`;
+  }
+
+  getBusScheduleDetail() {
+    return  '/Teacher/GetScheduleDetail';
+  }
+
+  busStartTravel() {
+    return '/Teacher/StartTravel';
+  }
+
+  cacelBusTravel() {
+    return '/Teacher/CancelTravel';
+  }
+
+  completeBusTravel() {
+    return '/Teacher/CompleteTravel';
+  }
+
+  buscheckInStudent() {
+    return '/Teacher/CheckInStudent';
+  }
+
+  busCheckoutStudent() {
+    return '/Teacher/CheckOutStudent';
+  }
+
+  reOrderStudentQueue() {
+    return '/Teacher/Schedule/ReOrderStudents';
+  }
+
+  submitBusIndividualIncident() {
+    return '/Teacher/SubmitIncident/Individual';
+  }
+
+  submitBusGroupIncident() {
+    return '/Teacher/SubmitIncident/Group';
+  }
+
+  getBusIncidentList() {
+    return '/Teacher/GetIncidents';
+  }
+
+  readBusIncident(incidentID) {
+    return `/Teacher/ReadIncidentDetail/${incidentID}`
+  }
+
+  readAllBusIncidentForTeacher() {
+    return `/Teacher/ReadAllIncidents`
+  }
+
+  getReportVehicleCheckInOut() {
+    return '/Teacher/ReportVehicleCheckInOut'
+  }
+
+  getPassengerBoardingAlightingReports() {
+    return '/Teacher/ReportAllCheckInOut'
+  }
+
+  getPassengerBoardingAlightingReportDetails() {
+    return '/Teacher/ReportCheckInOutDetail'
+  }
+
+  updateBusLocation() {
+    return '/Teacher/Travel/UpdateCurrentLocation'
+  }
+
+  checkTodayBusScheduleForStudent() {
+    return '/Student/CheckTodaySchedules'
+  }
+
+  getScheduleDetailForStudent() {
+    return '/Student/GetScheduleDetail'
+  }
+
+  getStudentBusIncidentList() {
+    return '/Student/GetIncidents'
+  }
+
+  readStudentBusIncident(incidentID) {
+    return `/Student/ReadIncidentDetail/${incidentID}`
+  }
+
+  readAllStudentBusIncidents() {
+    return `/Student/ReadAllIncidents`
+  }
+
+  getStudentPickUpDropOffReport() {
+    return `/Student/ReportCheckInOut`
   }
 }
 

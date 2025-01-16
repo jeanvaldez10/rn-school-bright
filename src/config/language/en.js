@@ -76,10 +76,7 @@ export default {
   DRAWER_manageaccount: 'Manage Account',
   DRAWER_temperature: 'Temperature',
 
-
   DRAWER_onlineclassroom: 'Online Classroom',
-
-
 
   USERINFO_userinfo: 'User Info',
   USERINFO_attendance: 'Attendance',
@@ -107,15 +104,15 @@ export default {
   USERINFO_uncheck: 'UNCHECK ',
   USERINFO_total: 'TOTAL ',
   // USERINFO_attendreport: "Attendance\n\nReport",
-  USERINFO_attendreport: "Attendance Report",
-  USERINFO_helthyreport: "Health Report",
-  USERINFO_healthLevelOne: "Underweight\nSeverely Underweight",
+  USERINFO_attendreport: 'Attendance Report',
+  USERINFO_helthyreport: 'Health Report',
+  USERINFO_healthLevelOne: 'Underweight\nSeverely Underweight',
   USERINFO_healthLevelTwo: 'Normal\nHealthy',
   USERINFO_healthLevelThree: 'Overweight\nObese Class 1',
   USERINFO_healthLevelFour: 'Overweight\nObese Class 2',
   USERINFO_healthLevelFive: 'Very Severely Overweight\nObese Class 3',
-  USERINFO_congendisease: "Congenital disease",
-  USERINFO_notfound: "Not Found Data",
+  USERINFO_congendisease: 'Congenital disease',
+  USERINFO_notfound: 'Not Found Data',
   USERINFO_sex: 'Gender',
   USERINFO_age: 'Age',
   USERINFO_height: 'Height',
@@ -123,7 +120,7 @@ export default {
   USERINFO_bloodtype: 'Blood type',
   USERINFO_foodAllergy: 'Food Allergy',
   USERINFO_drugAllergy: 'Drug Allergy',
-  USERINFO_checktemp: "CHECK TEMPERATURE",
+  USERINFO_checktemp: 'CHECK TEMPERATURE',
   USERINFO_position: 'Position',
   USERINFO_department: 'Department',
 
@@ -163,8 +160,6 @@ export default {
   HOMEWORK_group: 'Group',
   HOMEWORK_recipient: 'Recipient',
 
-
-
   ACADEMIC_msg_selectyear: 'Please select School Year',
   ACADEMIC_msg_selectyear2: 'Please select years',
   ACADEMIC_msg_selectsemester: 'Please select semester',
@@ -184,7 +179,6 @@ export default {
   ACADEMIC_additionclassnot: 'Additional Class not Count Credit',
   ACADEMIC_learnerdevelop: 'Learner Development Activity',
   ACADEMIC_gpa: 'GPA',
-
 
   LEAVE_leavereason: 'Leave Reason',
   LEAVE_startingdate: 'Starting Date',
@@ -254,7 +248,7 @@ export default {
   TOPUP_tu500: 'Top Up 500',
   TOPUP_other: 'Other',
   TOPUP_msg_inputamount: 'Please input topup amount',
-  TOPUP_AMOUNT_ERROR: "Cannot top up more than 50,000 baht",
+  TOPUP_AMOUNT_ERROR: 'Cannot top up more than 50,000 baht',
   TOPUP_msg_noactivate: 'The system has not been activated',
   TOPUP_backmain: 'Back to main',
 
@@ -390,8 +384,6 @@ export default {
   ATTENDANCE_STATUS_undefined: 'UNDEFINED',
   ATTENDANCE_STATUS_holiday: 'HOLIDAY',
 
-
-
   QR_CODE: 'QR CODE',
   STUDENT_ID: 'STUDENT ID',
   QR_Code: 'QR Code',
@@ -413,7 +405,7 @@ export default {
   UPDATE_SUCCESS: 'Update Success',
   SELECT_SUBJECT: 'Please Select Subject',
   HAVE_NOT_ARRANGED_TIME_TABLE: "Sorry, there haven't been arranged time table",
-  SUBJECT_NOT_CHECKED: "This subject has not been checked",
+  SUBJECT_NOT_CHECKED: 'This subject has not been checked',
   SCHOOL_HOLIDAY_CANNOT_TRANSACTION: 'Close Semester. Can not submit',
   GROUP: 'Group',
   INDIVIDUAL: 'Individual',
@@ -449,7 +441,8 @@ export default {
   CHOOSE_IMAGE1: 'CHOOSE\nIMAGE',
   COMING_SOON: 'Coming Soon',
   CAN_ATTACH_IMAGES_SOON: 'Can attach images soon',
-  PICK_UP_CAN_NOT_SUBMIT: 'Can not submit the request. Please stay within 1 km. distance from school',
+  PICK_UP_CAN_NOT_SUBMIT:
+    'Can not submit the request. Please stay within 1 km. distance from school',
   PLEASE_SELECT_LEVEL: 'Please select level',
   PLEASE_SELECT_YOUR_DEGREE: 'Please select your degree',
   ADD_SCORE_SCAN_QR_CODE: 'Add Score by QR Code',
@@ -468,7 +461,8 @@ export default {
   SUBJECT: 'Subject',
   CHECK_IN_REPORT: 'Check in Report',
   INCORRECT_USERNAME_PWD: 'Incorrect Username/Password',
-  CONTACT_YOUER_SCHOOL_ADMIN: "You don't have access permission. Please contact your school administrator.",
+  CONTACT_YOUER_SCHOOL_ADMIN:
+    "You don't have access permission. Please contact your school administrator.",
   DUBPLICATE_USR: 'Duplicate the users',
   SELECT_YOUR_GRADE: 'Please Select your grade',
   ENTER_STUDENT_ID: 'Please Enter Student ID',
@@ -480,7 +474,8 @@ export default {
   SELECT_LEAVE_DATE: 'Please select leave date',
   ATTACHED_IMAGE: 'Attached Image',
   ATTACHED_FILE: 'Attached File',
-  REACHED_LEAVE_REQ_LIMIT: 'You have reached the leave request limit. Please contact your school administrator.',
+  REACHED_LEAVE_REQ_LIMIT:
+    'You have reached the leave request limit. Please contact your school administrator.',
   PEOPLE: 'people',
   ON_TIME: 'On Time',
   LATE: 'Late',
@@ -554,7 +549,6 @@ export default {
   TOTAL_SALE_MONTH: 'Total Sales This Month',
   TOTAL_SALE_YEAR: 'Total Sales This Year',
 
-
   TODAY: 'Today',
   WEEK: 'Week',
   MONTH: 'Month',
@@ -567,17 +561,12 @@ export default {
 
   List: 'List',
 
-
-
   Image: 'Image',
 
   Points: 'Points',
 
   SEARCH_Placeholder_namestudent: 'Name/Student ID',
   MONEY_THB: ' THB',
-
-
-
 
   Monday_One: 'M',
   Tuesday_One: 'T',
@@ -606,7 +595,7 @@ export default {
   Password_confrim_again: 'Enter New PIN Again',
   staff_id: 'Staff ID',
   COMMON_msg_confirm_remove: 'Do you want to remove this item?',
-  PAYMENT_DUEDATE: "Payment due date: ",
+  PAYMENT_DUEDATE: 'Payment due date: ',
   TURN_ON: 'Turn On',
   TURN_OFF: 'Turn Off',
   ALL_NOTIFICATION: 'All Notification',
@@ -622,7 +611,8 @@ export default {
   ERROR_UPPER: 'ERROR',
   WRONG_VERIFY_CODE: 'Wrong verification code provided.',
   PASSWORD_DISMATCH: 'Password mismatch detected.',
-  PASSWORD_INVALID: 'Passwords must comprise of at least eight characters, an upper case character, a lower case character and a number.',
+  PASSWORD_INVALID:
+    'Passwords must comprise of at least eight characters, an upper case character, a lower case character and a number.',
   PASSWORD_SUCCESS: 'Password successfully changed.',
   SELECT_GENDER: 'Select Gender',
   SELECT_STATUS: 'Select Status',
@@ -647,8 +637,8 @@ export default {
   EDIT_ATTENDANCE: 'Edit Attendance',
   EDIT: 'Edit',
   CHECKING: 'Checking',
-  ASSIGNMENT:'Assignment',
-  ATTACH_LINK:'Attach Link',
+  ASSIGNMENT: 'Assignment',
+  ATTACH_LINK: 'Attach Link',
   LESSON_LIB: 'Lesson Library',
   FULL_SCORE: 'Full Score',
   INPUT_SCORE: 'Please Input Score',
@@ -660,7 +650,7 @@ export default {
   NOT_SUBMIT: 'Not Submit',
   SEND: 'Send',
   UNSEND: 'Unsend',
-  INPUT_ASSIGNMENT: "Please Input Assignment",
+  INPUT_ASSIGNMENT: 'Please Input Assignment',
   INPUT_MATERIAL: 'Please Input Material',
   INPUT_DESCRIPTION: 'Please Input Description',
   INPUT_HEADTOPIC: 'Please Input Headtopic',
@@ -670,7 +660,7 @@ export default {
   INPUT_DEADLINE_DATE: 'Please Input Deadline Date',
   INPUT_SCHE_DATE: 'Please Input Schedule Date',
   CHECKIN_SUBJECT_REPORT: 'Check In Subject Report',
-  TIMES: "Times",
+  TIMES: 'Times',
   LAST_UPDATE: 'Last Update',
   ONLINE: 'Online',
 
@@ -688,13 +678,11 @@ export default {
   TEACHING_INFORMATION: 'Teaching Information',
   OCCUPATIONAL_LICENSE: 'Occupational license',
 
-
   PROFILE_studentinfo: 'Student Info',
   PROFILE_parentinfo: 'Parent Info',
   PROFILE_educationinfo: 'Education Info',
   PROFILE_healthinfo: 'Health Information',
   PROFILE_edit: 'Edit',
-
 
   PROFILE_firstname: 'Name',
   PROFILE_lastname: 'Surname',
@@ -741,7 +729,6 @@ export default {
   PROFILE_PROVINCE: 'Province',
   PROFILE_EXPENSES: 'Expenses',
 
-
   PROFILE_WORKING_STATUS: 'Working Status',
   PROFILE_LEVEL_GOVERNMENT: 'Level(for government officials*)',
   PROFILE_DATE_OF_WORK_IN: 'Date of work in the school',
@@ -759,7 +746,8 @@ export default {
   PROFILE_PROFESSIONAL_LICENSE_NAME: 'Professional license name',
   PROFILE_DATE_ISSUE_ACCOMPANYING_CERTIFICATE: 'Date of issue of accompanying certificate',
   PROFILE_CERTIFICATE_EXPIRATION_DATE: 'Certificate expiration date',
-  PROFILE_ORGANIZATION_ACCOMPANYING_CERTIFICATE: 'The organization issuing the accompanying certificate',
+  PROFILE_ORGANIZATION_ACCOMPANYING_CERTIFICATE:
+    'The organization issuing the accompanying certificate',
   PROFILE_HISTORY_ROYAL_DECORATION: 'History of receiving royal decorations',
   PROFILE_ROYAL_DECORATION_CLASS: 'Royal decoration class',
   PROFILE_ROYAL_GOVERNMENT_VOLUME_NO: 'Royal Government Volume No',
@@ -767,8 +755,8 @@ export default {
   PROFILE_ROYAL_GOVERNMENT_NO: 'Royal Government No',
   PROFILE_DATED: 'Dated',
 
-  DONT_SHOW_AGAIN: "Do not show announcement again",
-  YEAR_RANGE: "Year Range",
+  DONT_SHOW_AGAIN: 'Do not show announcement again',
+  YEAR_RANGE: 'Year Range',
 
   PROFILE_ID_CARD_CODE: 'ID card code',
   PROFILE_RELATIONSHIP: 'Relationship',
@@ -798,8 +786,6 @@ export default {
   NO_SCORE: 'No Score',
   DEADLINE: 'Deadline',
   HOMEWORK_DETAILS: 'Homework Details',
-
-
 
   NAME_TITLES: 'Name Titles',
   PASSPORT_NUMBER: 'Passport Number',
@@ -880,15 +866,14 @@ export default {
   SEVEN_DAYS_BACK: '7 days back',
   FINISHED: 'Finished',
 
-
   HISTORY: 'History',
-  SUN: "Sun",
-  MON: "Mon",
-  TUE: "Tue",
-  WED: "Wed",
-  THU: "Thu",
-  FRI: "Fri",
-  SAT: "Sat",
+  SUN: 'Sun',
+  MON: 'Mon',
+  TUE: 'Tue',
+  WED: 'Wed',
+  THU: 'Thu',
+  FRI: 'Fri',
+  SAT: 'Sat',
 
   JAN: 'Jan',
   FEB: 'Feb',
@@ -906,21 +891,23 @@ export default {
   SELECT_MONTH: 'Select Month',
   BY: 'By',
 
-  NOT_SUPPORT_STRING: "Sorry, this function is not supported for your school or there is no shop available for mobile payment.",
-  MANTERNITY_LEAVE: "Maternity leave",
-  VACATION_LEAVE: "Vacation leave",
+  NOT_SUPPORT_STRING:
+    'Sorry, this function is not supported for your school or there is no shop available for mobile payment.',
+  MANTERNITY_LEAVE: 'Maternity leave',
+  VACATION_LEAVE: 'Vacation leave',
   NOT_FOUND_EMPLOYEE: 'Not Found Employee',
-  PICKUP_OUT_SCHOOL: "You are out of school radius.",
-  PICKUP_OUT_SCHOOL_COME_CLOSER: "Sorry, you are out of school radius, please come closer and try again.",
-  PICKUP_NOT_AVAILABLE: "Your school is not supported for this function.",
-  PICKUP_IN_SCHOOL: "You are in school area",
+  PICKUP_OUT_SCHOOL: 'You are out of school radius.',
+  PICKUP_OUT_SCHOOL_COME_CLOSER:
+    'Sorry, you are out of school radius, please come closer and try again.',
+  PICKUP_NOT_AVAILABLE: 'Your school is not supported for this function.',
+  PICKUP_IN_SCHOOL: 'You are in school area',
   WANT_PACK_UP: 'Do you confirm student pick up?',
   CONFIRM_PACK_UP: 'Confirm Pickup',
 
   PICKUP_LEAVE: "Can't pickup because student leave.",
 
-  ALL_EXPENSES: "All Expenses",
-  ALL_TOPUP: "All Top up",
+  ALL_EXPENSES: 'All Expenses',
+  ALL_TOPUP: 'All Top up',
   TUITION_AMOUNT: 'Tuition Amount',
   NUMBER_OF_STUDENT: 'Number of Students',
   CHECK_IN_LATE: 'Check In Late',
@@ -933,8 +920,10 @@ export default {
   DONT_SHOW_AGAIN_WEEK: 'Do not show again within 7 days',
   SUGGESTION: 'Suggestion',
 
-  TOPUP_ALERT: 'Attention! Top up service is linked with the bank. If the bank or promptpay system have problem or under failure stage, the bank will not send transaction records to School Bright system. Therefore, School Bright will not update your balance at that moment. Please note that the bank usually fixes the issue within 24-72 hrs and will send all transactions record to us to update balance in School Bright wallet.',
-  TUITION_ALERT: 'Attention! Tuition payment service is linked with the bank. If the bank or promptpay system have problem or under failure stage, the bank will not send transaction records to School Bright system. Therefore, School Bright will not be able to update your payment status at that moment. Please note that the bank usually fixes the issue within 24-72 hrs and will send all transactions record to us to update payment status in our system.',
+  TOPUP_ALERT:
+    'Attention! Top up service is linked with the bank. If the bank or promptpay system have problem or under failure stage, the bank will not send transaction records to School Bright system. Therefore, School Bright will not update your balance at that moment. Please note that the bank usually fixes the issue within 24-72 hrs and will send all transactions record to us to update balance in School Bright wallet.',
+  TUITION_ALERT:
+    'Attention! Tuition payment service is linked with the bank. If the bank or promptpay system have problem or under failure stage, the bank will not send transaction records to School Bright system. Therefore, School Bright will not be able to update your payment status at that moment. Please note that the bank usually fixes the issue within 24-72 hrs and will send all transactions record to us to update payment status in our system.',
 
   DOWNLOAD_RECEIPT: 'Download Receipt',
   DOWNLOAD_PICTURE: 'Download picuture',
@@ -943,7 +932,7 @@ export default {
   RECEIPT: 'Receipt',
   SCHOOL_BRIGHT_SYSTEM: 'School Bright System',
   PASSWORD: 'Password',
-  CANTSELECT_LIMIT: "Limit image count is 10. Try again.",
+  CANTSELECT_LIMIT: 'Limit image count is 10. Try again.',
   AMOUNT_PAYMENT: 'Amount of payment',
   CORRECT_DATERANGE: 'Please correct start date and end date.',
 
@@ -967,84 +956,89 @@ export default {
   RETIRED: 'Retired',
   EXCHANGE_STUDENT: 'Exchange student',
   REQUEST_CANCELED: 'Request Cancel',
-  WAITING_APPROVE: "Waiting for %{count} Approval",
-  CANCEL_REQUEST_SENT: "Cancellation request sent",
-  CANCELED_REQUEST_SUCCESS: "Canceled Request successfully",
+  WAITING_APPROVE: 'Waiting for %{count} Approval',
+  CANCEL_REQUEST_SENT: 'Cancellation request sent',
+  CANCELED_REQUEST_SUCCESS: 'Canceled Request successfully',
 
   UPDATE_PASSWORD: 'Update Password',
   DELETED_BY_USER: 'Deleted by user',
   DELETED: 'Deleted',
-  NOTIFICATION_ALERT: 'Notifications can only be viewed for the past 7 days. Please go through the menu within the application such as news information, leave letters and reports, etc. to check all historical information.',
+  NOTIFICATION_ALERT:
+    'Notifications can only be viewed for the past 7 days. Please go through the menu within the application such as news information, leave letters and reports, etc. to check all historical information.',
   CHANGE_PASSWORD: 'Change Password',
   CANCELED: 'Cancelled',
   NOT_PERMISSION_EDIT: "You don't have permission to edit\n please contact\n",
-  PASSWORD_CHANGED_LOGIN_AGAIN: "Password changed, please log in again",
-  NOT_CANCEL_REQUEST_PAST_TODAY: "Not allow to cancel request that past current day",
+  PASSWORD_CHANGED_LOGIN_AGAIN: 'Password changed, please log in again',
+  NOT_CANCEL_REQUEST_PAST_TODAY: 'Not allow to cancel request that past current day',
   CANT_LOGIN_USER: "You've changed your password.",
-  ENTER_NEW_PASSWORD: "Please enter a new Password.",
+  ENTER_NEW_PASSWORD: 'Please enter a new Password.',
   BODY_MASS: 'Body Mass',
   GOOD: 'Good',
   NEED_UPDATE_APP: 'You need to update app.',
   SERVER_NOTIFY: 'Application is offline, please check internet connection and launch app again',
 
   JAB_COMPANY_NAME: 'Jabjai Corporation Co., Ltd.',
-  JAB_ADDRESSS: '708/13 Charansanitwong Soi 3, Charansanitwong Road, Wat Thapra, Bangkok Yai, Bangkok 10600',
+  JAB_ADDRESSS:
+    '708/13 Charansanitwong Soi 3, Charansanitwong Road, Wat Thapra, Bangkok Yai, Bangkok 10600',
   WEBSITE: 'Website',
   JAB_WEBSITE: 'https://www.schoolbright.co',
   JAB_EMAIL: 'cs@schoolbright.co',
   JAB_PHONENUMBER: '02-096-2550',
   VERSION: 'Version',
-  ALERT_OFFLINE: "Application is offline, please check internet connection and launch app again",
+  ALERT_OFFLINE: 'Application is offline, please check internet connection and launch app again',
   ALERT_SEL_PAYMENT: 'Please select payment option',
   DISCIPLINE: 'Discipline',
-  CLASS_HAVE_PEOPLE: "Class %{classroom} have %{count} people",
-  SDQ_HOMEVISIT: "SDQ / Home Visit",
-  VISIT_HOME: "Visit Home",
-  TEACHER_STAFF: "Teacher/Staff",
-  LEAVE: "Leave",
-  PICUP_ALERT: "Today you already submitted, please try again tomorrow",
-  OVERSIZE_ALERT: "This file size is over 25Mb.",
-  OVERSCORE_ALERT: "Please enter the correct score.",
-  DRAWER_STUDENT_TIMETABLE: "TimeTable",
-  DRAWER_TEACHER_TIMETABLE: "TimeTable",
-  SUBMITTED: "Submitted",
-  SUBMITTED_LATE: "Submitted Late",
-  USER_GUIDE: "User Guide",
-  SEARCH_STARTDATE: "Start Date",
-  SEARCH_ENDDATE: "End Date",
-  LOGIN_STUDENTID: "Student ID/Staff ID/Mobile No",
-  CURRENT_PASSWORD: "Current Password",
-  VISITHOME_LOST_ALERT: "If you leave this page, all data will be lost , please make sure you save before go back.",
-  SUB_DISTRICT: "Sub-District",
-  HOMEWORK_DISPLAY_DATE: "Display Data",
-  DEADLINE_DATE: "Deadline Date",
-  TOPUP_AMOUNT_NOTICE: "Amount no more than 50,000 per transaction",
+  CLASS_HAVE_PEOPLE: 'Class %{classroom} have %{count} people',
+  SDQ_HOMEVISIT: 'SDQ / Home Visit',
+  VISIT_HOME: 'Visit Home',
+  TEACHER_STAFF: 'Teacher/Staff',
+  LEAVE: 'Leave',
+  PICUP_ALERT: 'Today you already submitted, please try again tomorrow',
+  OVERSIZE_ALERT: 'This file size is over 25Mb.',
+  OVERSCORE_ALERT: 'Please enter the correct score.',
+  DRAWER_STUDENT_TIMETABLE: 'TimeTable',
+  DRAWER_TEACHER_TIMETABLE: 'TimeTable',
+  SUBMITTED: 'Submitted',
+  SUBMITTED_LATE: 'Submitted Late',
+  USER_GUIDE: 'User Guide',
+  SEARCH_STARTDATE: 'Start Date',
+  SEARCH_ENDDATE: 'End Date',
+  LOGIN_STUDENTID: 'Student ID/Staff ID/Mobile No',
+  CURRENT_PASSWORD: 'Current Password',
+  VISITHOME_LOST_ALERT:
+    'If you leave this page, all data will be lost , please make sure you save before go back.',
+  SUB_DISTRICT: 'Sub-District',
+  HOMEWORK_DISPLAY_DATE: 'Display Data',
+  DEADLINE_DATE: 'Deadline Date',
+  TOPUP_AMOUNT_NOTICE: 'Amount no more than 50,000 per transaction',
 
+  Verify_email: 'Verify Email',
+  Current_Email: 'Current Email',
+  Email: 'Email',
+  Information_Alert:
+    'If confirmation of information is successful, it will no longer be possible to edit this information.',
+  Information_Updated: 'Information updated successfully',
 
-  Verify_email: "Verify Email",
-  Current_Email: "Current Email",
-  Email: "Email",
-  Information_Alert: "If confirmation of information is successful, it will no longer be possible to edit this information.",
-  Information_Updated: "Information updated successfully",
-
-  Phone_Setting: "Phone Setting",
-  Current_Phone: "Current Phone number",
-  Line_Connect: "Line account connection",
-  Line_Disconnect: "Disconnect Line account",
-  Line_Disconnect_Modal: "Do you want to disconnect your Line account?",
-  Line_disconnect_success: "Line Account disconnected successfully.",
+  Phone_Setting: 'Phone Setting',
+  Current_Phone: 'Current Phone number',
+  Line_Connect: 'Line account connection',
+  Line_Disconnect: 'Disconnect Line account',
+  Line_Disconnect_Modal: 'Do you want to disconnect your Line account?',
+  Line_disconnect_success: 'Line Account disconnected successfully.',
 
   Agree_Connect: 'Agree and Connect',
   Line_Connection_Succeeded: 'Line connection succeeded.',
   Verify_Start: 'Please Update your email information or mobile number to activate Two-step security system. ',
   Common_Start: 'Start',
 
-  Step: "Step",
-  Enter_Email: "Please enter your email address to receive a verification code",
-  Get_Verification_Code: "Get Verification Code",
+  Step: 'Step',
+  Enter_Email: 'Please enter your email address to receive a verification code',
+  Get_Verification_Code: 'Get Verification Code',
 
-  Enter_email_code: "Please enter the code received in the email. If not received, check your Junk Mail.",
-  Resend_Code: "Resend the code",
+  Enter_email_code:
+    'Please enter the code received in the email. If not received, check your Junk Mail.',
+  Resend_Code: 'Resend the code',
+
 
   Email_verification_successful: "Email verification successful",
   Email_verification_fail: "You haven't verified your email.",
@@ -1054,38 +1048,39 @@ export default {
   Phone_verified_successfully: "Phone number verified successfully.",
   Connected_line: "You have connected to Line.",
 
-
-  Ready: "Ready",
-  Warning: "Warning",
+  Ready: 'Ready',
+  Warning: 'Warning',
 
   Not_verified_phone: "You haven't verified your phone number.",
-  Not_connected_line: "You have not connected to Line.",
+  Not_connected_line: 'You have not connected to Line.',
 
-  Back: "Back",
+  Back: 'Back',
   Complete_verification: "Complete verification to ensure your account's security",
 
-  Unverified: "Unverified",
-  Verified: "Verified",
-  Not_yet_connected: "Not Linked",
-  Linked: "Linked",
-  Email_input_placeholder: "please add email",
-  Closed : "Closed",
-  Verify_phone_number: "Verify Phone number",
-  Phone_input_placeholder: "please add phone number",
+  Unverified: 'Unverified',
+  Verified: 'Verified',
+  Not_yet_connected: 'Not Linked',
+  Linked: 'Linked',
+  Email_input_placeholder: 'please add email',
+  Closed: 'Closed',
+  Verify_phone_number: 'Verify Phone number',
+  Phone_input_placeholder: 'please add phone number',
 
-  Token_exist: 'The previous otp code has not expired. Please use other email or wait 3min to use this email.',
-  Token_exist_phone: 'The previous otp code has not expired. Please use other number or wait 3min to use this number.',
+  Token_exist:
+    'The previous otp code has not expired. Please use other email or wait 3min to use this email.',
+  Token_exist_phone:
+    'The previous otp code has not expired. Please use other number or wait 3min to use this number.',
 
-  Phone_verified_already: "This phone number has been verified",
-  Email_verified_already: "This email has been verified",
+  Phone_verified_already: 'This phone number has been verified',
+  Email_verified_already: 'This email has been verified',
 
-  Input_Valid_Phone: "Please enter valid phone number",
+  Input_Valid_Phone: 'Please enter valid phone number',
 
-  Invalid_OTP_Code: "Invalid OTP Code",
-  Your_devices: "Your Devices",
+  Invalid_OTP_Code: 'Invalid OTP Code',
+  Your_devices: 'Your Devices',
 
-
-  Verify_Device_Comment: 'For the safety of your account Please select a device verification method to save this device as your trusted device.',
+  Verify_Device_Comment:
+    'For the safety of your account Please select a device verification method to save this device as your trusted device.',
   Verify_Device_Waiting: 'Please check your "email/SMS/Line" to verify trusted device.',
 
   Location: 'Location',
@@ -1093,70 +1088,76 @@ export default {
   Recent_Activity: 'Recent Activity',
   Device: 'Device',
 
-  Forgot_Password_Link_Comment: "A link to reset your password will be sent to your chosen channel.",
+  Forgot_Password_Link_Comment:
+    'A link to reset your password will be sent to your chosen channel.',
 
-  Account_Recovery: "Account Recovery",
+  Account_Recovery: 'Account Recovery',
 
-  Reset_Success: "Success",
+  Reset_Success: 'Success',
 
-  Confirm_Success: "Successful Confirmation",
+  Confirm_Success: 'Successful Confirmation',
 
-  Remove_Device_Comment: "Once you remove this device, system will log out your account from this device as well",
-  Remove_Device_Success: "Successfully removed this device from the system",
+  Remove_Device_Comment:
+    'Once you remove this device, system will log out your account from this device as well',
+  Remove_Device_Success: 'Successfully removed this device from the system',
 
-  Recovery_Notification: "Please use the device that you previously used to log in when attempting to recover your account." +
-    " If you use a new device, we may need more time to verify your ownership than usual. Thank you",
+  Recovery_Notification:
+    'Please use the device that you previously used to log in when attempting to recover your account.' +
+    ' If you use a new device, we may need more time to verify your ownership than usual. Thank you',
 
   Add_Phrase_Student_ID: `Account owner's ID Card`,
-  ID_Card_Photo_Front: "ID card photo (front)",
-  Attach_Photo: "* Attach Photo *",
+  ID_Card_Photo_Front: 'ID card photo (front)',
+  Attach_Photo: '* Attach Photo *',
 
-  ID_Card_Instruction1: "1. The photo mush show both the ID card and ID card.",
-  ID_Card_Instruction2: "2. Photos must be checked and able to read ID card information.",
-  ID_Card_Instruction3: "3. Photos must be real and not edited.",
+  ID_Card_Instruction1: '1. The photo mush show both the ID card and ID card.',
+  ID_Card_Instruction2: '2. Photos must be checked and able to read ID card information.',
+  ID_Card_Instruction3: '3. Photos must be real and not edited.',
 
-  Attach_Picture: "Attach a photo",
+  Attach_Picture: 'Attach a photo',
 
-  Example: "example",
+  Example: 'example',
 
   Upload_Gallery: 'Upload from gallery.',
-  Open_Camera: "Open the camera to take a photo.",
+  Open_Camera: 'Open the camera to take a photo.',
 
-  Add_Picture_ID_Selfie: "Authentication",
-  Add_Picture_ID_Selfie1: "Attach a ID card photo with your own face.",
+  Add_Picture_ID_Selfie: 'Authentication',
+  Add_Picture_ID_Selfie1: 'Attach a ID card photo with your own face.',
 
   Attach_Parent_ID: "Please attach a parent's ID card that the same surname.",
-  Add_Picture_ID_Parent: "Add a picture of the parent ID card with a selfie.",
+  Add_Picture_ID_Parent: 'Add a picture of the parent ID card with a selfie.',
 
-  Remove_Device: "Remove device",
-  Verify_ID_Success_Message: "Thank you for the information. Please wait for your user account to be confirmed within 7 days.",
+  Remove_Device: 'Remove device',
+  Verify_ID_Success_Message:
+    'Thank you for the information. Please wait for your user account to be confirmed within 7 days.',
 
-  Select_Between: "Select between",
+  Select_Between: 'Select between',
 
-  Check_Status: "Check Status",
-  Device_Not_Verified: "sorry your device is not yet verify, please contact account owner",
+  Check_Status: 'Check Status',
+  Device_Not_Verified: 'sorry your device is not yet verify, please contact account owner',
 
-  Link_Not_Expired: "The link has not expired. Please check the channel you selected or wait 3 minutes.",
+  Link_Not_Expired:
+    'The link has not expired. Please check the channel you selected or wait 3 minutes.',
 
-  Check_Name: "Check in",
+  Check_Name: 'Check in',
   CHECKIN_SUBJECT: 'Subject',
 
-  No_list: "No list.",
-  Select_Date: "Select Date",
+  No_list: 'No list.',
+  Select_Date: 'Select Date',
 
-  Note_placeholder: "please enter remark.",
-  Attached_Pictures: "Attached Pictures",
-  Note: "Note",
+  Note_placeholder: 'please enter remark.',
+  Attached_Pictures: 'Attached Pictures',
+  Note: 'Note',
 
-  Not_Remove_Device: "Unfortunately, you cannot delete your own device",
+  Not_Remove_Device: 'Unfortunately, you cannot delete your own device',
 
   ONLINE_CHECKIN: 'Check in',
   ONLINE_SUBJECT: 'Subject',
 
-  WARNING_NO_DEPARTMENT: 'This system is not fully configured. Please contact your system administrator to complete the setup. No user department has been assigned.',
+  WARNING_NO_DEPARTMENT:
+    'This system is not fully configured. Please contact your system administrator to complete the setup. No user department has been assigned.',
 
   EDITING_HISTORY: 'Editing History',
-  NO_HISTORY: "There is not history",
+  NO_HISTORY: 'There is not history',
 
   HISTORY_TOPIC: 'Topic',
   HISTORY_STATUS: 'Status',
@@ -1204,7 +1205,7 @@ export default {
   discipline: 'Discipline',
   savings: 'Savings',
   recycle_bank: 'Recycle Bank',
-  schoolBus: "School Bus",
+  schoolBus: 'School Bus',
   arrange: 'Arrange',
   all_your_accounts: 'All Your Accounts',
   add_account: 'Add Account',
@@ -1213,8 +1214,8 @@ export default {
   check_in_out: 'Check in/Out',
   services: 'Services',
 
-  show_information: "Show Information",
-  show_balance: "Show Balance",
+  show_information: 'Show Information',
+  show_balance: 'Show Balance',
 
   hello: 'Hello, ',
   hello_student: 'Hello, ',
@@ -1228,8 +1229,7 @@ export default {
   s_recycle: 'Recycle Score',
 
   coming_soon: 'Coming Soon',
-  add_menu: "Add Menu",
-
+  add_menu: 'Add Menu',
 
   view_score: 'View score',
   view_balance: 'View balance',
@@ -1240,17 +1240,18 @@ export default {
 
   FOR_YOUR_SAFETY: 'For your safety',
 
-  TRY_AGAIN: "Try again",
+  TRY_AGAIN: 'Try again',
 
-  NOT_APPROVED_DUE_TO: "Not approved due to",
-  NOT_APPROVED: "Not approved",
+  NOT_APPROVED_DUE_TO: 'Not approved due to',
+  NOT_APPROVED: 'Not approved',
 
-  NUMBER_LEAVE_DAYS_NOT_ENOUGH: "Sorry, the number of leave days is not enough",
-  CHECK_LEAVE_DAYS_AT_TOP_RIGHT_CORNER: "You can check the leave days at the icon on the top right corner Or contact the school administrator",
+  NUMBER_LEAVE_DAYS_NOT_ENOUGH: 'Sorry, the number of leave days is not enough',
+  CHECK_LEAVE_DAYS_AT_TOP_RIGHT_CORNER:
+    'You can check the leave days at the icon on the top right corner Or contact the school administrator',
 
-  REMAINING_LEAVE_DAYS: "Remaining leave days",
-  LEAVE_TYPE: "Leave type",
-  LEAVE_DAYS_IN_CURRENT_PERIOD: "Leave days in the current period",
+  REMAINING_LEAVE_DAYS: 'Remaining leave days',
+  LEAVE_TYPE: 'Leave type',
+  LEAVE_DAYS_IN_CURRENT_PERIOD: 'Leave days in the current period',
 
   DISCIPLINE_SEARCH_BAHVIOR_LIST: "Search bahavior list",
   DISCIPLINE_POINT_ADDED: "Added",
@@ -1281,5 +1282,91 @@ export default {
   // start of schoolBus
   LIST_OF_VEHICLES: 'Vehicles',
   SELECT_ROUTE: 'Select Route',
+  MORNING_ROUND: 'Morning Round',
+  EVENING_ROUND: 'Evening Round',
+
+  NOT_DEPARTRED: 'Not Departed',
+  DEPARTED: 'Departed',
+  ARRIVED: 'Arrived',
+  START_JOURNEY: 'Start Travel',
+  RESTART_TRAVEL: 'Restart',
+
+  COMPLETE_TRAVEL: 'Complete Task',
+  ARRIVED_TRAVEL: 'Arrived',
+  CANCEL_TRAVEL: 'Cancel',
+  CANCELLED_TRAVEL: 'Cancelled',
+
+  TURN_ON_GPS: 'Please turn on gps',
+  BUS_SUCCESSFUL_DEPART:  'Successfully departed!',
+  BUS_SUCCESSFUL_CANCEL: 'successfully cancelled!',
+  BUS_SUCCESSFUL_ARRIVE: 'The bus is arrived!',
+
+  SELECT_ITEM: 'Select an item',
+  CALL_PARENT: 'Call the parents',
+  REPORT_INCIDENT: 'Report incident',
+  INCIDENT_REPORT: 'Incident report',
+  CHECK_STUDENT_STATUS: 'Please Check Student Status.',
+  CHECK_STUDENT_QUEUE:
+    'Please check the students in queue order. If you need to check this student, you can reorder the queue.',
+
+  BUS_CHECK_IN_STATUS_CHECKED_IN: 'Checked In',
+  BUS_CHECK_IN_STATUS_CHECKED_OUT: 'Checked Out',
+  BUS_CHECK_IN_STATUS_CHECKED_IN_LATE: 'Checked In Late',
+  BUS_CHECK_IN_STATUS_NOT_BOARD: 'Did Not Board',
+  BUS_CHECK_IN_STATUS_PERSONNAL_LEAVE: 'Personal Leave',
+  BUS_CHECK_IN_STATUS_SICK_LEAVE: 'Sick Leave',
+  BUS_CHECK_IN_STATUS_UNSPECIFIED: 'Not Specified',
+
+  REPORT_INCIDENT_TO_PARENT: 'Report to parents',
+  REPORT_INCIDENT_TO_GROUP: 'Report to group',
+  DATE_NUMBER: '',
+
+  REPORT_TYPE_SCHOOL: 'School',
+  REPORT_TYPE_PARENT: 'Parent',
+
+  REPORT_SEND_TO_SCHOOL: 'Send to school',
+  REPORT_SEND_TO_PARENTS: 'Send to parents',
+  REPORT_SEND_TO_PARENTS_NOT_CHECKEDIN: 'Send to parents of students who haven\'t checked in yet.',
+  REPORT_SEND_TO_PARENTS_NOT_CHECKEDOUT: 'Send to parents of students who haven\'t checked out yet.',
+  REPORT_SEND_TO_PARENTS_ALL: 'Send to the parents of all students in the bus.',
+
+  DOT_MENU_QUEUE_MANAGE: 'Manage Queue',
+  DOT_MENU_BUS_DETAILS: 'Vehicle details',
+  DOT_MENU_GROUP_ICIDENT_REPORT: 'Group Incident Report',
+  DOT_MENU_INCIDENT_REPORTING_REPORT: 'Report of incident',
+  DOT_MENU_PASSENGER_REPORT: 'Passenger Boarding and Alighting Report',
+  SUCCESS_INCIDENT_SUBMIT: 'SUCCESS',
+  VEHICLE_REGISTRATION: 'Vehicle Registration',
+  BUS_MODEL: 'Car brand/Model',
+  DRIVER_NAME: 'Driver\'s Name',
+  DRIVER_PHONE_NUMBER: 'Driver\'s Phone Number',
+
+  PASSENGER_REPORT: 'Passenger Boarding and Alighting Report',
+  BUS_ALIGHTING_REPORT: 'Passenger Boarding and Alighting Report',
+  BUS_DROP_PICKUP: 'Report on Pickup and Drop-off',
+
+  BUS_MORNING_SESSION: 'Morning Session',
+  BUS_EVENING_SESSION: 'Evening Session',
+
+  DRIVER_NUMBER: 'Driver Number',
+  VEHICLE_ROUTE: 'Vehicle Route',
+  DEPATURE_TIME: 'Departured time',
+  QUEUE_ORDER: 'Queue Order',
+  BUS_TEACHER_STAFF: 'Teacher/Staff',
+
+  THIS_WEEK: 'This Week',
+  CHECK_IN: 'CheckIn',
+  CHECK_OUT: 'CheckOut',
+  REPORT_SENDER: "Sender",
+  REPORT_SEND_TO: 'Send to',
+
+  ALL_STUDENTS: 'All Students',
+  NO_SCHEDULE_FOUND: 'Not found schedule.',
+  CALL_TEACHER: 'Call Teacher',
+  TEACHER_STUFF: 'Teacher',
+
+  UPDATED_AS_OF: 'Updated as of',
+
+
   // End of schoolBus
 };

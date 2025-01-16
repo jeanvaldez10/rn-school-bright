@@ -50,6 +50,7 @@ export const AsyncStorageKey = {
   quickMenuTeacher: "quickMenuTeacher",
   allMenuStudent: "allMenuStudent",
   allMenuTeacher: "allMenuTeacher",
+  startedSchedules: "startedSchedules",
 };
 
 export const VowelLetters = ['a', 'o', 'e', 'i', 'u'];

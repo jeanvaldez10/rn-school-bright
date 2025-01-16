@@ -5,6 +5,7 @@ import academicHttpClient from "../utils/academicHttpClient";
 import {apiUrls} from "../constants/ApiUrls";
 import StorageManager from "./StorageManager";
 import moment from 'moment'
+import schoolBusHttpClient from "../utils/schoolBusHttpClient";
 
 let params;
 
@@ -2753,6 +2754,367 @@ const getLeaveInfos = (userId) => {
     return promise
 }
 
+const getBusList = () => {
+  return schoolBusHttpClient
+    .post(apiUrls.getBusList(), {})
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error fetching bus list:', error);
+      throw error;
+    });
+};
+
+const getBusSchedule = (nBusID) => {
+  return schoolBusHttpClient
+    .post(apiUrls.getTodayBusSchedule(), {
+      nBusID,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error fetching bus schedule list:', error);
+      throw error;
+    });
+};
+
+const getBusScheduleDetail = (nScheduleID, lang) => {
+  return schoolBusHttpClient
+    .post(
+      apiUrls.getBusScheduleDetail(),
+      {
+        nScheduleID,
+      },
+      {
+        headers: {
+            sblanguage: lang,
+        },
+      },
+    )
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error fetching bus schedule details:', error);
+      throw error;
+    });
+};
+
+const busCheckInStudent = (nTravelID, sStudentID, nStatus) => {
+  return schoolBusHttpClient
+    .post(apiUrls.buscheckInStudent(), {
+      nTravelID,
+      sStudentID,
+      nStatus,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error updating checkin status:', error);
+      throw error;
+    });
+};
+
+const busCheckoutStudent = (nTravelID, sStudentID, nStatus) => {
+  return schoolBusHttpClient
+    .post(apiUrls.busCheckoutStudent(), {
+      nTravelID,
+      sStudentID,
+      nStatus,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error updating checkout status:', error);
+      throw error;
+    });
+};
+
+const busStartTravel = (nTravelID) => {
+  return schoolBusHttpClient
+    .post(apiUrls.busStartTravel(), {
+      nTravelID,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error starting travel:', error);
+      throw error;
+    });
+};
+
+const busCancelTravel = (nTravelID) => {
+  return schoolBusHttpClient
+    .post(apiUrls.cacelBusTravel(), {
+      nTravelID,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error cancelling travel:', error);
+      throw error;
+    });
+};
+
+const busCompleteTravel = (nTravelID) => {
+  return schoolBusHttpClient
+    .post(apiUrls.completeBusTravel(), {
+      nTravelID,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error completing travel:', error);
+      throw error;
+    });
+};
+
+const reOrderStudentQueue = (nScheduleID, lstStudentIDsByOrder) => {
+  return schoolBusHttpClient
+    .post(apiUrls.reOrderStudentQueue(), {
+      nScheduleID,
+      lstStudentIDsByOrder,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error re-ordering queue:', error);
+      throw error;
+    });
+};
+
+const submitBusIndividualIncident = ({
+  nTravelID,
+  sStudentID,
+  sMessage,
+  sFileURLs,
+  sImageURLs,
+}) => {
+  return schoolBusHttpClient
+    .post(apiUrls.submitBusIndividualIncident(), {
+      nTravelID,
+      sStudentID,
+      sMessage,
+      sFileURLs,
+      sImageURLs,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error submitting student incident:', error);
+      throw error;
+    });
+};
+
+const submitBusGroupIncident = ({
+  nTravelID,
+  isSendToSchool,
+  isSendToParent,
+  nStudentGroupKind,
+  sMessage,
+  sFileURLs,
+  sImageURLs,
+}) => {
+  return schoolBusHttpClient
+    .post(apiUrls.submitBusGroupIncident(), {
+      nTravelID,
+      isSendToSchool,
+      isSendToParent,
+      nStudentGroupKind,
+      sMessage,
+      sFileURLs,
+      sImageURLs,
+    })
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error submitting group incident:', error);
+      throw error;
+    });
+};
+
+const getBusIncidentList = () => {
+  return schoolBusHttpClient
+    .post(apiUrls.getBusIncidentList(), {})
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error retrieving incidents:', error);
+      throw error;
+    });
+};
+
+const readBusIncident = (incidentID) => {
+  return schoolBusHttpClient
+    .post(apiUrls.readBusIncident(incidentID), {})
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error reading incident:', error);
+      throw error;
+    });
+};
+
+const readAllBusIncidentForTeacher = () => {
+  return schoolBusHttpClient
+    .post(apiUrls.readAllBusIncidentForTeacher(), {})
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error reading incidents:', error);
+      throw error;
+    });
+};
+
+const getVehicleCheckInOutListWithDate = (busId, ddate, edate) => {
+  const params = {
+    nBusID: busId,
+    sDateFrom: moment(ddate).add(543, 'years').format('DD/MM/YYYY'),
+    sDateTo: moment(edate).add(543, 'years').format('DD/MM/YYYY'),
+  };
+  return schoolBusHttpClient
+    .post(apiUrls.getReportVehicleCheckInOut(), params)
+    .then((response) => response.data)
+    .catch((error) => {
+      console.error('Error reading reports:', error);
+      throw error;
+    });
+};
+
+const getPassengerBoardingAlightingReports = (sDate, isEvening) => {
+    const params = {
+      sDate: moment(sDate).add(543, 'years').format('DD/MM/YYYY'),
+      isEvening
+    };
+    return schoolBusHttpClient
+      .post(apiUrls.getPassengerBoardingAlightingReports(), params)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error reading reports:', error);
+        throw error;
+      });
+  };
+
+  const getPassengerBoardingAlightingReportDetails = (sDate, nBusID, isEvening) => {
+    const params = {
+      sDate: moment(sDate).add(543, 'years').format('DD/MM/YYYY'),
+      nBusID,
+      isEvening,
+    };
+    return schoolBusHttpClient
+      .post(apiUrls.getPassengerBoardingAlightingReportDetails(), params)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error reading reports:', error);
+        throw error;
+      });
+  };
+
+  const updateBusLocation = (nTravelID, dLat, dLng) => {
+    const params = {
+      nTravelID,
+      dLat,
+      dLng,
+    };
+    return schoolBusHttpClient
+      .post(apiUrls.updateBusLocation(), params)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error updating location:', error);
+        throw error;
+      });
+  };
+
+  const checkTodayBusScheduleForStudent = () => {
+    const params = {};
+    return schoolBusHttpClient
+      .post(apiUrls.checkTodayBusScheduleForStudent(), params, {
+        headers: {
+            isStudent: true
+        }
+  })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error checking schedule:', error);
+        throw error;
+      });
+  };
+
+  const getScheduleDetailForStudent = (scheduleID) => {
+    const params = { nScheduleID: scheduleID };
+    return schoolBusHttpClient
+      .post(apiUrls.getScheduleDetailForStudent(), params, {
+        headers: {
+            isStudent: true
+        }
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error checking schedule:', error);
+        throw error;
+      });
+  };
+
+  const getStudentBusIncidentList = () => {
+    return schoolBusHttpClient
+      .post(
+        apiUrls.getStudentBusIncidentList(),
+        {},
+        {
+          headers: {
+            isStudent: true,
+          },
+        },
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error retrieving incidents:', error);
+        throw error;
+      });
+  };
+
+  const readStudentBusIncident = (incidentID) => {
+    return schoolBusHttpClient
+      .post(
+        apiUrls.readStudentBusIncident(incidentID),
+        {},
+        {
+          headers: {
+            isStudent: true,
+          },
+        },
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error reading incident:', error);
+        throw error;
+      });
+  };
+
+  const readAllStudentBusIncidents = () => {
+    return schoolBusHttpClient
+      .post(
+        apiUrls.readAllStudentBusIncidents(),
+        {},
+        {
+          headers: {
+            isStudent: true,
+          },
+        },
+      )
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error reading incidents:', error);
+        throw error;
+      });
+  };
+
+  const getStudentPickUpDropOffReport = (ddate, edate) => {
+    const params = {
+      nBusID: 0,
+      sDateFrom: moment(ddate).add(543, 'years').format('DD/MM/YYYY'), 
+      sDateTo: moment(edate).add(543, 'years').format('DD/MM/YYYY'),
+    };
+    return schoolBusHttpClient
+      .post(apiUrls.getStudentPickUpDropOffReport(), params, {
+        headers: {
+          isStudent: true,
+        },
+      })
+      .then((response) => response.data)
+      .catch((error) => {
+        console.error('Error reading reports:', error);
+        throw error;
+      });
+  };
+  
+  
+
 export default {
     getVerification,
     getLogStatus,
@@ -2958,7 +3320,6 @@ export default {
     removeNotification,
     getAllClass,
     checkStudentIsPrimary,
-
     checkVerify,
     requestOTP,
     recoveryRequestOTP,
@@ -2972,4 +3333,31 @@ export default {
     getStudentLeaveType,
     getTeacherLeaveType,
     getLeaveInfos,
+
+    // start school bus
+    getBusList,
+    getBusSchedule,
+    getBusScheduleDetail,
+    busCheckInStudent,
+    busCheckoutStudent,
+    busStartTravel,
+    busCancelTravel,
+    busCompleteTravel,
+    reOrderStudentQueue,
+    submitBusIndividualIncident,
+    submitBusGroupIncident,
+    getBusIncidentList,
+    readBusIncident,
+    getVehicleCheckInOutListWithDate,
+    getPassengerBoardingAlightingReports,
+    getPassengerBoardingAlightingReportDetails,
+    updateBusLocation,
+    checkTodayBusScheduleForStudent,
+    getScheduleDetailForStudent,
+    getStudentBusIncidentList,
+    readStudentBusIncident,
+    getStudentPickUpDropOffReport,
+    readAllBusIncidentForTeacher,
+    readAllStudentBusIncidents,
+    // end schcool bus
 };

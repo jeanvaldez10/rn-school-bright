@@ -393,9 +393,24 @@ export const defaultAllMenuStudent = {
       key: 'schoolBus',
       image: Images.m_school_bus,
       quick_menu: false,
-      link: 'VehicleList',
-      func: 'link',
+      link: 'BusListScreen',
+      func: 'modal',
+      subMenu: [
+        {
+          key: 'BUS_MORNING_SESSION',
+          image: Images.m_leave_half_day,
+          link: 'MorningBusScheduleDetail',
+          func: 'gotoAfterCheckSchedule',
+        },
+        {
+          key: 'BUS_EVENING_SESSION',
+          image: Images.m_leave_half_day,
+          link: 'EveningBusScheduleDetail',
+          func: 'gotoAfterCheckSchedule',
+        },
+      ],
     },
+
     {
       key: 'message',
       image: Images.m_message,
@@ -609,7 +624,7 @@ export const defaultAllMenuTeacher = {
       key: 'schoolBus',
       image: Images.m_school_bus,
       quick_menu: false,
-      link: 'VehicleList',
+      link: 'BusListScreen',
       func: 'link',
     },
     {
@@ -661,6 +676,14 @@ export const defaultAllMenuTeacher = {
   ],
 };
 
+export const TravelStatuses = {
+  NOT_DEPARTED: 0,
+  DEPARTED: 1,
+  ARRIVED: 100,
+  CANCELLED: -1,
+  INCIDENT: -100,
+}
+
 class Constant {
   static isRunning = false;
   static AddProfiles = [];
@@ -693,5 +716,6 @@ class Constant {
       });
   };
 }
+
 
 export default Constant;

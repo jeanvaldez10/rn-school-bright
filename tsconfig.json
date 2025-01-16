@@ -2,7 +2,9 @@
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {},
+    "paths": {
+      "@src/*": ["./src/*"],
+    },
     "skipLibCheck": true
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "**/*.d.ts"]

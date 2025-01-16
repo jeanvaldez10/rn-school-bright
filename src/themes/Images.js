@@ -31,6 +31,7 @@ const images = {
   ic_calendar: require('../assets/images/ic_calendar.png'),
   ic_calendarschool_new: require('../assets/images/ic_calendarschool_new.png'),
   ic_call_blue: require('../assets/images/ic_call_blue.png'),
+  ic_call_yellow: require('../assets/images/ic_call_yellow.png'),
   ic_card_blue: require('../assets/images/ic_card_blue.png'),
   ic_chair_blue: require('../assets/images/ic_chair_blue.png'),
   ic_chart: require('../assets/images/ic_chart.png'),
@@ -365,6 +366,8 @@ const images = {
   ic_red_line: require("../assets/images/new/ic_red_line.png"),
 
   ic_warning: require("../assets/images/new/ic_warning.png"),
+  ic_warning_yellow: require("../assets/images/new/ic_warning_yellow.png"),
+
   ic_close_red: require("../assets/images/new/ic_close_red.png"),
 
   default_ID: require("../assets/images/new/default_ID.png"),
@@ -433,6 +436,16 @@ const images = {
 
   ic_alert: require("../assets/images/new/alert.png"),
 
+  ic_three_line: require("../assets/images/new/ic_three_line.png"),
+
+  ic_school_bus_1: require("../assets/images/new/ic_school_bus_1.png"),
+  ic_school_bus_2: require("../assets/images/new/ic_school_bus_2.png"),
+  ic_school_bus_blue: require("../assets/images/new/ic_school_bus_blue.png"),
+  ic_school_bus_green: require("../assets/images/new/ic_school_bus_green.png"),
+  ic_school_bus_marker_small: require("../assets/images/new/ic_school_bus_marker_small.png"),
+  ic_school_bus_marker_large: require("../assets/images/new/ic_school_bus_marker_large.png"),
+  ic_checked_green: require("../assets/images/new/ic_checked_green.png"),
+  ic_checked_disabled: require("../assets/images/new/ic_checked_disabled.png"),
   n_ic_qrcode_1: require("../assets/images/new/n_ic_qrcode_1.png"),
   n_ic_search_group: require("../assets/images/new/n_ic_search_group.png"),
 

@@ -1193,7 +1193,7 @@ export default {
   discipline: 'พฤติกรรม',
   savings: 'เงินออม',
   recycle_bank: 'ธนาคารขยะ',
-  schoolBus: 'รถโรงเรียน',
+  schoolBus: 'School Bus',
 
   arrange: 'จัดเรียง',
   all_your_accounts: 'บัญชีทั้งหมดของคุณ',
@@ -1270,5 +1270,86 @@ export default {
   // start of schoolBus
   LIST_OF_VEHICLES: 'รายการรถ',
   SELECT_ROUTE: 'เลือกรอบ',
+  MORNING_ROUND: 'เช้า รอบที่',
+  EVENING_ROUND: 'เย็น รอบที่',
+
+  NOT_DEPARTRED: 'ยังไม่เดินทาง',
+  DEPARTED: 'ออกเดินทาง',
+  ARRIVED: 'ถึงที่หมาย',
+  START_JOURNEY: 'เริ่มเดินทาง',
+  COMPLETE_TRAVEL: 'เสร็จสิ้นงาน',
+  ARRIVED_TRAVEL: 'เสร็จสิ้นงาน',
+  CANCEL_TRAVEL: 'ยกเลิกงาน',
+  CANCELLED_TRAVEL: 'Cancelled',
+
+  TURN_ON_GPS: 'กรุณาเปิด gps',
+  BUS_SUCCESSFUL_DEPART:  'เริ่มงานสำเร็จ',
+  BUS_SUCCESSFUL_CANCEL: 'ยกเลิกเรียบร้อย',
+  BUS_SUCCESSFUL_ARRIVE: 'ปรับสถานะเรียบร้อย',
+
+  SELECT_ITEM: 'เลือกรายการ',
+  CALL_PARENT: 'โทรหาผู้ปกครอง',
+  REPORT_INCIDENT: 'การแจ้งเหตุ',
+  INCIDENT_REPORT: 'แจ้งเหตุ',
+  CHECK_STUDENT_STATUS: 'กรุณาเช็กนักเรียนให้ครบก่อนค่ะ',
+  CHECK_STUDENT_QUEUE:
+    'กรุณาเช็กนักเรียนตามลำดับคิว หากต้องการเซ็กนักเรียนคนนี้ ท่านสามารถจัดลำดับคิวใหม่ได้',
+
+  BUS_CHECK_IN_STATUS_CHECKED_IN: 'เช็กอิน',
+  BUS_CHECK_IN_STATUS_CHECKED_OUT: 'เช็กเอาท์',
+
+  BUS_CHECK_IN_STATUS_CHECKED_IN_LATE: 'เช็กอินสาย',
+  BUS_CHECK_IN_STATUS_NOT_BOARD: 'ไม่ขึ้นรถ',
+  BUS_CHECK_IN_STATUS_PERSONNAL_LEAVE: 'ลากิจ',
+  BUS_CHECK_IN_STATUS_SICK_LEAVE: 'ลาป่วย',
+  BUS_CHECK_IN_STATUS_UNSPECIFIED: 'ไม่ระบุ',
+  REPORT_INCIDENT_TO_PARENT: 'ส่งข้อความให้ผู้ปกครอง',
+  REPORT_INCIDENT_TO_GROUP: 'แจ้งเหตุรายกลุ่ม',
+
+  DATE_NUMBER: 'วันที่ ',
+  REPORT_TYPE_SCHOOL: 'ส่งหาโรงเรียน',
+  REPORT_TYPE_PARENT: 'ส่งหาผู้ปกครอง',
+  REPORT_SEND_TO_SCHOOL: 'ส่งหาโรงเรียน',
+  REPORT_SEND_TO_PARENTS: 'ส่งหาผู้ปกครอง',
+  REPORT_SEND_TO_PARENTS_NOT_CHECKEDIN: 'ส่งหาผู้ปกครองของนักเรียนที่ยัง ไม่เช็กอิน',
+  REPORT_SEND_TO_PARENTS_NOT_CHECKEDOUT: 'ส่งหาผู้ปกครองของนักเรียนที่ยัง ไม่เช็กเอาท์',
+  REPORT_SEND_TO_PARENTS_ALL: 'ส่งหาผู้ปกครองของนักเรียนทุกคน บนรถ',
+
+  DOT_MENU_QUEUE_MANAGE: 'จัดลำดับคิว',
+  DOT_MENU_BUS_DETAILS: 'รายละเอียดรถ',
+  DOT_MENU_GROUP_ICIDENT_REPORT: 'แจ้งเหตุ',
+  DOT_MENU_INCIDENT_REPORTING_REPORT: 'รายงานการแจ้งเหตุ',
+  DOT_MENU_PASSENGER_REPORT: 'หน้ารายงานขึ้น-ลงรถรับส่ง',
+  SUCCESS_INCIDENT_SUBMIT: 'แจ้งเหตุเรียบร้อย',
+
+  VEHICLE_REGISTRATION: 'ทะเบียนรถ',
+  BUS_MODEL: 'ยี่ห้อรถ / รุ่นรถ',
+  DRIVER_NAME: 'ชื่อคนขับ',
+  DRIVER_PHONE_NUMBER: 'เบอร์โทร',
+
+  PASSENGER_REPORT: 'หน้ารายงานขึ้น-ลงรถรับส่ง',
+  BUS_ALIGHTING_REPORT: 'รายงานขึ้น-ลงรถรับส่ง',
+  BUS_DROP_PICKUP: 'รายงานขึ้น-ลงรถรับส่ง',
+
+  BUS_MORNING_SESSION: 'รอบเช้า',
+  BUS_EVENING_SESSION: 'รอบบ่าย',
+  DRIVER_NUMBER: 'เบอร์โทรคนขับ',
+  VEHICLE_ROUTE: 'รอบรถ',
+  DEPATURE_TIME: 'เวลาออกเดินทาง',
+  QUEUE_ORDER: 'ลำดับคิว',
+  BUS_TEACHER_STAFF: 'ครู/บุคลากร',
+
+  THIS_WEEK: 'สัปดาห์นี้',
+  CHECK_IN: 'ขึ้นรถ',
+  CHECK_OUT: 'ลงรถ',
+  REPORT_SENDER: "ผู้ส่ง",
+  REPORT_SEND_TO: 'ส่งถึง',
+
+  ALL_STUDENTS: 'นักเรียนทั้งหมด',
+  NO_SCHEDULE_FOUND: 'Not found schedule.',
+  CALL_TEACHER: 'โทรหาครู',
+  TEACHER_STUFF: 'ครู',
+  UPDATED_AS_OF: 'อัปเดต ณ เวลา',
+  
   // End of schoolBus
 };
